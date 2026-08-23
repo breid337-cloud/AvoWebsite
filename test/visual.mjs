@@ -21,10 +21,13 @@ import { createStaticServer, listen } from '../src/preview/static-server.js';
 import { THEME_IDS } from '../src/themes/index.js';
 import { parseArgs } from '../src/cli/args.js';
 
-const { flags } = parseArgs(process.argv.slice(2), { booleans: ['help'] });
+const { flags } = parseArgs(process.argv.slice(2), { booleans: ['help', 'quick'] });
 
 if (flags.help) {
-  console.log(`Usage: node test/visual.mjs [--client <slug>] [--theme <id>] [--shots <dir>]`);
+  console.log(`Usage: node test/visual.mjs [--client <slug>] [--theme <id>] [--shots <dir>] [--quick]
+
+  --quick   Only the viewport extremes (320 and 1440) on the key pages. Much
+            faster, and still catches the overflow class of bug.`);
   process.exit(0);
 }
 
@@ -57,13 +60,19 @@ const CHROMIUM_PATHS = [
 ].filter(Boolean);
 const executablePath = CHROMIUM_PATHS.find((p) => existsSync(p));
 
-const PAGES = ['/', '/services/', '/contact/', '/about/', '/gallery/', '/404.html'];
-const VIEWPORTS = [
+const ALL_PAGES = ['/', '/services/', '/contact/', '/about/', '/gallery/', '/404.html'];
+const ALL_VIEWPORTS = [
   ['narrow', { width: 320, height: 720 }],
   ['phone', { width: 390, height: 844 }],
   ['tablet', { width: 768, height: 1024 }],
   ['desktop', { width: 1440, height: 1000 }],
 ];
+
+// Overflow surfaces at the extremes, so --quick keeps 320 and 1440 and drops
+// the middle. Headless Chromium is slow enough that the distinction matters.
+const PAGES = flags.quick ? ['/', '/services/', '/contact/'] : ALL_PAGES;
+const VIEWPORTS = flags.quick ? [ALL_VIEWPORTS[0], ALL_VIEWPORTS[3]] : ALL_VIEWPORTS;
+const SCHEMES = flags.quick ? ['light'] : ['light', 'dark'];
 
 const profile = normalizeProfile(JSON.parse(await readFile(profilePath, 'utf8')));
 if (shotDir) await mkdir(shotDir, { recursive: true });
@@ -86,7 +95,7 @@ for (const id of themes) {
   const { port } = await listen(server, 0);
   try {
     for (const [label, viewport] of VIEWPORTS) {
-      for (const scheme of ['light', 'dark']) {
+      for (const scheme of SCHEMES) {
         const page = await browser.newPage({ viewport, colorScheme: scheme });
         page.on('pageerror', (e) => issues.push(`${id}/${label}/${scheme}: JS error — ${e.message}`));
 
@@ -121,8 +130,11 @@ for (const id of themes) {
 
         // Scroll-reveal must never leave content permanently invisible.
         if (scheme === 'light' && (label === 'desktop' || label === 'phone')) {
-          await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'load' });
-          await page.waitForTimeout(3000);
+          // Not 'load': a blocked webfont request would stall the navigation
+          // until the network timeout. The explicit wait covers the reveal
+          // failsafe, which is what this check is actually about.
+          await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'domcontentloaded' });
+          await page.waitForTimeout(3200);
           const hidden = await page.evaluate(
             () => [...document.querySelectorAll('[data-reveal]')].filter((e) => !e.classList.contains('is-visible')).length,
           );
@@ -143,7 +155,7 @@ for (const id of themes) {
 }
 await browser.close();
 
-console.log(`\n${renders} page renders across ${themes.length} theme(s), ${VIEWPORTS.length} viewports, light and dark.`);
+console.log(`\n${renders} page renders across ${themes.length} theme(s), ${VIEWPORTS.length} viewport(s), ${SCHEMES.join(' + ')}.`);
 if (issues.length) {
   console.error(`\n${issues.length} issue(s):`);
   for (const issue of issues) console.error(`  ✗ ${issue}`);
