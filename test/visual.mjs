@@ -116,16 +116,27 @@ for (const id of themes) {
                 wide.push(el.tagName.toLowerCase() + (cls ? '.' + cls : ''));
               }
             }
+            // A <dialog> or overlay that is visible on load covers the whole
+            // page. This has happened once; it must never ship again.
+            const overlays = [...document.querySelectorAll('dialog, .lightbox')]
+              .filter((el) => {
+                const st = getComputedStyle(el);
+                if (st.display === 'none' || st.visibility === 'hidden' || st.opacity === '0') return false;
+                const r = el.getBoundingClientRect();
+                return r.width > vw * 0.5 && r.height > window.innerHeight * 0.5;
+              }).length;
             return {
               overflow: document.documentElement.scrollWidth - vw,
               culprits: [...new Set(wide)].slice(0, 4),
               h1: document.querySelectorAll('h1').length,
               untitled: !document.title,
+              overlays,
             };
           });
           if (audit.overflow > 1) issues.push(`${id}/${label}/${scheme} ${route}: ${audit.overflow}px horizontal overflow [${audit.culprits.join(', ')}]`);
           if (audit.h1 !== 1) issues.push(`${id} ${route}: ${audit.h1} <h1> elements, expected 1`);
           if (audit.untitled) issues.push(`${id} ${route}: empty <title>`);
+          if (audit.overlays) issues.push(`${id} ${route}: ${audit.overlays} full-screen overlay(s) visible on load`);
         }
 
         // Scroll-reveal must never leave content permanently invisible.

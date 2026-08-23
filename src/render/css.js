@@ -47,6 +47,9 @@ p { text-wrap: pretty; }
 .hero__inner > *, .about__grid > *, .contact__grid > *, .prose-layout > *,
 .site-footer__inner > *, .cta__inner > *, .service-row > *, .value-prop > *,
 .contact-list li > *, .menu-item > *, .card, .feature, .stat { min-width: 0; }
+/* …but fixed-size markers and icons must keep their intrinsic width. */
+.service-number, .value-prop__icon, .contact-list__icon, .feature__icon,
+.card__icon, .testimonial__mark { flex: none; min-width: max-content; }
 .contact-list__value, .footer__list a, .footer__list address { overflow-wrap: anywhere; }
 .page-header__title, .section-title, .notfound__title { overflow-wrap: break-word; }
 
@@ -273,7 +276,10 @@ body.nav-open { overflow: hidden; }
 .gallery--masonry .gallery__trigger, .gallery--masonry .gallery__img { height: 100%; }
 .gallery--masonry .gallery__img { aspect-ratio: auto; }
 
-.lightbox { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: var(--space-6); background: rgba(6,8,12,.9); border: 0; max-width: none; max-height: none; width: 100%; height: 100%; }
+/* A <dialog> is display:none until opened. Setting display on the bare class
+   would override that and leave the overlay covering the whole page. */
+.lightbox { position: fixed; inset: 0; z-index: 90; padding: var(--space-6); background: rgba(6,8,12,.9); border: 0; max-width: none; max-height: none; width: 100%; height: 100%; }
+.lightbox[open] { display: grid; place-items: center; }
 .lightbox::backdrop { background: rgba(6,8,12,.9); }
 .lightbox img { max-width: min(96vw, 1400px); max-height: 82vh; width: auto; border-radius: var(--radius); }
 .lightbox__caption { color: #fff; text-align: center; margin-top: var(--space-5); font-size: var(--step--1); }

@@ -44,7 +44,8 @@ export default {
 .hero { position: relative; }
 .hero::after { content: ""; position: absolute; inset: auto 0 0 0; height: 6px;
   background: repeating-linear-gradient(135deg, var(--primary) 0 22px, #14171c 22px 44px); }
-.service-number { font-family: var(--font-heading); font-size: var(--step-4); color: var(--primary); line-height: 1; }
+.service-number { font-family: var(--font-heading); font-size: var(--step-4); color: var(--primary);
+  line-height: 1; white-space: nowrap; font-variant-numeric: tabular-nums; }
 `,
   },
 };
