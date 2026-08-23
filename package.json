@@ -1,0 +1,48 @@
+{
+  "name": "avo-website-builder",
+  "version": "0.1.0",
+  "description": "Point it at a tired small-business website, harvest everything it knows, and generate a modern, responsive, static replacement site in the theme of your choice.",
+  "type": "module",
+  "bin": {
+    "avo": "./bin/avo.js"
+  },
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "avo": "node ./bin/avo.js",
+    "test": "node --test test/*.test.js",
+    "doctor": "node ./bin/avo.js doctor",
+    "test:visual": "node test/visual.mjs"
+  },
+  "keywords": [
+    "website-builder",
+    "static-site",
+    "small-business",
+    "themes",
+    "scraper"
+  ],
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  },
+  "peerDependenciesMeta": {
+    "playwright": {
+      "optional": true
+    },
+    "basic-ftp": {
+      "optional": true
+    },
+    "ssh2-sftp-client": {
+      "optional": true
+    },
+    "sharp": {
+      "optional": true
+    }
+  }
+}
