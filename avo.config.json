@@ -1,0 +1,13 @@
+{
+  "clientsDir": "clients",
+  "defaults": {
+    "theme": "meridian",
+    "mode": "light",
+    "maxPages": 20,
+    "minify": true,
+    "darkMode": "auto",
+    "themeToggle": false,
+    "lang": "en"
+  },
+  "deploy": {}
+}

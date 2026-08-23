@@ -1,0 +1,212 @@
+{
+  "$schema": "avo-profile/1",
+  "slug": "brannigan",
+  "source": {
+    "url": "http://localhost:8781/",
+    "harvestedAt": "2026-08-23T00:00:00.000Z",
+    "pagesCrawled": 6,
+    "notes": "Enriched from the harvested FrontPage-era site. Every factual claim below appears in the source material; anything unverifiable is listed in _meta.todo."
+  },
+  "business": {
+    "name": "Brannigan Heating & Air Conditioning",
+    "legalName": "Brannigan Heating & Air Conditioning",
+    "tagline": "Family-run heating and cooling for central Illinois",
+    "category": "HVAC contractor",
+    "description": "Family-owned HVAC contractor in Springfield, Illinois, repairing and installing heating and cooling systems since 1987, with 24-hour emergency service.",
+    "founded": "1987",
+    "employees": "14",
+    "licenses": ["Licensed and insured in the State of Illinois", "BBB accredited, A+ rated since 2004"],
+    "serviceArea": ["Springfield", "Chatham", "Rochester", "Sherman", "Riverton", "Auburn", "Pawnee"]
+  },
+  "contact": {
+    "phone": "(217) 555-0142",
+    "email": "service@branniganheating.com",
+    "address": {
+      "street": "1425 North Grand Avenue East",
+      "street2": "Suite B",
+      "city": "Springfield",
+      "region": "IL",
+      "postalCode": "62702",
+      "country": "US"
+    },
+    "hours": [
+      { "day": "monday", "open": "7:00 AM", "close": "5:30 PM" },
+      { "day": "tuesday", "open": "7:00 AM", "close": "5:30 PM" },
+      { "day": "wednesday", "open": "7:00 AM", "close": "5:30 PM" },
+      { "day": "thursday", "open": "7:00 AM", "close": "5:30 PM" },
+      { "day": "friday", "open": "7:00 AM", "close": "5:30 PM" },
+      { "day": "saturday", "open": "8:00 AM", "close": "12:00 PM" },
+      { "day": "sunday", "closed": true }
+    ],
+    "hoursNote": "Emergency service available 24 hours a day.",
+    "emergency": "24-hour emergency service"
+  },
+  "brand": {
+    "logo": "assets/harvested/logo-01-logo.gif",
+    "colors": { "primary": "#1f3a93", "secondary": "#c41e3a" }
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/branniganheating",
+    "instagram": "https://www.instagram.com/branniganheating",
+    "yelp": "https://www.yelp.com/biz/brannigan-heating-springfield"
+  },
+  "content": {
+    "hero": {
+      "headline": "Heat back on tonight, not next week",
+      "subhead": "Family-owned heating and cooling for Springfield and the surrounding communities since 1987. NATE-certified technicians, 24-hour emergency callouts, and the price we quote on the phone.",
+      "image": "assets/harvested/hero-02-hero.jpg",
+      "imageAlt": "Brannigan technician servicing a heating system",
+      "primaryCta": { "label": "Get a free estimate", "href": "contact/" },
+      "secondaryCta": { "label": "See what we do", "href": "services/" },
+      "badges": ["NATE-certified technicians", "24-hour emergency service", "Family owned since 1987"]
+    },
+    "about": {
+      "heading": "Three generations on central Illinois rooftops",
+      "body": [
+        "Ed Brannigan started this company in 1987 with one truck and the garage of his house on the north end of Springfield. Nearly forty years later we run eight trucks and employ fourteen people, and the approach has not changed: do good work, charge a fair price, and treat every house like it belongs to your own family.",
+        "We are fully licensed and insured in the State of Illinois, and every technician on staff carries NATE certification. We are factory trained on Carrier, Trane, Lennox, Goodman, Rheem and American Standard, so whatever is already in your basement, we can service it.",
+        "We have been accredited by the Better Business Bureau with an A+ rating since 2004. Most of our work still comes from people who were recommended by a neighbour."
+      ],
+      "highlights": [
+        "Family owned and operated since 1987",
+        "Eight trucks covering Springfield and six surrounding towns",
+        "NATE-certified, factory-trained technicians",
+        "BBB accredited with an A+ rating since 2004"
+      ]
+    },
+    "valueProps": [
+      { "icon": "clock", "title": "We answer at 2am", "text": "Emergency service runs 24 hours a day, including holidays. A no-heat call in January goes straight to an on-call technician." },
+      { "icon": "shield", "title": "No surprise charges", "text": "You get the price before we start. Our quotes are what you pay, which is the single thing customers mention most." },
+      { "icon": "award", "title": "NATE certified", "text": "Every technician is NATE certified and factory trained across all the major equipment brands." },
+      { "icon": "users", "title": "Same family, same town", "text": "Three generations of Branniganss have worked in central Illinois. Ed still answers the phone on Saturday mornings." }
+    ],
+    "stats": [
+      { "value": "1987", "label": "Serving Springfield since" },
+      { "value": "8", "label": "Trucks on the road" },
+      { "value": "14", "label": "People on the team" },
+      { "value": "A+", "label": "BBB rating since 2004" }
+    ],
+    "closingCta": {
+      "heading": "Furnace out? Call now.",
+      "text": "We answer 24 hours a day, and we will tell you what it costs before we start work.",
+      "primaryCta": { "label": "Request a free estimate", "href": "contact/" }
+    }
+  },
+  "services": [
+    {
+      "slug": "air-conditioning-repair",
+      "name": "Air conditioning repair",
+      "summary": "Fast diagnosis and repair for every major brand of central air conditioner, with the common parts already on the truck.",
+      "description": [
+        "When your air conditioning quits in an Illinois July, waiting three days is not an option. We diagnose the fault, tell you what it costs, and in most cases have it repaired the same day.",
+        "Our trucks carry the parts that fail most often — capacitors, contactors, fan motors, thermostats — so the majority of repairs are finished on the first visit rather than turning into a return trip.",
+        "We work on every major brand of central air conditioning. If your system is old enough that repair no longer makes financial sense, we will say so and show you the numbers rather than quietly replacing parts."
+      ],
+      "features": ["Same-day repair on most faults", "Common parts stocked on every truck", "All major brands serviced"],
+      "featured": true
+    },
+    {
+      "slug": "furnace-repair-and-replacement",
+      "name": "Furnace repair & replacement",
+      "summary": "Emergency no-heat callouts and planned high-efficiency furnace replacement, with financing available on new equipment.",
+      "description": [
+        "No heat is an emergency, and we treat it as one. Emergency calls are dispatched to an on-call technician immediately, 24 hours a day, including holidays.",
+        "For planned work, we size the replacement properly for your house rather than fitting whatever is on the van. An oversized furnace short-cycles, costs more to run and wears out sooner.",
+        "Financing is available on approved credit with terms up to sixty months on qualifying new system installations."
+      ],
+      "features": ["24-hour emergency no-heat service", "Correctly sized replacements", "Financing up to 60 months on approved credit"],
+      "featured": true
+    },
+    {
+      "slug": "heat-pump-installation",
+      "name": "Heat pump installation",
+      "summary": "Energy-efficient heat pump systems sized correctly for your home, including ductless mini-split installation.",
+      "description": [
+        "Heat pumps have come a long way in cold climates, and for the right house they will cut running costs substantially compared with older equipment.",
+        "We size and install full heat pump systems as well as ductless mini-splits, which are a practical answer for additions, converted garages, sun rooms and any space your ductwork never reached."
+      ],
+      "features": ["Full system and ductless mini-split installation", "Sizing based on your actual house"]
+    },
+    {
+      "slug": "preventive-maintenance-plans",
+      "name": "Preventive maintenance plans",
+      "summary": "Twice-yearly tune-ups that keep your equipment under warranty and catch small problems before they become expensive ones.",
+      "description": [
+        "Most manufacturers require documented annual servicing to keep a warranty valid. Our maintenance plans cover two visits a year — the furnace before winter, the air conditioning in spring.",
+        "The visits are as much about catching the cheap problems early as about efficiency. A worn capacitor found in October is an inexpensive part; the same failure in January is an emergency callout."
+      ],
+      "features": ["Two visits a year", "Keeps manufacturer warranties valid", "Priority scheduling"]
+    },
+    {
+      "slug": "indoor-air-quality",
+      "name": "Indoor air quality",
+      "summary": "Whole-home humidifiers, air purifiers, UV lamps and duct cleaning to help with allergies and household dust.",
+      "description": [
+        "If your house is dusty year-round, or someone in it struggles through allergy season, the heating and cooling system is usually part of the story.",
+        "We fit whole-home humidifiers, air purifiers and UV lamps, and clean duct systems that have not been touched in years. These work on the air in the whole house, not one room at a time."
+      ],
+      "features": ["Whole-home humidifiers and purifiers", "UV lamp installation", "Full duct system cleaning"]
+    },
+    {
+      "slug": "commercial-hvac",
+      "name": "Commercial HVAC",
+      "summary": "Rooftop units, service contracts and planned replacement for small commercial buildings around Springfield.",
+      "description": [
+        "We look after rooftop units and light commercial systems for small businesses across the Springfield area — offices, shops, restaurants and workshops.",
+        "Service contracts mean the equipment gets checked on a schedule instead of when it fails, and planned replacement lets you budget for a new unit rather than finding the money in an emergency."
+      ],
+      "features": ["Rooftop unit service and replacement", "Scheduled service contracts", "Planned replacement budgeting"]
+    }
+  ],
+  "gallery": [
+    { "src": "assets/harvested/gallery-03-gallery1.jpg", "alt": "New Carrier system installed in a Springfield basement", "caption": "Full system replacement, Springfield" },
+    { "src": "assets/harvested/gallery-04-gallery2.jpg", "alt": "Rooftop commercial unit replacement in progress", "caption": "Commercial rooftop unit swap" },
+    { "src": "assets/harvested/gallery-05-gallery3.jpg", "alt": "Ductless mini split head mounted in a sun room", "caption": "Ductless mini-split in a sun room" }
+  ],
+  "testimonials": [
+    { "quote": "Our furnace quit on the coldest night of the year and Brannigan had a technician at the house within ninety minutes. He had heat back on before midnight and the bill was exactly what they quoted on the phone.", "author": "Diane M.", "location": "Springfield" },
+    { "quote": "We have used Brannigan for both our home and our office for over ten years. They have never once tried to sell us something we did not need, which is why we keep calling them.", "author": "Tom R.", "location": "Chatham" },
+    { "quote": "Katie got us on the schedule the same week and Marcus did a beautiful job on the new system. The install was clean, the crew was polite, and they hauled everything away.", "author": "Priya S.", "location": "Rochester" },
+    { "quote": "Fair, honest and on time. After being burned by a big national chain we will not use anyone else in Springfield.", "author": "Gary L." }
+  ],
+  "team": [
+    { "name": "Ed Brannigan", "role": "Founder", "bio": "Ed started the company in 1987 and still answers the phone on Saturday mornings." },
+    { "name": "Katie Brannigan-Voss", "role": "General Manager", "bio": "Katie runs the office, the schedule and the service contracts." },
+    { "name": "Marcus Webb", "role": "Lead Installer", "bio": "Marcus has installed more than two thousand systems across central Illinois." }
+  ],
+  "faqs": [
+    { "question": "Do you offer emergency service?", "answer": "Yes. We answer the phone 24 hours a day, 7 days a week, including holidays. Emergency calls are dispatched to an on-call technician immediately." },
+    { "question": "How often should I have my furnace serviced?", "answer": "Once a year, ideally in early autumn before the first cold snap. Air conditioners should be serviced each spring." },
+    { "question": "Do you offer financing on new equipment?", "answer": "We do. Financing is available on approved credit with terms up to sixty months on qualifying new system installations." },
+    { "question": "What brands do you service?", "answer": "All of them. Our technicians are factory trained on Carrier, Trane, Lennox, Goodman, Rheem and American Standard equipment." },
+    { "question": "Which areas do you cover?", "answer": "Springfield, Chatham, Rochester, Sherman, Riverton, Auburn and Pawnee." }
+  ],
+  "seo": {
+    "title": "HVAC Repair & Installation in Springfield IL | Brannigan",
+    "description": "Family-owned HVAC contractor in Springfield, IL since 1987. Same-day AC repair, 24-hour emergency furnace service, NATE-certified technicians. Call (217) 555-0142.",
+    "keywords": ["HVAC Springfield IL", "furnace repair Springfield", "AC repair Springfield IL", "heat pump installation"]
+  },
+  "site": {
+    "theme": "forge",
+    "mode": "light",
+    "domain": "https://branniganheating.com",
+    "form": { "provider": "none", "action": "", "method": "POST" },
+    "showPrices": false
+  },
+  "_meta": {
+    "enriched": true,
+    "gaps": [
+      "Facebook, Instagram and Yelp all refused anonymous requests, so nothing was read from them."
+    ],
+    "todo": [
+      "Confirm the exact NATE certification wording and whether all technicians currently hold it.",
+      "Confirm the Illinois licence number so it can be shown in the footer.",
+      "Do you want to publish a diagnostic call-out fee? No prices were on the old site.",
+      "Get the Yelp / Google review score and count so we can show a rating.",
+      "Ask for 6-10 recent job photos — the old site only had three, at low resolution.",
+      "Confirm the emergency response time you are comfortable promising in writing.",
+      "Which form endpoint do you want leads sent to (Formspree, or email forwarding)?",
+      "Is the fax number (217) 555-0143 still in use, or should it be dropped?"
+    ]
+  }
+}

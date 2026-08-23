@@ -1,0 +1,840 @@
+{
+  "harvestedAt": "2026-08-23T00:31:42.213Z",
+  "startUrl": "http://localhost:8781/",
+  "origin": "http://localhost:8781",
+  "slug": "brannigan",
+  "stats": {
+    "pagesCrawled": 6,
+    "urlsDiscovered": 7,
+    "requests": 18,
+    "bytes": 12987
+  },
+  "robots": {
+    "present": true,
+    "crawlDelay": 0,
+    "sitemaps": [
+      "/sitemap.xml"
+    ],
+    "honoured": true
+  },
+  "pages": [
+    {
+      "url": "http://localhost:8781/",
+      "kind": "home",
+      "title": "Brannigan Heating & Air Conditioning - Springfield IL HVAC Contractor",
+      "description": "",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Welcome to Brannigan Heating & Air"
+        },
+        {
+          "level": 2,
+          "text": "Why Choose Brannigan?"
+        }
+      ],
+      "paragraphs": [
+        "Brannigan Heating & Air Conditioning has been keeping Springfield families comfortable since 1987. We are a family owned and operated HVAC contractor serving Springfield, Chatham, Rochester and the surrounding communities. Our technicians are NATE certified and we service all makes and models of heating and cooling equipment.",
+        "We pride ourselves on honest pricing, clean work and showing up when we say we will. No high pressure sales, no surprise charges, and every job is backed by our satisfaction guarantee."
+      ],
+      "nav": [],
+      "audit": {
+        "url": "http://localhost:8781/",
+        "platform": "Microsoft FrontPage",
+        "bytes": 3061,
+        "counts": {
+          "images": 2,
+          "imagesNoAlt": 1,
+          "scripts": 0,
+          "stylesheets": 1,
+          "inlineStyled": 1,
+          "tables": 3,
+          "layoutTables": 3,
+          "words": 205,
+          "h1": 1
+        },
+        "hasViewport": false,
+        "hasStructuredData": false,
+        "hasHttps": false,
+        "flags": [
+          "No viewport meta tag — the page does not adapt to phones.",
+          "Served over HTTP, so browsers show a \"Not secure\" warning.",
+          "No meta description — Google invents its own snippet.",
+          "Page title is 69 characters and gets truncated in search results.",
+          "1 of 2 images have no alt text (accessibility + SEO).",
+          "3 table(s) used for page layout — a pre-2010 technique.",
+          "Uses deprecated <font>/<center>/<marquee> tags.",
+          "No structured data (schema.org) — no rich results in Google."
+        ]
+      }
+    },
+    {
+      "url": "http://localhost:8781/about.html",
+      "kind": "about",
+      "title": "About Us - Brannigan Heating",
+      "description": "",
+      "headings": [
+        {
+          "level": 1,
+          "text": "About Our Company"
+        },
+        {
+          "level": 2,
+          "text": "Meet The Team"
+        },
+        {
+          "level": 4,
+          "text": "Ed Brannigan"
+        },
+        {
+          "level": 4,
+          "text": "Katie Brannigan-Voss"
+        },
+        {
+          "level": 4,
+          "text": "Marcus Webb"
+        }
+      ],
+      "paragraphs": [
+        "Ed Brannigan founded Brannigan Heating & Air Conditioning in 1987 out of a single truck and his garage on the north end of Springfield. Nearly forty years later the company runs eight trucks and employs fourteen people, but the approach has not changed: do good work, charge a fair price, and treat every house like it belongs to your own family.",
+        "We are fully licensed and insured in the state of Illinois, and every technician on staff carries NATE certification. We are also an accredited business with the Better Business Bureau and have held an A+ rating since 2004.",
+        "Ed started the company in 1987 and still answers the phone on Saturday mornings.",
+        "Katie runs the office, the schedule and the service contracts.",
+        "Marcus has installed more than two thousand systems across central Illinois."
+      ],
+      "nav": [],
+      "audit": {
+        "url": "http://localhost:8781/about.html",
+        "platform": "",
+        "bytes": 1332,
+        "counts": {
+          "images": 0,
+          "imagesNoAlt": 0,
+          "scripts": 0,
+          "stylesheets": 1,
+          "inlineStyled": 0,
+          "tables": 0,
+          "layoutTables": 0,
+          "words": 155,
+          "h1": 1
+        },
+        "hasViewport": false,
+        "hasStructuredData": false,
+        "hasHttps": false,
+        "flags": [
+          "No viewport meta tag — the page does not adapt to phones.",
+          "Served over HTTP, so browsers show a \"Not secure\" warning.",
+          "No meta description — Google invents its own snippet.",
+          "No structured data (schema.org) — no rich results in Google."
+        ]
+      }
+    },
+    {
+      "url": "http://localhost:8781/services.html",
+      "kind": "services",
+      "title": "Our Services - Brannigan Heating & Air",
+      "description": "",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Frequently Asked Questions"
+        },
+        {
+          "level": 3,
+          "text": "Air Conditioning Repair"
+        },
+        {
+          "level": 3,
+          "text": "Furnace Repair & Replacement"
+        },
+        {
+          "level": 3,
+          "text": "Heat Pump Installation"
+        },
+        {
+          "level": 3,
+          "text": "Preventive Maintenance Plans"
+        },
+        {
+          "level": 3,
+          "text": "Indoor Air Quality"
+        },
+        {
+          "level": 3,
+          "text": "Commercial HVAC"
+        },
+        {
+          "level": 3,
+          "text": "Do you offer emergency service?"
+        },
+        {
+          "level": 3,
+          "text": "How often should I have my furnace serviced?"
+        },
+        {
+          "level": 3,
+          "text": "Do you offer financing on new equipment?"
+        },
+        {
+          "level": 3,
+          "text": "What brands do you service?"
+        }
+      ],
+      "paragraphs": [
+        "Fast diagnosis and repair for every major brand of central air conditioner. Most repairs completed same day, and we stock the common parts on every truck.",
+        "From emergency no-heat calls to planned high-efficiency furnace replacement, with financing available on new equipment.",
+        "Energy efficient heat pump systems sized correctly for your home, including ductless mini split installation.",
+        "Twice yearly tune ups that keep your equipment under warranty and catch small problems before they become expensive ones.",
+        "Whole home humidifiers, air purifiers, UV lamps and duct cleaning to help with allergies and dust.",
+        "Rooftop units, service contracts and planned replacement for small commercial buildings in the Springfield area.",
+        "Yes. We answer the phone 24 hours a day, 7 days a week, including holidays. Emergency calls are dispatched to an on-call technician immediately.",
+        "We recommend a professional tune up once a year, ideally in early fall before the first cold snap. Air conditioners should be serviced each spring.",
+        "We do. We offer approved credit financing with terms up to sixty months on qualifying new system installations.",
+        "All of them. Our technicians are factory trained on Carrier, Trane, Lennox, Goodman, Rheem and American Standard equipment."
+      ],
+      "nav": [],
+      "audit": {
+        "url": "http://localhost:8781/services.html",
+        "platform": "",
+        "bytes": 2295,
+        "counts": {
+          "images": 0,
+          "imagesNoAlt": 0,
+          "scripts": 0,
+          "stylesheets": 1,
+          "inlineStyled": 0,
+          "tables": 0,
+          "layoutTables": 0,
+          "words": 246,
+          "h1": 1
+        },
+        "hasViewport": false,
+        "hasStructuredData": false,
+        "hasHttps": false,
+        "flags": [
+          "No viewport meta tag — the page does not adapt to phones.",
+          "Served over HTTP, so browsers show a \"Not secure\" warning.",
+          "No meta description — Google invents its own snippet.",
+          "No structured data (schema.org) — no rich results in Google."
+        ]
+      }
+    },
+    {
+      "url": "http://localhost:8781/contact.html",
+      "kind": "contact",
+      "title": "Contact Us - Brannigan Heating",
+      "description": "",
+      "headings": [
+        {
+          "level": 2,
+          "text": "Hours of Operation"
+        },
+        {
+          "level": 2,
+          "text": "Service Area"
+        }
+      ],
+      "paragraphs": [
+        "Springfield, Chatham, Rochester, Sherman, Riverton, Auburn and Pawnee."
+      ],
+      "nav": [],
+      "audit": {
+        "url": "http://localhost:8781/contact.html",
+        "platform": "",
+        "bytes": 834,
+        "counts": {
+          "images": 0,
+          "imagesNoAlt": 0,
+          "scripts": 0,
+          "stylesheets": 1,
+          "inlineStyled": 0,
+          "tables": 0,
+          "layoutTables": 0,
+          "words": 57,
+          "h1": 1
+        },
+        "hasViewport": false,
+        "hasStructuredData": false,
+        "hasHttps": false,
+        "flags": [
+          "No viewport meta tag — the page does not adapt to phones.",
+          "Served over HTTP, so browsers show a \"Not secure\" warning.",
+          "No meta description — Google invents its own snippet.",
+          "No structured data (schema.org) — no rich results in Google."
+        ]
+      }
+    },
+    {
+      "url": "http://localhost:8781/testimonials.html",
+      "kind": "testimonials",
+      "title": "Testimonials - Brannigan Heating",
+      "description": "",
+      "headings": [
+        {
+          "level": 1,
+          "text": "What Our Customers Say"
+        }
+      ],
+      "paragraphs": [
+        "Katie got us on the schedule the same week and Marcus did a beautiful job on the new system. The install was clean, the crew was polite, and they hauled everything away.",
+        "Fair, honest and on time. After being burned by a big national chain we will not use anyone else in Springfield."
+      ],
+      "nav": [],
+      "audit": {
+        "url": "http://localhost:8781/testimonials.html",
+        "platform": "",
+        "bytes": 1156,
+        "counts": {
+          "images": 0,
+          "imagesNoAlt": 0,
+          "scripts": 0,
+          "stylesheets": 1,
+          "inlineStyled": 0,
+          "tables": 0,
+          "layoutTables": 0,
+          "words": 143,
+          "h1": 1
+        },
+        "hasViewport": false,
+        "hasStructuredData": false,
+        "hasHttps": false,
+        "flags": [
+          "No viewport meta tag — the page does not adapt to phones.",
+          "Served over HTTP, so browsers show a \"Not secure\" warning.",
+          "No meta description — Google invents its own snippet.",
+          "No structured data (schema.org) — no rich results in Google."
+        ]
+      }
+    },
+    {
+      "url": "http://localhost:8781/gallery.html",
+      "kind": "gallery",
+      "title": "Photo Gallery - Brannigan Heating",
+      "description": "",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Photo Gallery"
+        }
+      ],
+      "paragraphs": [],
+      "nav": [],
+      "audit": {
+        "url": "http://localhost:8781/gallery.html",
+        "platform": "",
+        "bytes": 566,
+        "counts": {
+          "images": 4,
+          "imagesNoAlt": 1,
+          "scripts": 0,
+          "stylesheets": 1,
+          "inlineStyled": 0,
+          "tables": 0,
+          "layoutTables": 0,
+          "words": 3,
+          "h1": 1
+        },
+        "hasViewport": false,
+        "hasStructuredData": false,
+        "hasHttps": false,
+        "flags": [
+          "No viewport meta tag — the page does not adapt to phones.",
+          "Served over HTTP, so browsers show a \"Not secure\" warning.",
+          "No meta description — Google invents its own snippet.",
+          "1 of 4 images have no alt text (accessibility + SEO).",
+          "No structured data (schema.org) — no rich results in Google."
+        ]
+      }
+    }
+  ],
+  "skipped": [
+    {
+      "url": "http://localhost:8781/index.html",
+      "reason": "duplicate of an already-crawled page"
+    }
+  ],
+  "meta": {
+    "title": "Brannigan Heating & Air Conditioning - Springfield IL HVAC Contractor",
+    "description": "",
+    "keywords": [
+      "hvac springfield il",
+      "ac repair",
+      "furnace",
+      "heating"
+    ],
+    "canonical": null,
+    "lang": "",
+    "robots": "",
+    "generator": "Microsoft FrontPage 6.0",
+    "viewport": "",
+    "themeColor": "",
+    "favicon": null,
+    "og": {
+      "title": "",
+      "description": "",
+      "image": null,
+      "siteName": "",
+      "type": "",
+      "url": ""
+    },
+    "twitter": {
+      "title": "",
+      "description": "",
+      "image": null,
+      "site": ""
+    },
+    "all": {
+      "keywords": "hvac springfield il, ac repair, furnace, heating",
+      "generator": "Microsoft FrontPage 6.0"
+    }
+  },
+  "jsonld": {
+    "found": 0,
+    "patch": {}
+  },
+  "contact": {
+    "phones": [
+      {
+        "value": "(217) 555-0142",
+        "confidence": "medium",
+        "source": "page text",
+        "kind": "phone"
+      }
+    ],
+    "emails": [
+      {
+        "value": "service@branniganheating.com",
+        "confidence": "high",
+        "source": "mailto: link"
+      }
+    ],
+    "address": {
+      "address": {
+        "street": "1425 North Grand Avenue East",
+        "street2": "Suite B",
+        "city": "Springfield",
+        "region": "IL",
+        "postalCode": "62702",
+        "country": "US"
+      },
+      "confidence": "medium",
+      "source": "text pattern",
+      "raw": "1425 North Grand Avenue East, Suite B, Springfield, IL 62702"
+    },
+    "hours": {
+      "hours": [
+        {
+          "day": "monday",
+          "closed": false,
+          "open": "7:00 AM",
+          "close": "5:30 PM"
+        },
+        {
+          "day": "tuesday",
+          "closed": false,
+          "open": "7:00 AM",
+          "close": "5:30 PM"
+        },
+        {
+          "day": "wednesday",
+          "closed": false,
+          "open": "7:00 AM",
+          "close": "5:30 PM"
+        },
+        {
+          "day": "thursday",
+          "closed": false,
+          "open": "7:00 AM",
+          "close": "5:30 PM"
+        },
+        {
+          "day": "friday",
+          "closed": false,
+          "open": "7:00 AM",
+          "close": "5:30 PM"
+        },
+        {
+          "day": "saturday",
+          "closed": false,
+          "open": "8:00 AM",
+          "close": "12:00 PM"
+        },
+        {
+          "day": "sunday",
+          "closed": true,
+          "open": "",
+          "close": "",
+          "note": ""
+        }
+      ],
+      "confidence": "medium",
+      "source": "page text"
+    }
+  },
+  "brand": {
+    "colors": {
+      "primary": "#1f3a93",
+      "secondary": "#c41e3a",
+      "accent": "",
+      "palette": [
+        {
+          "hex": "#1f3a93",
+          "score": 10,
+          "uses": 4
+        },
+        {
+          "hex": "#c41e3a",
+          "score": 4,
+          "uses": 2
+        },
+        {
+          "hex": "#eeeeee",
+          "score": 3,
+          "uses": 1
+        },
+        {
+          "hex": "#333333",
+          "score": 2,
+          "uses": 1
+        },
+        {
+          "hex": "#666666",
+          "score": 2,
+          "uses": 1
+        },
+        {
+          "hex": "#444444",
+          "score": 2,
+          "uses": 1
+        },
+        {
+          "hex": "#cccccc",
+          "score": 1,
+          "uses": 1
+        }
+      ]
+    },
+    "fonts": {
+      "heading": "Georgia",
+      "body": "Georgia",
+      "all": [
+        "Georgia"
+      ],
+      "googleFonts": []
+    },
+    "logo": "http://localhost:8781/img/logo.gif",
+    "hero": "http://localhost:8781/img/hero.jpg"
+  },
+  "social": {
+    "urls": {
+      "facebook": "https://www.facebook.com/branniganheating",
+      "instagram": "https://www.instagram.com/branniganheating",
+      "yelp": "https://www.yelp.com/biz/brannigan-heating-springfield"
+    },
+    "profiles": [
+      {
+        "network": "facebook",
+        "label": "Facebook",
+        "url": "https://www.facebook.com/branniganheating",
+        "status": "unreachable",
+        "data": {},
+        "notes": [
+          "Could not fetch (HTTP 403)."
+        ]
+      },
+      {
+        "network": "instagram",
+        "label": "Instagram",
+        "url": "https://www.instagram.com/branniganheating",
+        "status": "unreachable",
+        "data": {},
+        "notes": [
+          "Could not fetch (HTTP 403)."
+        ]
+      },
+      {
+        "network": "yelp",
+        "label": "Yelp",
+        "url": "https://www.yelp.com/biz/brannigan-heating-springfield",
+        "status": "unreachable",
+        "data": {},
+        "notes": [
+          "Could not fetch (HTTP 403)."
+        ]
+      }
+    ],
+    "gaps": [
+      {
+        "network": "Facebook",
+        "url": "https://www.facebook.com/branniganheating",
+        "ask": "Open https://www.facebook.com/branniganheating while signed in and copy: the bio/about text, the 6–10 best photos, any recent posts worth featuring, and the review score if there is one."
+      },
+      {
+        "network": "Instagram",
+        "url": "https://www.instagram.com/branniganheating",
+        "ask": "Open https://www.instagram.com/branniganheating while signed in and copy: the bio/about text, the 6–10 best photos, any recent posts worth featuring, and the review score if there is one."
+      },
+      {
+        "network": "Yelp",
+        "url": "https://www.yelp.com/biz/brannigan-heating-springfield",
+        "ask": "Open https://www.yelp.com/biz/brannigan-heating-springfield while signed in and copy: the bio/about text, the 6–10 best photos, any recent posts worth featuring, and the review score if there is one."
+      }
+    ]
+  },
+  "content": {
+    "services": [
+      {
+        "name": "Air Conditioning Repair",
+        "summary": "Fast diagnosis and repair for every major brand of central air conditioner. Most repairs completed same day, and we stock the common parts on every truck.",
+        "image": "",
+        "sourceUrl": ""
+      },
+      {
+        "name": "Furnace Repair & Replacement",
+        "summary": "From emergency no-heat calls to planned high-efficiency furnace replacement, with financing available on new equipment.",
+        "image": "",
+        "sourceUrl": ""
+      },
+      {
+        "name": "Heat Pump Installation",
+        "summary": "Energy efficient heat pump systems sized correctly for your home, including ductless mini split installation.",
+        "image": "",
+        "sourceUrl": ""
+      },
+      {
+        "name": "Preventive Maintenance Plans",
+        "summary": "Twice yearly tune ups that keep your equipment under warranty and catch small problems before they become expensive ones.",
+        "image": "",
+        "sourceUrl": ""
+      },
+      {
+        "name": "Indoor Air Quality",
+        "summary": "Whole home humidifiers, air purifiers, UV lamps and duct cleaning to help with allergies and dust.",
+        "image": "",
+        "sourceUrl": ""
+      },
+      {
+        "name": "Commercial HVAC",
+        "summary": "Rooftop units, service contracts and planned replacement for small commercial buildings in the Springfield area.",
+        "image": "",
+        "sourceUrl": ""
+      }
+    ],
+    "testimonials": [
+      {
+        "quote": "Our furnace quit on the coldest night of the year and Brannigan had a technician at the house within ninety minutes. He had heat back on before midnight and the bill was exactly what they quoted on the phone.",
+        "author": "Diane M., Springfield",
+        "source": "blockquote"
+      },
+      {
+        "quote": "We have used Brannigan for both our home and our office for over ten years. They have never once tried to sell us something we did not need, which is why we keep calling them.",
+        "author": "Tom R., Chatham",
+        "source": "blockquote"
+      },
+      {
+        "quote": "Katie got us on the schedule the same week and Marcus did a beautiful job on the new system. The install was clean, the crew was polite, and they hauled everything away.",
+        "author": "Priya S., Rochester",
+        "source": "testimonial block"
+      },
+      {
+        "quote": "Fair, honest and on time. After being burned by a big national chain we will not use anyone else in Springfield.",
+        "author": "Gary L.",
+        "source": "testimonial block"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Do you offer emergency service?",
+        "answer": "Yes. We answer the phone 24 hours a day, 7 days a week, including holidays. Emergency calls are dispatched to an on-call technician immediately."
+      },
+      {
+        "question": "How often should I have my furnace serviced?",
+        "answer": "We recommend a professional tune up once a year, ideally in early fall before the first cold snap. Air conditioners should be serviced each spring."
+      },
+      {
+        "question": "Do you offer financing on new equipment?",
+        "answer": "We do. We offer approved credit financing with terms up to sixty months on qualifying new system installations."
+      },
+      {
+        "question": "What brands do you service?",
+        "answer": "All of them. Our technicians are factory trained on Carrier, Trane, Lennox, Goodman, Rheem and American Standard equipment."
+      }
+    ],
+    "team": [
+      {
+        "name": "Ed Brannigan",
+        "role": "Founder",
+        "bio": "Ed started the company in 1987 and still answers the phone on Saturday mornings.",
+        "photo": ""
+      },
+      {
+        "name": "Katie Brannigan-Voss",
+        "role": "General Manager",
+        "bio": "Katie runs the office, the schedule and the service contracts.",
+        "photo": ""
+      },
+      {
+        "name": "Marcus Webb",
+        "role": "Lead Installer",
+        "bio": "Marcus has installed more than two thousand systems across central Illinois.",
+        "photo": ""
+      }
+    ],
+    "gallery": [
+      {
+        "src": "http://localhost:8781/img/gallery1.jpg",
+        "alt": "New Carrier system installed in a Springfield basement",
+        "caption": "",
+        "category": ""
+      },
+      {
+        "src": "http://localhost:8781/img/gallery2.jpg",
+        "alt": "Rooftop commercial unit replacement",
+        "caption": "",
+        "category": ""
+      },
+      {
+        "src": "http://localhost:8781/img/gallery3.jpg",
+        "alt": "Ductless mini split in a sun room",
+        "caption": "",
+        "category": ""
+      }
+    ]
+  },
+  "images": [
+    {
+      "url": "http://localhost:8781/img/logo.gif",
+      "alt": "Brannigan Heating and Air Conditioning logo",
+      "title": "",
+      "width": 240,
+      "height": 70,
+      "classes": [],
+      "role": "logo"
+    },
+    {
+      "url": "http://localhost:8781/img/hero.jpg",
+      "alt": "",
+      "title": "",
+      "width": 960,
+      "height": 300,
+      "classes": [],
+      "role": "hero"
+    },
+    {
+      "url": "http://localhost:8781/img/gallery1.jpg",
+      "alt": "New Carrier system installed in a Springfield basement",
+      "title": "",
+      "width": 400,
+      "height": 300,
+      "classes": [],
+      "role": "gallery"
+    },
+    {
+      "url": "http://localhost:8781/img/gallery2.jpg",
+      "alt": "Rooftop commercial unit replacement",
+      "title": "",
+      "width": 400,
+      "height": 300,
+      "classes": [],
+      "role": "gallery"
+    },
+    {
+      "url": "http://localhost:8781/img/gallery3.jpg",
+      "alt": "Ductless mini split in a sun room",
+      "title": "",
+      "width": 400,
+      "height": 300,
+      "classes": [],
+      "role": "gallery"
+    }
+  ],
+  "assets": [
+    {
+      "role": "logo",
+      "sourceUrl": "http://localhost:8781/img/logo.gif",
+      "file": "assets/harvested/logo-01-logo.gif",
+      "alt": "Brannigan Heating and Air Conditioning logo",
+      "bytes": 42,
+      "contentType": "image/gif"
+    },
+    {
+      "role": "hero",
+      "sourceUrl": "http://localhost:8781/img/hero.jpg",
+      "file": "assets/harvested/hero-02-hero.jpg",
+      "alt": "",
+      "bytes": 160,
+      "contentType": "image/jpeg"
+    },
+    {
+      "role": "gallery",
+      "sourceUrl": "http://localhost:8781/img/gallery1.jpg",
+      "file": "assets/harvested/gallery-03-gallery1.jpg",
+      "alt": "New Carrier system installed in a Springfield basement",
+      "bytes": 160,
+      "contentType": "image/jpeg"
+    },
+    {
+      "role": "gallery",
+      "sourceUrl": "http://localhost:8781/img/gallery2.jpg",
+      "file": "assets/harvested/gallery-04-gallery2.jpg",
+      "alt": "Rooftop commercial unit replacement",
+      "bytes": 160,
+      "contentType": "image/jpeg"
+    },
+    {
+      "role": "gallery",
+      "sourceUrl": "http://localhost:8781/img/gallery3.jpg",
+      "file": "assets/harvested/gallery-05-gallery3.jpg",
+      "alt": "Ductless mini split in a sun room",
+      "bytes": 160,
+      "contentType": "image/jpeg"
+    }
+  ],
+  "audit": {
+    "pages": 6,
+    "platform": "Microsoft FrontPage",
+    "mobileFriendly": false,
+    "https": false,
+    "structuredData": false,
+    "totals": {
+      "images": 6,
+      "imagesNoAlt": 2,
+      "words": 809,
+      "bytes": 9244
+    },
+    "flags": [
+      {
+        "text": "No viewport meta tag — the page does not adapt to phones.",
+        "pages": 6
+      },
+      {
+        "text": "Served over HTTP, so browsers show a \"Not secure\" warning.",
+        "pages": 6
+      },
+      {
+        "text": "No meta description — Google invents its own snippet.",
+        "pages": 6
+      },
+      {
+        "text": "No structured data (schema.org) — no rich results in Google.",
+        "pages": 6
+      },
+      {
+        "text": "1 of 2 images have no alt text (accessibility + SEO).",
+        "pages": 2
+      },
+      {
+        "text": "Page title is 69 characters and gets truncated in search results.",
+        "pages": 1
+      },
+      {
+        "text": "3 table(s) used for page layout — a pre-2010 technique.",
+        "pages": 1
+      },
+      {
+        "text": "Uses deprecated <font>/<center>/<marquee> tags.",
+        "pages": 1
+      }
+    ]
+  }
+}

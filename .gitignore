@@ -1,0 +1,20 @@
+node_modules/
+*.log
+.DS_Store
+.env
+.env.*
+
+# Per-client working data. Keep the folder, ignore the contents — except the
+# worked example, which is committed as documentation.
+clients/*
+!clients/.gitkeep
+!clients/brannigan/
+clients/brannigan/dist/
+
+# Build output
+dist/
+*.zip
+*.tmp.mjs
+
+# Deploy credentials
+avo.secrets.json

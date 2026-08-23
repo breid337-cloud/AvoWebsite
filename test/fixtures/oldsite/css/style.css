@@ -1,0 +1,9 @@
+body { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #333333; background: #FFFFFF; }
+#nav { background-color: #1F3A93; padding: 6px; }
+#nav a { color: #FFFFFF; text-decoration: none; font-weight: bold; }
+h1 { font-family: Georgia, serif; color: #1F3A93; font-size: 24px; }
+h2, h3 { font-family: Georgia, serif; color: #1F3A93; }
+.service { border: 1px solid #CCCCCC; padding: 8px; }
+.btn, .button { background-color: #C41E3A; color: #FFFFFF; padding: 6px 12px; }
+#footer { background: #EEEEEE; color: #666666; font-size: 11px; }
+blockquote { color: #444444; border-left: 3px solid #C41E3A; }
