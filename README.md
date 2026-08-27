@@ -156,6 +156,22 @@ Local server with a floating bar to switch themes live, flip light/dark, and
 open the old site side by side. Built for showing a business owner the
 difference.
 
+### 4b. Send it to the client as one file
+
+```bash
+avo bundle their-business
+avo bundle their-business --banner "Draft for Tuesday"
+```
+
+Folds the whole build into a single self-contained HTML file — every page, the
+stylesheet and all the photographs inlined, with no external requests. Internal
+navigation still works, the lightbox still opens, and the contact form is inert
+and says so.
+
+Useful when the client cannot be got onto a call: email them one file and it
+opens on a phone, off a USB stick, or anywhere else, with no hosting involved.
+Images are held in a keyed map, so a photo used on two pages is embedded once.
+
 ### 5. Deploy
 
 ```bash

@@ -21,6 +21,7 @@ harvest/       fetcher (robots-aware) → crawler → extract/* → index.js →
 themes/        7 theme data modules + tokens.js (the token → CSS compiler)
 shell/         pages.js (page plan) + sections/* (markup) + components/icons
 render/        css.js, js.js, html.js, seo.js, assets.js → index.js (buildSite)
+               bundle.js folds a build into one self-contained HTML file
 preview/  deploy/  cli/
 ```
 

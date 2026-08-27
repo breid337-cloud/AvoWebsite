@@ -350,7 +350,8 @@ body.nav-open { overflow: hidden; }
 .prose p { color: var(--text-muted); }
 .sticky-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-7); display: grid; gap: var(--space-5); }
 .sticky-card__title { font-size: var(--step-2); }
-.sticky-card__price { font-size: var(--step-3); font-weight: var(--fw-heading-strong); color: var(--primary); font-family: var(--font-heading); }
+.sticky-card__price { font-size: var(--step-3); font-weight: var(--fw-heading-strong); color: var(--primary);
+  font-family: var(--font-heading); line-height: 1.1; text-wrap: balance; }
 .sticky-card__price span { display: block; font-size: var(--step--1); color: var(--text-muted); font-family: var(--font-body); font-weight: var(--fw-body); }
 .sticky-card p { color: var(--text-muted); }
 .service-detail__media { margin-top: var(--space-9); }

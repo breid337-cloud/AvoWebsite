@@ -19,6 +19,7 @@ const COMMANDS = {
   check: () => import('./commands/check.js'),
   build: () => import('./commands/build.js'),
   preview: () => import('./commands/preview.js'),
+  bundle: () => import('./commands/bundle.js'),
   deploy: () => import('./commands/deploy.js'),
   themes: () => import('./commands/themes.js'),
   doctor: () => import('./commands/doctor.js'),
@@ -44,6 +45,7 @@ ${color.bold('Commands')}
   check <client>          Validate a profile and score its completeness
   build <client>          Build the static site
   preview <client>        Serve the build locally
+  bundle <client>         Fold the build into one self-contained HTML file
   deploy <client>         Publish the build
   themes [client]         List themes, or see which suits a client
   doctor                  Check the environment and self-test the themes
