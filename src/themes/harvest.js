@@ -34,6 +34,18 @@ export default {
       overlay: 'rgba(12, 9, 6, 0.62)',
     },
   },
+  copy: {
+    heroPrimary: 'Book a table',
+    contactHeading: 'Find us',
+    contactHeadingCompact: 'Book a table',
+    formSubject: 'What are you asking about?',
+    formSubmit: 'Send it over',
+    formNote: 'We read everything that comes in and will get back to you.',
+    ctaPrimary: 'Get directions',
+    areaPrefix: '',
+    galleryEyebrow: 'Recent nights',
+    galleryHeading: 'Inside',
+  },
   extras: {
     css: `
 .eyebrow { text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); font-size: var(--step--1); color: var(--accent); }

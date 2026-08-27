@@ -34,10 +34,13 @@ Node 20+. **No required dependencies.** Optional extras:
 
 | Package | Enables |
 | --- | --- |
-| `sharp` | Responsive WebP image variants (`srcset`) |
+| `sharp` | Responsive WebP variants (`srcset`). An optional dependency, so `npm install` picks it up automatically where the platform supports it |
 | `basic-ftp` | `--target ftp` |
 | `ssh2-sftp-client` | `--target sftp` |
-| `playwright` | Harvesting sites that render their content with JavaScript |
+| `playwright` | The visual test harness (`npm run test:visual`) |
+
+Without `sharp` the build still succeeds; it just ships the original images and
+says so in the warnings.
 
 ## The workflow
 
@@ -74,6 +77,22 @@ Written to `clients/<slug>/`:
 | `profile.draft.json` | A buildable profile using the old copy verbatim |
 | `BRIEF.md` | The enrichment brief for a Claude Code session |
 | `assets/harvested/` | Downloaded images |
+
+### Harvesting from saved pages
+
+Some sites cannot be crawled: they block bots, sit behind a login, or build
+their content with JavaScript. For those, ask the client to save each page in
+Chrome or Edge via **Save page as → "Webpage, Single File"** and send you the
+`.mht` files:
+
+```bash
+avo harvest home.mht drinks.mht contact.mht --slug their-business
+```
+
+An MHTML archive contains the *rendered* DOM plus every image and stylesheet the
+page actually loaded, so this often yields more than crawling would — including
+photography that page builders reference from CSS rather than `<img>` tags. It
+is also two clicks for a non-technical client.
 
 Social profiles are checked for public OpenGraph data. Facebook and Instagram
 serve a login wall to anonymous requests — when that happens it is **reported as
@@ -175,6 +194,7 @@ hero, services, testimonial, gallery and CTA variants.
 | **Harvest** | Editorial serif over full-bleed photography | Restaurants, cafés, bakeries, bars, caterers |
 | **Beacon** | Geometric, indigo gradients, generous radii | Agencies, software, startups, marketing |
 | **Homestead** | Warm off-white, forest green, sturdy serif | Landscaping, cleaning, pest control, pet care, childcare |
+| **Calypso** | Night-time aubergine lit with mango, hibiscus and turquoise | Rum & cocktail bars, live music venues, tiki bars, taprooms |
 
 ```bash
 avo themes                    # descriptions and layout variants

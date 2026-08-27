@@ -9,8 +9,8 @@ export function renderGallery(ctx, config = {}) {
   if (!items.length) return '';
 
   const head = sectionHeader({
-    eyebrow: config.preview ? 'Recent work' : null,
-    title: config.heading ?? 'Our work',
+    eyebrow: config.preview ? ctx.copy('galleryEyebrow', 'Recent work') : null,
+    title: config.heading ?? ctx.copy('galleryHeading', 'Our work'),
     align: 'start',
     id: 'gallery-title',
   });
@@ -20,7 +20,7 @@ export function renderGallery(ctx, config = {}) {
     const alt = item.alt || `${profile.business.name} work, photo ${i + 1}`;
     return `  <figure class="gallery__item">
     <button class="gallery__trigger" type="button"${attrs({ 'data-lightbox': src, 'data-caption': item.caption || alt })}>
-      ${image(src, alt, { className: 'gallery__img', sizes: '(min-width: 900px) 33vw, 50vw' })}
+      ${image(src, alt, { className: 'gallery__img', sizes: '(min-width: 900px) 33vw, 50vw', variants: ctx.variantsFor?.(item.src) })}
       <span class="visually-hidden">View larger: ${escapeHtml(alt)}</span>
     </button>
 ${item.caption ? `    <figcaption>${escapeHtml(item.caption)}</figcaption>` : ''}

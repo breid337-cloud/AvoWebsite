@@ -11,12 +11,23 @@ export function mainContent(doc) {
   return explicit || qs(doc, 'body') || doc;
 }
 
+const CHROME_CLASS = /\b(nav|navbar|menu|header|footer|sidebar|breadcrumb|cookie|banner|modal|popup)\b/;
+
+/**
+ * Is this node inside site chrome rather than page content?
+ *
+ * The walk deliberately stops at <body>. WordPress themes routinely put layout
+ * hints in the body class — GeneratePress emits `nav-float-right`,
+ * `header-aligned-left`, `right-sidebar` — and treating those as chrome markers
+ * classifies every element on the page as navigation, which silently harvests
+ * nothing at all.
+ */
 const isChrome = (node) => {
   let cur = node;
-  while (cur) {
+  while (cur && cur.tag !== 'body' && cur.tag !== 'html' && cur.type !== 'root') {
     if (['nav', 'header', 'footer', 'aside'].includes(cur.tag)) return true;
     const cls = classList(cur).join(' ').toLowerCase() + ' ' + (attr(cur, 'id') || '').toLowerCase();
-    if (/\b(nav|navbar|menu|header|footer|sidebar|breadcrumb|cookie|banner|modal|popup)\b/.test(cls)) return true;
+    if (CHROME_CLASS.test(cls)) return true;
     cur = cur.parent;
   }
   return false;

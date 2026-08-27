@@ -3,7 +3,9 @@ import { squash, uniqueBy } from '../../util/text.js';
 import { DAYS } from '../../profile/schema.js';
 import { to12h } from './jsonld.js';
 
-const PHONE_RE = /(?:\+?\d{1,3}[\s.‐-―-]?)?\(?\d{3}\)?[\s.‐-―-]?\d{3}[\s.‐-―-]?\d{4}\b/g;
+// Covers North American 3-3-4 and UK groupings (01242 500690, 020 7946 0000,
+// +44 1242 500690). Validation happens in looksLikePhone.
+const PHONE_RE = /(?:\+\d{1,3}[\s.-]?)?\(?\d{2,5}\)?[\s.-]?\d{3,4}[\s.-]?\d{3,4}\b/g;
 const EMAIL_RE = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}/gi;
 
 // Addresses and emails that belong to the site's toolchain, not the business.
@@ -28,10 +30,19 @@ const US_ADDRESS_RE = new RegExp(
 
 /** True when a digit run is plausibly a phone number rather than a date/ID/price. */
 function looksLikePhone(raw, context = '') {
-  const digits = raw.replace(/\D/g, '');
+  const trimmed = raw.trim();
+  const digits = trimmed.replace(/\D/g, '');
   if (digits.length < 10 || digits.length > 15) return false;
   if (/^0+$/.test(digits)) return false;
-  if (/^(19|20)\d{2}[-/]/.test(raw.trim())) return false;
+  if (/^(19|20)\d{2}[-/]/.test(trimmed)) return false;
+
+  // UK numbers are 10-11 digits starting 0 nationally, or +44 internationally.
+  // The NANP area-code rules below would reject every one of them.
+  const isUk = /^\+?44/.test(digits) || (digits.startsWith('0') && digits.length >= 10 && digits.length <= 11);
+  if (isUk) {
+    if (!/^\+?4?4?0?[1237]/.test(digits.replace(/^\+?44/, '0'))) return false;
+    return true;
+  }
   if (/\b(?:invoice|order|sku|isbn|ein|tax\s*id|account|license|lic)\s*#?\s*:?\s*$/i.test(context.slice(0, context.length - raw.length))) return false;
   if (/^\d{10,}$/.test(raw.trim()) && !/[()\s.-]/.test(raw)) return false; // bare digit blob
   const area = digits.length === 11 && digits.startsWith('1') ? digits.slice(1, 4) : digits.slice(0, 3);

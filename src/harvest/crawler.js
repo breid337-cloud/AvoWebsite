@@ -20,13 +20,15 @@ const PRIORITY = [
   { re: /area|service-area|coverage|neighborhoods/i, score: 60, kind: 'area' },
 ];
 
-function classify(url) {
+export function classifyUrl(url) {
   const path = toUrl(url)?.pathname ?? '/';
   for (const entry of PRIORITY) {
     if (entry.re.test(path)) return entry;
   }
   return { score: 40 - depth(url) * 5, kind: 'page' };
 }
+
+const classify = classifyUrl;
 
 /** Discover URLs from sitemap.xml (and nested sitemap indexes). */
 export async function readSitemap(fetcher, origin, { limit = 200 } = {}) {

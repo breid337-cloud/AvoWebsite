@@ -14,7 +14,7 @@ import { relativeUrl, planPages } from '../src/shell/pages.js';
 import { Robots } from '../src/harvest/fetcher.js';
 import { extractContact } from '../src/harvest/extract/contact.js';
 import { collectJsonLd, jsonLdToProfile } from '../src/harvest/extract/jsonld.js';
-import { extractServices, extractFaqs, extractTestimonials } from '../src/harvest/extract/content.js';
+import { extractServices, extractFaqs, extractTestimonials, extractHeadings, extractParagraphs } from '../src/harvest/extract/content.js';
 import { walk } from '../src/util/fs.js';
 
 const sampleProfile = () => normalizeProfile({
@@ -217,4 +217,26 @@ test('all six themes build without error', async () => {
       await fsp.rm(outDir, { recursive: true, force: true });
     }
   }
+});
+
+test('WordPress body classes do not poison content extraction', () => {
+  // GeneratePress and friends put layout hints in the body class. Treating
+  // those as chrome markers used to classify the entire page as navigation.
+  const doc = parseHtml(`<body class="home wp-singular nav-float-right header-aligned-left right-sidebar separate-containers">
+    <div id="content" class="site-content"><h1>33 The Rum Bar</h1>
+    <h2>Our Story</h2>
+    <p>We like to shake things up, and we have been doing it on the same street for years now.</p>
+    <p>Another paragraph of genuine page copy that should survive the chrome filter entirely.</p>
+    </div></body>`);
+  assert.ok(extractHeadings(doc).length >= 2, 'headings survive a poisoned body class');
+  assert.equal(extractParagraphs(doc).length, 2, 'paragraphs survive a poisoned body class');
+});
+
+test('real chrome is still excluded', () => {
+  const doc = parseHtml(`<body><nav><p>Home About Contact Services Gallery menu items</p></nav>
+    <div class="site-footer"><p>Copyright notice and a long line of footer boilerplate text here</p></div>
+    <main><p>This is the actual page content that we care about harvesting properly.</p></main></body>`);
+  const paras = extractParagraphs(doc);
+  assert.equal(paras.length, 1);
+  assert.ok(paras[0].startsWith('This is the actual'));
 });

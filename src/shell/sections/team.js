@@ -15,7 +15,7 @@ export function renderTeam(ctx, config = {}) {
     children: `${sectionHeader({ eyebrow: 'The people', title: config.heading ?? 'Meet the team', id: 'team-title' })}
 <ul class="card-grid card-grid--team">
 ${items.map((m) => `  <li class="card card--person">
-    ${m.photo ? `<div class="card__media card__media--portrait">${image(asset(m.photo), m.name, { className: 'card__img', sizes: '(min-width: 900px) 25vw, 50vw' })}</div>` : `<span class="card__icon">${icon('users')}</span>`}
+    ${m.photo ? `<div class="card__media card__media--portrait">${image(asset(m.photo), m.name, { className: 'card__img', sizes: '(min-width: 900px) 25vw, 50vw', variants: ctx.variantsFor?.(m.photo) })}</div>` : `<span class="card__icon">${icon('users')}</span>`}
     <div class="card__body">
       <h3 class="card__title">${escapeHtml(m.name)}</h3>
       ${m.role ? `<p class="card__role">${escapeHtml(m.role)}</p>` : ''}

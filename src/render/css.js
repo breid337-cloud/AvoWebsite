@@ -177,15 +177,17 @@ body.nav-open { overflow: hidden; }
 .hero--centered .hero__inner, .hero--gradient .hero__inner { justify-items: center; text-align: center; }
 .hero--centered .hero__subtitle, .hero--gradient .hero__subtitle { margin-inline: auto; }
 .hero--centered .hero__actions, .hero--gradient .hero__actions { justify-content: center; }
-.hero--image { color: #fff; }
+/* White hero text is only safe over a photo. Scoped to [data-has-media] so a
+   client with no hero image yet still gets readable, on-theme colours. */
+.hero--image[data-has-media] { color: #fff; }
 .hero--image .hero__bg { position: absolute; inset: 0; z-index: 0; }
 .hero--image .hero__bg::after { content: ""; position: absolute; inset: 0; background: var(--overlay); }
 .hero--image .hero__img { width: 100%; height: 100%; object-fit: cover; border-radius: 0; box-shadow: none; }
 .hero--image .hero__inner { position: relative; z-index: 1; min-height: clamp(24rem, 58vh, 34rem); align-content: center; }
-.hero--image .hero__subtitle { color: rgba(255,255,255,.9); }
-.hero--image .eyebrow { color: #fff; opacity: .9; }
-.hero--image .btn--ghost { color: #fff; border-color: rgba(255,255,255,.55); }
-.hero--image .btn--ghost:hover { background: rgba(255,255,255,.14); border-color: #fff; color: #fff; }
+.hero--image[data-has-media] .hero__subtitle { color: rgba(255,255,255,.9); }
+.hero--image[data-has-media] .eyebrow { color: #fff; opacity: .9; }
+.hero--image[data-has-media] .btn--ghost { color: #fff; border-color: rgba(255,255,255,.55); }
+.hero--image[data-has-media] .btn--ghost:hover { background: rgba(255,255,255,.14); border-color: #fff; color: #fff; }
 
 /* ── Trust bar ─────────────────────────────────────────────────────── */
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: var(--space-7); list-style: none; padding: 0; text-align: center; }

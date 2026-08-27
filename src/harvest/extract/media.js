@@ -4,6 +4,8 @@ import { absolutize, basename, isImageUrl } from '../../util/url.js';
 
 const TRACKING_HOSTS = /doubleclick|google-analytics|googletagmanager|facebook\.com\/tr|scorecardresearch|quantserve|hotjar|pixel|beacon/i;
 const JUNK_NAME = /^(spacer|blank|clear|pixel|1x1|dot|shim|transparent|loading|placeholder|arrow|bullet|divider|separator|bg-?\d*)\.(gif|png|jpe?g)$/i;
+// Embedded map tiles and share badges are not photographs of the business.
+const JUNK_URL = /staticmap|maps\.googleapis|mapservice|google.*static|badge|qr-?code|captcha/i;
 
 /** Pick the largest candidate out of a srcset string. */
 function fromSrcset(value) {
@@ -32,7 +34,7 @@ export function extractImages(doc, baseUrl) {
     if (!raw || raw.startsWith('data:')) continue;
     const url = absolutize(raw, baseUrl);
     if (!url || TRACKING_HOSTS.test(url)) continue;
-    if (JUNK_NAME.test(basename(url))) continue;
+    if (JUNK_NAME.test(basename(url)) || JUNK_URL.test(url)) continue;
 
     const width = Number(attr(img, 'width')) || null;
     const height = Number(attr(img, 'height')) || null;
@@ -123,4 +125,24 @@ export function pickGallery(images, { limit = 24 } = {}) {
     .filter((i) => !i.width || i.width >= 300)
     .slice(0, limit)
     .map((i) => ({ src: i.url, alt: i.alt, caption: i.title, category: i.role === 'team' ? 'team' : '' }));
+}
+
+/**
+ * Background images referenced from stylesheets rather than <img> tags.
+ * Page builders (Elementor, Divi, WPBakery) put most photography here, so
+ * without this a visually rich site looks like it has one image on it.
+ */
+export function cssBackgroundImages(cssText, baseUrl) {
+  const out = [];
+  const seen = new Set();
+  for (const m of String(cssText).matchAll(/url\(\s*(['"]?)([^'")]+)\1\s*\)/gi)) {
+    const raw = m[2].trim();
+    if (!raw || raw.startsWith('data:')) continue;
+    const url = absolutize(raw, baseUrl);
+    if (!url || !isImageUrl(url) || TRACKING_HOSTS.test(url)) continue;
+    if (JUNK_NAME.test(basename(url)) || JUNK_URL.test(url) || seen.has(url)) continue;
+    seen.add(url);
+    out.push({ url, alt: '', width: null, height: null, classes: [], role: 'background' });
+  }
+  return out;
 }

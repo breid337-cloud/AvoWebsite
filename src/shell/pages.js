@@ -112,7 +112,7 @@ export function planPages(profile, { theme } = {}) {
       navLabel: 'Gallery',
       inNav: true,
       sections: [
-        { type: 'pageHeader', title: 'Our work' },
+        { type: 'pageHeader', title: theme?.copy?.galleryHeading ?? 'Our work' },
         { type: 'gallery' },
         { type: 'cta' },
       ],

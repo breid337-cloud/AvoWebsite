@@ -44,5 +44,8 @@
     "sharp": {
       "optional": true
     }
+  },
+  "optionalDependencies": {
+    "sharp": "^0.35.4"
   }
 }

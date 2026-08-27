@@ -66,7 +66,7 @@ ${services.map((s) => `  <li class="service-row">
 
     cards: () => `<ul class="card-grid">
 ${services.map((s) => `  <li class="card card--service">
-    ${s.image ? `<div class="card__media">${image(asset(s.image), s.name, { className: 'card__img', sizes: '(min-width: 900px) 33vw, 100vw' })}</div>` : `<span class="card__icon">${icon(s.icon || iconForService(s.name))}</span>`}
+    ${s.image ? `<div class="card__media">${image(asset(s.image), s.name, { className: 'card__img', sizes: '(min-width: 900px) 33vw, 100vw', variants: ctx.variantsFor?.(s.image) })}</div>` : `<span class="card__icon">${icon(s.icon || iconForService(s.name))}</span>`}
     <div class="card__body">
       <h3 class="card__title"><a class="stretched" href="${href(s)}">${escapeHtml(s.name)}</a></h3>
       ${s.summary ? `<p class="card__text">${escapeHtml(truncate(s.summary, 160))}</p>` : ''}
@@ -112,9 +112,9 @@ ${service.features?.length ? `    <h2>What's included</h2>
       <h2 class="sticky-card__title">${escapeHtml(service.name)}</h2>
       ${service.price ? `<p class="sticky-card__price">${escapeHtml(service.price)}${service.priceNote ? `<span>${escapeHtml(service.priceNote)}</span>` : ''}</p>` : ''}
       <p>${escapeHtml(profile.business.tagline || `Talk to ${profile.business.name} about your ${service.name.toLowerCase()}.`)}</p>
-      ${button({ label: 'Request a quote', href: link('contact/') }, { variant: 'primary', className: 'btn--block' })}
+      ${button({ label: ctx.copy('ctaPrimary', 'Request a quote'), href: link('contact/') }, { variant: 'primary', className: 'btn--block' })}
     </div>
   </aside>
-</div>${service.image ? `\n<div class="service-detail__media">${image(asset(service.image), service.name, { className: 'rounded' })}</div>` : ''}`,
+</div>${service.image ? `\n<div class="service-detail__media">${image(asset(service.image), service.name, { className: 'rounded', variants: ctx.variantsFor?.(service.image) })}</div>` : ''}`,
   });
 }

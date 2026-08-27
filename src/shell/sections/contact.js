@@ -65,7 +65,7 @@ ${DAYS.filter((d) => profile.contact.hours.some((h) => h.day === d)).map((day) =
     <span class="field__error" data-error-for="cf-email" hidden></span>
   </p>
   ${profile.services.length ? `<p class="field">
-    <label for="cf-service">What do you need?</label>
+    <label for="cf-service">${escapeHtml(ctx.copy('formSubject', 'What do you need?'))}</label>
     <select id="cf-service" name="service">
       <option value="">Please choose…</option>
 ${profile.services.map((s) => `      <option value="${escapeHtml(s.name)}">${escapeHtml(s.name)}</option>`).join('\n')}
@@ -78,15 +78,15 @@ ${profile.services.map((s) => `      <option value="${escapeHtml(s.name)}">${esc
     <span class="field__error" data-error-for="cf-message" hidden></span>
   </p>
   <div class="contact-form__foot">
-    <button class="btn btn--primary" type="submit">Send enquiry</button>
-    <p class="contact-form__note">We reply to every enquiry, usually the same working day.</p>
+    <button class="btn btn--primary" type="submit">${escapeHtml(ctx.copy('formSubmit', 'Send enquiry'))}</button>
+    <p class="contact-form__note">${escapeHtml(ctx.copy('formNote', 'We reply to every enquiry, usually the same working day.'))}</p>
   </div>
   <p class="form-status" role="status" aria-live="polite" data-form-status hidden></p>
 </form>`;
 
   const head = sectionHeader({
     eyebrow: compact ? 'Get in touch' : null,
-    title: config.heading ?? (compact ? 'Request a quote' : 'Contact us'),
+    title: config.heading ?? (compact ? ctx.copy('contactHeadingCompact', 'Request a quote') : ctx.copy('contactHeading', 'Contact us')),
     intro: config.intro,
     id: 'contact-title',
   });

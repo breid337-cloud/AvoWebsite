@@ -18,7 +18,7 @@ export function renderHero(ctx) {
   const eyebrow = profile.business.tagline && profile.business.tagline !== subhead ? profile.business.tagline : profile.business.category;
 
   const primary = button(
-    ctx.cta(hero.primaryCta, { label: 'Get a free quote', href: 'contact/' }),
+    ctx.cta(hero.primaryCta, { label: ctx.copy('heroPrimary', 'Get a free quote'), href: 'contact/' }),
     { variant: 'primary', className: 'hero__cta' },
   );
   const secondary = phone

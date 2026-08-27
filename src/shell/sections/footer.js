@@ -64,7 +64,7 @@ ${nav.map((item) => `        <li><a href="${item.href}">${escapeHtml(item.label)
 
   <div class="container site-footer__legal">
     <p>&copy; ${year} ${escapeHtml(profile.business.legalName || name)}. All rights reserved.</p>
-    ${profile.business.serviceArea.length ? `<p class="footer__areas">Serving ${escapeHtml(profile.business.serviceArea.join(', '))}</p>` : ''}
+    ${profile.business.serviceArea.length ? `<p class="footer__areas">${escapeHtml(ctx.copy('areaPrefix', 'Serving '))}${escapeHtml(profile.business.serviceArea.join(', '))}</p>` : ''}
     ${profile.business.licenses.length ? `<p class="footer__licence">${escapeHtml(profile.business.licenses.join(' · '))}</p>` : ''}
   </div>
 </footer>`;

@@ -4,8 +4,9 @@ import bloom from './bloom.js';
 import harvest from './harvest.js';
 import beacon from './beacon.js';
 import homestead from './homestead.js';
+import calypso from './calypso.js';
 
-export const THEMES = { meridian, forge, bloom, harvest, beacon, homestead };
+export const THEMES = { meridian, forge, bloom, harvest, beacon, homestead, calypso };
 export const THEME_IDS = Object.keys(THEMES);
 export const DEFAULT_THEME = 'meridian';
 
@@ -42,7 +43,8 @@ export function suggestTheme(profile) {
 
   const rules = [
     { id: 'forge', re: /hvac|heating|cooling|air condition|plumb|electric|roof|construct|contractor|excavat|concrete|paving|weld|auto repair|mechanic|towing|garage|tire|collision|septic|drain|gutter|siding|fence|masonry|demolition/g },
-    { id: 'harvest', re: /restaurant|cafe|coffee|bakery|bake|bar\b|brewery|pub\b|catering|caterer|deli\b|butcher|pizzeria|pizza|diner|bistro|food|grill|winery|taproom/g },
+    { id: 'calypso', re: /rum\b|cocktail|tiki|speakeasy|nightclub|night club|nightlife|live music venue|music venue|dive bar|gin bar|whisky bar|whiskey bar|wine bar|lounge bar|late bar/g },
+    { id: 'harvest', re: /restaurant|cafe|coffee|bakery|bake|brewery|pub\b|catering|caterer|deli\b|butcher|pizzeria|pizza|diner|bistro|food|grill|winery|taproom/g },
     { id: 'bloom', re: /salon|spa\b|beauty|nail|hair|barber|massage|wellness|yoga|pilates|aesthetic|lash|brow|skincare|florist|flower|boutique|photograph|wedding|event planner|bridal/g },
     { id: 'homestead', re: /landscap|lawn|garden|tree service|house cleaning|home cleaning|office cleaning|commercial cleaning|cleaning service|carpet clean|window clean|maid|janitor|pest|exterminat|pet care|grooming|kennel|veterinar|childcare|daycare|handyman|moving compan|mover|junk removal|pressure wash|snow removal|nursery/g },
     { id: 'beacon', re: /software|technology|agency|marketing|digital|design studio|startup|saas|web design|web development|seo\b|recruit|staffing|coworking|analytics|cyber|\bit services\b/g },

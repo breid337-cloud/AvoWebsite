@@ -16,7 +16,7 @@ export function renderCta(ctx, config = {}) {
       : `Talk to ${profile.business.name} about what you need.`);
 
   const primary = button(
-    ctx.cta(cta.primaryCta, { label: 'Request a quote', href: 'contact/', track: 'cta-primary' }),
+    ctx.cta(cta.primaryCta, { label: ctx.copy('ctaPrimary', 'Request a quote'), href: 'contact/', track: 'cta-primary' }),
     { variant: 'invert' },
   );
   const secondary = phone

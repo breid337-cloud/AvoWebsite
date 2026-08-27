@@ -34,8 +34,13 @@ export function image(src, alt, { className = '', sizes = '100vw', loading = 'la
   const srcset = variants?.length
     ? variants.map((v) => `${v.src} ${v.width}w`).join(', ')
     : null;
+  // Point src at a mid-size variant rather than the full-resolution original,
+  // so the fallback path is not a multi-megabyte download.
+  const display = variants?.length
+    ? (variants.find((v) => v.width >= 1200) ?? variants[variants.length - 1]).src
+    : src;
   return `<img${attrs({
-    src,
+    src: display,
     srcset,
     sizes: srcset ? sizes : null,
     alt: alt ?? '',

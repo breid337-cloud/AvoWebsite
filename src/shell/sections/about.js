@@ -24,7 +24,7 @@ ${more ? `<div class="section-foot">${more}</div>` : ''}
 </div>`;
 
   const media = about.image
-    ? `<div class="about__media">${image(asset(about.image), `${profile.business.name} team`, { className: 'rounded', sizes: '(min-width: 900px) 45vw, 100vw' })}</div>`
+    ? `<div class="about__media">${image(asset(about.image), `${profile.business.name} team`, { className: 'rounded', sizes: '(min-width: 900px) 45vw, 100vw', variants: ctx.variantsFor?.(about.image) })}</div>`
     : '';
 
   return section({

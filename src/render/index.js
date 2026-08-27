@@ -82,7 +82,15 @@ export async function buildSite(profile, options = {}) {
       },
       asset: (p) => (p && !/^(https?:)?\/\//i.test(p) ? link(p) : p),
       variant: (name) => theme.sections[name] ?? 'cards',
-      variantsFor: (src) => variants.get(src) ?? null,
+      // Default microcopy assumes a service business ("Request a quote").
+      // Themes for other kinds of venue override it here.
+      copy: (key, fallback) => theme.copy?.[key] ?? fallback,
+      // Variant paths come out of the asset pipeline dist-relative. They must be
+      // resolved against the current page or they break on any nested page.
+      variantsFor: (src) => {
+        const list = variants.get(src);
+        return list ? list.map((v) => ({ ...v, src: link(v.src) })) : null;
+      },
       cssPath: link('styles.css'),
       jsPath: link('site.js'),
     };

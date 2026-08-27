@@ -17,7 +17,8 @@ node bin/avo.js <cmd> --help    # per-command help
 util/          HTML parser, selector engine, colour maths, text, URL, fs, log
 profile/       schema.js is the data contract; normalize → validate → score
 harvest/       fetcher (robots-aware) → crawler → extract/* → index.js → report
-themes/        6 theme data modules + tokens.js (the token → CSS compiler)
+               mhtml.js + archive.js ingest saved .mht pages instead of crawling
+themes/        7 theme data modules + tokens.js (the token → CSS compiler)
 shell/         pages.js (page plan) + sections/* (markup) + components/icons
 render/        css.js, js.js, html.js, seo.js, assets.js → index.js (buildSite)
 preview/  deploy/  cli/
@@ -49,6 +50,13 @@ Data flows one way: **raw HTML → `raw.json` → `profile.json` → `dist/`**.
    below AA.
 4. Section variants named in `sections` must exist in the relevant renderer, or
    the section silently falls back to `cards`.
+
+## Section microcopy
+
+Default strings assume a service business ("Request a quote", "What do you
+need?"). Venue themes override them through a `copy` map on the theme, read via
+`ctx.copy(key, fallback)` in the section renderers. Add a key there rather than
+branching on theme id.
 
 ## Adding a profile field
 
