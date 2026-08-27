@@ -114,7 +114,7 @@ export function emptyProfile(slug = 'client') {
     faqs: [],
     seo: { title: '', description: '', keywords: [], ogImage: '', canonical: '' },
     site: {
-      theme: 'meridian', mode: 'light', domain: '', pages: null,
+      theme: 'meridian', mode: 'light', domain: '', pages: null, host: '',
       form: { action: '', method: 'POST', provider: 'none' },
       analytics: { plausible: '', ga4: '' },
       showPrices: true,

@@ -16,6 +16,7 @@ export function renderContact(ctx, config = {}) {
   const { profile, link } = ctx;
   const address = formatAddress(profile.contact.address);
   const form = profile.site.form ?? {};
+  const provider = form.provider ?? 'none';
   const compact = !!config.compact;
 
   const details = `<ul class="contact-list">
@@ -31,8 +32,11 @@ ${DAYS.filter((d) => profile.contact.hours.some((h) => h.day === d)).map((day) =
     </tbody></table></div></li>` : ''}
 </ul>`;
 
-  const provider = form.provider ?? 'none';
-  const action = form.action || (profile.contact.email ? `mailto:${profile.contact.email}` : '');
+  // Netlify Forms posts back to the page itself, so it must NOT get an action.
+  // Only providers with no endpoint of their own fall back to mailto:.
+  const selfPosting = provider === 'netlify';
+  const action = form.action
+    || (!selfPosting && profile.contact.email ? `mailto:${profile.contact.email}` : '');
   const isMailto = action.startsWith('mailto:');
 
   const formHtml = `<form class="contact-form"${attrs({

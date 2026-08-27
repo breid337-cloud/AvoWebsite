@@ -68,7 +68,9 @@ export function validateProfile(profile) {
   }
 
   const form = profile?.site?.form ?? {};
-  if (form.provider && form.provider !== 'none' && !form.action) {
+  // Netlify Forms posts back to the page itself, so it legitimately has no action.
+  const SELF_POSTING = new Set(['netlify']);
+  if (form.provider && form.provider !== 'none' && !form.action && !SELF_POSTING.has(form.provider)) {
     errors.push(`site.form.provider is "${form.provider}" but site.form.action is empty.`);
   }
 
