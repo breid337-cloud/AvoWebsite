@@ -470,10 +470,34 @@ export function buildStylesheet(theme, { brand = {}, mode = 'light', darkMode = 
     parts.push(tokensToCss(light.vars, `:root[data-theme="${mode === 'dark' ? 'dark' : 'light'}"]`));
   }
 
+  parts.push(logoSwapCss({ mode, darkMode }));
   parts.push(BASE_CSS.trim());
   if (theme.extras?.css) parts.push(`/* ${theme.name} theme details */\n${theme.extras.css.trim()}`);
 
   return { css: parts.join('\n\n') + '\n', warnings: [...new Set(warnings)] };
+}
+
+/**
+ * Show the logo master that suits the current background. Mirrors the token
+ * selectors above exactly, so the swap follows both `prefers-color-scheme` and
+ * the manual `[data-theme]` toggle.
+ */
+function logoSwapCss({ mode = 'light', darkMode = 'auto' } = {}) {
+  const baseName = mode === 'dark' ? 'dark' : 'light';
+  const otherName = baseName === 'dark' ? 'light' : 'dark';
+  const show = (n) => `.logo__img--${n} { display: inline-block; }`;
+  const hide = (n) => `.logo__img--${n} { display: none; }`;
+  const swap = (prefix) => `${prefix} ${show(otherName)}\n${prefix} ${hide(baseName)}`;
+
+  const out = [`/* Logo masters: ${baseName} background by default */`, hide(otherName)];
+  if (darkMode !== 'off') {
+    if (darkMode === 'auto') {
+      out.push(`@media (prefers-color-scheme: ${otherName}) {\n  ${swap(':root:not([data-theme])').replace(/\n/g, '\n  ')}\n}`);
+    }
+    out.push(swap(`:root[data-theme="${otherName}"]`));
+    out.push(`:root[data-theme="${baseName}"] ${show(baseName)}\n:root[data-theme="${baseName}"] ${hide(otherName)}`);
+  }
+  return out.join('\n');
 }
 
 /** Crude but effective minifier: safe for the CSS we generate ourselves. */

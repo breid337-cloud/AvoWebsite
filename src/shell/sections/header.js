@@ -1,5 +1,5 @@
 import { escapeHtml } from '../../util/text.js';
-import { attrs, cx, image, wordmark, button } from '../components.js';
+import { attrs, cx, brandLogo, button } from '../components.js';
 import { icon } from '../icons.js';
 import { telHref, formatPhone } from '../../profile/normalize.js';
 
@@ -15,9 +15,7 @@ export function renderHeader(ctx) {
   const name = profile.business.name;
   const phone = profile.contact.phone;
 
-  const logo = profile.brand.logo
-    ? image(ctx.asset(profile.brand.logo), `${name} logo`, { className: 'logo__img', loading: 'eager', fetchpriority: 'high' })
-    : wordmark(name);
+  const logo = brandLogo(profile, ctx.asset, { loading: 'eager', fetchpriority: 'high' });
 
   const brand = `<a class="brand" href="${link('')}"${attrs({ 'aria-label': `${name} — home` })}>${logo}</a>`;
 

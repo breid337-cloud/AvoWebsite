@@ -5,11 +5,14 @@ node_modules/
 .env.*
 
 # Per-client working data. Keep the folder, ignore the contents — except the
-# worked example, which is committed as documentation.
+# brannigan worked example, committed as documentation, and avosolution, which
+# is our own site rather than a client's private data.
 clients/*
 !clients/.gitkeep
 !clients/brannigan/
 clients/brannigan/dist/
+!clients/avosolution/
+clients/avosolution/dist/
 
 # Build output
 dist/
