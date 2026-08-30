@@ -300,6 +300,13 @@ body.nav-open { overflow: hidden; }
 .case-study__media img { width: 100%; }
 /* The table is the point of a case study, so it stays readable on a phone: */
 /* it scrolls in its own box rather than widening the page. */
+/* The headline figures. The "before" is deliberately quiet and the "after"
+   loud, so the direction of travel reads without needing the label. */
+.case-study__deltas { grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--space-6); margin: var(--space-7) 0; text-align: start; }
+.stat--delta .stat__value { display: flex; align-items: baseline; flex-wrap: wrap; gap: .3rem; font-size: var(--step-3); }
+.stat--delta .stat__before { font-size: var(--step-0); font-weight: 400; color: var(--text-muted); text-decoration: line-through; }
+.stat--delta .stat__arrow { font-size: var(--step-0); color: var(--text-muted); }
+.stat--delta .stat__after { color: var(--primary); }
 .case-study__metrics { width: 100%; border-collapse: collapse; font-size: var(--step--1); display: block; overflow-x: auto; }
 .case-study__metrics th, .case-study__metrics td { padding: var(--space-3) var(--space-4); text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
 .case-study__metrics thead th { font-size: var(--step--2); text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }

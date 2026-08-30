@@ -24,12 +24,28 @@ export function renderCaseStudies(ctx, config = {}) {
   });
 
   const card = (study) => {
-    const metrics = study.metrics.length
+    // A table is right for the full list and wrong for the headline: someone
+    // who has never heard of Lighthouse reads "8.7s → 1.8s" and understands
+    // it. Highlighted rows are lifted out; the rest stay in the table, so
+    // nothing is said twice.
+    const headline = study.metrics.filter((m) => m.highlight);
+    const rest = study.metrics.filter((m) => !m.highlight);
+
+    const deltas = headline.length
+      ? `      <ul class="stats case-study__deltas">
+${headline.map((m) => `        <li class="stat stat--delta">
+          <span class="stat__value"><span class="stat__before">${escapeHtml(m.before)}</span><span class="stat__arrow" aria-hidden="true">→</span><span class="visually-hidden">improved to</span><span class="stat__after">${escapeHtml(m.after)}</span></span>
+          <span class="stat__label">${escapeHtml(m.label)}</span>
+        </li>`).join('\n')}
+      </ul>`
+      : '';
+
+    const metrics = rest.length
       ? `      <table class="case-study__metrics">
         <caption class="visually-hidden">Measured before and after the rebuild</caption>
         <thead><tr><th scope="col">Measure</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
         <tbody>
-${study.metrics.map((m) => `          <tr><th scope="row">${escapeHtml(m.label)}</th><td>${escapeHtml(m.before)}</td><td>${escapeHtml(m.after)}</td></tr>`).join('\n')}
+${rest.map((m) => `          <tr><th scope="row">${escapeHtml(m.label)}</th><td>${escapeHtml(m.before)}</td><td>${escapeHtml(m.after)}</td></tr>`).join('\n')}
         </tbody>
       </table>`
       : '';
@@ -52,6 +68,7 @@ ${study.image ? `    <div class="case-study__media">${image(asset(study.image), 
 ${study.sector ? `      <p class="eyebrow">${escapeHtml(study.sector)}</p>` : ''}
       <h3 class="case-study__title">${escapeHtml(study.client)}</h3>
 ${study.summary ? `      <p class="case-study__summary">${escapeHtml(study.summary)}</p>` : ''}
+${deltas}
 ${study.before.length ? `      <h4>Where they started</h4>
 ${study.before.map((p) => `      <p>${escapeHtml(p)}</p>`).join('\n')}` : ''}
 ${study.after.length ? `      <h4>What changed</h4>
