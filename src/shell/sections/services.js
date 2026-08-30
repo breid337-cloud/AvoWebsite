@@ -91,7 +91,7 @@ ${services.map((s) => `  <li class="card card--service">
 
 /** Long-form body of an individual service page. */
 export function renderServiceDetail(ctx, config = {}) {
-  const { profile, link, asset } = ctx;
+  const { profile, asset } = ctx;
   const service = config.service;
   if (!service) return '';
 
@@ -112,7 +112,7 @@ ${service.features?.length ? `    <h2>What's included</h2>
       <h2 class="sticky-card__title">${escapeHtml(service.name)}</h2>
       ${service.price ? `<p class="sticky-card__price">${escapeHtml(service.price)}${service.priceNote ? `<span>${escapeHtml(service.priceNote)}</span>` : ''}</p>` : ''}
       <p>${escapeHtml(service.strapline || profile.business.tagline || `Talk to ${profile.business.name} about your ${service.name.toLowerCase()}.`)}</p>
-      ${button({ label: 'Request a quote', href: link('contact/') }, { variant: 'primary', className: 'btn--block' })}
+      ${button(ctx.cta(service.cta, { label: 'Request a quote' }), { variant: 'primary', className: 'btn--block' })}
     </div>
   </aside>
 </div>${service.image ? `\n<div class="service-detail__media">${image(asset(service.image), service.name, { className: 'rounded' })}</div>` : ''}`,

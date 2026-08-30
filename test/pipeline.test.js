@@ -206,12 +206,13 @@ test('a full build produces valid, self-consistent output', async () => {
   }
 });
 
-test('a service strapline overrides the company tagline in its sticky card', async () => {
+test('a service can override its sticky card strapline and CTA', async () => {
   const outDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-strapline-'));
   try {
     const profile = sampleProfile();
     profile.business.tagline = 'Comfort, sorted.';
     profile.services[0].strapline = 'Cold air, same day.';
+    profile.services[0].cta = { label: 'Book a callout' };
     await buildSite(profile, { themeId: 'forge', outDir, siteUrl: 'https://example.com', minify: false });
 
     const cardText = async (slug) => {
@@ -220,6 +221,13 @@ test('a service strapline overrides the company tagline in its sticky card', asy
     };
     assert.ok((await cardText('ac-repair')).includes('Cold air, same day.'));
     assert.ok((await cardText('furnace-install')).includes('Comfort, sorted.'), 'falls back to the company tagline');
+
+    const buttonText = async (slug) => {
+      const html = await fsp.readFile(path.join(outDir, 'services', slug, 'index.html'), 'utf8');
+      return cleanText(qs(qs(parseHtml(html), '.sticky-card'), 'a'));
+    };
+    assert.equal(await buttonText('ac-repair'), 'Book a callout');
+    assert.equal(await buttonText('furnace-install'), 'Request a quote', 'falls back to the default label');
   } finally {
     await fsp.rm(outDir, { recursive: true, force: true });
   }

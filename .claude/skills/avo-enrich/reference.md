@@ -73,6 +73,7 @@ so a pale brand yellow will come out darker than supplied.
   "name": "Air conditioning repair",
   "summary": "Same-day diagnosis and repair for every major brand, with common parts stocked on the van.",
   "strapline": "Cold air, same day.",
+  "cta": { "label": "Book a callout" },
   "description": ["Paragraph one…", "Paragraph two…"],
   "features": ["Same-day callouts", "All major brands"],
   "price": "From $89 diagnostic",
@@ -88,6 +89,10 @@ service pages at `/services/<slug>/`.
 copy. Omit it and the card falls back to `business.tagline`. Set it when a
 service sells on a different promise from the business as a whole — a product
 line, say, where the company strapline would read as boilerplate.
+
+`cta` is optional too — `{ label, href }`, defaulting to "Request a quote"
+pointing at the contact page. Set the label when "quote" is the wrong word for
+what the service asks of someone.
 
 ## testimonials[]
 
