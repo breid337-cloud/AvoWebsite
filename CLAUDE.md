@@ -1,7 +1,7 @@
 # Avo — notes for Claude Code sessions
 
 A CLI + library that rebuilds small-business websites: harvest an existing site,
-enrich the copy, generate a static site in one of six themes, deploy it.
+enrich the copy, generate a static site in one of seven themes, deploy it.
 
 ## Commands
 
@@ -17,7 +17,7 @@ node bin/avo.js <cmd> --help    # per-command help
 util/          HTML parser, selector engine, colour maths, text, URL, fs, log
 profile/       schema.js is the data contract; normalize → validate → score
 harvest/       fetcher (robots-aware) → crawler → extract/* → index.js → report
-themes/        6 theme data modules + tokens.js (the token → CSS compiler)
+themes/        7 theme data modules + tokens.js (the token → CSS compiler)
 shell/         pages.js (page plan) + sections/* (markup) + components/icons
 render/        css.js, js.js, html.js, seo.js, assets.js → index.js (buildSite)
 preview/  deploy/  cli/

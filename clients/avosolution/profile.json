@@ -50,8 +50,8 @@
     "logoDark": "assets/brand/logo-white.svg",
     "favicon": "assets/brand/favicon-32.png",
     "colors": {
-      "primary": "#3B82F6",
-      "secondary": "#1B2145",
+      "primary": "",
+      "secondary": "",
       "accent": ""
     },
     "fonts": {
@@ -80,7 +80,8 @@
       "heading": "One studio, design through to deployment",
       "body": [
         "AvoSolution runs two streams that feed each other. One designs and builds websites. The other develops bespoke software — applications, commerce platforms and service management systems for businesses whose needs have outgrown off-the-shelf tools.",
-        "Keeping both under one roof means the site that wins the customer and the system that serves them are designed together, by the same people, rather than handed between an agency and a development shop."
+        "Keeping both under one roof means the site that wins the customer and the system that serves them are designed together, by the same people, rather than handed between an agency and a development shop.",
+        "Alongside client work we are building Avo, our own platform for appointment-led businesses — a branded customer portal that keeps the customer relationship with the business that earned it."
       ],
       "image": "",
       "highlights": []
@@ -162,8 +163,8 @@
     },
     {
       "slug": "service-management-systems",
-      "name": "Service management and customer engagement",
-      "summary": "Systems for appointment-led businesses — bookings, customer records, loyalty, memberships and messaging working from one record.",
+      "name": "Service management systems",
+      "summary": "Bespoke systems for businesses that run work in the field or by appointment — scheduling, customer records, quoting and invoicing built to fit.",
       "description": [
         "Businesses built on appointments and repeat custom tend to run on several disconnected front doors: a marketplace, a phone, a social inbox, a paper diary. Each keeps a fragment of the story, and none of them adds up to a single view of a customer.",
         "We build the layer that joins them up — one customer record behind booking, history, reminders, loyalty and memberships, under the business' own brand rather than someone else'.",
@@ -176,6 +177,23 @@
       ],
       "icon": "calendar",
       "featured": true
+    },
+    {
+      "slug": "avo",
+      "name": "Avo",
+      "summary": "Our own platform: a branded customer portal for appointment-led businesses, with booking, loyalty, memberships and messaging against a single customer record.",
+      "description": [
+        "Businesses built on appointments and repeat custom tend to arrive with the same problem. Customers come in through a marketplace or a social inbox, the visit goes well, and then the relationship goes back to whoever made the introduction rather than staying with the business that earned it.",
+        "Avo is our answer to that. It is a customer portal carrying the business' own brand, where customers book, see their history, collect loyalty, manage memberships and stay in touch in one place. Every one of those actions writes to a single customer record that belongs to the business.",
+        "Avo is in active development with a small group of founding partners who are shaping what gets built. If your business runs on appointments and repeat custom, we would like to hear from you."
+      ],
+      "features": [
+        "A customer portal under your own brand",
+        "Loyalty, memberships and referrals",
+        "One customer record, owned by you"
+      ],
+      "featured": true,
+      "icon": "users"
     }
   ],
   "gallery": [],
@@ -190,7 +208,7 @@
     "canonical": ""
   },
   "site": {
-    "theme": "beacon",
+    "theme": "folio",
     "mode": "light",
     "domain": "https://avosolution.co.uk",
     "pages": null,
@@ -214,10 +232,11 @@
       "Three internal documents were supplied for context (an investor deck, a founding partner proposal and a customer journey deck). All three are marked CONFIDENTIAL. Nothing from them is published: no pricing, ROI modelling, market sizing, roadmap, customer names or competitor names. They were used only to correct the category line and sharpen the service-management positioning."
     ],
     "todo": [
-      "DECIDE: the Avo product (branded customer portal, loyalty, memberships, referrals) is described generically under \"Service management and customer engagement\" but is not named on the site. Do you want Avo named publicly, with a product page and a founding-partner call to action, or kept off the public site for now?",
+      "NAME: \"Avo\" is a working name on the site. Run `node clients/avosolution/rename-product.mjs \"New name\" --write` to change it everywhere, then rebuild. It renames 7 references and the /services/avo/ URL, and never touches the company name.",
+      "CONFIRM: the Avo page says we are working with \"a small group of founding partners\". The founding partner proposal is marked confidential — confirm you are happy for the programme to be public. No pricing or figures from it appear on the site.",
+      "Navy: the design system doc specifies --navy #1B2145 but the colour logo artwork is filled #272f51. The folio theme and logo-navy.svg both use #1B2145. Say which is authoritative.",
       "CONFIRM: site.domain is set to https://avosolution.co.uk, inferred from the ask@avosolution.co.uk email. Correct it if the live site sits on www or elsewhere — it drives sitemap.xml and OpenGraph absolute URLs.",
       "CONFIRM: is the country United Kingdom? Inferred from the .co.uk address but deliberately left unset, since it feeds schema.org markup.",
-      "Navy mismatch: the design system doc specifies --navy #1B2145, but the colour logo artwork is filled #272f51. The site and the logo SVG both use #1B2145 for consistency. Say which is authoritative.",
       "A phone number, if you want one in the header — the header phone link only renders when contact.phone is set.",
       "Is there a legal/registered company name that should appear in the footer?",
       "Confirm the hero headline — it is a draft written from your description, not your own words. (The tagline uses your real strapline, \"Innovate in style\".)",

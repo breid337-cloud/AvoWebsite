@@ -40,23 +40,46 @@ names. They informed only the category line and the service-management copy.
 
 The owner's standing instruction: **no customer names on the website.**
 
+## The product name is provisional
+
+**Avo is a working name.** It is named on the site — its own page at
+`/services/avo/`, plus mentions in the about copy — but the real name is still
+to be decided.
+
+Every public reference lives in one file, `profile.json`, because that profile
+is the only contract the renderer reads. To rename:
+
+```bash
+node clients/avosolution/rename-product.mjs "New name"          # preview
+node clients/avosolution/rename-product.mjs "New name" --write  # apply
+node bin/avo.js build avosolution
+```
+
+It matches the whole word `Avo` only, so **AvoSolution** (the company) is never
+touched, and it renames the `avo` service slug separately since that drives the
+URL. Do not do this with a plain find-and-replace: this repo's own CLI is also
+called `avo`, and a case-insensitive pass would wreck it.
+
+## Theme
+
+`folio` — see [docs/themes/folio.md](../../docs/themes/folio.md). Built from the
+design system's own tokens, so the site matches the decks. It ships **no
+webfont**, which also removes the Google Fonts privacy question.
+
+`brand.colors` is deliberately left empty: the theme already carries the
+palette, and setting it again would contrast-nudge the blue into another hue.
+
 ## Open decisions
 
-See `_meta.todo` in `profile.json` — it is the live list. The two that shape the
-site most:
-
-1. Whether the **Avo** product is named publicly, with a product page and a
-   founding-partner call to action, or kept off the public site for now.
-   Currently described generically and not named.
-2. Whether to keep the tinted stock `beacon` theme or add a bespoke `avo` theme
-   built from the design system's own tokens. Currently beacon, tinted via
-   `brand.colors`.
+See `_meta.todo` in `profile.json` — it is the live list. The ones that matter
+most: the real product name, whether the founding partner programme can be
+public, and a form endpoint before launch.
 
 ## Colour note
 
 The design system doc specifies `--navy #1B2145`, but the colour logo artwork is
-filled `#272f51`. The site and `logo-navy.svg` both use `#1B2145` for internal
-consistency. Unresolved — see `_meta.todo`.
+filled `#272f51`. The folio theme and `logo-navy.svg` both use `#1B2145` for
+internal consistency. Unresolved — see `_meta.todo`.
 
 ## Commands
 

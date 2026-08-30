@@ -4,8 +4,9 @@ import bloom from './bloom.js';
 import harvest from './harvest.js';
 import beacon from './beacon.js';
 import homestead from './homestead.js';
+import folio from './folio.js';
 
-export const THEMES = { meridian, forge, bloom, harvest, beacon, homestead };
+export const THEMES = { meridian, forge, bloom, harvest, beacon, homestead, folio };
 export const THEME_IDS = Object.keys(THEMES);
 export const DEFAULT_THEME = 'meridian';
 
@@ -45,7 +46,8 @@ export function suggestTheme(profile) {
     { id: 'harvest', re: /restaurant|cafe|coffee|bakery|bake|bar\b|brewery|pub\b|catering|caterer|deli\b|butcher|pizzeria|pizza|diner|bistro|food|grill|winery|taproom/g },
     { id: 'bloom', re: /salon|spa\b|beauty|nail|hair|barber|massage|wellness|yoga|pilates|aesthetic|lash|brow|skincare|florist|flower|boutique|photograph|wedding|event planner|bridal/g },
     { id: 'homestead', re: /landscap|lawn|garden|tree service|house cleaning|home cleaning|office cleaning|commercial cleaning|cleaning service|carpet clean|window clean|maid|janitor|pest|exterminat|pet care|grooming|kennel|veterinar|childcare|daycare|handyman|moving compan|mover|junk removal|pressure wash|snow removal|nursery/g },
-    { id: 'beacon', re: /software|technology|agency|marketing|digital|design studio|startup|saas|web design|web development|seo\b|recruit|staffing|coworking|analytics|cyber|\bit services\b/g },
+    { id: 'beacon', re: /technology|agency|marketing|digital|design studio|startup|web design|seo\b|recruit|staffing|coworking|cyber/g },
+    { id: 'folio', re: /software development|software consultancy|bespoke software|consultancy|systems integrat|platform|b2b\b|saas|api\b|data engineer|devops|\bit services\b|technical consult/g },
     { id: 'meridian', re: /law\b|attorney|legal|account|cpa\b|tax\b|bookkeep|insurance|financial|advisor|wealth|dental|dentist|orthodont|medical|doctor|physician|clinic|chiropract|optometr|therapy|counsel|real estate|realtor|notary|architect|engineer|consult/g },
   ];
 
