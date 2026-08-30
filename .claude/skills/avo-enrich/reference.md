@@ -72,6 +72,7 @@ so a pale brand yellow will come out darker than supplied.
   "slug": "ac-repair",
   "name": "Air conditioning repair",
   "summary": "Same-day diagnosis and repair for every major brand, with common parts stocked on the van.",
+  "strapline": "Cold air, same day.",
   "description": ["Paragraph one…", "Paragraph two…"],
   "features": ["Same-day callouts", "All major brands"],
   "price": "From $89 diagnostic",
@@ -82,6 +83,11 @@ so a pale brand yellow will come out darker than supplied.
 
 Two or more services with a `summary` or `description` triggers individual
 service pages at `/services/<slug>/`.
+
+`strapline` is optional and appears in the sticky card beside the service
+copy. Omit it and the card falls back to `business.tagline`. Set it when a
+service sells on a different promise from the business as a whole — a product
+line, say, where the company strapline would read as boilerplate.
 
 ## testimonials[]
 

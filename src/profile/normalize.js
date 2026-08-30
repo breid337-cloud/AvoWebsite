@@ -75,6 +75,7 @@ function normalizeService(service, index) {
     slug: slugify(service?.slug || name, `service-${index + 1}`),
     name,
     summary: str(service?.summary ?? service?.excerpt ?? ''),
+    strapline: str(service?.strapline),
     description: typeof service?.description === 'string' ? squash(service.description) : arr(service?.description).map(str).filter(Boolean),
     image: str(service?.image),
     icon: str(service?.icon),

@@ -206,6 +206,25 @@ test('a full build produces valid, self-consistent output', async () => {
   }
 });
 
+test('a service strapline overrides the company tagline in its sticky card', async () => {
+  const outDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-strapline-'));
+  try {
+    const profile = sampleProfile();
+    profile.business.tagline = 'Comfort, sorted.';
+    profile.services[0].strapline = 'Cold air, same day.';
+    await buildSite(profile, { themeId: 'forge', outDir, siteUrl: 'https://example.com', minify: false });
+
+    const cardText = async (slug) => {
+      const html = await fsp.readFile(path.join(outDir, 'services', slug, 'index.html'), 'utf8');
+      return qsa(qs(parseHtml(html), '.sticky-card'), 'p').map(cleanText);
+    };
+    assert.ok((await cardText('ac-repair')).includes('Cold air, same day.'));
+    assert.ok((await cardText('furnace-install')).includes('Comfort, sorted.'), 'falls back to the company tagline');
+  } finally {
+    await fsp.rm(outDir, { recursive: true, force: true });
+  }
+});
+
 test('all six themes build without error', async () => {
   const profile = sampleProfile();
   for (const id of THEME_IDS) {

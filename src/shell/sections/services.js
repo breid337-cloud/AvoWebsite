@@ -111,7 +111,7 @@ ${service.features?.length ? `    <h2>What's included</h2>
     <div class="sticky-card">
       <h2 class="sticky-card__title">${escapeHtml(service.name)}</h2>
       ${service.price ? `<p class="sticky-card__price">${escapeHtml(service.price)}${service.priceNote ? `<span>${escapeHtml(service.priceNote)}</span>` : ''}</p>` : ''}
-      <p>${escapeHtml(profile.business.tagline || `Talk to ${profile.business.name} about your ${service.name.toLowerCase()}.`)}</p>
+      <p>${escapeHtml(service.strapline || profile.business.tagline || `Talk to ${profile.business.name} about your ${service.name.toLowerCase()}.`)}</p>
       ${button({ label: 'Request a quote', href: link('contact/') }, { variant: 'primary', className: 'btn--block' })}
     </div>
   </aside>
