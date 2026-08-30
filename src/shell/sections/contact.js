@@ -32,7 +32,10 @@ ${DAYS.filter((d) => profile.contact.hours.some((h) => h.day === d)).map((day) =
 </ul>`;
 
   const provider = form.provider ?? 'none';
-  const action = form.action || (profile.contact.email ? `mailto:${profile.contact.email}` : '');
+  // Netlify Forms posts back to the page's own URL, so an empty action is
+  // correct there — falling back to mailto: would break the submission.
+  const selfPosting = provider === 'netlify';
+  const action = form.action || (selfPosting || !profile.contact.email ? '' : `mailto:${profile.contact.email}`);
   const isMailto = action.startsWith('mailto:');
 
   const formHtml = `<form class="contact-form"${attrs({

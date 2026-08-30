@@ -100,7 +100,7 @@
       {
         "icon": "checkCircle",
         "title": "Clear on what you own",
-        "text": "Bespoke work can be handed over — code, documentation and all — for a price agreed at the outset. Where we are building a product to license, we say so before we start. You always know which of the two you are buying."
+        "text": "Bespoke work belongs to you. Our own products, Avo among them, we license — and we say which of the two you are getting before any work starts. Websites you can take and run yourself, or leave with us to maintain."
       }
     ],
     "stats": [],
@@ -120,12 +120,12 @@
       "summary": "Websites designed and built from scratch — fast, accessible, and shaped around what the business needs the site to do.",
       "description": [
         "Every site is designed for the business it belongs to rather than assembled from a template. That starts with what the site is for — winning enquiries, taking bookings, explaining a complicated service — and works back to the layout and the copy from there.",
-        "Sites are built to be quick on a phone on a bad connection, to meet accessibility standards rather than merely claim to, and to stay editable after handover."
+        "Sites are built to be quick on a phone on a bad connection, and to meet accessibility standards rather than merely claim to. When it is finished you can take it and run it yourself, or leave it with us to maintain — the site is yours either way."
       ],
       "features": [
         "Designed around the site's actual job",
         "Fast and accessible on any device",
-        "Yours to edit after handover"
+        "Yours to run, or maintained by us"
       ],
       "featured": true,
       "icon": "sparkle"
@@ -136,7 +136,8 @@
       "summary": "Custom applications for businesses that have outgrown spreadsheets and off-the-shelf software.",
       "description": [
         "When a process only half fits the tool it runs on, the workarounds cost more than the software ever did. Bespoke development replaces that with a system built around the real workflow.",
-        "Work is scoped in stages, so there is something usable early and the direction can change before the budget is spent."
+        "Work is scoped in stages, so there is something usable early and the direction can change before the budget is spent.",
+        "Bespoke work belongs to the client who commissioned it. Where a piece of what we build is one of our own licensed products rather than bespoke, we say so before the work starts."
       ],
       "features": [
         "Built around your existing workflow",
@@ -185,7 +186,7 @@
       "description": [
         "Businesses built on appointments and repeat custom tend to arrive with the same problem. Customers come in through a marketplace or a social inbox, the visit goes well, and then the relationship goes back to whoever made the introduction rather than staying with the business that earned it.",
         "Avo is our answer to that. It is a customer portal carrying the business' own brand, where customers book, see their history, collect loyalty, manage memberships and stay in touch in one place. Every one of those actions writes to a single customer record that belongs to the business.",
-        "Avo is in active development with a small group of founding partners who are shaping what gets built. If your business runs on appointments and repeat custom, we would like to hear from you."
+        "Avo is our own product, licensed rather than built bespoke. It is in active development with a small group of founding partners who are shaping what gets built. If your business runs on appointments and repeat custom, we would like to hear from you."
       ],
       "features": [
         "A customer portal under your own brand",
@@ -215,7 +216,7 @@
     "form": {
       "action": "",
       "method": "POST",
-      "provider": "none"
+      "provider": "netlify"
     },
     "analytics": {
       "plausible": "",
@@ -230,10 +231,10 @@
       "The design system is a document/deck spec (fixed 1456x819 slides rendered to PDF). Its palette, logo and house rules transfer to the website; its fixed-position slide layout does not.",
       "No contact details, service area, founding year, team, client work, testimonials or FAQs have been supplied yet.",
       "Three internal documents were supplied for context (an investor deck, a founding partner proposal and a customer journey deck). All three are marked CONFIDENTIAL. Nothing from them is published: no pricing, ROI modelling, market sizing, roadmap, customer names or competitor names. They were used only to correct the category line and sharpen the service-management positioning.",
-      "The founding partner programme is approved for public mention (owner, 30 Aug 2026). Its pricing, ROI modelling and partner list remain confidential and are not published."
+      "The founding partner programme is approved for public mention (owner, 30 Aug 2026). Its pricing, ROI modelling and partner list remain confidential and are not published.",
+      "Ownership model confirmed by the owner (30 Aug 2026): bespoke work belongs to the client; AvoSolution licenses its own products (Avo); websites can be handed over outright or maintained by AvoSolution."
     ],
     "todo": [
-      "CONFIRM: the \"Clear on what you own\" value prop now says bespoke work can be handed over for an agreed cost, and that some work is product development we license. Confirm that is the right characterisation, and whether the products you build for resale are resold by AvoSolution or by the client — the services copy should say so once it is settled.",
       "NAME: \"Avo\" is a working name on the site. Run `node clients/avosolution/rename-product.mjs \"New name\" --write` to change it everywhere, then rebuild. It renames 7 references and the /services/avo/ URL, and never touches the company name.",
       "Navy: the design system doc specifies --navy #1B2145 but the colour logo artwork is filled #272f51. The folio theme and logo-navy.svg both use #1B2145. Say which is authoritative.",
       "CONFIRM: site.domain is set to https://avosolution.co.uk, inferred from the ask@avosolution.co.uk email. Correct it if the live site sits on www or elsewhere — it drives sitemap.xml and OpenGraph absolute URLs.",

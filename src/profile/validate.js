@@ -21,7 +21,11 @@ export function validateProfile(profile) {
     }
   }
 
-  const hasContact = isFilled(profile?.contact?.phone) || isFilled(profile?.contact?.email) || isFilled(profile?.site?.form?.action);
+  // Netlify Forms posts back to the page's own URL, so it is a working contact
+  // route despite having no action of its own.
+  const netlifyForm = profile?.site?.form?.provider === 'netlify';
+  const hasContact = isFilled(profile?.contact?.phone) || isFilled(profile?.contact?.email)
+    || isFilled(profile?.site?.form?.action) || netlifyForm;
   if (!hasContact) {
     errors.push('No way for a customer to make contact: set contact.phone, contact.email, or site.form.action.');
   }
@@ -68,7 +72,7 @@ export function validateProfile(profile) {
   }
 
   const form = profile?.site?.form ?? {};
-  if (form.provider && form.provider !== 'none' && !form.action) {
+  if (form.provider && form.provider !== 'none' && form.provider !== 'netlify' && !form.action) {
     errors.push(`site.form.provider is "${form.provider}" but site.form.action is empty.`);
   }
 

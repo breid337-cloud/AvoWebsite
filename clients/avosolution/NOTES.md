@@ -85,6 +85,41 @@ The design system doc specifies `--navy #1B2145`, but the colour logo artwork is
 filled `#272f51`. The folio theme and `logo-navy.svg` both use `#1B2145` for
 internal consistency. Unresolved — see `_meta.todo`.
 
+## Ownership model (confirmed by the owner, 30 Aug 2026)
+
+- **Bespoke work belongs to the client** who commissioned it.
+- **AvoSolution licenses its own products** (Avo among them) — these are not
+  bespoke and are not handed over.
+- **Websites** can be handed over outright, or kept and maintained by
+  AvoSolution. Either way the site is the client's.
+
+Which of the two a piece of work is gets stated before work starts. Do not
+write blanket "no lock-in" or "yours to take anywhere" copy — that was on the
+site once and was wrong.
+
+## Deploying
+
+`site.form.provider` is `netlify`, so the contact form is handled by Netlify
+Forms — it posts back to its own URL and has no action. That only works when
+the site is hosted on Netlify. **If it ever moves off Netlify, the form stops
+working** and needs a Formspree or custom endpoint instead
+(see `docs/contact-forms.md`).
+
+```bash
+node bin/avo.js build avosolution
+node bin/avo.js deploy avosolution --target netlify --dry-run
+node bin/avo.js deploy avosolution --target netlify
+```
+
+The Netlify target shells out to the Netlify CLI, so it needs `netlify login`
+(interactive) or `NETLIFY_AUTH_TOKEN` in the environment. Neither exists in a
+fresh remote session — deploys are run by a human, or with a token supplied
+deliberately.
+
+DNS lives at GoDaddy. `site.domain` is set to the apex,
+`https://avosolution.co.uk`; if www becomes the primary, change it, because it
+drives sitemap.xml and OpenGraph absolute URLs.
+
 ## Commands
 
 ```bash
