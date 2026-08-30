@@ -20,7 +20,7 @@ ${stats.map((s) => `  <li class="stat"><span class="stat__value">${escapeHtml(s.
 ${props.map((p) => `  <li class="value-prop">
     <span class="value-prop__icon">${icon(p.icon || 'checkCircle')}</span>
     <div>
-      ${p.title ? `<h3 class="value-prop__title">${escapeHtml(p.title)}</h3>` : ''}
+      ${p.title ? `<h2 class="value-prop__title">${escapeHtml(p.title)}</h2>` : ''}
       ${p.text ? `<p class="value-prop__text">${escapeHtml(p.text)}</p>` : ''}
     </div>
   </li>`).join('\n')}

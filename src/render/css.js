@@ -445,9 +445,9 @@ a.contact-list__value:hover { color: var(--primary); }
 .site-footer__legal { margin-top: var(--space-10); padding-top: var(--space-7); border-top: 1px solid var(--border); display: grid; gap: var(--space-3); color: var(--text-muted); font-size: var(--step--1); }
 
 /* ── Motion ────────────────────────────────────────────────────────── */
-[data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
-[data-reveal].is-visible { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; } }
+[data-reveal] { transform: translateY(14px); transition: transform .5s ease; }
+[data-reveal].is-visible { transform: none; }
+@media (prefers-reduced-motion: reduce) { [data-reveal] { transform: none; transition: none; } }
 
 /* ── Breakpoints ───────────────────────────────────────────────────── */
 @media (min-width: 40em) {
