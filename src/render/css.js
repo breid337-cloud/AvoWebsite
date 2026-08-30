@@ -320,6 +320,11 @@ body.nav-open { overflow: hidden; }
 /* ── CTA ───────────────────────────────────────────────────────────── */
 .cta { background: var(--inverse-bg); color: var(--inverse-text); padding-block: var(--section-y); }
 .cta.section + .section { padding-top: var(--section-y); }
+/* The adjacent-section rule above collapses top padding so flowing sections
+   don't double up, but it outranks .cta's own padding-block, and a filled band
+   paints its own background — collapsing leaves the heading flush against a
+   visible edge. The boxed variant is transparent, so it keeps the collapse. */
+.section + .cta:not(.cta--boxed) { padding-top: var(--section-y); }
 .cta__inner { display: grid; gap: var(--space-7); }
 .cta__title { font-size: var(--step-4); color: var(--inverse-text); }
 .cta__text { color: color-mix(in srgb, var(--inverse-text) 78%, transparent); margin-top: var(--space-4); font-size: var(--step-1); }

@@ -53,7 +53,7 @@ export function planPages(profile, { theme } = {}) {
       inNav: true,
       sections: [
         { type: 'pageHeader', title: profile.content.about.heading || `About ${profile.business.name}`, intro: profile.business.tagline },
-        has.about ? { type: 'about' } : null,
+        has.about ? { type: 'about', heading: false } : null,
         has.stats ? { type: 'trustbar' } : null,
         has.team ? { type: 'team' } : null,
         has.testimonials ? { type: 'testimonials', limit: 3 } : null,

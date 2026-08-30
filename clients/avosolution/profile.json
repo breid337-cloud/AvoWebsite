@@ -98,9 +98,9 @@
         "text": "The same studio handles the interface and the system behind it, so there is no gap between what was designed and what gets built."
       },
       {
-        "icon": "sparkle",
-        "title": "Built to be handed over",
-        "text": "Clear code, documented decisions and no lock-in. What we build is yours to run, extend or take elsewhere."
+        "icon": "checkCircle",
+        "title": "Clear on what you own",
+        "text": "Bespoke work can be handed over — code, documentation and all — for a price agreed at the outset. Where we are building a product to license, we say so before we start. You always know which of the two you are buying."
       }
     ],
     "stats": [],
@@ -233,6 +233,7 @@
       "The founding partner programme is approved for public mention (owner, 30 Aug 2026). Its pricing, ROI modelling and partner list remain confidential and are not published."
     ],
     "todo": [
+      "CONFIRM: the \"Clear on what you own\" value prop now says bespoke work can be handed over for an agreed cost, and that some work is product development we license. Confirm that is the right characterisation, and whether the products you build for resale are resold by AvoSolution or by the client — the services copy should say so once it is settled.",
       "NAME: \"Avo\" is a working name on the site. Run `node clients/avosolution/rename-product.mjs \"New name\" --write` to change it everywhere, then rebuild. It renames 7 references and the /services/avo/ URL, and never touches the company name.",
       "Navy: the design system doc specifies --navy #1B2145 but the colour logo artwork is filled #272f51. The folio theme and logo-navy.svg both use #1B2145. Say which is authoritative.",
       "CONFIRM: site.domain is set to https://avosolution.co.uk, inferred from the ask@avosolution.co.uk email. Correct it if the live site sits on www or elsewhere — it drives sitemap.xml and OpenGraph absolute URLs.",
