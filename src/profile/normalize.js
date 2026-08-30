@@ -76,6 +76,9 @@ function normalizeService(service, index) {
     name,
     summary: str(service?.summary ?? service?.excerpt ?? ''),
     strapline: str(service?.strapline),
+    stats: arr(service?.stats)
+      .map((s) => ({ value: str(s?.value), label: str(s?.label) }))
+      .filter((s) => s.value && s.label),
     cta: service?.cta?.label ? { label: str(service.cta.label), href: str(service.cta.href) } : null,
     description: typeof service?.description === 'string' ? squash(service.description) : arr(service?.description).map(str).filter(Boolean),
     image: str(service?.image),

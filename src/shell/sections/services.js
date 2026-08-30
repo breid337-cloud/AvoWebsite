@@ -104,6 +104,7 @@ export function renderServiceDetail(ctx, config = {}) {
     children: `<div class="prose-layout">
   <div class="prose">
 ${paragraphs.map((p) => `    <p>${escapeHtml(p)}</p>`).join('\n')}
+${service.stats?.length ? `    <ul class="stats service-detail__stats">${service.stats.map((s) => `<li class="stat"><span class="stat__value">${escapeHtml(s.value)}</span><span class="stat__label">${escapeHtml(s.label)}</span></li>`).join('')}</ul>` : ''}
 ${service.features?.length ? `    <h2>What's included</h2>
     <ul class="tick-list tick-list--lg">${service.features.map((f) => `<li>${icon('check')}<span>${escapeHtml(f)}</span></li>`).join('')}</ul>` : ''}
   </div>

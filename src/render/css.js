@@ -194,6 +194,9 @@ body.nav-open { overflow: hidden; }
 .stat__label { color: var(--text-muted); font-size: var(--step--1); }
 .value-props { display: grid; gap: var(--space-7); list-style: none; padding: 0; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
 .stats + .value-props { margin-top: var(--space-10); }
+/* Inside a service page the stats break up a long read, so they align with
+   the text column rather than centring across the page. */
+.service-detail__stats { margin: var(--space-8) 0; padding: var(--space-7) 0; border-block: 1px solid var(--border); text-align: start; gap: var(--space-6); }
 .value-prop { display: flex; gap: var(--space-5); }
 .value-prop__icon { flex: none; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: var(--radius); background: var(--primary-soft); color: var(--primary); }
 .value-prop__icon .icon { width: 1.4rem; height: 1.4rem; }
