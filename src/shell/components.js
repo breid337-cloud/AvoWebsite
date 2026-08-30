@@ -77,6 +77,22 @@ export function ratingStars(rating) {
 }
 
 /** Fallback wordmark when the client has no usable logo file. */
+/**
+ * Site logo. When the profile supplies both a light-background and a
+ * dark-background master, emit both and let CSS pick — matching the colour
+ * scheme *and* the manual theme toggle, which a <picture media> cannot do.
+ */
+export function brandLogo(profile, asset, { className = '', loading = 'lazy', fetchpriority = null } = {}) {
+  const { logo, logoDark } = profile.brand;
+  if (!logo) return wordmark(profile.business.name);
+  const alt = `${profile.business.name} logo`;
+  const cls = (extra) => ['logo__img', className, extra].filter(Boolean).join(' ');
+  const light = image(asset(logo), alt, { className: cls(logoDark && 'logo__img--light'), loading, fetchpriority });
+  if (!logoDark) return light;
+  // The second copy is decorative: the first already carries the accessible name.
+  return light + image(asset(logoDark), '', { className: cls('logo__img--dark'), loading, fetchpriority });
+}
+
 export function wordmark(name) {
   const initials = name
     .split(/\s+/)

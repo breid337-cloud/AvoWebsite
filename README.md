@@ -9,7 +9,7 @@ business.
 ```
   old site ──▶  harvest  ──▶  profile.json  ──▶  build  ──▶  dist/  ──▶  deploy
                   │              ▲                  │
-             raw.json       Claude Code        6 themes
+             raw.json       Claude Code        7 themes
              report.md      writes the copy
              BRIEF.md
 ```
@@ -175,6 +175,11 @@ hero, services, testimonial, gallery and CTA variants.
 | **Harvest** | Editorial serif over full-bleed photography | Restaurants, cafés, bakeries, bars, caterers |
 | **Beacon** | Geometric, indigo gradients, generous radii | Agencies, software, startups, marketing |
 | **Homestead** | Warm off-white, forest green, sturdy serif | Landscaping, cleaning, pest control, pet care, childcare |
+| **Folio** | Navy and blue, white cards, no webfont at all | Software development, consultancies, B2B SaaS, professional services |
+
+Folio is the house theme, carried over from the AvoSolution document design
+system — [docs/themes/folio.md](docs/themes/folio.md) covers its palette, its
+one hardcoded colour, and how to reuse it on another client.
 
 ```bash
 avo themes                    # descriptions and layout variants
@@ -200,7 +205,7 @@ avo doctor                    # environment + theme contrast self-test
 ```
 
 The generated output has been checked with headless Chromium across
-6 themes × 4 viewports (320/390/768/1440) × light and dark × 7 page types —
+7 themes × 4 viewports (320/390/768/1440) × light and dark × 7 page types —
 336 renders with no horizontal overflow and no JavaScript errors.
 
 ## Layout

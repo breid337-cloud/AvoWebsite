@@ -106,9 +106,11 @@ export async function buildSite(profile, options = {}) {
   const warnings = [...validation.warnings, ...cssWarnings];
   if (!siteUrl) warnings.push('No site.domain set — sitemap.xml and absolute OpenGraph URLs were skipped. Set it before going live.');
   const form = profile.site.form ?? {};
-  if (!form.action && !profile.contact.email) {
+  // A self-posting provider (Netlify Forms) has no action by design.
+  const selfPosting = form.provider === 'netlify';
+  if (!form.action && !selfPosting && !profile.contact.email) {
     warnings.push('The contact form has no endpoint and no fallback email address, so submissions will go nowhere.');
-  } else if (!form.action) {
+  } else if (!form.action && !selfPosting) {
     warnings.push(`The contact form falls back to a mailto: link (${profile.contact.email}). Set site.form.action to a real endpoint before launch.`);
   }
   if (responsive && !sharp) {

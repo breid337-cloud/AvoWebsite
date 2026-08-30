@@ -320,6 +320,11 @@ body.nav-open { overflow: hidden; }
 /* ── CTA ───────────────────────────────────────────────────────────── */
 .cta { background: var(--inverse-bg); color: var(--inverse-text); padding-block: var(--section-y); }
 .cta.section + .section { padding-top: var(--section-y); }
+/* The adjacent-section rule above collapses top padding so flowing sections
+   don't double up, but it outranks .cta's own padding-block, and a filled band
+   paints its own background — collapsing leaves the heading flush against a
+   visible edge. The boxed variant is transparent, so it keeps the collapse. */
+.section + .cta:not(.cta--boxed) { padding-top: var(--section-y); }
 .cta__inner { display: grid; gap: var(--space-7); }
 .cta__title { font-size: var(--step-4); color: var(--inverse-text); }
 .cta__text { color: color-mix(in srgb, var(--inverse-text) 78%, transparent); margin-top: var(--space-4); font-size: var(--step-1); }
@@ -470,10 +475,34 @@ export function buildStylesheet(theme, { brand = {}, mode = 'light', darkMode = 
     parts.push(tokensToCss(light.vars, `:root[data-theme="${mode === 'dark' ? 'dark' : 'light'}"]`));
   }
 
+  parts.push(logoSwapCss({ mode, darkMode }));
   parts.push(BASE_CSS.trim());
   if (theme.extras?.css) parts.push(`/* ${theme.name} theme details */\n${theme.extras.css.trim()}`);
 
   return { css: parts.join('\n\n') + '\n', warnings: [...new Set(warnings)] };
+}
+
+/**
+ * Show the logo master that suits the current background. Mirrors the token
+ * selectors above exactly, so the swap follows both `prefers-color-scheme` and
+ * the manual `[data-theme]` toggle.
+ */
+function logoSwapCss({ mode = 'light', darkMode = 'auto' } = {}) {
+  const baseName = mode === 'dark' ? 'dark' : 'light';
+  const otherName = baseName === 'dark' ? 'light' : 'dark';
+  const show = (n) => `.logo__img--${n} { display: inline-block; }`;
+  const hide = (n) => `.logo__img--${n} { display: none; }`;
+  const swap = (prefix) => `${prefix} ${show(otherName)}\n${prefix} ${hide(baseName)}`;
+
+  const out = [`/* Logo masters: ${baseName} background by default */`, hide(otherName)];
+  if (darkMode !== 'off') {
+    if (darkMode === 'auto') {
+      out.push(`@media (prefers-color-scheme: ${otherName}) {\n  ${swap(':root:not([data-theme])').replace(/\n/g, '\n  ')}\n}`);
+    }
+    out.push(swap(`:root[data-theme="${otherName}"]`));
+    out.push(`:root[data-theme="${baseName}"] ${show(baseName)}\n:root[data-theme="${baseName}"] ${hide(otherName)}`);
+  }
+  return out.join('\n');
 }
 
 /** Crude but effective minifier: safe for the CSS we generate ourselves. */

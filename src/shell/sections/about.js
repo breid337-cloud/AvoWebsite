@@ -16,8 +16,12 @@ export function renderAbout(ctx, config = {}) {
     ? button({ label: `About ${profile.business.name}`, href: link('about/') }, { variant: 'ghost', iconName: 'arrow' })
     : '';
 
+  // The about page already renders this heading in its pageHeader, so it opts
+  // out here rather than printing the same line twice.
+  const showHeading = config.heading !== false;
+
   const copy = `<div class="about__copy">
-${sectionHeader({ eyebrow: config.preview ? 'Who we are' : null, title: about.heading || `About ${profile.business.name}`, id: 'about-title' })}
+${showHeading ? sectionHeader({ eyebrow: config.preview ? 'Who we are' : null, title: about.heading || `About ${profile.business.name}`, id: 'about-title' }) : ''}
 ${body.map((p) => `  <p>${escapeHtml(p)}</p>`).join('\n')}
 ${highlights}
 ${more ? `<div class="section-foot">${more}</div>` : ''}
@@ -31,7 +35,7 @@ ${more ? `<div class="section-foot">${more}</div>` : ''}
     id: 'about',
     className: 'about',
     tone: config.preview ? null : 'surface',
-    labelledBy: 'about-title',
+    labelledBy: showHeading ? 'about-title' : null,
     children: `<div class="about__grid${media ? '' : ' about__grid--single'}">
 ${copy}
 ${media}
