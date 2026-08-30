@@ -40,6 +40,10 @@ names. They informed only the category line and the service-management copy.
 
 The owner's standing instruction: **no customer names on the website.**
 
+Approved for public mention (owner, 30 Aug 2026): the **founding partner
+programme** — its existence only. Pricing, ROI modelling and the partner list
+stay confidential and are not published.
+
 ## The product name is provisional
 
 **Avo is a working name.** It is named on the site — its own page at

@@ -229,11 +229,11 @@
       "No existing site, socials or marketing material was available to harvest. Business positioning comes from a short description by the owner; brand comes from the AvoSolution Document Design System v1.0.",
       "The design system is a document/deck spec (fixed 1456x819 slides rendered to PDF). Its palette, logo and house rules transfer to the website; its fixed-position slide layout does not.",
       "No contact details, service area, founding year, team, client work, testimonials or FAQs have been supplied yet.",
-      "Three internal documents were supplied for context (an investor deck, a founding partner proposal and a customer journey deck). All three are marked CONFIDENTIAL. Nothing from them is published: no pricing, ROI modelling, market sizing, roadmap, customer names or competitor names. They were used only to correct the category line and sharpen the service-management positioning."
+      "Three internal documents were supplied for context (an investor deck, a founding partner proposal and a customer journey deck). All three are marked CONFIDENTIAL. Nothing from them is published: no pricing, ROI modelling, market sizing, roadmap, customer names or competitor names. They were used only to correct the category line and sharpen the service-management positioning.",
+      "The founding partner programme is approved for public mention (owner, 30 Aug 2026). Its pricing, ROI modelling and partner list remain confidential and are not published."
     ],
     "todo": [
       "NAME: \"Avo\" is a working name on the site. Run `node clients/avosolution/rename-product.mjs \"New name\" --write` to change it everywhere, then rebuild. It renames 7 references and the /services/avo/ URL, and never touches the company name.",
-      "CONFIRM: the Avo page says we are working with \"a small group of founding partners\". The founding partner proposal is marked confidential — confirm you are happy for the programme to be public. No pricing or figures from it appear on the site.",
       "Navy: the design system doc specifies --navy #1B2145 but the colour logo artwork is filled #272f51. The folio theme and logo-navy.svg both use #1B2145. Say which is authoritative.",
       "CONFIRM: site.domain is set to https://avosolution.co.uk, inferred from the ask@avosolution.co.uk email. Correct it if the live site sits on www or elsewhere — it drives sitemap.xml and OpenGraph absolute URLs.",
       "CONFIRM: is the country United Kingdom? Inferred from the .co.uk address but deliberately left unset, since it feeds schema.org markup.",
