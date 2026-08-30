@@ -315,6 +315,21 @@ body.nav-open { overflow: hidden; }
 .case-study__metrics tbody th { font-weight: 600; white-space: normal; }
 .case-study__metrics td { font-variant-numeric: tabular-nums; }
 .case-study__metrics tbody tr td:last-child { color: var(--primary); font-weight: 600; }
+/* On a narrow screen the three columns scrolled sideways, and since the
+   after column was the one off-screen a phone showed only the before
+   figures — exactly backwards. Below 40rem each row stacks and labels its
+   own cells, so both numbers are always visible. */
+@media (max-width: 40rem) {
+  .case-study__metrics { display: table; overflow-x: visible; }
+  .case-study__metrics thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .case-study__metrics tbody, .case-study__metrics tr, .case-study__metrics th, .case-study__metrics td { display: block; }
+  .case-study__metrics tr { padding-block: var(--space-5); border-bottom: 1px solid var(--border); }
+  .case-study__metrics th, .case-study__metrics td { padding: 0; border: 0; white-space: normal; }
+  .case-study__metrics tbody th { margin-bottom: var(--space-3); }
+  .case-study__metrics td { display: flex; gap: var(--space-4); align-items: baseline; }
+  .case-study__metrics td::before { content: attr(data-label); flex: 0 0 3.5rem; font-size: var(--step--2); text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
+}
+
 .case-study__quote { margin: 0; padding-left: var(--space-5); border-left: 3px solid var(--primary); }
 .case-study__quote p { font-size: var(--step-1); }
 .case-study__quote footer { margin-top: var(--space-3); font-size: var(--step--1); color: var(--text-muted); }

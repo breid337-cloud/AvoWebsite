@@ -46,7 +46,7 @@ ${m.note ? `          <span class="stat__note">${escapeHtml(m.note)}</span>` : '
         <caption class="visually-hidden">Measured before and after the rebuild</caption>
         <thead><tr><th scope="col">Measure</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
         <tbody>
-${rest.map((m) => `          <tr><th scope="row">${escapeHtml(m.label)}</th><td>${escapeHtml(m.before)}</td><td>${escapeHtml(m.after)}</td></tr>`).join('\n')}
+${rest.map((m) => `          <tr><th scope="row">${escapeHtml(m.label)}</th><td data-label="Before">${escapeHtml(m.before)}</td><td data-label="After">${escapeHtml(m.after)}</td></tr>`).join('\n')}
         </tbody>
       </table>`
       : '';
