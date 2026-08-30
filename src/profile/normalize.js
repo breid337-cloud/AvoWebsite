@@ -77,7 +77,7 @@ function normalizeService(service, index) {
     summary: str(service?.summary ?? service?.excerpt ?? ''),
     strapline: str(service?.strapline),
     stats: arr(service?.stats)
-      .map((s) => ({ value: str(s?.value), label: str(s?.label) }))
+      .map((s) => ({ value: str(s?.value), label: str(s?.label), note: str(s?.note) }))
       .filter((s) => s.value && s.label),
     cta: service?.cta?.label ? { label: str(service.cta.label), href: str(service.cta.href) } : null,
     description: typeof service?.description === 'string' ? squash(service.description) : arr(service?.description).map(str).filter(Boolean),
@@ -103,7 +103,7 @@ function normalizeCaseStudy(study, index) {
     // Each row is one measurable that moved. Kept as strings so a case study
     // can quote "8.7s" or "1 page" without the renderer guessing at units.
     metrics: arr(study?.metrics)
-      .map((m) => ({ label: str(m?.label), before: str(m?.before), after: str(m?.after), highlight: m?.highlight === true }))
+      .map((m) => ({ label: str(m?.label), before: str(m?.before), after: str(m?.after), note: str(m?.note), highlight: m?.highlight === true }))
       .filter((m) => m.label && (m.before || m.after)),
     quote: study?.quote?.text
       ? { text: str(study.quote.text), author: str(study.quote.author), role: str(study.quote.role) }

@@ -192,6 +192,8 @@ body.nav-open { overflow: hidden; }
 .stat { display: grid; gap: .25rem; }
 .stat__value { font-family: var(--font-heading); font-size: var(--step-4); font-weight: var(--fw-heading-strong); color: var(--primary); line-height: 1; }
 .stat__label { color: var(--text-muted); font-size: var(--step--1); }
+/* The plain-English gloss under a deliberately technical label. */
+.stat__note { color: var(--text-muted); font-size: var(--step--2); line-height: 1.45; max-width: 26ch; }
 .value-props { display: grid; gap: var(--space-7); list-style: none; padding: 0; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
 .stats + .value-props { margin-top: var(--space-10); }
 /* Inside a service page the stats break up a long read, so they align with

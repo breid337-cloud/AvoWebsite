@@ -36,6 +36,7 @@ export function renderCaseStudies(ctx, config = {}) {
 ${headline.map((m) => `        <li class="stat stat--delta">
           <span class="stat__value"><span class="stat__before">${escapeHtml(m.before)}</span><span class="stat__arrow" aria-hidden="true">→</span><span class="visually-hidden">improved to</span><span class="stat__after">${escapeHtml(m.after)}</span></span>
           <span class="stat__label">${escapeHtml(m.label)}</span>
+${m.note ? `          <span class="stat__note">${escapeHtml(m.note)}</span>` : ''}
         </li>`).join('\n')}
       </ul>`
       : '';
