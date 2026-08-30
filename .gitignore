@@ -5,14 +5,11 @@ node_modules/
 .env.*
 
 # Per-client working data. Keep the folder, ignore the contents — except the
-# brannigan worked example, committed as documentation, and avosolution, which
-# is our own site rather than a client's private data.
+# brannigan worked example, committed as documentation.
 clients/*
 !clients/.gitkeep
 !clients/brannigan/
 clients/brannigan/dist/
-!clients/avosolution/
-clients/avosolution/dist/
 
 # Build output
 dist/
@@ -21,3 +18,6 @@ dist/
 
 # Deploy credentials
 avo.secrets.json
+
+# Netlify CLI working directory (link state and generated build config)
+.netlify/

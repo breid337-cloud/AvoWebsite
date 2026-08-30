@@ -87,14 +87,14 @@ enriched `profile.json`, and the brief.
 
 ## The AvoSolution site
 
-`clients/avosolution/` is our own site — a real client, not a fixture. It has no
-old site to harvest, so its `profile.json` was written by hand from the owner's
-own description, the AvoSolution design system and the logo pack.
+Our own site does **not** live here. It is in its own private repo,
+`breid337-cloud/avosolution-website`, because its working notes record the
+ownership model the copy must not overstate and which source documents are
+confidential — none of which belongs in a public repo.
 
-**Read `clients/avosolution/NOTES.md` before touching it.** It records the
-confirmed business facts, the ownership model that the copy must not overstate,
-which source documents are confidential, the provisional product name and how to
-rename it, and how the site deploys. Getting any of those wrong publishes
-something untrue.
+That repo consumes this one as an npm dependency and sets `clientsDir` to `"."`,
+so `npm run build` there produces the site from its `profile.json`. Nothing about
+it is hand-written HTML. **Read its `NOTES.md` before touching the site.**
 
-It builds with the `folio` theme — see `docs/themes/folio.md`.
+It builds with the `folio` theme, which lives here — see `docs/themes/folio.md`.
+Changing Folio changes that site, so treat the theme as published API.
