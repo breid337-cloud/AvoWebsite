@@ -112,6 +112,7 @@ export function emptyProfile(slug = 'client') {
     testimonials: [],
     team: [],
     faqs: [],
+    caseStudies: [],
     seo: { title: '', description: '', keywords: [], ogImage: '', canonical: '' },
     site: {
       theme: 'meridian', mode: 'light', domain: '', pages: null,

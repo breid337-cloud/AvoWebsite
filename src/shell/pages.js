@@ -10,6 +10,7 @@ export function planPages(profile, { theme } = {}) {
     services: profile.services.length > 0,
     servicePages: profile.services.filter((s) => s.summary || s.description?.length).length >= 2,
     gallery: profile.gallery.length >= 3,
+    caseStudies: (profile.caseStudies ?? []).length > 0,
     testimonials: profile.testimonials.length > 0,
     team: profile.team.length > 0,
     faqs: profile.faqs.length > 0,
@@ -35,6 +36,7 @@ export function planPages(profile, { theme } = {}) {
       has.services ? { type: 'services', limit: 6, preview: true } : null,
       has.about ? { type: 'about', preview: true } : null,
       has.gallery ? { type: 'gallery', limit: 6, preview: true } : null,
+      has.caseStudies ? { type: 'caseStudies', limit: 2, preview: true } : null,
       has.testimonials ? { type: 'testimonials', limit: 3 } : null,
       has.faqs ? { type: 'faq', limit: 4, preview: true } : null,
       { type: 'cta' },
@@ -100,6 +102,23 @@ export function planPages(profile, { theme } = {}) {
         });
       }
     }
+  }
+
+  if (has.caseStudies) {
+    pages.push({
+      slug: 'work',
+      url: 'work/',
+      outPath: 'work/index.html',
+      title: `Case studies | ${profile.business.name}`,
+      description: `How ${profile.business.name} rebuilt these sites, and what changed.`,
+      navLabel: 'Case studies',
+      inNav: true,
+      sections: [
+        { type: 'pageHeader', title: 'Case studies' },
+        { type: 'caseStudies' },
+        { type: 'cta' },
+      ],
+    });
   }
 
   if (has.gallery) {

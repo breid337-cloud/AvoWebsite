@@ -286,6 +286,31 @@ body.nav-open { overflow: hidden; }
 .lightbox__close { position: absolute; top: var(--space-5); right: var(--space-5); width: 3rem; height: 3rem; display: grid; place-items: center; color: #fff; background: rgba(255,255,255,.14); border-radius: var(--radius-pill); }
 .lightbox__close .icon { width: 1.5rem; height: 1.5rem; }
 
+/* ── Case studies ──────────────────────────────────────────────────── */
+.case-studies__list { display: grid; gap: var(--space-8); }
+.case-study { display: grid; gap: var(--space-6); padding: var(--space-8); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.case-study__body { display: grid; gap: var(--space-4); min-width: 0; }
+.case-study__title { margin: 0; }
+.case-study__summary { font-size: var(--step-1); color: var(--text-muted); }
+.case-study__body h4 { margin: var(--space-3) 0 0; font-size: var(--step-0); }
+.case-study__body p { margin: 0; }
+.case-study__media img { width: 100%; }
+/* The table is the point of a case study, so it stays readable on a phone: */
+/* it scrolls in its own box rather than widening the page. */
+.case-study__metrics { width: 100%; border-collapse: collapse; font-size: var(--step--1); display: block; overflow-x: auto; }
+.case-study__metrics th, .case-study__metrics td { padding: var(--space-3) var(--space-4); text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.case-study__metrics thead th { font-size: var(--step--2); text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
+.case-study__metrics tbody th { font-weight: 600; white-space: normal; }
+.case-study__metrics td { font-variant-numeric: tabular-nums; }
+.case-study__metrics tbody tr td:last-child { color: var(--primary); font-weight: 600; }
+.case-study__quote { margin: 0; padding-left: var(--space-5); border-left: 3px solid var(--primary); }
+.case-study__quote p { font-size: var(--step-1); }
+.case-study__quote footer { margin-top: var(--space-3); font-size: var(--step--1); color: var(--text-muted); }
+.case-study__links { display: flex; flex-wrap: wrap; gap: var(--space-3); font-size: var(--step--1); }
+@media (min-width: 60rem) {
+  .case-studies--split .case-study { grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); align-items: start; }
+}
+
 /* ── Testimonials ──────────────────────────────────────────────────── */
 .testimonial { padding: var(--space-8); display: grid; gap: var(--space-5); align-content: start; }
 .testimonial__mark { color: var(--primary); opacity: .3; }

@@ -45,7 +45,7 @@ export default {
     lg: '0 26px 60px -20px rgba(21, 26, 46, 0.28)',
   },
   layout: { container: '1200px', headerHeight: '78px' },
-  sections: { header: 'standard', hero: 'gradient', services: 'cards', testimonials: 'quote', gallery: 'grid', cta: 'band', about: 'split' },
+  sections: { header: 'standard', hero: 'gradient', services: 'cards', testimonials: 'quote', gallery: 'grid', cta: 'band', about: 'split', caseStudies: 'split' },
   palettes: {
     light: {
       // --bg from the source system becomes `surface`: on paper it is the slide

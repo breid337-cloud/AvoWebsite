@@ -88,6 +88,29 @@ function normalizeService(service, index) {
   };
 }
 
+function normalizeCaseStudy(study, index) {
+  const client = str(study?.client ?? study?.name ?? '');
+  return {
+    slug: slugify(study?.slug || client, `case-study-${index + 1}`),
+    client,
+    sector: str(study?.sector),
+    summary: str(study?.summary),
+    before: arr(study?.before).map(str).filter(Boolean),
+    after: arr(study?.after).map(str).filter(Boolean),
+    // Each row is one measurable that moved. Kept as strings so a case study
+    // can quote "8.7s" or "1 page" without the renderer guessing at units.
+    metrics: arr(study?.metrics)
+      .map((m) => ({ label: str(m?.label), before: str(m?.before), after: str(m?.after) }))
+      .filter((m) => m.label && (m.before || m.after)),
+    quote: study?.quote?.text
+      ? { text: str(study.quote.text), author: str(study.quote.author), role: str(study.quote.role) }
+      : null,
+    liveUrl: str(study?.liveUrl),
+    archiveUrl: str(study?.archiveUrl),
+    image: str(study?.image),
+  };
+}
+
 function normalizeSocial(social) {
   const out = {};
   for (const [key, value] of Object.entries(social ?? {})) {
@@ -153,6 +176,10 @@ export function normalizeProfile(input = {}, { slug } = {}) {
     .filter((s) => s.value && s.label);
 
   p.services = uniqueBy(arr(p.services).map(normalizeService).filter((s) => s.name), (s) => s.slug);
+  p.caseStudies = uniqueBy(
+    arr(p.caseStudies).map(normalizeCaseStudy).filter((c) => c.client),
+    (c) => c.slug,
+  );
   p.gallery = uniqueBy(
     arr(p.gallery)
       .map((g) => (typeof g === 'string' ? { src: g } : g))

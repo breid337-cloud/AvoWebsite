@@ -4,6 +4,7 @@ import { renderTrustbar } from './trustbar.js';
 import { renderServices, renderServiceDetail } from './services.js';
 import { renderAbout } from './about.js';
 import { renderGallery } from './gallery.js';
+import { renderCaseStudies } from './case-studies.js';
 import { renderTestimonials } from './testimonials.js';
 import { renderTeam } from './team.js';
 import { renderFaq } from './faq.js';
@@ -20,6 +21,7 @@ export const SECTIONS = {
   serviceDetail: renderServiceDetail,
   about: renderAbout,
   gallery: renderGallery,
+  caseStudies: renderCaseStudies,
   testimonials: renderTestimonials,
   team: renderTeam,
   faq: renderFaq,
