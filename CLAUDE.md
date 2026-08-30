@@ -84,3 +84,17 @@ node bin/avo.js harvest http://localhost:8781/ --slug brannigan --pages 10
 
 `clients/brannigan/` is the committed worked example — harvest output, the
 enriched `profile.json`, and the brief.
+
+## The AvoSolution site
+
+`clients/avosolution/` is our own site — a real client, not a fixture. It has no
+old site to harvest, so its `profile.json` was written by hand from the owner's
+own description, the AvoSolution design system and the logo pack.
+
+**Read `clients/avosolution/NOTES.md` before touching it.** It records the
+confirmed business facts, the ownership model that the copy must not overstate,
+which source documents are confidential, the provisional product name and how to
+rename it, and how the site deploys. Getting any of those wrong publishes
+something untrue.
+
+It builds with the `folio` theme — see `docs/themes/folio.md`.
