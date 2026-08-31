@@ -309,6 +309,13 @@ body.nav-open { overflow: hidden; }
 .stat--delta .stat__before { font-size: var(--step-0); font-weight: 400; color: var(--text-muted); text-decoration: line-through; }
 .stat--delta .stat__arrow { font-size: var(--step-0); color: var(--text-muted); }
 .stat--delta .stat__after { color: var(--primary); }
+/* Label above the figures, as a caption does. The icon is decorative — the
+   label already says what the measure is. */
+.stat--delta .stat__label { display: flex; align-items: center; gap: .4rem; font-size: var(--step--2); text-transform: uppercase; letter-spacing: .07em; }
+.stat--delta .stat__label .icon { width: 1.1rem; height: 1.1rem; color: var(--primary); flex: none; }
+/* The percentage is the line that sells: a 1 becoming a 39 is a fact, and
+   +3,800% is the same fact doing some work. */
+.stat__change { font-weight: var(--fw-bold); color: var(--success, var(--primary)); font-size: var(--step--1); }
 .case-study__metrics { width: 100%; border-collapse: collapse; font-size: var(--step--1); display: block; overflow-x: auto; }
 .case-study__metrics th, .case-study__metrics td { padding: var(--space-3) var(--space-4); text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
 .case-study__metrics thead th { font-size: var(--step--2); text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }

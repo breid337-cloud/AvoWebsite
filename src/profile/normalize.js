@@ -103,7 +103,7 @@ function normalizeCaseStudy(study, index) {
     // Each row is one measurable that moved. Kept as strings so a case study
     // can quote "8.7s" or "1 page" without the renderer guessing at units.
     metrics: arr(study?.metrics)
-      .map((m) => ({ label: str(m?.label), before: str(m?.before), after: str(m?.after), note: str(m?.note), highlight: m?.highlight === true }))
+      .map((m) => ({ label: str(m?.label), before: str(m?.before), after: str(m?.after), change: str(m?.change), note: str(m?.note), icon: str(m?.icon), highlight: m?.highlight === true }))
       .filter((m) => m.label && (m.before || m.after)),
     quote: study?.quote?.text
       ? { text: str(study.quote.text), author: str(study.quote.author), role: str(study.quote.role) }

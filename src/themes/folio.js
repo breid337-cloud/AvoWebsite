@@ -54,7 +54,9 @@ export default {
       text: '#151a2e', textMuted: '#4a5568', border: '#e6ebf2',
       primary: '#2b6cb9', accent: '#3b82f6', focus: '#2b6cb9',
       inverseBg: '#1b2145', inverseText: '#eef2f8',
-      success: '#16a34a', danger: '#e5484d',
+      // #16a34a is 3.07:1 on the surface — it fails AA wherever it is used as
+      // text, which it is, in the form success message. #15803d clears it.
+      success: '#15803d', danger: '#e5484d',
     },
     dark: {
       // The source system's dark slides sit on --navy, so navy becomes the

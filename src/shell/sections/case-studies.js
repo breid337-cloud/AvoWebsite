@@ -1,5 +1,6 @@
 import { escapeHtml } from '../../util/text.js';
 import { image, section, sectionHeader, button } from '../components.js';
+import { icon } from '../icons.js';
 
 /**
  * Client case studies: what was wrong, what changed, and the numbers that
@@ -34,8 +35,9 @@ export function renderCaseStudies(ctx, config = {}) {
     const deltas = headline.length
       ? `      <ul class="stats case-study__deltas">
 ${headline.map((m) => `        <li class="stat stat--delta">
+          <span class="stat__label">${m.icon ? icon(m.icon) : ''}${escapeHtml(m.label)}</span>
           <span class="stat__value"><span class="stat__before">${escapeHtml(m.before)}</span><span class="stat__arrow" aria-hidden="true">→</span><span class="visually-hidden">improved to</span><span class="stat__after">${escapeHtml(m.after)}</span></span>
-          <span class="stat__label">${escapeHtml(m.label)}</span>
+${m.change ? `          <span class="stat__change">${escapeHtml(m.change)}</span>` : ''}
 ${m.note ? `          <span class="stat__note">${escapeHtml(m.note)}</span>` : ''}
         </li>`).join('\n')}
       </ul>`
