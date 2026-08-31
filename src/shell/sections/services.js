@@ -105,6 +105,8 @@ export function renderServiceDetail(ctx, config = {}) {
   <div class="prose">
 ${paragraphs.map((p) => `    <p>${escapeHtml(p)}</p>`).join('\n')}
 ${service.stats?.length ? `    <ul class="stats service-detail__stats">${service.stats.map((s) => `<li class="stat"><span class="stat__value">${escapeHtml(s.value)}</span><span class="stat__label">${escapeHtml(s.label)}</span>${s.note ? `<span class="stat__note">${escapeHtml(s.note)}</span>` : ''}</li>`).join('')}</ul>` : ''}
+${service.outcomes?.length ? `    <h2>What that means for you</h2>
+    <ul class="value-props value-props--stacked">${service.outcomes.map((o) => `<li class="value-prop"><span class="value-prop__icon">${icon(o.icon || 'checkCircle')}</span><div><h3 class="value-prop__title">${escapeHtml(o.title)}</h3><p class="value-prop__text">${escapeHtml(o.text)}</p></div></li>`).join('')}</ul>` : ''}
 ${service.features?.length ? `    <h2>What's included</h2>
     <ul class="tick-list tick-list--lg">${service.features.map((f) => `<li>${icon('check')}<span>${escapeHtml(f)}</span></li>`).join('')}</ul>` : ''}
   </div>

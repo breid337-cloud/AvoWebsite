@@ -196,6 +196,8 @@ body.nav-open { overflow: hidden; }
 .stat__note { color: var(--text-muted); font-size: var(--step--2); line-height: 1.45; max-width: 26ch; }
 .value-props { display: grid; gap: var(--space-7); list-style: none; padding: 0; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
 .stats + .value-props { margin-top: var(--space-10); }
+/* Inside a service page these read as a list rather than a row of columns. */
+.value-props--stacked { grid-template-columns: 1fr; gap: var(--space-6); margin-bottom: var(--space-8); }
 /* Inside a service page the stats break up a long read, so they align with
    the text column rather than centring across the page. */
 .service-detail__stats { margin: var(--space-8) 0; padding: var(--space-7) 0; border-block: 1px solid var(--border); text-align: start; gap: var(--space-6); }

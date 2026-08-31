@@ -86,6 +86,10 @@ function normalizeService(service, index) {
     price: str(service?.price),
     priceNote: str(service?.priceNote),
     features: arr(service?.features).map(str).filter(Boolean),
+    // What the technical work buys the owner, in their terms.
+    outcomes: arr(service?.outcomes)
+      .map((o) => ({ icon: str(o?.icon), title: humanizeHeading(str(o?.title)), text: str(o?.text) }))
+      .filter((o) => o.title && o.text),
     featured: service?.featured === true,
     sourceUrl: str(service?.sourceUrl),
   };
