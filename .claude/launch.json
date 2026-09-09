@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "jacksons-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-e", "import('./src/preview/static-server.js').then(async m => { const s = m.createStaticServer('clients/jacksonstonemasonry/_site'); await m.listen(s, 8790); console.log('serving jacksons on 8790'); })"],
+      "port": 8790
+    }
+  ]
+}
