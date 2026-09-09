@@ -1,0 +1,1752 @@
+{
+  "ranAt": "2026-09-09T22:44:01.366Z",
+  "sites": [
+    {
+      "name": "Jackson's Stonemasonry",
+      "slug": "jackson",
+      "origin": "https://jacksonstonemasonry.com",
+      "pagesInSitemap": 39,
+      "pagesRead": 39,
+      "failed": [],
+      "counts": {
+        "medium": 27,
+        "low": 36
+      },
+      "findings": [
+        {
+          "level": "medium",
+          "what": "Title is 88 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/areas/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 163 characters and gets truncated",
+          "where": [
+            "/areas/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 76 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/faqs/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 173 characters and gets truncated",
+          "where": [
+            "/faqs/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Title is 66 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 200 characters and gets truncated",
+          "where": [
+            "/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 81 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 170 characters and gets truncated",
+          "where": [
+            "/projects/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 82 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/quote/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 177 characters and gets truncated",
+          "where": [
+            "/quote/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 81 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/services/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 172 characters and gets truncated",
+          "where": [
+            "/services/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 78 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/about/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 173 characters and gets truncated",
+          "where": [
+            "/about/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 77 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/dry-stone-walling/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 174 characters and gets truncated",
+          "where": [
+            "/dry-stone-walling/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 78 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/house-signs/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 176 characters and gets truncated",
+          "where": [
+            "/house-signs/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 85 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/repointing/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 168 characters and gets truncated",
+          "where": [
+            "/repointing/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Title is 73 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/stone-carving/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 173 characters and gets truncated",
+          "where": [
+            "/stone-carving/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Title is 71 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/stone-cleaning/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 184 characters and gets truncated",
+          "where": [
+            "/stone-cleaning/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Title is 73 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/stone-fireplaces/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 166 characters and gets truncated",
+          "where": [
+            "/stone-fireplaces/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Title is 72 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/stone-restoration/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 183 characters and gets truncated",
+          "where": [
+            "/stone-restoration/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 77 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/stone-wall-repair/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 170 characters and gets truncated",
+          "where": [
+            "/stone-wall-repair/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Title is 75 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/stonemasonry/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 180 characters and gets truncated",
+          "where": [
+            "/stonemasonry/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 77 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/areas/broadway/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 165 characters and gets truncated",
+          "where": [
+            "/areas/broadway/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 80 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/areas/cheltenham/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 166 characters and gets truncated",
+          "where": [
+            "/areas/cheltenham/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Title is 75 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/areas/cirencester/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 85 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/areas/cotswolds/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 170 characters and gets truncated",
+          "where": [
+            "/areas/cotswolds/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 78 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/areas/gloucester/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 178 characters and gets truncated",
+          "where": [
+            "/areas/gloucester/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 80 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/areas/stow-on-the-wold/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 166 characters and gets truncated",
+          "where": [
+            "/areas/stow-on-the-wold/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 78 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/areas/tewkesbury/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 169 characters and gets truncated",
+          "where": [
+            "/areas/tewkesbury/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 84 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/areas/winchcombe/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 175 characters and gets truncated",
+          "where": [
+            "/areas/winchcombe/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Title is 74 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/chimney-cap-bibury/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 86 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/church-chimney-bee-rescue-cotswolds/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is 162 characters and gets truncated",
+          "where": [
+            "/projects/church-chimney-bee-rescue-cotswolds/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 76 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/courtyard-walling-lamb-inn-burford/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 78 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/doorway-repair-the-baytree-burford/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 90 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/dry-stone-wall-name-plaque/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 89 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/gateway-through-drystone-wall/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 80 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/inglenook-fireplace-restoration/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Title is 75 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/retaining-wall-burford/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 76 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/river-coln-wall-the-swan-bibury/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 79 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/rustic-garden-wall/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Title is 75 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/stone-cill-repair-cotswolds/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Title is 80 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/stone-house-signs-and-numbers/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Title is 66 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/stone-porch-repair-winchcombe/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Title is 73 characters — Google shows about 60, so the end is cut off",
+          "where": [
+            "/projects/window-repair-the-swan-bibury/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "2 pages never mention any town the business serves",
+          "where": [
+            "/quote/",
+            "/reviews/"
+          ]
+        }
+      ],
+      "pages": [
+        {
+          "url": "https://jacksonstonemasonry.com/areas/",
+          "title": "Areas We Cover | Stonemasons in Gloucestershire & the Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 88,
+          "desc": "Jackson's Stonemasonry works across Gloucestershire and the Cotswolds — Winchcombe, Cheltenham, Gloucester, Tewkesbury, Broadway, Stow-on-the-Wold and Cirencester.",
+          "descLen": 163,
+          "canonical": "https://jacksonstonemasonry.com/areas/",
+          "h1s": [
+            "Areas We Cover"
+          ],
+          "words": 375,
+          "images": 1,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/faqs/",
+          "title": "Stonemasonry FAQs | Costs, Repairs & Cotswold Stone | Jackson's Stonemasonry",
+          "titleLen": 76,
+          "desc": "Answers to the questions we're asked most — dry stone walling costs in Gloucestershire, repairing Cotswold stone walls, cleaning old stone safely, listed buildings and more.",
+          "descLen": 173,
+          "canonical": "https://jacksonstonemasonry.com/faqs/",
+          "h1s": [
+            "Frequently Asked Questions"
+          ],
+          "words": 815,
+          "images": 1,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList",
+            "FAQPage"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/",
+          "title": "Stonemasons in Cheltenham & the Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 66,
+          "desc": "Traditional stonemasons based in Winchcombe near Cheltenham. Dry stone walling, stone restoration, stone cleaning, stone carving and Cotswold stone wall repair across Gloucestershire. Free quotations.",
+          "descLen": 200,
+          "canonical": "https://jacksonstonemasonry.com/",
+          "h1s": [
+            "Traditional Stonemasonry & Dry Stone Walling in the Cotswolds"
+          ],
+          "words": 671,
+          "images": 13,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/",
+          "title": "Stonemasonry Projects in Gloucestershire & the Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 81,
+          "desc": "Before-and-after case studies from Jackson's Stonemasonry — dry stone walls rebuilt, Cotswold stone restored and bespoke carving across Gloucestershire and the Cotswolds.",
+          "descLen": 170,
+          "canonical": "https://jacksonstonemasonry.com/projects/",
+          "h1s": [
+            "Projects"
+          ],
+          "words": 545,
+          "images": 15,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/quote/",
+          "title": "Get a Free Quote | Stonemasons in Winchcombe & Cheltenham | Jackson's Stonemasonry",
+          "titleLen": 82,
+          "desc": "Request a free, no-obligation quotation from Jackson's Stonemasonry — dry stone walling, restoration, cleaning, carving and wall repair across Gloucestershire and the Cotswolds.",
+          "descLen": 177,
+          "canonical": "https://jacksonstonemasonry.com/quote/",
+          "h1s": [
+            "Request a Free Quotation"
+          ],
+          "words": 173,
+          "images": 1,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/reviews/",
+          "title": "Customer Reviews | Jackson's Stonemasonry",
+          "titleLen": 41,
+          "desc": "What customers across Winchcombe, Cheltenham and the Cotswolds say about Jackson's Stonemasonry — dry stone walling, restoration and stone wall repair reviews.",
+          "descLen": 159,
+          "canonical": "https://jacksonstonemasonry.com/reviews/",
+          "h1s": [
+            "Customer Reviews"
+          ],
+          "words": 295,
+          "images": 1,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/services/",
+          "title": "Stonemasonry Services in Gloucestershire & the Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 81,
+          "desc": "Our stonemasonry services across Gloucestershire and the Cotswolds: dry stone walling, stone restoration, stone cleaning, stone carving, stonemasonry and stone wall repair.",
+          "descLen": 172,
+          "canonical": "https://jacksonstonemasonry.com/services/",
+          "h1s": [
+            "Stonemasonry Services in Gloucestershire & the Cotswolds"
+          ],
+          "words": 209,
+          "images": 10,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/about/",
+          "title": "About Jackson's Stonemasonry | Winchcombe Stonemasons | Jackson's Stonemasonry",
+          "titleLen": 78,
+          "desc": "Jackson's Stonemasonry Ltd is a traditional stonemasonry business based in Winchcombe, Gloucestershire, serving Cheltenham and the Cotswolds. Fully insured, free quotations.",
+          "descLen": 173,
+          "canonical": "https://jacksonstonemasonry.com/about/",
+          "h1s": [
+            "About Jackson's Stonemasonry"
+          ],
+          "words": 468,
+          "images": 4,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/dry-stone-walling/",
+          "title": "Dry Stone Walling in Gloucestershire & the Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 77,
+          "desc": "Traditional dry stone walling in Gloucestershire and the Cotswolds — new walls, rebuilds and repairs in Cotswold stone. Based in Winchcombe, near Cheltenham. Free quotations.",
+          "descLen": 174,
+          "canonical": "https://jacksonstonemasonry.com/dry-stone-walling/",
+          "h1s": [
+            "Dry Stone Walling in Gloucestershire & the Cotswolds"
+          ],
+          "words": 1087,
+          "images": 7,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/house-signs/",
+          "title": "Stone House Signs & Numbers | Hand-Carved | Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 78,
+          "desc": "Hand-carved stone house signs and door numbers in Gloucestershire and the Cotswolds — cut to your specification, built into a wall or fixed to an existing one. Free quotations.",
+          "descLen": 176,
+          "canonical": "https://jacksonstonemasonry.com/house-signs/",
+          "h1s": [
+            "Stone House Signs & Numbers in Gloucestershire & the Cotswolds"
+          ],
+          "words": 634,
+          "images": 2,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/repointing/",
+          "title": "Repointing in Cheltenham & Gloucestershire | Lime Repointing | Jackson's Stonemasonry",
+          "titleLen": 85,
+          "desc": "Traditional lime repointing in Cheltenham, Gloucestershire and the Cotswolds — cement pointing raked out by hand and replaced with matched lime mortar. Free quotations.",
+          "descLen": 168,
+          "canonical": "https://jacksonstonemasonry.com/repointing/",
+          "h1s": [
+            "Repointing in Cheltenham, Gloucestershire & the Cotswolds"
+          ],
+          "words": 1347,
+          "images": 4,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/stone-carving/",
+          "title": "Stone Carving in Gloucestershire & the Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 73,
+          "desc": "Hand stone carving and lettering in Gloucestershire — house name plaques, date stones, replacement carved details and bespoke commissions in Cotswold stone. Free quotations.",
+          "descLen": 173,
+          "canonical": "https://jacksonstonemasonry.com/stone-carving/",
+          "h1s": [
+            "Stone Carving in Gloucestershire & the Cotswolds"
+          ],
+          "words": 861,
+          "images": 4,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/stone-cleaning/",
+          "title": "Stone Cleaning in Cheltenham & Gloucestershire | Jackson's Stonemasonry",
+          "titleLen": 71,
+          "desc": "Careful, non-damaging stone cleaning in Cheltenham, Gloucestershire and the Cotswolds — removing dirt, algae and paint from Cotswold stone without harming the surface. Free quotations.",
+          "descLen": 184,
+          "canonical": "https://jacksonstonemasonry.com/stone-cleaning/",
+          "h1s": [
+            "Stone Cleaning in Cheltenham & Gloucestershire"
+          ],
+          "words": 825,
+          "images": 2,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/stone-fireplaces/",
+          "title": "Stone Fireplaces in Cheltenham & Gloucestershire | Jackson's Stonemasonry",
+          "titleLen": 73,
+          "desc": "Bespoke stone fireplaces in Cheltenham, Gloucestershire and the Cotswolds — hand-cut surrounds, hearths and lintels, inglenooks opened up and old fireplaces restored.",
+          "descLen": 166,
+          "canonical": "https://jacksonstonemasonry.com/stone-fireplaces/",
+          "h1s": [
+            "Stone Fireplaces in Cheltenham, Gloucestershire & the Cotswolds"
+          ],
+          "words": 1275,
+          "images": 9,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/stone-restoration/",
+          "title": "Stone Restoration in Cheltenham & the Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 72,
+          "desc": "Sympathetic stone restoration across Cheltenham, Gloucestershire and the Cotswolds — repointing in lime, stone replacement and repairs to period and listed buildings. Free quotations.",
+          "descLen": 183,
+          "canonical": "https://jacksonstonemasonry.com/stone-restoration/",
+          "h1s": [
+            "Stone Restoration in Cheltenham, Gloucestershire & the Cotswolds"
+          ],
+          "words": 1115,
+          "images": 9,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/stone-wall-repair/",
+          "title": "Stone Wall Repair in Gloucestershire & the Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 77,
+          "desc": "Cotswold stone wall repair across Gloucestershire — collapsed sections rebuilt, bulges and leans corrected, copings refixed, in dry stone or lime mortar. Free quotations.",
+          "descLen": 170,
+          "canonical": "https://jacksonstonemasonry.com/stone-wall-repair/",
+          "h1s": [
+            "Cotswold Stone Wall Repair in Gloucestershire"
+          ],
+          "words": 873,
+          "images": 3,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/stonemasonry/",
+          "title": "Traditional Stonemasons in Winchcombe & Cheltenham | Jackson's Stonemasonry",
+          "titleLen": 75,
+          "desc": "Traditional stonemasonry in Winchcombe, Cheltenham and the Cotswolds — new stonework, extensions, fireplaces, porches and dressed stone features in Cotswold stone. Free quotations.",
+          "descLen": 180,
+          "canonical": "https://jacksonstonemasonry.com/stonemasonry/",
+          "h1s": [
+            "Traditional Stonemasonry in Winchcombe, Cheltenham & the Cotswolds"
+          ],
+          "words": 1010,
+          "images": 5,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/areas/broadway/",
+          "title": "Stonemasons in Broadway | Cotswold Stone Specialists | Jackson's Stonemasonry",
+          "titleLen": 77,
+          "desc": "Stonemasons serving Broadway, Worcestershire from nearby Winchcombe — Cotswold stone restoration, dry stone walling, wall repair and stone cleaning. Free quotations.",
+          "descLen": 165,
+          "canonical": "https://jacksonstonemasonry.com/areas/broadway/",
+          "h1s": [
+            "Stonemasons in Broadway"
+          ],
+          "words": 545,
+          "images": 1,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/areas/cheltenham/",
+          "title": "Stonemasons in Cheltenham | Stone Restoration & Walling | Jackson's Stonemasonry",
+          "titleLen": 80,
+          "desc": "Stonemasons serving Cheltenham from nearby Winchcombe. Stone restoration, garden wall repair, stone cleaning and dry stone walling across Cheltenham. Free quotations.",
+          "descLen": 166,
+          "canonical": "https://jacksonstonemasonry.com/areas/cheltenham/",
+          "h1s": [
+            "Stonemasons in Cheltenham"
+          ],
+          "words": 565,
+          "images": 1,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/areas/cirencester/",
+          "title": "Stonemasons in Cirencester | Restoration & Walling | Jackson's Stonemasonry",
+          "titleLen": 75,
+          "desc": "Stonemasons serving Cirencester and the south Cotswolds — Cotswold stone restoration, dry stone walling, garden wall repair and stone cleaning. Free quotations.",
+          "descLen": 160,
+          "canonical": "https://jacksonstonemasonry.com/areas/cirencester/",
+          "h1s": [
+            "Stonemasons in Cirencester"
+          ],
+          "words": 520,
+          "images": 1,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/areas/cotswolds/",
+          "title": "Cotswold Stonemasons | Dry Stone Walling & Stone Restoration | Jackson's Stonemasonry",
+          "titleLen": 85,
+          "desc": "Traditional Cotswold stonemasons based in Winchcombe — dry stone walling, Cotswold stone restoration, wall repair, cleaning and carving across the Cotswolds. Free quotes.",
+          "descLen": 170,
+          "canonical": "https://jacksonstonemasonry.com/areas/cotswolds/",
+          "h1s": [
+            "Stonemasons in the Cotswolds"
+          ],
+          "words": 574,
+          "images": 1,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/areas/gloucester/",
+          "title": "Stonemasons in Gloucester | Restoration & Wall Repair | Jackson's Stonemasonry",
+          "titleLen": 78,
+          "desc": "Stonemasons serving Gloucester from Winchcombe — stone restoration, repointing in lime, garden wall repair and stone cleaning across Gloucester and its villages. Free quotations.",
+          "descLen": 178,
+          "canonical": "https://jacksonstonemasonry.com/areas/gloucester/",
+          "h1s": [
+            "Stonemasons in Gloucester"
+          ],
+          "words": 518,
+          "images": 1,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/areas/stow-on-the-wold/",
+          "title": "Stonemasons in Stow-on-the-Wold | Walling & Restoration | Jackson's Stonemasonry",
+          "titleLen": 80,
+          "desc": "Stonemasons serving Stow-on-the-Wold and the north Cotswold villages — dry stone walling, Cotswold stone restoration, wall repair and stone cleaning. Free quotations.",
+          "descLen": 166,
+          "canonical": "https://jacksonstonemasonry.com/areas/stow-on-the-wold/",
+          "h1s": [
+            "Stonemasons in Stow-on-the-Wold"
+          ],
+          "words": 551,
+          "images": 1,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/areas/tewkesbury/",
+          "title": "Stonemasons in Tewkesbury | Restoration & Wall Repair | Jackson's Stonemasonry",
+          "titleLen": 78,
+          "desc": "Stonemasons serving Tewkesbury from nearby Winchcombe — stone restoration, lime repointing, garden wall repair and stone cleaning in Tewkesbury and surrounding villages.",
+          "descLen": 169,
+          "canonical": "https://jacksonstonemasonry.com/areas/tewkesbury/",
+          "h1s": [
+            "Stonemasons in Tewkesbury"
+          ],
+          "words": 549,
+          "images": 1,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/areas/winchcombe/",
+          "title": "Stonemasons in Winchcombe | Dry Stone Walling & Restoration | Jackson's Stonemasonry",
+          "titleLen": 84,
+          "desc": "Jackson's Stonemasonry is based in Winchcombe, Gloucestershire. Dry stone walling, stone restoration, stone cleaning and wall repair in and around Winchcombe. Free quotations.",
+          "descLen": 175,
+          "canonical": "https://jacksonstonemasonry.com/areas/winchcombe/",
+          "h1s": [
+            "Stonemasons in Winchcombe"
+          ],
+          "words": 604,
+          "images": 1,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/chimney-cap-bibury/",
+          "title": "Project: Bespoke Stone Chimney Cap Cut for Bibury | Jackson's Stonemasonry",
+          "titleLen": 74,
+          "desc": "Case study: a chimney cap cut and worked in the Jackson's workshop and delivered to Bibury — bespoke banker masonry from a single block.",
+          "descLen": 136,
+          "canonical": "https://jacksonstonemasonry.com/projects/chimney-cap-bibury/",
+          "h1s": [
+            "Bespoke Carved Stone Chimney Cap, Bibury"
+          ],
+          "words": 270,
+          "images": 4,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/church-chimney-bee-rescue-cotswolds/",
+          "title": "Project: Church Chimney Repair and Bee Removal, the Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 86,
+          "desc": "Case study: a Cotswold church chimney taken down and rebuilt in matching ashlar — after a beekeeper had safely rehomed the honeybee colony living inside the wall.",
+          "descLen": 162,
+          "canonical": "https://jacksonstonemasonry.com/projects/church-chimney-bee-rescue-cotswolds/",
+          "h1s": [
+            "Church Chimney Rebuild — With the Bees Rehomed First"
+          ],
+          "words": 351,
+          "images": 4,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/courtyard-walling-lamb-inn-burford/",
+          "title": "Project: Courtyard Walling at the Lamb Inn, Burford | Jackson's Stonemasonry",
+          "titleLen": 76,
+          "desc": "Case study: new coursed stone walling with a dressed coping, and a curved edging wall forming a gravel bed, in the courtyard of the Lamb Inn at Burford.",
+          "descLen": 152,
+          "canonical": "https://jacksonstonemasonry.com/projects/courtyard-walling-lamb-inn-burford/",
+          "h1s": [
+            "New Courtyard Stonework at the Lamb Inn, Burford"
+          ],
+          "words": 328,
+          "images": 4,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/doorway-repair-the-baytree-burford/",
+          "title": "Project: Stone Doorway Repair at The Baytree, Burford | Jackson's Stonemasonry",
+          "titleLen": 78,
+          "desc": "Case study: piecing new stone into the eroded jambs of a doorway at The Baytree in Burford, under an existing moulded stone hood.",
+          "descLen": 129,
+          "canonical": "https://jacksonstonemasonry.com/projects/doorway-repair-the-baytree-burford/",
+          "h1s": [
+            "Stone Doorway Repair at The Baytree, Burford"
+          ],
+          "words": 283,
+          "images": 2,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/dry-stone-wall-name-plaque/",
+          "title": "Project: 8ft Dry Stone Wall and Carved Name Plaque, the Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 90,
+          "desc": "Case study: eight feet high and six metres long, a new dry stone wall built to a gateway with a hand-carved house name plaque set into the face.",
+          "descLen": 144,
+          "canonical": "https://jacksonstonemasonry.com/projects/dry-stone-wall-name-plaque/",
+          "h1s": [
+            "8ft Dry Stone Wall with a Carved Name Plaque"
+          ],
+          "words": 369,
+          "images": 4,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/gateway-through-drystone-wall/",
+          "title": "Project: New Gateway Through a 7ft Dry Stone Wall, the Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 89,
+          "desc": "Case study: opening a new gateway through a seven-foot Cotswold dry stone wall, building both cheeks square and re-coping across the top.",
+          "descLen": 137,
+          "canonical": "https://jacksonstonemasonry.com/projects/gateway-through-drystone-wall/",
+          "h1s": [
+            "Cutting a Gateway Through a 7ft Dry Stone Wall"
+          ],
+          "words": 414,
+          "images": 5,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/inglenook-fireplace-restoration/",
+          "title": "Project: Inglenook Fireplace Restoration, the Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 80,
+          "desc": "Case study: replacing the worn jambs of a cottage inglenook with clean new dressed stone, under the original oak bressummer beam.",
+          "descLen": 129,
+          "canonical": "https://jacksonstonemasonry.com/projects/inglenook-fireplace-restoration/",
+          "h1s": [
+            "Inglenook Fireplace Restoration in a Cotswold Cottage"
+          ],
+          "words": 293,
+          "images": 3,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/retaining-wall-burford/",
+          "title": "Project: Retaining Drystone Wall Repair in Burford | Jackson's Stonemasonry",
+          "titleLen": 75,
+          "desc": "Case study: rebuilding the collapsed head of a roadside retaining drystone wall in Burford, taking it back to a clean, level line beneath the house.",
+          "descLen": 148,
+          "canonical": "https://jacksonstonemasonry.com/projects/retaining-wall-burford/",
+          "h1s": [
+            "Retaining Drystone Wall Repair in Burford"
+          ],
+          "words": 315,
+          "images": 3,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/river-coln-wall-the-swan-bibury/",
+          "title": "Project: River Coln Wall Repair at The Swan, Bibury | Jackson's Stonemasonry",
+          "titleLen": 76,
+          "desc": "Case study: repairing the stone wall retaining the River Coln through the gardens of The Swan at Bibury, one of the most photographed spots in the Cotswolds.",
+          "descLen": 157,
+          "canonical": "https://jacksonstonemasonry.com/projects/river-coln-wall-the-swan-bibury/",
+          "h1s": [
+            "Repairing a Wall in the River Coln at The Swan, Bibury"
+          ],
+          "words": 310,
+          "images": 3,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/rustic-garden-wall/",
+          "title": "Project: Rustic Dry Stone Garden Wall, Gloucestershire | Jackson's Stonemasonry",
+          "titleLen": 79,
+          "desc": "Case study: a new dry stone wall built to a customer's brief for something rustic, dividing a gravelled drive from the lawn with a heavy upright coping.",
+          "descLen": 152,
+          "canonical": "https://jacksonstonemasonry.com/projects/rustic-garden-wall/",
+          "h1s": [
+            "New Rustic Dry Stone Garden Wall"
+          ],
+          "words": 400,
+          "images": 5,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/stone-cill-repair-cotswolds/",
+          "title": "Project: Stone Window Cill Repair in the Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 75,
+          "desc": "Case study: cutting out an eroded stone window cill and mullion on a Cotswold building and piecing in new dressed stone to match.",
+          "descLen": 129,
+          "canonical": "https://jacksonstonemasonry.com/projects/stone-cill-repair-cotswolds/",
+          "h1s": [
+            "Stone Window Cill Repair, the Cotswolds"
+          ],
+          "words": 278,
+          "images": 3,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/stone-house-signs-and-numbers/",
+          "title": "Stone House Signs and Numbers, Cut to Order | Cotswolds | Jackson's Stonemasonry",
+          "titleLen": 80,
+          "desc": "Hand-carved Cotswold stone house signs and door numbers, cut to your specification and either built into a wall or fixed to an existing one.",
+          "descLen": 140,
+          "canonical": "https://jacksonstonemasonry.com/projects/stone-house-signs-and-numbers/",
+          "h1s": [
+            "Hand-Carved Stone House Signs and Numbers"
+          ],
+          "words": 430,
+          "images": 5,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/stone-porch-repair-winchcombe/",
+          "title": "Project: Stone Porch Repair in Winchcombe | Jackson's Stonemasonry",
+          "titleLen": 66,
+          "desc": "Case study: repairing the decayed cornice and parapet of a classical stone porch on a Winchcombe house, working off ladders above the front door.",
+          "descLen": 145,
+          "canonical": "https://jacksonstonemasonry.com/projects/stone-porch-repair-winchcombe/",
+          "h1s": [
+            "Repairing a Stone Porch in Winchcombe"
+          ],
+          "words": 322,
+          "images": 4,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://jacksonstonemasonry.com/projects/window-repair-the-swan-bibury/",
+          "title": "Project: Stone Window Repair at The Swan, Bibury | Jackson's Stonemasonry",
+          "titleLen": 73,
+          "desc": "Case study: repairing the stone surround of a window at The Swan in Bibury, replacing eroded stone and making the building structural again.",
+          "descLen": 140,
+          "canonical": "https://jacksonstonemasonry.com/projects/window-repair-the-swan-bibury/",
+          "h1s": [
+            "Stone Window Repair at The Swan, Bibury"
+          ],
+          "words": 322,
+          "images": 2,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "BreadcrumbList"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Basingstoke K9 Companions",
+      "slug": "k9",
+      "origin": "https://basingstokek9companions.co.uk",
+      "pagesInSitemap": 11,
+      "pagesRead": 11,
+      "failed": [],
+      "counts": {
+        "medium": 1
+      },
+      "findings": [
+        {
+          "level": "medium",
+          "what": "1 pages never mention any town the business serves",
+          "where": [
+            "/prices/"
+          ]
+        }
+      ],
+      "pages": [
+        {
+          "url": "https://basingstokek9companions.co.uk/",
+          "title": "Dog Walker in Basingstoke | The K9 Companions",
+          "titleLen": 45,
+          "desc": "Family-run dog walking, house sitting and pet care in Basingstoke and Kempshott. Fully insured, DBS checked, sociable group walks and a photo every time.",
+          "descLen": 153,
+          "canonical": "https://basingstokek9companions.co.uk/",
+          "h1s": [
+            "Adventures, not laps of the block."
+          ],
+          "words": 1390,
+          "images": 6,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "ProfessionalService",
+            "WebSite",
+            "WebPage",
+            "FAQPage"
+          ]
+        },
+        {
+          "url": "https://basingstokek9companions.co.uk/about/",
+          "title": "About Your Dog Walker | The K9 Companions",
+          "titleLen": 41,
+          "desc": "Meet Jacqui, the owner of The K9 Companions — insured, DBS checked, and walking dogs across Basingstoke and Kempshott.",
+          "descLen": 118,
+          "canonical": "https://basingstokek9companions.co.uk/about/",
+          "h1s": [
+            "Hello — I'm Jacqui"
+          ],
+          "words": 722,
+          "images": 2,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "ProfessionalService",
+            "WebSite",
+            "WebPage",
+            "BreadcrumbList",
+            "AboutPage"
+          ]
+        },
+        {
+          "url": "https://basingstokek9companions.co.uk/booking/",
+          "title": "Request a Booking | The K9 Companions",
+          "titleLen": 37,
+          "desc": "Request dog walking, house sitting or pet care in Basingstoke. We confirm availability within 24 hours. Free meet and greet, nothing charged up front.",
+          "descLen": 150,
+          "canonical": "https://basingstokek9companions.co.uk/booking/",
+          "h1s": [
+            "Tell us about your dog"
+          ],
+          "words": 407,
+          "images": 0,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "ProfessionalService",
+            "WebSite",
+            "WebPage",
+            "BreadcrumbList",
+            "ContactPage",
+            "ReserveAction"
+          ]
+        },
+        {
+          "url": "https://basingstokek9companions.co.uk/contact/",
+          "title": "Contact Us | The K9 Companions",
+          "titleLen": 30,
+          "desc": "Contact The K9 Companions — call 07504 243208, email us, or request a booking online. Covering Basingstoke, Kempshott and the surrounding villages.",
+          "descLen": 147,
+          "canonical": "https://basingstokek9companions.co.uk/contact/",
+          "h1s": [
+            "Get in touch"
+          ],
+          "words": 374,
+          "images": 0,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "ProfessionalService",
+            "WebSite",
+            "WebPage",
+            "BreadcrumbList",
+            "ContactPage"
+          ]
+        },
+        {
+          "url": "https://basingstokek9companions.co.uk/prices/",
+          "title": "Dog Walking Prices | The K9 Companions",
+          "titleLen": 38,
+          "desc": "Dog walking from £15, house sitting from £55 a night, cat and small animal visits from £15. No joining fees, block-booking discounts, free meet and greet.",
+          "descLen": 154,
+          "canonical": "https://basingstokek9companions.co.uk/prices/",
+          "h1s": [
+            "Clear prices, nothing hidden"
+          ],
+          "words": 460,
+          "images": 0,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "ProfessionalService",
+            "WebSite",
+            "WebPage",
+            "BreadcrumbList",
+            "FAQPage"
+          ]
+        },
+        {
+          "url": "https://basingstokek9companions.co.uk/privacy/",
+          "title": "Privacy Notice | The K9 Companions",
+          "titleLen": 34,
+          "desc": "How The K9 Companions collects, uses and stores the personal information you provide through this website.",
+          "descLen": 106,
+          "canonical": "https://basingstokek9companions.co.uk/privacy/",
+          "h1s": [
+            "Privacy notice"
+          ],
+          "words": 308,
+          "images": 0,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "ProfessionalService",
+            "WebSite",
+            "WebPage",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://basingstokek9companions.co.uk/services/",
+          "title": "Pet Care Services | The K9 Companions",
+          "titleLen": 37,
+          "desc": "Dog walking, house sitting, cat and small animal visits and puppy sitting across Basingstoke. Family-run, fully insured and DBS checked. From £15.",
+          "descLen": 146,
+          "canonical": "https://basingstokek9companions.co.uk/services/",
+          "h1s": [
+            "Pet care in Basingstoke, built around your routine"
+          ],
+          "words": 250,
+          "images": 4,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "ProfessionalService",
+            "WebSite",
+            "WebPage",
+            "BreadcrumbList",
+            "ItemList"
+          ]
+        },
+        {
+          "url": "https://basingstokek9companions.co.uk/services/cat-and-small-animal-visits/",
+          "title": "Cat & Small Animal Visits | The K9 Companions",
+          "titleLen": 45,
+          "desc": "Cat and small animal drop-in visits across Basingstoke from £15. Feeding, litter trays, medication and company while you are away.",
+          "descLen": 130,
+          "canonical": "https://basingstokek9companions.co.uk/services/cat-and-small-animal-visits/",
+          "h1s": [
+            "Cat & Small Animal Visits"
+          ],
+          "words": 351,
+          "images": 4,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "ProfessionalService",
+            "WebSite",
+            "WebPage",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://basingstokek9companions.co.uk/services/dog-walking/",
+          "title": "Dog Walking in Basingstoke | The K9 Companions",
+          "titleLen": 46,
+          "desc": "Group dog walking in Basingstoke from £15. Proper adventures with familiar canine company, a photo every time, fully insured and DBS checked.",
+          "descLen": 141,
+          "canonical": "https://basingstokek9companions.co.uk/services/dog-walking/",
+          "h1s": [
+            "Dog Walking in Basingstoke"
+          ],
+          "words": 370,
+          "images": 4,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "ProfessionalService",
+            "WebSite",
+            "WebPage",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://basingstokek9companions.co.uk/services/house-sitting/",
+          "title": "House Sitting in Basingstoke | The K9 Companions",
+          "titleLen": 48,
+          "desc": "Overnight house sitting in Basingstoke from £55 a night. Your dog stays in their own home and routine, with two walks a day included.",
+          "descLen": 133,
+          "canonical": "https://basingstokek9companions.co.uk/services/house-sitting/",
+          "h1s": [
+            "House Sitting & Overnight Pet Care"
+          ],
+          "words": 359,
+          "images": 4,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "ProfessionalService",
+            "WebSite",
+            "WebPage",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://basingstokek9companions.co.uk/services/puppy-visits/",
+          "title": "Puppy Visits & Sitting | The K9 Companions",
+          "titleLen": 42,
+          "desc": "Puppy visits in Basingstoke from £15. Toilet breaks, training reinforcement and safe play to break up a long day for a new puppy.",
+          "descLen": 129,
+          "canonical": "https://basingstokek9companions.co.uk/services/puppy-visits/",
+          "h1s": [
+            "Puppy Visits & Puppy Sitting"
+          ],
+          "words": 354,
+          "images": 4,
+          "noAlt": 0,
+          "schema": [
+            "LocalBusiness",
+            "ProfessionalService",
+            "WebSite",
+            "WebPage",
+            "BreadcrumbList",
+            "Service"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AvoSolution",
+      "slug": "avo",
+      "origin": "https://avosolution.co.uk",
+      "pagesInSitemap": 10,
+      "pagesRead": 10,
+      "failed": [],
+      "counts": {
+        "medium": 12,
+        "low": 3
+      },
+      "findings": [
+        {
+          "level": "medium",
+          "what": "2 of 4 images have no alt attribute at all",
+          "where": [
+            "/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Only 137 words of copy — too thin to rank",
+          "where": [
+            "/about/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "2 of 4 images have no alt attribute at all",
+          "where": [
+            "/about/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is only 24 characters",
+          "where": [
+            "/services/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "2 of 4 images have no alt attribute at all",
+          "where": [
+            "/services/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "2 of 4 images have no alt attribute at all",
+          "where": [
+            "/services/web-design/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "2 of 4 images have no alt attribute at all",
+          "where": [
+            "/services/bespoke-application-development/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "2 of 4 images have no alt attribute at all",
+          "where": [
+            "/services/commerce/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "2 of 4 images have no alt attribute at all",
+          "where": [
+            "/services/service-management-systems/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "2 of 4 images have no alt attribute at all",
+          "where": [
+            "/services/avocustomer/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is only 54 characters",
+          "where": [
+            "/work/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "2 of 4 images have no alt attribute at all",
+          "where": [
+            "/work/"
+          ]
+        },
+        {
+          "level": "low",
+          "what": "Meta description is only 30 characters",
+          "where": [
+            "/contact/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "Only 67 words of copy — too thin to rank",
+          "where": [
+            "/contact/"
+          ]
+        },
+        {
+          "level": "medium",
+          "what": "2 of 4 images have no alt attribute at all",
+          "where": [
+            "/contact/"
+          ]
+        }
+      ],
+      "pages": [
+        {
+          "url": "https://avosolution.co.uk/",
+          "title": "AvoSolution | Web design and bespoke software development",
+          "titleLen": 57,
+          "desc": "AvoSolution is a UK software development and consultancy studio: websites, bespoke applications, commerce and customer engagement systems for…",
+          "descLen": 142,
+          "canonical": "https://avosolution.co.uk/",
+          "h1s": [
+            "Software built around your business, not the other way round"
+          ],
+          "words": 1247,
+          "images": 4,
+          "noAlt": 2,
+          "schema": [
+            "LocalBusiness",
+            "WebSite"
+          ]
+        },
+        {
+          "url": "https://avosolution.co.uk/about/",
+          "title": "About AvoSolution",
+          "titleLen": 17,
+          "desc": "AvoSolution is a UK software development and consultancy studio. We design and build websites, and develop bespoke applications for commerce, service…",
+          "descLen": 150,
+          "canonical": "https://avosolution.co.uk/about/",
+          "h1s": [
+            "One studio, design through to deployment"
+          ],
+          "words": 137,
+          "images": 4,
+          "noAlt": 2,
+          "schema": [
+            "LocalBusiness",
+            "WebSite",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://avosolution.co.uk/services/",
+          "title": "Services | AvoSolution",
+          "titleLen": 22,
+          "desc": "What AvoSolution offers.",
+          "descLen": 24,
+          "canonical": "https://avosolution.co.uk/services/",
+          "h1s": [
+            "Our services"
+          ],
+          "words": 248,
+          "images": 4,
+          "noAlt": 2,
+          "schema": [
+            "LocalBusiness",
+            "WebSite",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://avosolution.co.uk/services/web-design/",
+          "title": "Web design | AvoSolution",
+          "titleLen": 24,
+          "desc": "Not just a website. An AvoWebsite — built to a standard we publish and measure: accessibility, structured business data and load speed, all checkable.",
+          "descLen": 150,
+          "canonical": "https://avosolution.co.uk/services/web-design/",
+          "h1s": [
+            "Web design"
+          ],
+          "words": 753,
+          "images": 4,
+          "noAlt": 2,
+          "schema": [
+            "LocalBusiness",
+            "WebSite",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://avosolution.co.uk/services/bespoke-application-development/",
+          "title": "Bespoke application development | AvoSolution",
+          "titleLen": 45,
+          "desc": "Custom applications for businesses that have outgrown spreadsheets and off-the-shelf software.",
+          "descLen": 94,
+          "canonical": "https://avosolution.co.uk/services/bespoke-application-development/",
+          "h1s": [
+            "Bespoke application development"
+          ],
+          "words": 345,
+          "images": 4,
+          "noAlt": 2,
+          "schema": [
+            "LocalBusiness",
+            "WebSite",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://avosolution.co.uk/services/commerce/",
+          "title": "Commerce | AvoSolution",
+          "titleLen": 22,
+          "desc": "Online stores and commerce systems, including the stock, pricing and fulfilment logic behind the storefront.",
+          "descLen": 108,
+          "canonical": "https://avosolution.co.uk/services/commerce/",
+          "h1s": [
+            "Commerce"
+          ],
+          "words": 309,
+          "images": 4,
+          "noAlt": 2,
+          "schema": [
+            "LocalBusiness",
+            "WebSite",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://avosolution.co.uk/services/service-management-systems/",
+          "title": "Service management systems | AvoSolution",
+          "titleLen": 40,
+          "desc": "Bespoke systems for businesses that run work in the field or by appointment — scheduling, customer records, quoting and invoicing built to fit.",
+          "descLen": 143,
+          "canonical": "https://avosolution.co.uk/services/service-management-systems/",
+          "h1s": [
+            "Service management systems"
+          ],
+          "words": 352,
+          "images": 4,
+          "noAlt": 2,
+          "schema": [
+            "LocalBusiness",
+            "WebSite",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://avosolution.co.uk/services/avocustomer/",
+          "title": "AvoCustomer | AvoSolution",
+          "titleLen": 25,
+          "desc": "Own the relationship. A branded customer portal for appointment-led businesses — so the customers you win stay yours, not the marketplace’s.",
+          "descLen": 140,
+          "canonical": "https://avosolution.co.uk/services/avocustomer/",
+          "h1s": [
+            "AvoCustomer"
+          ],
+          "words": 453,
+          "images": 4,
+          "noAlt": 2,
+          "schema": [
+            "LocalBusiness",
+            "WebSite",
+            "BreadcrumbList",
+            "Service"
+          ]
+        },
+        {
+          "url": "https://avosolution.co.uk/work/",
+          "title": "Case studies | AvoSolution",
+          "titleLen": 26,
+          "desc": "How AvoSolution rebuilt these sites, and what changed.",
+          "descLen": 54,
+          "canonical": "https://avosolution.co.uk/work/",
+          "h1s": [
+            "Case studies"
+          ],
+          "words": 760,
+          "images": 4,
+          "noAlt": 2,
+          "schema": [
+            "LocalBusiness",
+            "WebSite",
+            "BreadcrumbList"
+          ]
+        },
+        {
+          "url": "https://avosolution.co.uk/contact/",
+          "title": "Contact | AvoSolution",
+          "titleLen": 21,
+          "desc": "Get in touch with AvoSolution.",
+          "descLen": 30,
+          "canonical": "https://avosolution.co.uk/contact/",
+          "h1s": [
+            "Get in touch"
+          ],
+          "words": 67,
+          "images": 4,
+          "noAlt": 2,
+          "schema": [
+            "LocalBusiness",
+            "WebSite",
+            "BreadcrumbList"
+          ]
+        }
+      ]
+    }
+  ]
+}

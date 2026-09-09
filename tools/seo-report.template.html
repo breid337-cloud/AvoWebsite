@@ -1,0 +1,275 @@
+<title>Search Visibility Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --paper: #f2f4f1; --card: #ffffff; --rule: #d9ddd6;
+  --ink: #161b18; --ink-soft: #4e574f; --ink-faint: #6b756e;
+  --accent: #2f6a4c; --accent-dim: #e2ece6;
+  --ok: #26694a; --ok-bg: #e3f0e9;
+  --warn: #7f5606; --warn-bg: #f7edd8;
+  --bad: #99312b; --bad-bg: #f7e3e1;
+  --shadow: 0 1px 2px rgba(22,27,24,.05), 0 8px 24px -16px rgba(22,27,24,.28);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #10140f; --card: #191e19; --rule: #2c332d;
+    --ink: #e8ece7; --ink-soft: #a9b3ab; --ink-faint: #8b958d;
+    --accent: #7cc39a; --accent-dim: #1e2a23;
+    --ok: #6dbd93; --ok-bg: #17281f;
+    --warn: #dcaa4e; --warn-bg: #2c2416;
+    --bad: #e4938c; --bad-bg: #2e1c1b;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10140f; --card: #191e19; --rule: #2c332d;
+  --ink: #e8ece7; --ink-soft: #a9b3ab; --ink-faint: #8b958d;
+  --accent: #7cc39a; --accent-dim: #1e2a23;
+  --ok: #6dbd93; --ok-bg: #17281f;
+  --warn: #dcaa4e; --warn-bg: #2c2416;
+  --bad: #e4938c; --bad-bg: #2e1c1b;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.9);
+}
+
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); line-height: 1.55; font-size: 15px;
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 62rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+h1, h2, h3 { font-family: Newsreader, ui-serif, Georgia, serif; font-weight: 500; text-wrap: balance; margin: 0; }
+.mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+.masthead { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: baseline; justify-content: space-between;
+  padding-bottom: 1.25rem; border-bottom: 2px solid var(--ink); margin-bottom: 2.25rem; }
+.masthead h1 { font-size: clamp(2rem, 5vw, 2.9rem); letter-spacing: -.015em; line-height: 1.1; }
+.masthead .sub { color: var(--ink-soft); font-size: .9rem; margin-top: .4rem; max-width: 34rem; }
+.stamp { font-size: .74rem; color: var(--ink-faint); letter-spacing: .07em; text-transform: uppercase; }
+.stamp b { display: block; font-family: "IBM Plex Mono", monospace; font-weight: 500;
+  font-size: 1rem; letter-spacing: 0; text-transform: none; color: var(--ink); margin: .15rem 0; }
+
+.headline { padding: 1.35rem 1.5rem; border-radius: 4px; border: 1px solid;
+  background: var(--warn-bg); border-color: color-mix(in srgb, var(--warn) 40%, transparent);
+  box-shadow: var(--shadow); margin-bottom: 2.75rem; }
+.headline h2 { font-size: 1.45rem; color: var(--warn); margin-bottom: .35rem; }
+.headline p { margin: 0 0 .6rem; color: var(--ink-soft); font-size: .95rem; }
+.headline p:last-child { margin-bottom: 0; }
+
+.sec { margin-bottom: 3rem; }
+.sec > h2 { font-size: 1.45rem; letter-spacing: -.01em; margin-bottom: .3rem; }
+.sec > .lede { color: var(--ink-soft); font-size: .9rem; margin: 0 0 1.25rem; max-width: 48rem; }
+
+/* index coverage */
+.cover { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.cov { background: var(--card); border: 1px solid var(--rule); border-radius: 5px;
+  padding: 1.1rem 1.2rem; box-shadow: var(--shadow); min-width: 0; }
+.cov h3 { font-size: 1.1rem; margin-bottom: .7rem; }
+.bar { height: .5rem; border-radius: 99px; background: var(--accent-dim); overflow: hidden; margin: .55rem 0 .5rem; }
+.bar i { display: block; height: 100%; background: var(--accent); }
+.cov.is-bad .bar i { background: var(--bad); }
+.cov .ratio { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums;
+  font-size: 1.7rem; font-weight: 500; line-height: 1; color: var(--accent); }
+.cov.is-bad .ratio { color: var(--bad); }
+.cov .of { color: var(--ink-faint); font-size: .82rem; }
+.cov p { margin: .35rem 0 0; font-size: .85rem; color: var(--ink-soft); }
+
+/* rank tables */
+.tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 5px;
+  background: var(--card); box-shadow: var(--shadow); margin-bottom: 1.25rem; }
+table { border-collapse: collapse; width: 100%; font-size: .85rem; }
+th, td { text-align: left; padding: .62rem .85rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+thead th { font-size: .67rem; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--ink-faint); font-weight: 600; white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+td.q { font-family: "IBM Plex Mono", monospace; white-space: nowrap; }
+td.note { color: var(--ink-soft); min-width: 16rem; }
+.posn { display: inline-block; min-width: 2.1rem; text-align: center; padding: .12rem .4rem; border-radius: 3px;
+  font-family: "IBM Plex Mono", monospace; font-weight: 500; font-size: .82rem; }
+.posn--good { background: var(--ok-bg); color: var(--ok); }
+.posn--mid  { background: var(--warn-bg); color: var(--warn); }
+.posn--none { background: var(--bad-bg); color: var(--bad); }
+h3.sitehead { font-size: 1.05rem; margin: 1.5rem 0 .5rem; }
+h3.sitehead:first-of-type { margin-top: 0; }
+
+/* actions */
+.acts { display: grid; gap: 1rem; counter-reset: act; }
+.act { background: var(--card); border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+  border-radius: 4px; padding: 1.05rem 1.2rem; box-shadow: var(--shadow); }
+.act__top { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: baseline;
+  justify-content: space-between; margin-bottom: .45rem; }
+.act h3 { font-size: 1.1rem; line-height: 1.25; }
+.act__tags { display: flex; gap: .4rem; flex: none; }
+.tag { font-size: .66rem; letter-spacing: .05em; text-transform: uppercase; font-weight: 600;
+  padding: .2rem .45rem; border-radius: 3px; background: var(--accent-dim); color: var(--accent); white-space: nowrap; }
+.tag--effort { background: transparent; color: var(--ink-faint); border: 1px solid var(--rule); }
+.act p { margin: 0; font-size: .89rem; color: var(--ink-soft); }
+.act p b { color: var(--ink); }
+.act .num { font-family: "IBM Plex Mono", monospace; color: var(--ink-faint); font-size: .8rem; margin-right: .4rem; }
+
+/* crawl findings */
+.find { display: grid; gap: .5rem; }
+.f { display: grid; grid-template-columns: auto 1fr auto; gap: .8rem; align-items: baseline;
+  background: var(--card); border: 1px solid var(--rule); border-radius: 4px; padding: .65rem .9rem; font-size: .87rem; }
+.f__lvl { font-size: .62rem; letter-spacing: .07em; text-transform: uppercase; font-weight: 600;
+  padding: .18rem .4rem; border-radius: 3px; white-space: nowrap; }
+.f--high { background: var(--bad-bg); color: var(--bad); }
+.f--medium { background: var(--warn-bg); color: var(--warn); }
+.f--low { background: var(--accent-dim); color: var(--accent); }
+.f__n { color: var(--ink-faint); font-family: "IBM Plex Mono", monospace; font-size: .8rem; white-space: nowrap; }
+.clean { background: var(--ok-bg); color: var(--ok); border: 1px solid color-mix(in srgb, var(--ok) 30%, transparent);
+  border-radius: 4px; padding: .7rem .9rem; font-size: .87rem; }
+
+.caveat { background: var(--card); border: 1px dashed var(--rule); border-radius: 5px;
+  padding: 1rem 1.2rem; font-size: .86rem; color: var(--ink-soft); }
+.caveat b { color: var(--ink); }
+
+footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);
+  font-size: .8rem; color: var(--ink-faint); display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; justify-content: space-between; }
+code { font-family: "IBM Plex Mono", monospace; font-size: .93em;
+  background: var(--accent-dim); padding: .08em .3em; border-radius: 3px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <h1>Search Visibility Review</h1>
+      <div class="sub">Where the three client sites actually appear in Google, what the crawl found on the pages themselves, and what to do about it.</div>
+    </div>
+    <div class="stamp">Checked<b id="checked"></b><span id="crawled"></span></div>
+  </header>
+
+  <div class="headline">
+    <h2>One finding outweighs the rest</h2>
+    <p><b id="hl-lead"></b></p>
+    <p id="hl-body"></p>
+  </div>
+
+  <section class="sec">
+    <h2>What Google has indexed</h2>
+    <p class="lede">A page that is not in the index cannot rank for anything, however well it is written. This is the ceiling every other effort sits under.</p>
+    <div class="cover" id="cover"></div>
+  </section>
+
+  <section class="sec">
+    <h2>Where the sites rank today</h2>
+    <p class="lede">Read by hand off google.co.uk, logged out, one reading per query. <b>Organic</b> is the position among the ordinary blue links; <b>map</b> is the position in the local pack, which for a local trade is the part people actually tap.</p>
+    <div id="ranks"></div>
+    <div class="caveat">
+      <b>How much to trust these.</b> Google personalises and localises results, so a search from this machine
+      is not what a customer standing in Basingstoke or Cheltenham sees. Treat them as one honest reading
+      rather than a rank-tracking service. Google Search Console reports the real positions people saw,
+      averaged over everyone who searched — which is the other reason to get the sites registered on it.
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>What the crawl found</h2>
+    <p class="lede">Every page in every sitemap, fetched and read. This part is machine-collected and repeats exactly: <code>node tools/seo-crawl.mjs</code>.</p>
+    <div id="crawl"></div>
+  </section>
+
+  <section class="sec">
+    <h2>What to do, in order</h2>
+    <p class="lede">Most valuable first. Nothing here has been done — no site has been touched.</p>
+    <div class="acts" id="actions"></div>
+  </section>
+
+  <footer>
+    <span>Crawl: <code>node tools/seo-crawl.mjs</code> &middot; Report: <code>node tools/seo-report.mjs</code></span>
+    <span>Read-only. No site was changed to produce this.</span>
+  </footer>
+</div>
+
+<script>
+const DATA = __DATA__;
+
+const el = (h) => { const t = document.createElement('template'); t.innerHTML = h.trim(); return t.content.firstChild; };
+const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+const dmy = (d) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+document.getElementById('checked').textContent = dmy(DATA.checked);
+document.getElementById('crawled').textContent = 'crawled ' + dmy(DATA.ranAt);
+
+/* headline — derived, not hard-coded, so it cannot drift from the data */
+const jack = DATA.sites.find((s) => s.slug === 'jackson');
+const jackIdx = DATA.index.jackson;
+document.getElementById('hl-lead').textContent =
+  `Jackson's has ${jackIdx.indexed} page in Google's index against ${jack.pagesInSitemap} in its sitemap.`;
+document.getElementById('hl-body').textContent =
+  'Google is still serving the old GoDaddy site’s title and description for that one page, which means it has '
+  + 'not recrawled since the domain moved. Every page built since is invisible to search — which is exactly why '
+  + 'the site ranks first for its own village, where the home page and the Business Profile do the work, and '
+  + 'nowhere at all for fireplaces, walling or repointing, where the pages that would rank are not in the index. '
+  + 'Nothing is wrong with those pages. Google has not been told they exist.';
+
+/* index coverage */
+const cover = document.getElementById('cover');
+for (const s of DATA.sites) {
+  const ix = DATA.index[s.slug];
+  if (!ix) continue;
+  const pct = Math.round((ix.indexed / s.pagesInSitemap) * 100);
+  const bad = pct < 50;
+  cover.append(el('<article class="cov' + (bad ? ' is-bad' : '') + '">'
+    + '<h3>' + esc(s.name) + '</h3>'
+    + '<div><span class="ratio">' + ix.indexed + '</span> <span class="of">of ' + s.pagesInSitemap + ' pages &middot; ' + pct + '%</span></div>'
+    + '<div class="bar"><i style="width:' + Math.max(pct, 2) + '%"></i></div>'
+    + '<p>' + esc(ix.note) + '</p></article>'));
+}
+
+/* rankings, grouped by site */
+const ranksEl = document.getElementById('ranks');
+const nameOf = (slug) => (DATA.sites.find((s) => s.slug === slug) || {}).name || slug;
+for (const slug of [...new Set(DATA.ranks.map((r) => r.site))]) {
+  const rows = DATA.ranks.filter((r) => r.site === slug);
+  const cell = (v, kind) => {
+    if (v === null || v === undefined) return '<span class="posn posn--none">&mdash;</span>';
+    const cls = v <= 3 ? 'good' : v <= 10 ? 'mid' : 'none';
+    return '<span class="posn posn--' + cls + '">' + v + '</span>';
+  };
+  ranksEl.append(el('<h3 class="sitehead">' + esc(nameOf(slug)) + '</h3>'));
+  ranksEl.append(el('<div class="tablewrap"><table>'
+    + '<thead><tr><th>Search</th><th>Organic</th><th>Map</th><th>What it means</th></tr></thead><tbody>'
+    + rows.map((r) => '<tr><td class="q">' + esc(r.q) + '</td>'
+        + '<td>' + cell(r.organic) + '</td><td>' + cell(r.pack) + '</td>'
+        + '<td class="note">' + esc(r.note) + '</td></tr>').join('')
+    + '</tbody></table></div>'));
+}
+
+/* crawl findings, collapsed by kind so 38 identical rows read as one line */
+const crawlEl = document.getElementById('crawl');
+const RANK = { high: 0, medium: 1, low: 2 };
+for (const s of DATA.sites) {
+  crawlEl.append(el('<h3 class="sitehead">' + esc(s.name)
+    + ' <span class="f__n">' + s.pagesRead + ' of ' + s.pagesInSitemap + ' pages read</span></h3>'));
+  const groups = new Map();
+  for (const f of s.findings) {
+    const key = f.what.replace(/\d+/g, '#');
+    const g = groups.get(key) || { level: f.level, sample: f.what, n: 0, where: [] };
+    g.n++; g.where.push(...f.where);
+    groups.set(key, g);
+  }
+  if (!groups.size) {
+    crawlEl.append(el('<div class="clean">Nothing found. Titles, descriptions, headings, canonicals, structured data and internal linking all check out.</div>'));
+    continue;
+  }
+  const list = el('<div class="find"></div>');
+  for (const g of [...groups.values()].sort((a, b) => RANK[a.level] - RANK[b.level] || b.n - a.n)) {
+    const label = g.n > 1 ? g.sample.replace(/^\d+ /, '').replace(/ is \d+ /, ' is ') : g.sample;
+    list.append(el('<div class="f f--x">'
+      + '<span class="f__lvl f--' + g.level + '">' + g.level + '</span>'
+      + '<span>' + esc(g.n > 1 ? label : g.sample) + '</span>'
+      + '<span class="f__n">' + (g.n > 1 ? g.n + ' pages' : esc(g.where[0] || '')) + '</span></div>'));
+  }
+  crawlEl.append(list);
+}
+
+/* actions */
+const actsEl = document.getElementById('actions');
+for (const a of DATA.actions) {
+  actsEl.append(el('<article class="act">'
+    + '<div class="act__top"><h3><span class="num">' + a.rank + '</span>' + esc(a.title) + '</h3>'
+    + '<div class="act__tags"><span class="tag">' + esc(a.impact) + '</span>'
+    + '<span class="tag tag--effort">' + esc(a.effort) + '</span></div></div>'
+    + '<p>' + a.body + '</p></article>'));
+}
+</script>
