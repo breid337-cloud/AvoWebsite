@@ -61,7 +61,8 @@ const ACTIONS = [
       + 'the services. Nothing is wrong with the pages; Google has not been told they exist. '
       + '<b>We can do this without Charlie.</b> Search Console verifies by a meta tag or a file, both of which '
       + 'we control in the build — no GoDaddy access needed. Submit the sitemap, request indexing on the '
-      + 'priority pages, and the rest follows on its own.',
+      + 'priority pages, and the rest follows on its own. '
+      + '<br><br><b>Status:</b> the site can now carry the verification token — branch <code>seo/search-console</code> on the stonemasonry repo, not yet deployed because the tag does nothing until the token exists. Outstanding: someone signed into a Google account has to open Search Console, add <code>https://jacksonstonemasonry.com</code> as a URL-prefix property, pick the HTML-tag method and hand over the token. Then it is one deploy and one click to verify.',
   },
   {
     rank: 2, effort: 'A morning', impact: 'The main local ranking factor',
