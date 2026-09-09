@@ -11,7 +11,7 @@
  * so if a note is stale, it is stale because nobody revisited it, not because
  * the tool guessed.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -48,7 +48,49 @@ const annotate = (issue) => {
   return { ...issue, detail: n.html };
 };
 
-const data = { ...scan, issues: scan.issues.map(annotate) };
+/**
+ * The on-page crawl rides along in this report rather than having one of its
+ * own: it answers the same weekly question, just about the pages instead of
+ * the plumbing. It is collected separately (tools/seo-crawl.mjs) so a slow
+ * crawl can never delay or break the health scan.
+ */
+const CRAWL = join(HERE, 'seo-crawl.json');
+const crawl = existsSync(CRAWL) ? JSON.parse(readFileSync(CRAWL, 'utf8')) : null;
+
+/**
+ * Only the severe on-page findings reach the verdict at the top. A truncated
+ * title is worth listing; it is not worth colouring the whole week amber. The
+ * severe ones — two pages fighting over a title, a canonical pointing
+ * somewhere else, a page nothing links to — are rare and always mean something.
+ */
+function crawlIssues(c) {
+  if (!c) return [];
+  const out = [];
+  for (const site of c.sites) {
+    for (const f of site.findings.filter((x) => x.level === 'high')) {
+      out.push({ level: 'attention', at: site.name, what: f.what });
+    }
+  }
+  return out;
+}
+
+const staleDays = crawl
+  ? Math.round((new Date(scan.ranAt) - new Date(crawl.ranAt)) / 86400000)
+  : null;
+
+const data = {
+  ...scan,
+  issues: [...scan.issues, ...crawlIssues(crawl)].map(annotate),
+  crawl: crawl && {
+    ranAt: crawl.ranAt,
+    stale: staleDays !== null && staleDays >= 2,
+    staleDays,
+    sites: crawl.sites.map((s) => ({
+      name: s.name, pagesRead: s.pagesRead, pagesInSitemap: s.pagesInSitemap,
+      findings: s.findings,
+    })),
+  },
+};
 
 const template = readFileSync(join(HERE, 'health-scan-report.template.html'), 'utf8');
 const out = join(HERE, 'health-scan-report.html');

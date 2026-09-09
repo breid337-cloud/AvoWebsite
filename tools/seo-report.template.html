@@ -110,6 +110,7 @@ h3.sitehead:first-of-type { margin-top: 0; }
 .find { display: grid; gap: .5rem; }
 .f { display: grid; grid-template-columns: auto 1fr auto; gap: .8rem; align-items: baseline;
   background: var(--card); border: 1px solid var(--rule); border-radius: 4px; padding: .65rem .9rem; font-size: .87rem; }
+.f > span { min-width: 0; overflow-wrap: anywhere; }
 .f__lvl { font-size: .62rem; letter-spacing: .07em; text-transform: uppercase; font-weight: 600;
   padding: .18rem .4rem; border-radius: 3px; white-space: nowrap; }
 .f--high { background: var(--bad-bg); color: var(--bad); }
@@ -244,8 +245,8 @@ for (const s of DATA.sites) {
   const groups = new Map();
   for (const f of s.findings) {
     const key = f.what.replace(/\d+/g, '#');
-    const g = groups.get(key) || { level: f.level, sample: f.what, n: 0, where: [] };
-    g.n++; g.where.push(...f.where);
+    const g = groups.get(key) || { level: f.level, sample: f.what, n: 0, where: [], members: [] };
+    g.n++; g.where.push(...f.where); g.members.push(f.what);
     groups.set(key, g);
   }
   if (!groups.size) {
@@ -253,11 +254,27 @@ for (const s of DATA.sites) {
     continue;
   }
   const list = el('<div class="find"></div>');
+  // A group of 38 findings has 38 different numbers in it. Showing the first
+  // one as if it spoke for the group is a small lie; showing the range is the
+  // truth and is more useful anyway.
+  const groupLabel = (g) => {
+    if (g.n === 1) return g.sample;
+    const rows = g.members.map((t) => (t.match(/\d+/g) || []).map(Number));
+    const width = rows[0].length;
+    if (!width || !rows.every((r) => r.length === width)) return g.sample;
+    let i = -1;
+    return g.sample.replace(/\d+/g, () => {
+      i++;
+      const col = rows.map((r) => r[i]);
+      const lo = Math.min(...col), hi = Math.max(...col);
+      return lo === hi ? String(lo) : lo + '–' + hi;
+    });
+  };
   for (const g of [...groups.values()].sort((a, b) => RANK[a.level] - RANK[b.level] || b.n - a.n)) {
-    const label = g.n > 1 ? g.sample.replace(/^\d+ /, '').replace(/ is \d+ /, ' is ') : g.sample;
+    const label = groupLabel(g);
     list.append(el('<div class="f f--x">'
       + '<span class="f__lvl f--' + g.level + '">' + g.level + '</span>'
-      + '<span>' + esc(g.n > 1 ? label : g.sample) + '</span>'
+      + '<span>' + esc(label) + '</span>'
       + '<span class="f__n">' + (g.n > 1 ? g.n + ' pages' : esc(g.where[0] || '')) + '</span></div>'));
   }
   crawlEl.append(list);

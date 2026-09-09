@@ -131,6 +131,24 @@ h1, h2, h3 { font-family: Newsreader, ui-serif, Georgia, serif; font-weight: 500
   border-top: 1px dashed var(--rule); }
 .item__detail b { font-weight: 600; color: var(--ink); }
 
+.crawl__site { font-family: Newsreader, serif; font-size: 1.05rem; margin: 1.4rem 0 .5rem; }
+.crawl__site:first-of-type { margin-top: 0; }
+.crawl__site .n { font-family: "IBM Plex Mono", monospace; font-size: .78rem; color: var(--ink-faint); }
+.f { display: grid; grid-template-columns: auto 1fr auto; gap: .8rem; align-items: baseline;
+  background: var(--card); border: 1px solid var(--rule); border-radius: 4px;
+  padding: .6rem .9rem; font-size: .86rem; margin-bottom: .5rem; }
+.f > span { min-width: 0; overflow-wrap: anywhere; }
+.f__lvl { font-size: .62rem; letter-spacing: .07em; text-transform: uppercase; font-weight: 600;
+  padding: .18rem .4rem; border-radius: 3px; white-space: nowrap; }
+.f--high { background: var(--bad-bg); color: var(--bad); }
+.f--medium { background: var(--warn-bg); color: var(--warn); }
+.f--low { background: var(--accent-dim); color: var(--accent); }
+.f__n { color: var(--ink-faint); font-family: "IBM Plex Mono", monospace; font-size: .78rem; white-space: nowrap; }
+.crawl__clean { background: var(--ok-bg); color: var(--ok); border-radius: 4px;
+  border: 1px solid color-mix(in srgb, var(--ok) 30%, transparent); padding: .65rem .9rem; font-size: .86rem; }
+.crawl__stale { background: var(--warn-bg); color: var(--warn); border-radius: 4px;
+  border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+  padding: .6rem .9rem; font-size: .84rem; margin-bottom: 1rem; }
 .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 5px; background: var(--card); box-shadow: var(--shadow); }
 table { border-collapse: collapse; width: 100%; font-size: .84rem; }
 th, td { text-align: left; padding: .6rem .85rem; border-bottom: 1px solid var(--rule); white-space: nowrap; }
@@ -183,6 +201,13 @@ code { font-family: "IBM Plex Mono", monospace; font-size: .95em; }
         <tbody id="redirects"></tbody>
       </table>
     </div>
+  </section>
+
+  <section class="sec" id="crawl-sec" hidden>
+    <h2>On the pages themselves</h2>
+    <p class="lede">Every page in every sitemap, fetched and read. This is the on-page half of the weekly check: the things that decide whether a page can rank for what it was written for. Severe findings are promoted into the list above; the rest sit here.</p>
+    <div id="crawl-stale"></div>
+    <div id="crawl"></div>
   </section>
 
   <section class="sec">
@@ -332,6 +357,57 @@ for (const s of DATA.sites) {
       + '<div class="fact"><dt>Measured from</dt><dd>' + (lh ? lh.samples + ' of ' + (lh.runs || 5) + ' runs' : 'not measured') + '</dd></div>'
       + (lh && lh.spread >= 4 ? '<div class="fact"><dt>Run-to-run range</dt><dd>' + lh.spread + ' points</dd></div>' : '')
     + '</dl></article>'));
+}
+
+/* on-page crawl */
+if (DATA.crawl) {
+  document.getElementById('crawl-sec').hidden = false;
+  if (DATA.crawl.stale) {
+    document.getElementById('crawl-stale').replaceWith(el('<div class="crawl__stale">'
+      + 'These page findings are ' + DATA.crawl.staleDays + ' days older than the checks above — '
+      + 'the crawl did not run alongside this scan. Re-run <code>node tools/seo-crawl.mjs</code>.</div>'));
+  }
+  const RANK = { high: 0, medium: 1, low: 2 };
+  const crawlEl = document.getElementById('crawl');
+  for (const s of DATA.crawl.sites) {
+    crawlEl.append(el('<h3 class="crawl__site">' + esc(s.name)
+      + ' <span class="n">' + s.pagesRead + ' of ' + s.pagesInSitemap + ' pages</span></h3>'));
+    // 38 identical findings are one fact, not 38. Collapse by shape.
+    const groups = new Map();
+    for (const f of s.findings) {
+      const key = f.what.replace(/\d+/g, '#');
+      const g = groups.get(key) || { level: f.level, sample: f.what, n: 0, where: [], members: [] };
+      g.n++; g.where.push(...f.where); g.members.push(f.what);
+      groups.set(key, g);
+    }
+    if (!groups.size) {
+      crawlEl.append(el('<div class="crawl__clean">Nothing found. Titles, descriptions, headings, canonicals, structured data and internal linking all check out.</div>'));
+      continue;
+    }
+    // A group of 38 findings has 38 different numbers in it. Showing the first
+    // one as if it spoke for the group is a small lie; showing the range is the
+    // truth and is more useful anyway.
+    const groupLabel = (g) => {
+      if (g.n === 1) return g.sample;
+      const rows = g.members.map((t) => (t.match(/\d+/g) || []).map(Number));
+      const width = rows[0].length;
+      if (!width || !rows.every((r) => r.length === width)) return g.sample;
+      let i = -1;
+      return g.sample.replace(/\d+/g, () => {
+        i++;
+        const col = rows.map((r) => r[i]);
+        const lo = Math.min(...col), hi = Math.max(...col);
+        return lo === hi ? String(lo) : lo + "–" + hi;
+      });
+    };
+    for (const g of [...groups.values()].sort((a, b) => RANK[a.level] - RANK[b.level] || b.n - a.n)) {
+      const label = groupLabel(g);
+      crawlEl.append(el('<div class="f">'
+        + '<span class="f__lvl f--' + g.level + '">' + g.level + '</span>'
+        + '<span>' + esc(label) + '</span>'
+        + '<span class="f__n">' + (g.n > 1 ? g.n + ' pages' : esc(g.where[0] || '')) + '</span></div>'));
+    }
+  }
 }
 
 const rEl = document.getElementById('redirects');
