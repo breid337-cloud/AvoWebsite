@@ -1,0 +1,124 @@
+{
+  "ranAt": "2026-09-09T22:22:13.109Z",
+  "lighthouse": true,
+  "sites": [
+    {
+      "name": "Jackson's Stonemasonry",
+      "domain": "jacksonstonemasonry.com",
+      "status": 200,
+      "responseMs": 335,
+      "cert": {
+        "days": 90,
+        "expires": "2026-12-08",
+        "issuer": "Let's Encrypt"
+      },
+      "dns": [
+        "75.2.60.5"
+      ],
+      "pages": 39,
+      "lighthouse": {
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 100,
+        "lcp": 1.6,
+        "samples": 5,
+        "runs": 5,
+        "spread": 3
+      }
+    },
+    {
+      "name": "Basingstoke K9 Companions",
+      "domain": "basingstokek9companions.co.uk",
+      "status": 200,
+      "responseMs": 85,
+      "cert": {
+        "days": 80,
+        "expires": "2026-11-28",
+        "issuer": "Let's Encrypt"
+      },
+      "dns": [
+        "75.2.60.5",
+        "99.83.231.61"
+      ],
+      "pages": 11,
+      "lighthouse": {
+        "performance": 99,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 100,
+        "lcp": 1.94,
+        "samples": 5,
+        "runs": 5,
+        "spread": 12
+      }
+    },
+    {
+      "name": "AvoSolution",
+      "domain": "avosolution.co.uk",
+      "status": 200,
+      "responseMs": 284,
+      "cert": {
+        "days": 80,
+        "expires": "2026-11-28",
+        "issuer": "Let's Encrypt"
+      },
+      "dns": [
+        "75.2.60.5"
+      ],
+      "pages": 10,
+      "lighthouse": {
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 100,
+        "lcp": 1.11,
+        "samples": 5,
+        "runs": 5,
+        "spread": 0
+      }
+    }
+  ],
+  "redirects": [
+    {
+      "from": "basingstokek9companions.weebly.com",
+      "to": "basingstokek9companions.co.uk",
+      "note": "Weebly signpost",
+      "status": 200,
+      "to_actual": "",
+      "kind": "in-page",
+      "ok": true
+    },
+    {
+      "from": "www.jacksonstonemasonry.com",
+      "to": "jacksonstonemasonry.com",
+      "note": "www",
+      "status": 301,
+      "to_actual": "jacksonstonemasonry.com",
+      "kind": "server",
+      "ok": true
+    },
+    {
+      "from": "bk9c.co.uk",
+      "to": "basingstokek9companions.co.uk",
+      "note": "short domain",
+      "status": 301,
+      "to_actual": "basingstokek9companions.co.uk",
+      "kind": "server",
+      "ok": true
+    }
+  ],
+  "issues": [
+    {
+      "level": "note",
+      "at": "Basingstoke K9 Companions",
+      "what": "Performance ranged 12 points across 5 runs — the median below is soft"
+    },
+    {
+      "level": "note",
+      "at": "Basingstoke K9 Companions",
+      "what": "Performance is 99, not 100 (median of 5)"
+    }
+  ],
+  "previousRun": "2026-09-09T22:18:51.221Z"
+}

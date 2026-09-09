@@ -1,0 +1,343 @@
+<title>Estate Health Scan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --paper:      #f2f4f1;
+  --card:       #ffffff;
+  --rule:       #d9ddd6;
+  --ink:        #161b18;
+  --ink-soft:   #4e574f;
+  --ink-faint:  #6b756e;
+  --accent:     #2f6a4c;
+  --accent-dim: #e2ece6;
+  --ok:         #26694a;
+  --ok-bg:      #e3f0e9;
+  --warn:       #7f5606;
+  --warn-bg:    #f7edd8;
+  --bad:        #99312b;
+  --bad-bg:     #f7e3e1;
+  --shadow:     0 1px 2px rgba(22,27,24,.05), 0 8px 24px -16px rgba(22,27,24,.28);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:      #10140f;
+    --card:       #191e19;
+    --rule:       #2c332d;
+    --ink:        #e8ece7;
+    --ink-soft:   #a9b3ab;
+    --ink-faint:  #8b958d;
+    --accent:     #7cc39a;
+    --accent-dim: #1e2a23;
+    --ok:         #6dbd93;
+    --ok-bg:      #17281f;
+    --warn:       #dcaa4e;
+    --warn-bg:    #2c2416;
+    --bad:        #e4938c;
+    --bad-bg:     #2e1c1b;
+    --shadow:     0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10140f; --card: #191e19; --rule: #2c332d; --ink: #e8ece7; --ink-soft: #a9b3ab;
+  --ink-faint: #8b958d; --accent: #7cc39a; --accent-dim: #1e2a23; --ok: #6dbd93; --ok-bg: #17281f;
+  --warn: #dcaa4e; --warn-bg: #2c2416; --bad: #e4938c; --bad-bg: #2e1c1b;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.9);
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 60rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+h1, h2, h3 { font-family: Newsreader, ui-serif, Georgia, serif; font-weight: 500; text-wrap: balance; margin: 0; }
+.mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+.masthead { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: baseline; justify-content: space-between;
+  padding-bottom: 1.25rem; border-bottom: 2px solid var(--ink); margin-bottom: 2.25rem; }
+.masthead h1 { font-size: clamp(2rem, 5vw, 2.9rem); letter-spacing: -.015em; line-height: 1.1; }
+.masthead .sub { color: var(--ink-soft); font-size: .9rem; margin-top: .4rem; }
+.stamp { font-size: .74rem; color: var(--ink-faint); letter-spacing: .07em; text-transform: uppercase; }
+.stamp b { display: block; font-size: 1rem; letter-spacing: 0; text-transform: none; color: var(--ink);
+  font-family: "IBM Plex Mono", monospace; font-weight: 500; margin: .15rem 0; }
+
+.verdict { display: flex; gap: 1rem; align-items: flex-start; padding: 1.15rem 1.35rem; border-radius: 4px;
+  border: 1px solid; margin-bottom: 2.75rem; box-shadow: var(--shadow); }
+.verdict--ok   { background: var(--ok-bg);   border-color: color-mix(in srgb, var(--ok) 35%, transparent); }
+.verdict--warn { background: var(--warn-bg); border-color: color-mix(in srgb, var(--warn) 40%, transparent); }
+.verdict--bad  { background: var(--bad-bg);  border-color: color-mix(in srgb, var(--bad) 40%, transparent); }
+.verdict .dot { width: .7rem; height: .7rem; border-radius: 50%; margin-top: .55rem; flex: none; }
+.verdict--ok .dot { background: var(--ok); }
+.verdict--warn .dot { background: var(--warn); }
+.verdict--bad .dot { background: var(--bad); }
+.verdict h2 { font-size: 1.3rem; margin-bottom: .15rem; }
+.verdict p { margin: 0; color: var(--ink-soft); font-size: .93rem; }
+.verdict--ok h2 { color: var(--ok); }
+.verdict--warn h2 { color: var(--warn); }
+.verdict--bad h2 { color: var(--bad); }
+
+.sec { margin-bottom: 3rem; }
+.sec > h2 { font-size: 1.45rem; letter-spacing: -.01em; margin-bottom: .3rem; }
+.sec > .lede { color: var(--ink-soft); font-size: .9rem; margin: 0 0 1.25rem; max-width: 46rem; }
+
+.sites { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+.site { background: var(--card); border: 1px solid var(--rule); border-radius: 5px; padding: 1.1rem 1.2rem 1.2rem;
+  box-shadow: var(--shadow); min-width: 0; display: flex; flex-direction: column; gap: .9rem; }
+.site__top { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+.site__name { font-family: Newsreader, serif; font-size: 1.18rem; line-height: 1.2; }
+.site__domain { font-size: .78rem; color: var(--ink-faint); margin-top: .2rem; word-break: break-word; }
+.pill { flex: none; font-size: .66rem; letter-spacing: .07em; text-transform: uppercase; font-weight: 600;
+  padding: .22rem .5rem; border-radius: 999px; }
+.pill--ok   { background: var(--ok-bg);   color: var(--ok); }
+.pill--warn { background: var(--warn-bg); color: var(--warn); }
+.pill--bad  { background: var(--bad-bg);  color: var(--bad); }
+
+.scores { display: grid; grid-template-columns: repeat(4, 1fr); gap: .4rem; }
+.score { text-align: center; padding: .5rem .25rem .45rem; border-radius: 4px; background: var(--accent-dim); min-width: 0; }
+.score b { display: block; font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums;
+  font-size: 1.35rem; font-weight: 500; line-height: 1; color: var(--accent); }
+.score.is-warn b { color: var(--warn); }
+.score.is-bad b { color: var(--bad); }
+.score span { display: block; font-size: .61rem; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--ink-faint); margin-top: .35rem; }
+
+.facts { border-top: 1px solid var(--rule); padding-top: .75rem; display: grid; gap: .35rem; font-size: .82rem; margin: 0; }
+.fact { display: flex; justify-content: space-between; gap: 1rem; }
+.fact dt { color: var(--ink-faint); }
+.fact dd { margin: 0; text-align: right; font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+
+.items { list-style: none; padding: 0; margin: 0; display: grid; gap: .6rem; }
+.item { display: grid; grid-template-columns: auto 1fr; gap: .85rem; align-items: start;
+  background: var(--card); border: 1px solid var(--rule); border-left: 3px solid var(--rule);
+  border-radius: 4px; padding: .8rem 1rem; }
+.item--urgent { border-left-color: var(--bad); }
+.item--attention { border-left-color: var(--warn); }
+.item--note { border-left-color: var(--accent); }
+.item--clear { border-left-color: var(--ok); }
+.item__lvl { font-size: .63rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 600;
+  padding: .2rem .45rem; border-radius: 3px; margin-top: .12rem; white-space: nowrap; }
+.item--urgent .item__lvl { background: var(--bad-bg); color: var(--bad); }
+.item--attention .item__lvl { background: var(--warn-bg); color: var(--warn); }
+.item--note .item__lvl { background: var(--accent-dim); color: var(--accent); }
+.item--clear .item__lvl { background: var(--ok-bg); color: var(--ok); }
+.item__at { font-size: .74rem; color: var(--ink-faint); margin-top: .15rem; }
+.item__detail { font-size: .85rem; color: var(--ink-soft); margin-top: .5rem; padding-top: .5rem;
+  border-top: 1px dashed var(--rule); }
+.item__detail b { font-weight: 600; color: var(--ink); }
+
+.tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 5px; background: var(--card); box-shadow: var(--shadow); }
+table { border-collapse: collapse; width: 100%; font-size: .84rem; }
+th, td { text-align: left; padding: .6rem .85rem; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+thead th { font-size: .67rem; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+tbody tr:last-child td { border-bottom: 0; }
+.tick { color: var(--ok); font-weight: 600; }
+.cross { color: var(--bad); font-weight: 600; }
+
+.scope { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.scope > div { background: var(--card); border: 1px solid var(--rule); border-radius: 5px; padding: 1rem 1.1rem; min-width: 0; }
+.scope h3 { font-size: 1.02rem; margin-bottom: .5rem; }
+.scope ul { margin: 0; padding-left: 1.05rem; font-size: .85rem; color: var(--ink-soft); }
+.scope li { margin-bottom: .3rem; }
+.scope li::marker { color: var(--ink-faint); }
+
+footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);
+  font-size: .8rem; color: var(--ink-faint); display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; justify-content: space-between; }
+code { font-family: "IBM Plex Mono", monospace; font-size: .95em; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <h1>Estate Health Scan</h1>
+      <div class="sub">A weekly read-only check across every live AvoSolution client site.</div>
+    </div>
+    <div class="stamp">Scan of<b id="ran"></b><span id="prev"></span></div>
+  </header>
+
+  <div id="verdict"></div>
+
+  <section class="sec">
+    <h2 id="issues-heading">Needs attention</h2>
+    <p class="lede" id="issues-lede">Everything the scan could not vouch for. Nothing here has been acted on — the scan reports, you decide.</p>
+    <ul class="items" id="issues"></ul>
+  </section>
+
+  <section class="sec">
+    <h2>The estate</h2>
+    <p class="lede">Lighthouse scores are the median of five mobile runs against the real domain, not a preview address. Where the five runs disagree by more than a few points the spread is shown too, because a median drawn from a wide range is a soft number and should not be quoted as a firm one.</p>
+    <div class="sites" id="sites"></div>
+  </section>
+
+  <section class="sec">
+    <h2>Old addresses</h2>
+    <p class="lede">Previous sites and spare domains that must keep pointing at the current one, so old links and existing search results still land somewhere useful.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>From</th><th>Goes to</th><th>How</th><th>Working</th></tr></thead>
+        <tbody id="redirects"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Known, but not scanned</h2>
+    <p class="lede">Standing items carried in the working notes. A machine cannot see any of these, so they will never appear above no matter how many weeks the scan runs — they are here so they do not quietly get forgotten.</p>
+    <ul class="items">
+      <li class="item item--note"><span class="item__lvl">Jackson's</span><div>
+        <div>Still waiting on Charlie: a logo file, a Google review link, and confirmation on the duplicate Facebook page.</div>
+        <div class="item__at">The Facebook listing still shows the dead 01242 landline. It must never be copied onto the site.</div></div></li>
+      <li class="item item--note"><span class="item__lvl">Jackson's</span><div>
+        <div>The two stonemasonry videos are WhatsApp copies, so 480p and 576p.</div>
+        <div class="item__at">Originals from Charlie's phone would look noticeably better and cost nothing to swap in.</div></div></li>
+      <li class="item item--note"><span class="item__lvl">K9</span><div>
+        <div>The site calls the business &ldquo;The K9 Companions&rdquo;. The domain, the socials, the logo file, the reviews and the case study all say &ldquo;Basingstoke K9 Companions&rdquo;.</div>
+        <div class="item__at">Worth settling with Jacqui and making consistent — search engines treat the name as a ranking signal.</div></div></li>
+      <li class="item item--note"><span class="item__lvl">Both</span><div>
+        <div>Both case studies on avosolution.co.uk still have an empty slot for a client quote.</div>
+        <div class="item__at">Charlie and Jacqui have each agreed to the case study; neither review has arrived yet.</div></div></li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h2>What this scan does</h2>
+    <p class="lede">Tier one is everything measurable from outside, without a client granting access to anything.</p>
+    <div class="scope">
+      <div>
+        <h3>Checked weekly</h3>
+        <ul>
+          <li>Home page answers, and how quickly</li>
+          <li>Certificate expiry and issuer, read off the TLS handshake</li>
+          <li>DNS records, and any change since last week</li>
+          <li>Page count from the sitemap</li>
+          <li>Lighthouse performance, accessibility, best practices and SEO</li>
+          <li>Old domains still redirecting</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Never done</h3>
+        <ul>
+          <li>No deploys and no edits to any client site</li>
+          <li>No DNS changes</li>
+          <li>Nothing published anywhere</li>
+          <li>There is no deploy path in the script to misfire</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Tier two, once clients allow it</h3>
+        <ul>
+          <li>New Google reviews, via Business Profile access</li>
+          <li>New Facebook and Instagram posts worth pulling onto the site</li>
+          <li>Search ranking movement</li>
+          <li>Each needs the client to add AvoSolution as a manager — Jackson's and K9 both still to ask</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Run with <code>node tools/health-scan.mjs --lighthouse</code></span>
+    <span>Read-only by construction.</span>
+  </footer>
+</div>
+
+<script>
+const DATA = __DATA__;
+
+const fmtDate = (iso) => new Date(iso).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+const el = (h) => { const t = document.createElement('template'); t.innerHTML = h.trim(); return t.content.firstChild; };
+const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+
+document.getElementById('ran').textContent = fmtDate(DATA.ranAt);
+document.getElementById('prev').textContent = DATA.previousRun
+  ? 'compared with ' + new Date(DATA.previousRun).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })
+  : 'first run, no baseline yet';
+
+const urgent = DATA.issues.filter((i) => i.level === 'urgent');
+const attention = DATA.issues.filter((i) => i.level === 'attention');
+const notes = DATA.issues.filter((i) => i.level === 'note');
+
+let vClass = 'ok', vTitle = 'Nothing needs you this week', vBody;
+if (urgent.length) {
+  vClass = 'bad';
+  vTitle = urgent.length + (urgent.length === 1 ? ' thing needs fixing now' : ' things need fixing now');
+  vBody = 'A site is down, a certificate is lapsing, or a domain has stopped resolving. Start at the top of the list below.';
+} else if (attention.length) {
+  vClass = 'warn';
+  vTitle = attention.length + (attention.length === 1 ? ' thing is worth a look' : ' things are worth a look');
+  vBody = 'Nothing is broken for a visitor. These are changes, or shortfalls, the scan could not vouch for on its own.';
+} else {
+  vBody = 'All ' + DATA.sites.length + ' sites answered, certificates are current, DNS is unchanged, and every old address still redirects.'
+    + (notes.length ? ' A few observations are listed below for the record.' : '');
+}
+document.getElementById('verdict').replaceWith(el(
+  '<div class="verdict verdict--' + vClass + '" id="verdict"><span class="dot"></span><div>'
+  + '<h2>' + esc(vTitle) + '</h2><p>' + esc(vBody) + '</p></div></div>'));
+
+// The heading should describe what is actually in the list. Calling a week of
+// observations "needs attention" is how a report trains you to stop reading it.
+if (!urgent.length && !attention.length) {
+  document.getElementById('issues-heading').textContent = notes.length ? 'Worth knowing' : 'Nothing outstanding';
+  document.getElementById('issues-lede').textContent = notes.length
+    ? 'Nothing here needs doing. These are things the scan noticed and thought you would rather be told about than not.'
+    : 'Every check passed on every site.';
+}
+
+const issuesEl = document.getElementById('issues');
+const ordered = [...urgent, ...attention, ...notes];
+if (!ordered.length) {
+  issuesEl.append(el('<li class="item item--clear"><span class="item__lvl">clear</span>'
+    + '<div><div>No issues found. Every check passed on every site.</div></div></li>'));
+} else {
+  for (const i of ordered) {
+    issuesEl.append(el('<li class="item item--' + i.level + '">'
+      + '<span class="item__lvl">' + esc(i.level) + '</span>'
+      + '<div><div>' + esc(i.what) + '</div><div class="item__at">' + esc(i.at) + '</div>'
+      + (i.detail ? '<div class="item__detail">' + i.detail + '</div>' : '')
+      + '</div></li>'));
+  }
+}
+
+const sitesEl = document.getElementById('sites');
+for (const s of DATA.sites) {
+  const lh = s.lighthouse;
+  const down = s.status !== 200 || !s.cert || (s.cert && s.cert.days < 21) || !s.dns.length;
+  const check = !down && (!lh || [lh.performance, lh.accessibility, lh.bestPractices, lh.seo].some((v) => v < 90));
+  const pill = down ? ['bad', 'down'] : check ? ['warn', 'check'] : ['ok', 'healthy'];
+  const cell = (v, label) => {
+    if (v == null) return '<div class="score"><b>&mdash;</b><span>' + label + '</span></div>';
+    const c = v < 90 ? ' is-bad' : v < 100 ? ' is-warn' : '';
+    return '<div class="score' + c + '"><b>' + v + '</b><span>' + label + '</span></div>';
+  };
+  sitesEl.append(el('<article class="site">'
+    + '<div class="site__top"><div><div class="site__name">' + esc(s.name) + '</div>'
+    + '<div class="site__domain mono">' + esc(s.domain) + '</div></div>'
+    + '<span class="pill pill--' + pill[0] + '">' + pill[1] + '</span></div>'
+    + '<div class="scores">'
+      + cell(lh && lh.performance, 'Perf')
+      + cell(lh && lh.accessibility, 'A11y')
+      + cell(lh && lh.bestPractices, 'Best')
+      + cell(lh && lh.seo, 'SEO')
+    + '</div>'
+    + '<dl class="facts">'
+      + '<div class="fact"><dt>Home page</dt><dd>' + s.status + ' in ' + s.responseMs + 'ms</dd></div>'
+      + '<div class="fact"><dt>Certificate</dt><dd>' + (s.cert ? s.cert.days + ' days left' : 'unreadable') + '</dd></div>'
+      + '<div class="fact"><dt>Pages in sitemap</dt><dd>' + (s.pages == null ? '&mdash;' : s.pages) + '</dd></div>'
+      + (lh ? '<div class="fact"><dt>Largest paint</dt><dd>' + lh.lcp + 's</dd></div>' : '')
+      + '<div class="fact"><dt>Measured from</dt><dd>' + (lh ? lh.samples + ' of ' + (lh.runs || 5) + ' runs' : 'not measured') + '</dd></div>'
+      + (lh && lh.spread >= 4 ? '<div class="fact"><dt>Run-to-run range</dt><dd>' + lh.spread + ' points</dd></div>' : '')
+    + '</dl></article>'));
+}
+
+const rEl = document.getElementById('redirects');
+for (const r of DATA.redirects) {
+  rEl.append(el('<tr><td class="mono">' + esc(r.from) + '</td><td class="mono">' + esc(r.to) + '</td>'
+    + '<td>' + (r.kind === 'server' ? 'HTTP ' + r.status : r.kind === 'in-page' ? 'page redirect' : 'none') + '</td>'
+    + '<td class="' + (r.ok ? 'tick' : 'cross') + '">' + (r.ok ? 'yes' : 'no') + '</td></tr>'));
+}
+</script>

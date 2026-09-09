@@ -1,0 +1,4 @@
+.lh-tmp*.json
+.lh-profile-*/
+.k9.json
+health-scan-report.html
