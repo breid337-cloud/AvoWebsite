@@ -1,5 +1,5 @@
 {
-  "ranAt": "2026-09-10T00:22:28.317Z",
+  "ranAt": "2026-09-10T00:52:01.320Z",
   "sites": [
     {
       "name": "Jackson's Stonemasonry",
@@ -1161,32 +1161,18 @@
       "name": "AvoSolution",
       "slug": "avo",
       "origin": "https://avosolution.co.uk",
-      "ranAt": "2026-09-10T00:22:28.316Z",
+      "ranAt": "2026-09-10T00:52:01.319Z",
       "pagesInSitemap": 10,
       "pagesRead": 10,
       "failed": [],
       "counts": {
-        "medium": 12,
+        "medium": 2,
         "low": 3
       },
       "findings": [
         {
           "level": "medium",
-          "what": "2 of 4 images have no alt attribute at all",
-          "where": [
-            "/"
-          ]
-        },
-        {
-          "level": "medium",
           "what": "Only 137 words of copy — too thin to rank",
-          "where": [
-            "/about/"
-          ]
-        },
-        {
-          "level": "medium",
-          "what": "2 of 4 images have no alt attribute at all",
           "where": [
             "/about/"
           ]
@@ -1199,57 +1185,8 @@
           ]
         },
         {
-          "level": "medium",
-          "what": "2 of 4 images have no alt attribute at all",
-          "where": [
-            "/services/"
-          ]
-        },
-        {
-          "level": "medium",
-          "what": "2 of 4 images have no alt attribute at all",
-          "where": [
-            "/services/web-design/"
-          ]
-        },
-        {
-          "level": "medium",
-          "what": "2 of 4 images have no alt attribute at all",
-          "where": [
-            "/services/bespoke-application-development/"
-          ]
-        },
-        {
-          "level": "medium",
-          "what": "2 of 4 images have no alt attribute at all",
-          "where": [
-            "/services/commerce/"
-          ]
-        },
-        {
-          "level": "medium",
-          "what": "2 of 4 images have no alt attribute at all",
-          "where": [
-            "/services/service-management-systems/"
-          ]
-        },
-        {
-          "level": "medium",
-          "what": "2 of 4 images have no alt attribute at all",
-          "where": [
-            "/services/avocustomer/"
-          ]
-        },
-        {
           "level": "low",
           "what": "Meta description is only 54 characters",
-          "where": [
-            "/work/"
-          ]
-        },
-        {
-          "level": "medium",
-          "what": "2 of 4 images have no alt attribute at all",
           "where": [
             "/work/"
           ]
@@ -1264,13 +1201,6 @@
         {
           "level": "medium",
           "what": "Only 67 words of copy — too thin to rank",
-          "where": [
-            "/contact/"
-          ]
-        },
-        {
-          "level": "medium",
-          "what": "2 of 4 images have no alt attribute at all",
           "where": [
             "/contact/"
           ]
@@ -1289,7 +1219,7 @@
           ],
           "words": 1247,
           "images": 4,
-          "noAlt": 2,
+          "noAlt": 0,
           "schema": [
             "LocalBusiness",
             "WebSite"
@@ -1307,7 +1237,7 @@
           ],
           "words": 137,
           "images": 4,
-          "noAlt": 2,
+          "noAlt": 0,
           "schema": [
             "LocalBusiness",
             "WebSite",
@@ -1326,7 +1256,7 @@
           ],
           "words": 248,
           "images": 4,
-          "noAlt": 2,
+          "noAlt": 0,
           "schema": [
             "LocalBusiness",
             "WebSite",
@@ -1345,7 +1275,7 @@
           ],
           "words": 753,
           "images": 4,
-          "noAlt": 2,
+          "noAlt": 0,
           "schema": [
             "LocalBusiness",
             "WebSite",
@@ -1365,7 +1295,7 @@
           ],
           "words": 345,
           "images": 4,
-          "noAlt": 2,
+          "noAlt": 0,
           "schema": [
             "LocalBusiness",
             "WebSite",
@@ -1385,7 +1315,7 @@
           ],
           "words": 309,
           "images": 4,
-          "noAlt": 2,
+          "noAlt": 0,
           "schema": [
             "LocalBusiness",
             "WebSite",
@@ -1405,7 +1335,7 @@
           ],
           "words": 352,
           "images": 4,
-          "noAlt": 2,
+          "noAlt": 0,
           "schema": [
             "LocalBusiness",
             "WebSite",
@@ -1425,7 +1355,7 @@
           ],
           "words": 453,
           "images": 4,
-          "noAlt": 2,
+          "noAlt": 0,
           "schema": [
             "LocalBusiness",
             "WebSite",
@@ -1445,7 +1375,7 @@
           ],
           "words": 760,
           "images": 4,
-          "noAlt": 2,
+          "noAlt": 0,
           "schema": [
             "LocalBusiness",
             "WebSite",
@@ -1464,7 +1394,7 @@
           ],
           "words": 67,
           "images": 4,
-          "noAlt": 2,
+          "noAlt": 0,
           "schema": [
             "LocalBusiness",
             "WebSite",
