@@ -16,6 +16,7 @@ import { extractContact } from '../src/harvest/extract/contact.js';
 import { collectJsonLd, jsonLdToProfile } from '../src/harvest/extract/jsonld.js';
 import { extractServices, extractFaqs, extractTestimonials } from '../src/harvest/extract/content.js';
 import { walk } from '../src/util/fs.js';
+import { image, brandLogo } from '../src/shell/components.js';
 
 const sampleProfile = () => normalizeProfile({
   business: { name: 'Test Trades Co', category: 'HVAC contractor', description: 'We fix things.', serviceArea: ['Springfield'] },
@@ -156,6 +157,28 @@ test('an unreadable brand colour is corrected rather than accepted', () => {
   const { vars, warnings } = compileTokens(getTheme('meridian'), { brand: { colors: { primary: '#ffe600' } }, mode: 'light' });
   assert.ok(contrast(vars['--primary'], vars['--bg']) >= 4.5);
   assert.ok(warnings.length > 0, 'the adjustment is reported');
+});
+
+test('every image carries an alt attribute, decorative ones included', () => {
+  // A decorative image says so with alt="". No alt at all is a different thing
+  // entirely — a screen reader reads out the filename. attrs() drops empty
+  // strings, so brandLogo's deliberate empty alt used to vanish on the way to
+  // the markup and nothing caught it.
+  assert.match(image('/a.png', ''), /\salt=""/, 'empty alt is written, not dropped');
+  assert.match(image('/a.png', undefined), /\salt=""/, 'a missing alt still produces one');
+  assert.match(image('/a.png', 'A carved stone'), /\salt="A carved stone"/);
+
+  const logo = brandLogo(
+    { brand: { logo: '/light.svg', logoDark: '/dark.svg' }, business: { name: 'Acme' } },
+    (s) => s,
+  );
+  const imgs = qsa(parseHtml(logo), 'img');
+  assert.equal(imgs.length, 2, 'both light and dark masters are emitted');
+  for (const img of imgs) {
+    assert.notEqual(attr(img, 'alt'), null, 'every logo copy has an alt attribute');
+  }
+  assert.equal(attr(imgs[0], 'alt'), 'Acme logo', 'the first carries the accessible name');
+  assert.equal(attr(imgs[1], 'alt'), '', 'the second is explicitly decorative');
 });
 
 test('theme suggestion weights category above service names', () => {

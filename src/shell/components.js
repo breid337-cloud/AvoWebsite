@@ -34,11 +34,19 @@ export function image(src, alt, { className = '', sizes = '100vw', loading = 'la
   const srcset = variants?.length
     ? variants.map((v) => `${v.src} ${v.width}w`).join(', ')
     : null;
+  // alt is written directly rather than through attrs(), which drops empty
+  // strings. alt="" is not an absent alt: it is a deliberate statement that the
+  // image is decorative, and a screen reader skips it. With no alt at all the
+  // same reader announces the filename instead. Every <img> gets one.
+  //
+  // attrs() is left alone on purpose — section() passes an often-empty
+  // aria-label through it, and emitting aria-label="" would suppress an
+  // element's accessible name, trading this bug for a worse one.
   return `<img${attrs({
     src,
     srcset,
     sizes: srcset ? sizes : null,
-    alt: alt ?? '',
+  })} alt="${escapeHtml(alt ?? '')}"${attrs({
     class: className || null,
     loading,
     decoding: 'async',
