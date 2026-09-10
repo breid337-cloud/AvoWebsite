@@ -216,6 +216,13 @@ export function metaTags(profile, page, { siteUrl = '', canonical = '' } = {}) {
     profile.social.x ? `<meta name="twitter:site" content="@${escapeHtml(profile.social.x.split('/').filter(Boolean).pop())}">` : '',
     profile.contact.address.region ? `<meta name="geo.region" content="${escapeHtml(profile.contact.address.region)}">` : '',
     profile.contact.address.city ? `<meta name="geo.placename" content="${escapeHtml(profile.contact.address.city)}">` : '',
+    // Search Console only reads this on the home page, but it costs one line
+    // everywhere and a site-wide tag survives someone changing which page is
+    // the home page. Removing it revokes the verification, so it is not
+    // something to tidy away.
+    profile.site.verification?.google
+      ? `<meta name="google-site-verification" content="${escapeHtml(profile.site.verification.google)}">`
+      : '',
   ];
   return tags.filter(Boolean).join('\n  ');
 }

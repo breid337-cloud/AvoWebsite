@@ -118,6 +118,9 @@ export function emptyProfile(slug = 'client') {
       theme: 'meridian', mode: 'light', domain: '', pages: null,
       form: { action: '', method: 'POST', provider: 'none' },
       analytics: { plausible: '', ga4: '' },
+      // Ownership tokens for search consoles. Grouped by provider like
+      // analytics, because Bing and the rest work exactly the same way.
+      verification: { google: '' },
       showPrices: true,
     },
     _meta: { confidence: {}, gaps: [], todo: [], enriched: false },

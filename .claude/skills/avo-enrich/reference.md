@@ -117,6 +117,7 @@ source.** Tidy obvious typos; never rewrite the substance, never invent one.
 | `form.action` | The endpoint. Without it the form degrades to `mailto:` |
 | `analytics.plausible` | Domain string |
 | `analytics.ga4` | Measurement ID |
+| `verification.google` | Google Search Console ownership token. From Add property → URL prefix → HTML tag; paste only the `content` value. Renders a `google-site-verification` meta tag on every page. Once verified it must stay — removing it revokes the verification and loses the search history with it |
 
 ## _meta
 
