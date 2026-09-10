@@ -62,7 +62,7 @@ const ACTIONS = [
       + '<b>We can do this without Charlie.</b> Search Console verifies by a meta tag or a file, both of which '
       + 'we control in the build — no GoDaddy access needed. Submit the sitemap, request indexing on the '
       + 'priority pages, and the rest follows on its own. '
-      + '<br><br><b>Done, 10 September.</b> The site is verified in Search Console by meta tag, and the titles went live in the same deploy — so the improved version is what Google reads on its first crawl rather than something it has to be asked to re-read. Outstanding: submit the sitemap, then request indexing on the fireplace, repointing, stonemasonry and services pages. Expect days to weeks, not hours.',
+      + '<br><br><b>Done, 10 September.</b> The site is verified in Search Console by meta tag, and the titles went live in the same deploy — so the improved version is what Google reads on its first crawl rather than something it has to be asked to re-read. The sitemap was submitted on 10 September, which is the point at which Google is told the other thirty-eight pages exist. Nothing further is required — indexing takes days to weeks and cannot be hurried. Requesting indexing on the fireplace, repointing, stonemasonry and services pages is worth doing if it has not been already, since those are the ones carrying the work Charlie most wants to sell.',
   },
   {
     rank: 2, effort: 'A morning', impact: 'The main local ranking factor',
