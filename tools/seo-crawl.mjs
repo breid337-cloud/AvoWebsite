@@ -17,7 +17,7 @@
  * fighting over one title, a page nobody links to, a service page that never
  * names the town it serves.
  */
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Fetcher } from '../src/harvest/fetcher.js';
@@ -190,6 +190,7 @@ for (const site of SITES.filter((s) => !only || s.slug === only)) {
   const counts = findings.reduce((m, f) => ({ ...m, [f.level]: (m[f.level] || 0) + 1 }), {});
   results.push({
     name: site.name, slug: site.slug, origin: site.origin,
+    ranAt: new Date().toISOString(),
     pagesInSitemap: urls.length, pagesRead: good.length,
     failed: pages.filter((p) => p.error).map((p) => ({ url: p.url, error: p.error })),
     counts, findings,
@@ -198,5 +199,21 @@ for (const site of SITES.filter((s) => !only || s.slug === only)) {
   console.log(`${site.name}: ${good.length}/${urls.length} pages, ${findings.length} findings ${JSON.stringify(counts)}`);
 }
 
-writeFileSync(join(HERE, 'seo-crawl.json'), JSON.stringify({ ranAt: new Date().toISOString(), sites: results }, null, 2));
-console.log(`\nwrote ${join(HERE, 'seo-crawl.json')}`);
+/**
+ * Crawling one site must not delete the other two. Writing only this run's
+ * results did exactly that, and the weekly report then showed a single site
+ * with nothing to say it was missing the rest — a quiet wrong answer, which is
+ * the worst kind. Sites not crawled this time keep their previous record, and
+ * each record carries the date it was actually collected.
+ */
+const OUT = join(HERE, 'seo-crawl.json');
+const previous = existsSync(OUT) ? JSON.parse(readFileSync(OUT, 'utf8')).sites ?? [] : [];
+const merged = SITES.map((s) =>
+  results.find((r) => r.slug === s.slug) ?? previous.find((p) => p.slug === s.slug)
+).filter(Boolean);
+
+writeFileSync(OUT, JSON.stringify({ ranAt: new Date().toISOString(), sites: merged }, null, 2));
+console.log(`\nwrote ${OUT}`);
+for (const s of merged) {
+  if (!results.some((r) => r.slug === s.slug)) console.log(`  ${s.name}: kept from ${s.ranAt ?? 'an earlier run'}`);
+}

@@ -4,8 +4,20 @@
     {
       "name": "jacksons-preview",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["-e", "import('./src/preview/static-server.js').then(async m => { const s = m.createStaticServer('clients/jacksonstonemasonry/_site'); await m.listen(s, 8790); console.log('serving jacksons on 8790'); })"],
+      "runtimeArgs": [
+        "-e",
+        "import('./src/preview/static-server.js').then(async m => { const s = m.createStaticServer('clients/jacksonstonemasonry/_site'); await m.listen(s, 8790); console.log('serving jacksons on 8790'); })"
+      ],
       "port": 8790
+    },
+    {
+      "name": "k9-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "-e",
+        "import('./src/preview/static-server.js').then(async m => { const s = m.createStaticServer('clients/k9/dist'); await m.listen(s, 8791); console.log('serving k9 on 8791'); })"
+      ],
+      "port": 8791
     }
   ]
 }

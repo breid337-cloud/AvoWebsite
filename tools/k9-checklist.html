@@ -1,0 +1,356 @@
+<title>Getting Found in Basingstoke</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --ground:  #f4f2ea;
+    --surface: #fbfaf6;
+    --sunk:    #eceade;
+    --ink:     #14170f;
+    --body:    #454b3c;
+    --muted:   #5f6553;
+    --rule:    #d8d5c6;
+    --moss:    #2f5741;
+    --moss-soft:#e2ebe3;
+    --amber:   #8a5313;
+    --amber-soft:#f6ebda;
+
+    --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:  #12150f;
+      --surface: #1b1f17;
+      --sunk:    #222719;
+      --ink:     #eef0e8;
+      --body:    #c2c8b6;
+      --muted:   #99a08c;
+      --rule:    #313724;
+      --moss:    #8fc0a3;
+      --moss-soft:#1b2a20;
+      --amber:   #e0a75f;
+      --amber-soft:#2a2114;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #12150f; --surface: #1b1f17; --sunk: #222719;
+    --ink: #eef0e8; --body: #c2c8b6; --muted: #99a08c; --rule: #313724;
+    --moss: #8fc0a3; --moss-soft: #1b2a20; --amber: #e0a75f; --amber-soft: #2a2114;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--body);
+    font-family: var(--sans); font-size: 1.0625rem; line-height: 1.62;
+    -webkit-text-size-adjust: 100%;
+  }
+  .sheet { max-width: 46rem; margin: 0 auto;
+    padding: clamp(1.75rem, 5vw, 4.5rem) clamp(1.15rem, 4vw, 2.5rem) 5rem; }
+
+  .masthead { border-bottom: 3px solid var(--moss); padding-bottom: 1.5rem; }
+  .eyebrow { font-size: 0.73rem; font-weight: 700; letter-spacing: 0.17em;
+    text-transform: uppercase; color: var(--moss); margin: 0 0 0.9rem; }
+  h1 { font-family: var(--display); font-weight: 600; color: var(--ink);
+    font-size: clamp(2rem, 7vw, 3.1rem); line-height: 1.05; margin: 0; text-wrap: balance; }
+  .standfirst { margin: 1.2rem 0 0; max-width: 58ch; font-size: 1.09rem; }
+  .standfirst strong { color: var(--ink); font-weight: 600; }
+
+  .stand { margin-top: 2.25rem; padding: 1.25rem 1.4rem;
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; }
+  .stand h2 { font-family: var(--sans); font-size: 0.76rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; margin: 0 0 0.8rem; color: var(--muted); }
+  .stand p { margin: 0 0 0.8rem; }
+  .stand p:last-child { margin-bottom: 0; }
+  .stand strong { color: var(--ink); }
+
+  table.pack { width: 100%; border-collapse: collapse; margin: 1.1rem 0 0.4rem; font-size: 0.95rem; }
+  table.pack th, table.pack td { text-align: left; padding: 0.5rem 0.6rem;
+    border-bottom: 1px solid var(--rule); }
+  table.pack th { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; }
+  table.pack td:last-child, table.pack th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  table.pack tr.you td { color: var(--amber); font-weight: 600; }
+  table.pack tr:last-child td { border-bottom: 0; }
+  .tablewrap { overflow-x: auto; }
+
+  .group { margin: 3.25rem 0 0; padding-top: 1.1rem; border-top: 1px solid var(--rule);
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 0.9rem; }
+  .group h2 { font-family: var(--sans); font-size: 1.02rem; font-weight: 700; margin: 0; color: var(--ink); }
+  .group .note { font-size: 0.92rem; color: var(--muted); margin: 0; }
+
+  .item { display: grid; gap: 0 1.4rem; grid-template-columns: 2.6rem 1fr;
+    padding: 1.9rem 0; border-bottom: 1px solid var(--rule); }
+  .num { font-family: var(--display); font-weight: 600; font-size: 1.55rem;
+    color: var(--moss); line-height: 1.05; font-variant-numeric: tabular-nums; }
+  .item > .body { grid-column: 2; min-width: 0; }
+  .item h3 { font-family: var(--sans); font-size: 1.2rem; font-weight: 700; color: var(--ink);
+    line-height: 1.3; margin: 0 0 0.5rem; text-wrap: balance; }
+  .item p { margin: 0 0 0.75rem; max-width: 60ch; }
+  .item p:last-child { margin-bottom: 0; }
+  .why { color: var(--muted); }
+  .item strong { color: var(--ink); font-weight: 600; }
+
+  .chip { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.22rem 0.6rem; margin-bottom: 0.7rem;
+    background: var(--amber-soft); color: var(--amber); border-radius: 2px; }
+  .chip--calm { background: var(--moss-soft); color: var(--moss); }
+
+  .how { margin-top: 1.1rem; padding: 1.05rem 1.2rem; background: var(--sunk);
+    border-left: 3px solid var(--moss); border-radius: 0 3px 3px 0; }
+  .how h4 { font-family: var(--sans); font-size: 0.74rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 0.7rem; color: var(--muted); }
+  .how ol, .how ul { margin: 0; padding-left: 1.15rem; }
+  .how li { margin-bottom: 0.5rem; }
+  .how li:last-child { margin-bottom: 0; }
+  .how p { margin: 0.8rem 0 0; font-size: 0.95rem; color: var(--muted); }
+  .say { font-weight: 600; color: var(--ink); }
+
+  code { font-family: var(--sans); font-weight: 700; background: var(--surface);
+    border: 1px solid var(--rule); padding: 0.05em 0.35em; border-radius: 2px;
+    font-size: 0.96em; white-space: nowrap; }
+  .wrong { text-decoration: line-through; text-decoration-thickness: 2px; }
+
+  .close { margin-top: 3rem; }
+  .close h2 { font-family: var(--display); font-weight: 600; font-size: 1.55rem;
+    color: var(--ink); margin: 0 0 0.8rem; }
+  .close p { max-width: 60ch; }
+  .sign { margin-top: 2.5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+    font-size: 0.9rem; color: var(--muted); }
+
+  a { color: var(--moss); text-underline-offset: 0.18em; }
+  a:focus-visible { outline: 2px solid var(--moss); outline-offset: 3px; }
+
+  @media (max-width: 30rem) {
+    .item { grid-template-columns: 1.9rem 1fr; gap: 0 0.9rem; }
+    .num { font-size: 1.2rem; }
+  }
+  @media print {
+    body { background: #fff; color: #000; }
+    .item, .how, .stand { break-inside: avoid; }
+  }
+</style>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <p class="eyebrow">Basingstoke K9 Companions &middot; your website</p>
+    <h1>Getting Found in Basingstoke</h1>
+    <p class="standfirst">
+      Your website is done and it is a good one. It loads faster than almost any small business
+      site we have measured, Google has it, and if somebody searches your name they find you first.
+      <strong>But almost nobody searches your name.</strong> They search &ldquo;dog walker
+      basingstoke&rdquo; &mdash; and for that, you do not appear at all.
+    </p>
+  </header>
+
+  <section class="stand">
+    <h2>Why that is</h2>
+    <p>
+      When someone looks for a dog walker, Google shows a little map with three businesses pinned on
+      it, each with a star rating. Almost everybody taps one of those three. Below the map are the
+      ordinary blue links, and most people never get that far.
+    </p>
+    <p>
+      To be in that map you need a <strong>Google Business Profile</strong> &mdash; a free listing,
+      separate from your website. <strong>You do not have one.</strong> We searched Google Maps for
+      your business name and for your phone number, and Google replied that it cannot find them.
+    </p>
+    <p>
+      So this is not a case of ranking low. Your business is simply not in the part of Google that
+      people actually use to find a dog walker. Here is who is:
+    </p>
+    <div class="tablewrap">
+      <table class="pack">
+        <thead><tr><th>Showing on the map today</th><th>Rating</th><th>Reviews</th></tr></thead>
+        <tbody>
+          <tr><td>House of K9</td><td>5.0</td><td>35</td></tr>
+          <tr><td>The Dog Walker Basingstoke</td><td>4.8</td><td>23</td></tr>
+          <tr><td>Anna&rsquo;s Paws N&rsquo; Claws</td><td>5.0</td><td>8</td></tr>
+          <tr class="you"><td>Basingstoke K9 Companions</td><td>&mdash;</td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="why" style="margin-top:.9rem">
+      Look at the third one. <strong>Eight reviews</strong> is enough to sit on that map alongside a
+      business with thirty-five. This is winnable, and it is free.
+    </p>
+  </section>
+
+  <div class="group">
+    <h2>What would make the difference</h2>
+    <p class="note">In order. The first one matters more than everything else put together.</p>
+  </div>
+
+  <article class="item">
+    <div class="num">1</div>
+    <div class="body">
+      <span class="chip">Do this one first</span>
+      <h3>Put the business on Google</h3>
+      <p>
+        It is free, it takes about ten minutes, and it is the single thing standing between you and
+        the map. One thing to check as you go: we found three reviews on your old site labelled as
+        Google reviews, so it is possible a listing was started at some point and never finished.
+        Google hides a listing that has not been verified, which would look exactly like this. If
+        one turns up when you sign in, claim it rather than making a new one.
+      </p>
+      <div class="how">
+        <h4>On your phone</h4>
+        <ol>
+          <li>Open the <strong>Google Maps</strong> app and sign in with the Google account you want
+              to own this &mdash; probably the one your business email uses.</li>
+          <li>Tap your <strong>profile picture</strong>, top right.</li>
+          <li>If you see <strong>Your Business Profile</strong>, tap it &mdash; a listing already
+              exists and you just need to finish it. If you only see <strong>Add your
+              business</strong>, tap that instead.</li>
+          <li>Business name: <span class="say">Basingstoke K9 Companions</span> &mdash; exactly that,
+              matching your website and your Facebook page.</li>
+          <li>Category: <span class="say">Dog walker</span>.</li>
+          <li>When it asks whether customers visit you at an address, say <strong>no</strong>, and
+              set a <strong>service area</strong> instead &mdash; Basingstoke and the villages you
+              cover. This is the important bit: see the note below.</li>
+          <li>Add your number <code>07504 243208</code> and your website address.</li>
+          <li>Google will ask to verify you, usually by video or a postcard in the post. Follow
+              whatever it offers.</li>
+        </ol>
+        <p>
+          <strong>Say no to publishing your address.</strong> A dog walking business run from home
+          is what Google calls a service-area business, and you are entitled to keep the address
+          private. If you enter it as a shop address, your home goes on the map for anyone to see.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <article class="item">
+    <div class="num">2</div>
+    <div class="body">
+      <span class="chip">The thing that keeps working</span>
+      <h3>Ask your customers for a Google review</h3>
+      <p>
+        Once the listing exists, reviews are what decide whether Google puts you on that map above
+        or below the next dog walker. You already have lovely things written about you &mdash; the
+        three on your website among them &mdash; but they only count for this if they are on Google.
+      </p>
+      <p class="why">
+        Eight would put you on the map. You have almost certainly walked more than eight dogs whose
+        owners would happily write a sentence if you asked.
+      </p>
+      <div class="how">
+        <h4>Once you are verified</h4>
+        <ol>
+          <li>In the Maps app, go to <strong>Your Business Profile</strong>.</li>
+          <li>Find <strong>Ask for reviews</strong> and tap <strong>Copy link</strong>.</li>
+          <li>Text that link to a customer when you drop their dog home &mdash; that is the moment
+              they are most pleased with you.</li>
+          <li>Send it to us as well, and we will put a button on the website.</li>
+        </ol>
+        <p>
+          Never offer anything in exchange for a review. Google removes them and can penalise the
+          listing. Just asking is allowed, and it works.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <article class="item">
+    <div class="num">3</div>
+    <div class="body">
+      <h3>Some directories have the wrong details</h3>
+      <p>
+        Your business is listed on sites you may never have signed up to &mdash; Yell, MapQuest,
+        Cylex, the Basingstoke Gazette directory. They disagree with each other. One of them,
+        Cylex, shows a landline starting <code class="wrong">01256</code>, and your correct number
+        is <code>07504 243208</code>. The postcodes differ between listings too.
+      </p>
+      <p class="why">
+        Google reads all of these when it works out who you are and whether to trust you. A business
+        that gives four different answers about itself looks less reliable than one that gives the
+        same answer everywhere.
+      </p>
+      <div class="how">
+        <h4>No rush, but worth an evening</h4>
+        <ul>
+          <li>Search your business name and see which directories come up.</li>
+          <li>Most have a <strong>&ldquo;claim this listing&rdquo;</strong> or <strong>&ldquo;is
+              this your business?&rdquo;</strong> link. Claim it and correct the number.</li>
+          <li>The details to match everywhere: <strong>Basingstoke K9 Companions</strong>,
+              <strong>07504 243208</strong>, and your website address.</li>
+          <li>If a listing shows your home address and you would rather it did not, ask them to
+              remove it.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="item">
+    <div class="num">4</div>
+    <div class="body">
+      <h3>The old Weebly site is still out there</h3>
+      <p>
+        Your previous site still exists and Google still has it. Anyone landing on it is sent
+        straight to the new one, so nobody gets stranded &mdash; but it does mean two versions of
+        your business are in Google competing with each other.
+      </p>
+      <div class="how">
+        <h4>When you have a minute</h4>
+        <p style="margin-top:0">
+          If you still have the Weebly login, delete the site or unpublish it. Everything on it is on
+          the new site already. If the login is long gone, leave it &mdash; the forwarding we put in
+          place does the job and this is a small thing.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <div class="group">
+    <h2>Already sorted, nothing needed from you</h2>
+    <p class="note">Done this week</p>
+  </div>
+
+  <article class="item">
+    <div class="num">&#10003;</div>
+    <div class="body">
+      <span class="chip chip--calm">Done</span>
+      <h3>The website now calls you what everyone else calls you</h3>
+      <p>
+        The site said &ldquo;The K9 Companions&rdquo;. Your web address, both your social accounts,
+        your logo, your reviews and every directory say <strong>Basingstoke K9 Companions</strong>.
+        Google matches a business name across the internet to work out who it is, and Basingstoke
+        has a lot of dog businesses with K9 in the name, so having two versions of yours was
+        throwing that away. The website now matches everything else.
+      </p>
+    </div>
+  </article>
+
+  <article class="item">
+    <div class="num">&#10003;</div>
+    <div class="body">
+      <span class="chip chip--calm">Done</span>
+      <h3>The site got faster and steadier</h3>
+      <p>
+        The two typefaces were being fetched from Google&rsquo;s servers, which meant your visitor&rsquo;s
+        phone had to reach two more places on the internet before it could draw anything. They now
+        come from your own site. Nobody will notice the difference on a good connection &mdash; on a
+        bad one, on a phone, in a field, they will.
+      </p>
+    </div>
+  </article>
+
+  <section class="close">
+    <h2>If you only do one thing</h2>
+    <p>
+      <strong>Number 1.</strong> Everything else on this page is worth doing and none of it matters
+      nearly as much. Without a Google listing you are invisible to somebody standing in Basingstoke
+      typing &ldquo;dog walker near me&rdquo; &mdash; and with one, plus a handful of reviews from
+      people you have already made happy, you are on the same map as everybody else.
+    </p>
+    <p class="sign">
+      Anything here that does not make sense, ring and ask &mdash; none of it is meant to be a
+      test.<br>
+      <strong>AvoSolution</strong> &middot; looking after the Basingstoke K9 Companions website.
+    </p>
+  </section>
+
+</div>

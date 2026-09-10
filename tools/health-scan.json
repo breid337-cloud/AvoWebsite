@@ -1,12 +1,12 @@
 {
-  "ranAt": "2026-09-09T22:22:13.109Z",
+  "ranAt": "2026-09-10T00:20:13.558Z",
   "lighthouse": true,
   "sites": [
     {
       "name": "Jackson's Stonemasonry",
       "domain": "jacksonstonemasonry.com",
       "status": 200,
-      "responseMs": 335,
+      "responseMs": 600,
       "cert": {
         "days": 90,
         "expires": "2026-12-08",
@@ -17,21 +17,21 @@
       ],
       "pages": 39,
       "lighthouse": {
-        "performance": 100,
+        "performance": 97,
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 100,
-        "lcp": 1.6,
+        "lcp": 1.74,
         "samples": 5,
         "runs": 5,
-        "spread": 3
+        "spread": 1
       }
     },
     {
       "name": "Basingstoke K9 Companions",
       "domain": "basingstokek9companions.co.uk",
       "status": 200,
-      "responseMs": 85,
+      "responseMs": 335,
       "cert": {
         "days": 80,
         "expires": "2026-11-28",
@@ -47,17 +47,17 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 100,
-        "lcp": 1.94,
+        "lcp": 2.01,
         "samples": 5,
         "runs": 5,
-        "spread": 12
+        "spread": 1
       }
     },
     {
       "name": "AvoSolution",
       "domain": "avosolution.co.uk",
       "status": 200,
-      "responseMs": 284,
+      "responseMs": 203,
       "cert": {
         "days": 80,
         "expires": "2026-11-28",
@@ -72,7 +72,7 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 100,
-        "lcp": 1.11,
+        "lcp": 0.92,
         "samples": 5,
         "runs": 5,
         "spread": 0
@@ -111,8 +111,8 @@
   "issues": [
     {
       "level": "note",
-      "at": "Basingstoke K9 Companions",
-      "what": "Performance ranged 12 points across 5 runs — the median below is soft"
+      "at": "Jackson's Stonemasonry",
+      "what": "Performance is 97, not 100 (median of 5)"
     },
     {
       "level": "note",
@@ -120,5 +120,5 @@
       "what": "Performance is 99, not 100 (median of 5)"
     }
   ],
-  "previousRun": "2026-09-09T22:18:51.221Z"
+  "previousRun": "2026-09-09T22:22:13.109Z"
 }
