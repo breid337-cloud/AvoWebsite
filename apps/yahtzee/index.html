@@ -28,42 +28,37 @@
     --hot: #a8321c;
     --hot-soft: #f6e2dd;
     --empty: #93a3a4;
+    --track: #dde3e2;
+    --p1: #0c6659; --p2: #2b5fa8; --p3: #a8437e; --p4: #8a5a10;
+    --p5: #5b4a9e; --p6: #3c7d2f; --p7: #a8321c; --p8: #44606c;
     --radius: 10px;
     --display: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
     --body: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --catw: 168px;
+    --maxw: 52px;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ground: #0e1417;
-      --surface: #171f23;
-      --surface-2: #1e282d;
-      --line: #2c383d;
-      --line-strong: #3d4d53;
-      --ink: #e7eeef;
-      --muted: #97a8ab;
-      --accent: #46c2ac;
-      --accent-soft: #1d3a37;
-      --on-accent: #0b1a18;
-      --hot: #f08a70;
-      --hot-soft: #3a211b;
-      --empty: #5b6b70;
+      --ground: #0e1417; --surface: #171f23; --surface-2: #1e282d;
+      --line: #2c383d; --line-strong: #3d4d53;
+      --ink: #e7eeef; --muted: #97a8ab;
+      --accent: #46c2ac; --accent-soft: #1d3a37; --on-accent: #0b1a18;
+      --hot: #f08a70; --hot-soft: #3a211b;
+      --empty: #5b6b70; --track: #2c383d;
+      --p1: #46c2ac; --p2: #6fa8e8; --p3: #ea8ec0; --p4: #d9a441;
+      --p5: #a292e6; --p6: #86c46b; --p7: #f08a70; --p8: #9db4bd;
     }
   }
   :root[data-theme="dark"] {
-    --ground: #0e1417;
-    --surface: #171f23;
-    --surface-2: #1e282d;
-    --line: #2c383d;
-    --line-strong: #3d4d53;
-    --ink: #e7eeef;
-    --muted: #97a8ab;
-    --accent: #46c2ac;
-    --accent-soft: #1d3a37;
-    --on-accent: #0b1a18;
-    --hot: #f08a70;
-    --hot-soft: #3a211b;
-    --empty: #5b6b70;
+    --ground: #0e1417; --surface: #171f23; --surface-2: #1e282d;
+    --line: #2c383d; --line-strong: #3d4d53;
+    --ink: #e7eeef; --muted: #97a8ab;
+    --accent: #46c2ac; --accent-soft: #1d3a37; --on-accent: #0b1a18;
+    --hot: #f08a70; --hot-soft: #3a211b;
+    --empty: #5b6b70; --track: #2c383d;
+    --p1: #46c2ac; --p2: #6fa8e8; --p3: #ea8ec0; --p4: #d9a441;
+    --p5: #a292e6; --p6: #86c46b; --p7: #f08a70; --p8: #9db4bd;
   }
 
   * { box-sizing: border-box; }
@@ -76,40 +71,23 @@
     line-height: 1.45;
     -webkit-text-size-adjust: 100%;
   }
-  .page {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding-inline: 16px;
-    padding-block: 22px 40px;
-  }
+  .page { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 22px 40px; }
 
-  /* ---- masthead ---- */
-  .masthead { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 20px; margin-bottom: 14px; }
+  .masthead { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 20px; margin-bottom: 14px; }
   .masthead h1 {
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: clamp(26px, 6vw, 40px);
-    letter-spacing: -0.02em;
-    line-height: 1;
-    margin: 0;
-    min-width: 0;
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(26px, 6vw, 40px); letter-spacing: -0.02em; line-height: 1;
+    margin: 0; min-width: 0;
   }
   .masthead h1 .die { color: var(--accent); }
   .tagline { color: var(--muted); font-size: 13px; margin: 0; min-width: 0; }
 
-  /* ---- toolbar ---- */
   .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; align-items: center; }
   .btn {
-    font: inherit;
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--ink);
-    background: var(--surface);
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius);
-    padding: 8px 13px;
-    cursor: pointer;
-    min-width: 0;
+    font: inherit; font-weight: 600; font-size: 14px;
+    color: var(--ink); background: var(--surface);
+    border: 1px solid var(--line-strong); border-radius: var(--radius);
+    padding: 8px 13px; cursor: pointer; min-width: 0;
   }
   .btn:hover { border-color: var(--accent); color: var(--accent); }
   .btn[disabled] { opacity: .45; cursor: not-allowed; }
@@ -120,27 +98,19 @@
   .count { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  /* ---- banner ---- */
   .banner {
     display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
-    border: 1px solid var(--line-strong);
-    border-left: 4px solid var(--accent);
-    background: var(--surface);
-    border-radius: var(--radius);
-    padding: 10px 14px;
-    margin-bottom: 14px;
-    font-size: 14px;
+    border: 1px solid var(--line-strong); border-left: 4px solid var(--accent);
+    background: var(--surface); border-radius: var(--radius);
+    padding: 10px 14px; margin-bottom: 14px; font-size: 14px;
   }
   .banner.win { border-left-color: var(--hot); background: var(--hot-soft); }
   .banner strong { font-family: var(--display); font-weight: 800; }
   .banner .btn { padding: 5px 10px; font-size: 13px; }
 
-  /* ---- scorecard ---- */
   .card {
-    background: var(--surface);
-    border: 1px solid var(--line-strong);
-    border-radius: 14px;
-    overflow: hidden;
+    background: var(--surface); border: 1px solid var(--line-strong);
+    border-radius: 14px; overflow: hidden;
   }
   .scroller { overflow-x: auto; }
   table { border-collapse: separate; border-spacing: 0; width: 100%; }
@@ -148,73 +118,65 @@
   tr:last-child th, tr:last-child td { border-bottom: 0; }
 
   th.cat {
-    position: sticky; left: 0; z-index: 2;
-    background: var(--surface);
-    text-align: left;
-    padding: 7px 12px;
-    min-width: 168px; width: 168px;
-    border-right: 1px solid var(--line-strong);
-    font-weight: 500;
+    position: sticky; left: 0; z-index: 2; background: var(--surface);
+    text-align: left; padding: 7px 12px;
+    min-width: var(--catw); width: var(--catw); font-weight: 500;
   }
   th.cat .name { display: block; font-size: 14px; }
   th.cat .hint { display: block; font-size: 11.5px; color: var(--muted); }
 
-  thead th.cat { background: var(--surface-2); }
+  td.max, th.max {
+    position: sticky; left: var(--catw); z-index: 2; background: var(--surface);
+    min-width: var(--maxw); width: var(--maxw);
+    border-right: 1px solid var(--line-strong);
+    font-family: var(--mono); font-variant-numeric: tabular-nums;
+    font-size: 12.5px; color: var(--muted); padding: 6px 4px;
+  }
+  thead th.cat, thead th.max { background: var(--surface-2); }
+  thead th.max { font-family: var(--body); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
+
   th.player {
-    background: var(--surface-2);
-    padding: 8px 8px 9px;
-    min-width: 108px;
-    border-left: 1px solid var(--line);
-    vertical-align: top;
+    background: var(--surface-2); padding: 8px 8px 9px; min-width: 112px;
+    border-left: 1px solid var(--line); vertical-align: top;
+    box-shadow: inset 0 3px 0 var(--pc, var(--line-strong));
   }
   .player-head { display: flex; flex-direction: column; gap: 4px; align-items: stretch; min-width: 0; }
   .name-row { display: flex; align-items: center; gap: 4px; min-width: 0; }
   input.pname {
-    font: 600 14px var(--body);
-    color: var(--ink);
-    background: transparent;
-    border: 1px solid transparent;
-    border-radius: 7px;
-    padding: 4px 5px;
-    width: 100%;
-    min-width: 0;
-    text-align: center;
+    font: 700 14px var(--body); color: var(--pc, var(--ink)); background: transparent;
+    border: 1px solid transparent; border-radius: 7px;
+    padding: 4px 5px; width: 100%; min-width: 0; text-align: center;
   }
   input.pname:hover { border-color: var(--line-strong); }
-  input.pname:focus { border-color: var(--accent); background: var(--surface); outline: none; }
+  input.pname:focus { border-color: var(--pc, var(--accent)); background: var(--surface); outline: none; }
   .drop {
     border: 0; background: transparent; color: var(--muted);
     font: 700 15px/1 var(--body); cursor: pointer; padding: 3px 5px; border-radius: 6px; flex: none;
   }
   .drop:hover { color: var(--hot); background: var(--hot-soft); }
-  .runner {
-    font-family: var(--mono); font-variant-numeric: tabular-nums;
-    font-size: 17px; font-weight: 600; color: var(--muted);
-  }
-  th.player.leader .runner { color: var(--accent); }
-  th.player.leader { box-shadow: inset 0 3px 0 var(--accent); }
+  .runner { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 18px; font-weight: 600; color: var(--muted); }
+  th.player.leader .runner { color: var(--pc, var(--accent)); }
 
   tr.section th {
-    background: var(--surface-2);
-    text-align: left;
+    background: var(--surface-2); text-align: left;
     font-family: var(--display); font-weight: 800; font-size: 11px;
     letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
-    padding: 6px 12px;
-    position: sticky; left: 0;
+    padding: 6px 12px; position: sticky; left: 0;
   }
+  tr.section th em { font-style: normal; text-transform: none; letter-spacing: 0; font-family: var(--body); font-weight: 500; font-size: 11.5px; }
 
   td.score { border-left: 1px solid var(--line); padding: 2px; }
   button.cell {
     font-family: var(--mono); font-variant-numeric: tabular-nums;
-    font-size: 16px; font-weight: 600;
-    color: var(--ink);
+    font-size: 16px; font-weight: 600; color: var(--ink);
     width: 100%; min-height: 40px;
     border: 1px dashed transparent; border-radius: 7px;
     background: transparent; cursor: pointer; padding: 4px 2px;
   }
   button.cell.empty { color: var(--empty); font-weight: 400; border-color: var(--line); }
-  button.cell:hover { border-style: solid; border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
+  button.cell:hover { border-style: solid; border-color: var(--pc, var(--accent)); background: var(--accent-soft); color: var(--ink); }
   button.cell.zero { color: var(--muted); }
+  button.cell.best { text-decoration: underline; text-decoration-color: var(--pc, var(--accent)); text-underline-offset: 3px; }
 
   .stepper { display: flex; align-items: center; justify-content: center; gap: 2px; padding: 3px; }
   .stepper button {
@@ -224,14 +186,43 @@
   .stepper button:hover { color: var(--accent); border-color: var(--accent); }
   .stepper .val { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 15px; min-width: 42px; }
 
-  tr.sum td, tr.sum th.cat { background: var(--surface-2); }
+  tr.sum td, tr.sum th.cat, tr.sum td.max { background: var(--surface-2); }
   tr.sum .val { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 15px; font-weight: 600; padding: 7px 4px; }
   tr.bonus .val.earned { color: var(--accent); }
   tr.bonus .need { display: block; font-family: var(--body); font-size: 11px; font-weight: 400; color: var(--muted); }
-  tr.grand th.cat, tr.grand td { background: var(--accent-soft); border-top: 2px solid var(--accent); }
+  tr.grand th.cat, tr.grand td, tr.grand td.max { background: var(--accent-soft); border-top: 2px solid var(--accent); }
   tr.grand th.cat .name { font-family: var(--display); font-weight: 800; font-size: 15px; }
   tr.grand .val { font-size: 20px; font-weight: 600; padding: 9px 4px; color: var(--ink); }
-  tr.grand td.lead .val { color: var(--accent); }
+  tr.grand td.lead .val { color: var(--pc, var(--accent)); }
+
+  /* ---- summary ---- */
+  .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(248px, 1fr)); gap: 10px; margin-top: 14px; }
+  .pcard {
+    background: var(--surface); border: 1px solid var(--line-strong);
+    border-top: 3px solid var(--pc, var(--accent));
+    border-radius: 12px; padding: 12px 13px; min-width: 0;
+    display: flex; flex-direction: column; gap: 7px;
+  }
+  .pcard h3 {
+    font-family: var(--display); font-weight: 800; font-size: 16px; margin: 0;
+    color: var(--pc, var(--ink)); overflow-wrap: anywhere;
+  }
+  .pcard .line { font-size: 13px; color: var(--muted); }
+  .pcard .line b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .bar { height: 7px; background: var(--track); border-radius: 99px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--pc, var(--accent)); border-radius: 99px; }
+  .pcard .rem { font-size: 12.5px; color: var(--muted); overflow-wrap: anywhere; }
+  .pcard .rem b { color: var(--ink); font-weight: 600; }
+  .pcard .done { color: var(--accent); font-weight: 600; }
+
+  .round {
+    margin-top: 12px; padding: 10px 14px; border-radius: var(--radius);
+    background: var(--surface); border: 1px solid var(--line-strong);
+    font-size: 13.5px; display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline;
+  }
+  .round .turn { font-family: var(--display); font-weight: 800; }
+  .round .tally { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .round .tally b { color: var(--ink); font-weight: 600; }
 
   /* ---- entry dialog ---- */
   dialog {
@@ -272,16 +263,18 @@
   .legend { margin-top: 14px; color: var(--muted); font-size: 12.5px; }
   .legend b { color: var(--ink); font-weight: 600; }
 
-  @media (max-width: 520px) {
-    th.cat { min-width: 132px; width: 132px; }
+  @media (max-width: 560px) {
+    :root { --catw: 128px; --maxw: 40px; }
+    th.cat { padding: 7px 9px; }
     th.cat .hint { display: none; }
-    th.player { min-width: 84px; }
+    th.player { min-width: 86px; }
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
   @media print {
     .toolbar, .drop, .legend, .banner .btn { display: none; }
     body { background: #fff; }
-    .card { border-color: #666; }
+    .card, .pcard, .round { border-color: #888; break-inside: avoid; }
+    .summary { grid-template-columns: 1fr 1fr; }
   }
 </style>
 
@@ -297,6 +290,7 @@
     <button class="btn primary" id="add">+ Add player</button>
     <button class="btn" id="undo">Undo</button>
     <button class="btn" id="reset">New game</button>
+    <button class="btn" id="print">Print</button>
     <span class="spacer"></span>
     <span class="count" id="progress"></span>
   </div>
@@ -312,9 +306,13 @@
     </div>
   </div>
 
+  <section class="summary" id="summary" aria-label="Player summaries"></section>
+  <div class="round" id="round"></div>
+
   <p class="legend">
-    <b>Upper section</b> counts only the matching face — 35 bonus at 63 or more.
-    <b>Full house</b> 25 · <b>small straight</b> 30 · <b>large straight</b> 40 · <b>Yahtzee</b> 50, and every extra Yahtzee after the first is worth 100 more.
+    The <b>Max</b> column is the most that box can be worth. <b>Upper section</b> counts only the matching
+    face — 35 bonus at 63 or more. <b>Full house</b> 25 · <b>small straight</b> 30 · <b>large straight</b> 40 ·
+    <b>Yahtzee</b> 50, and every extra Yahtzee after the first is worth 100 more.
     A dashed box is still open; scratching one scores it zero.
   </p>
 </div>
@@ -329,24 +327,23 @@
   var MAX_PLAYERS = 8;
 
   var CATS = [
-    { k: "ones",   label: "Aces",   hint: "Count and add only 1s",  face: 1 },
-    { k: "twos",   label: "Twos",   hint: "Count and add only 2s",  face: 2 },
-    { k: "threes", label: "Threes", hint: "Count and add only 3s",  face: 3 },
-    { k: "fours",  label: "Fours",  hint: "Count and add only 4s",  face: 4 },
-    { k: "fives",  label: "Fives",  hint: "Count and add only 5s",  face: 5 },
-    { k: "sixes",  label: "Sixes",  hint: "Count and add only 6s",  face: 6 },
-    { k: "threeKind", label: "Three of a kind", hint: "Add all five dice", sum: true },
-    { k: "fourKind",  label: "Four of a kind",  hint: "Add all five dice", sum: true },
-    { k: "fullHouse", label: "Full house",      hint: "Three of one, two of another", fixed: 25 },
-    { k: "smallStraight", label: "Small straight", hint: "Four in a row", fixed: 30 },
-    { k: "largeStraight", label: "Large straight", hint: "Five in a row", fixed: 40 },
-    { k: "yahtzee", label: "Yahtzee", hint: "Five of a kind", fixed: 50 },
-    { k: "chance",  label: "Chance",  hint: "Add all five dice", sum: true }
+    { k: "ones",   label: "Aces",   hint: "Count and add only 1s",  face: 1, max: 5 },
+    { k: "twos",   label: "Twos",   hint: "Count and add only 2s",  face: 2, max: 10 },
+    { k: "threes", label: "Threes", hint: "Count and add only 3s",  face: 3, max: 15 },
+    { k: "fours",  label: "Fours",  hint: "Count and add only 4s",  face: 4, max: 20 },
+    { k: "fives",  label: "Fives",  hint: "Count and add only 5s",  face: 5, max: 25 },
+    { k: "sixes",  label: "Sixes",  hint: "Count and add only 6s",  face: 6, max: 30 },
+    { k: "threeKind", label: "Three of a kind", hint: "Add all five dice", sum: true, max: 30 },
+    { k: "fourKind",  label: "Four of a kind",  hint: "Add all five dice", sum: true, max: 30 },
+    { k: "fullHouse", label: "Full house",      hint: "Three of one, two of another", fixed: 25, max: 25 },
+    { k: "smallStraight", label: "Small straight", hint: "Four in a row", fixed: 30, max: 30 },
+    { k: "largeStraight", label: "Large straight", hint: "Five in a row", fixed: 40, max: 40 },
+    { k: "yahtzee", label: "Yahtzee", hint: "Five of a kind", fixed: 50, max: 50 },
+    { k: "chance",  label: "Chance",  hint: "Add all five dice", sum: true, max: 30 }
   ];
   var UPPER = CATS.slice(0, 6);
   var LOWER = CATS.slice(6);
-  var byKey = {};
-  CATS.forEach(function (c) { byKey[c.k] = c; });
+  var UPPER_MAX = 105, LOWER_MAX = 235, GRAND_MAX = 375;
 
   var state = null;
   var history = [];
@@ -396,24 +393,25 @@
 
   function clampScore(cat, v) {
     if (v <= 0) return 0;
-    if (cat.face) return Math.min(v, cat.face * 5);
     if (cat.fixed) return cat.fixed;
-    return Math.min(v, 30);
+    return Math.min(v, cat.max);
   }
 
-  function upperSum(p) {
-    return UPPER.reduce(function (t, c) { return t + (p.scores[c.k] || 0); }, 0);
-  }
+  function upperSum(p) { return UPPER.reduce(function (t, c) { return t + (p.scores[c.k] || 0); }, 0); }
   function upperBonus(p) { return upperSum(p) >= 63 ? 35 : 0; }
   function lowerSum(p) {
     return LOWER.reduce(function (t, c) { return t + (p.scores[c.k] || 0); }, 0) + p.extraYahtzees * 100;
   }
   function grand(p) { return upperSum(p) + upperBonus(p) + lowerSum(p); }
-  function filled(p) {
-    return CATS.filter(function (c) { return typeof p.scores[c.k] === "number"; }).length;
-  }
-  function complete() {
-    return state.players.every(function (p) { return filled(p) === CATS.length; });
+  function open(p) { return CATS.filter(function (c) { return typeof p.scores[c.k] !== "number"; }); }
+  function filled(p) { return CATS.length - open(p).length; }
+  function complete() { return state.players.every(function (p) { return filled(p) === CATS.length; }); }
+
+  function ceiling(p) {
+    var rest = open(p).reduce(function (t, c) { return t + c.max; }, 0);
+    var upperRest = open(p).reduce(function (t, c) { return t + (c.face ? c.max : 0); }, 0);
+    var couldBonus = upperBonus(p) ? 0 : (upperSum(p) + upperRest >= 63 ? 35 : 0);
+    return { remaining: rest, best: grand(p) + rest + couldBonus };
   }
 
   /* ---------- persistence ---------- */
@@ -434,6 +432,7 @@
 
   var head = document.getElementById("head");
   var body = document.getElementById("body");
+  var summary = document.getElementById("summary");
 
   function el(tag, cls, text) {
     var n = document.createElement(tag);
@@ -442,13 +441,7 @@
     return n;
   }
 
-  function catHead(cat) {
-    var th = el("th", "cat");
-    th.scope = "row";
-    th.appendChild(el("span", "name", cat.label));
-    th.appendChild(el("span", "hint", cat.hint));
-    return th;
-  }
+  function hue(i) { return "var(--p" + ((i % 8) + 1) + ")"; }
 
   function renderAll() {
     head.textContent = "";
@@ -458,11 +451,16 @@
     corner.appendChild(el("span", "name", "Category"));
     corner.appendChild(el("span", "hint", state.players.length + " playing"));
     head.appendChild(corner);
+    var maxHead = el("th", "max", "Max");
+    maxHead.scope = "col";
+    maxHead.title = "Most this box can be worth";
+    head.appendChild(maxHead);
 
     state.players.forEach(function (p, i) {
       var th = el("th", "player");
       th.scope = "col";
       th.dataset.pid = p.id;
+      th.style.setProperty("--pc", hue(i));
       var wrap = el("div", "player-head");
       var row = el("div", "name-row");
       var input = el("input", "pname");
@@ -498,23 +496,27 @@
       head.appendChild(th);
     });
 
-    sectionRow("Upper section");
+    sectionRow("Upper section", "63 or more scores the 35-point bonus");
     UPPER.forEach(catRow);
-    sumRow("Upper total", "upper", "Aces through Sixes");
+    sumRow("Upper total", "upper", "Aces through Sixes", UPPER_MAX);
     bonusRow();
-    sectionRow("Lower section");
+    sectionRow("Lower section", "");
     LOWER.forEach(catRow);
     yahtzeeBonusRow();
-    sumRow("Lower total", "lower", "Includes Yahtzee bonus");
-    sumRow("Grand total", "grand", "Upper + bonus + lower", true);
+    sumRow("Lower total", "lower", "Includes Yahtzee bonus", LOWER_MAX);
+    sumRow("Grand total", "grand", "Upper + bonus + lower", GRAND_MAX, true);
 
     refreshTotals();
   }
 
-  function sectionRow(label) {
+  function sectionRow(label, note) {
     var tr = el("tr", "section");
     var th = el("th", null, label);
-    th.colSpan = state.players.length + 1;
+    if (note) {
+      th.appendChild(document.createTextNode(" "));
+      th.appendChild(el("em", null, note));
+    }
+    th.colSpan = state.players.length + 2;
     th.scope = "colgroup";
     tr.appendChild(th);
     body.appendChild(tr);
@@ -522,9 +524,15 @@
 
   function catRow(cat) {
     var tr = el("tr");
-    tr.appendChild(catHead(cat));
-    state.players.forEach(function (p) {
+    var th = el("th", "cat");
+    th.scope = "row";
+    th.appendChild(el("span", "name", cat.label));
+    th.appendChild(el("span", "hint", cat.hint));
+    tr.appendChild(th);
+    tr.appendChild(el("td", "max", String(cat.max)));
+    state.players.forEach(function (p, i) {
       var td = el("td", "score");
+      td.style.setProperty("--pc", hue(i));
       var btn = el("button", "cell");
       btn.type = "button";
       btn.dataset.pid = p.id;
@@ -541,22 +549,25 @@
     var v = p.scores[cat.k];
     var has = typeof v === "number";
     btn.textContent = has ? String(v) : "—";
-    btn.className = "cell" + (has ? (v === 0 ? " zero" : "") : " empty");
+    btn.className = "cell" + (has ? (v === 0 ? " zero" : (v === cat.max ? " best" : "")) : " empty");
     btn.setAttribute("aria-label",
-      cat.label + ", " + (p.name || "player") + ": " + (has ? v + " points" : "not scored yet"));
+      cat.label + ", " + (p.name || "player") + ": " + (has ? v + " points" : "not scored yet") +
+      ". Maximum " + cat.max + ".");
   }
 
-  function sumRow(label, kind, hint, isGrand) {
+  function sumRow(label, kind, hint, max, isGrand) {
     var tr = el("tr", "sum" + (isGrand ? " grand" : ""));
     var th = el("th", "cat");
     th.scope = "row";
     th.appendChild(el("span", "name", label));
     th.appendChild(el("span", "hint", hint));
     tr.appendChild(th);
-    state.players.forEach(function (p) {
+    tr.appendChild(el("td", "max", String(max)));
+    state.players.forEach(function (p, i) {
       var td = el("td");
       td.dataset.total = kind;
       td.dataset.pid = p.id;
+      td.style.setProperty("--pc", hue(i));
       td.appendChild(el("div", "val", "0"));
       tr.appendChild(td);
     });
@@ -570,6 +581,7 @@
     th.appendChild(el("span", "name", "Upper bonus"));
     th.appendChild(el("span", "hint", "35 if the upper total reaches 63"));
     tr.appendChild(th);
+    tr.appendChild(el("td", "max", "35"));
     state.players.forEach(function (p) {
       var td = el("td");
       td.dataset.total = "bonus";
@@ -589,6 +601,7 @@
     th.appendChild(el("span", "name", "Yahtzee bonus"));
     th.appendChild(el("span", "hint", "100 for each extra Yahtzee"));
     tr.appendChild(th);
+    tr.appendChild(el("td", "max", "+100 ea"));
     state.players.forEach(function (p) {
       var td = el("td", "score");
       var box = el("div", "stepper");
@@ -636,8 +649,7 @@
       if (cell) {
         cell.firstChild.nodeValue = String(bon);
         cell.className = "val" + (bon ? " earned" : "");
-        var need = cell.querySelector(".need");
-        need.textContent = bon ? "reached" : (63 - up) + " to go";
+        cell.querySelector(".need").textContent = bon ? "reached" : (63 - up) + " to go";
       }
 
       var td = body.querySelector('tr.grand td[data-pid="' + p.id + '"]');
@@ -653,12 +665,80 @@
     var scored = state.players.reduce(function (t, p) { return t + filled(p); }, 0);
     var boxes = state.players.length * CATS.length;
     document.getElementById("progress").textContent = scored + " of " + boxes + " boxes filled";
+    renderSummary(done, best);
     updateBanner(done, best);
   }
 
   function setTotal(pid, kind, value) {
     var node = body.querySelector('td[data-total="' + kind + '"][data-pid="' + pid + '"] .val');
     if (node) node.textContent = String(value);
+  }
+
+  /* ---------- summary cards + turn strip ---------- */
+
+  function renderSummary(done, best) {
+    summary.textContent = "";
+
+    state.players.forEach(function (p, i) {
+      var card = el("div", "pcard");
+      card.style.setProperty("--pc", hue(i));
+      card.appendChild(el("h3", null, p.name || "Player " + (i + 1)));
+
+      var up = upperSum(p);
+      var line = el("div", "line");
+      line.appendChild(document.createTextNode("Upper "));
+      line.appendChild(el("b", null, up + " / 63"));
+      line.appendChild(document.createTextNode(upperBonus(p) ? " — bonus secured" : " — " + (63 - up) + " more for the 35 bonus"));
+      card.appendChild(line);
+
+      var bar = el("div", "bar");
+      var fill = el("i");
+      fill.style.width = Math.min(100, Math.round((up / 63) * 100)) + "%";
+      bar.appendChild(fill);
+      card.appendChild(bar);
+
+      var left = open(p);
+      var rem = el("div", "rem");
+      if (left.length) {
+        var c = ceiling(p);
+        rem.appendChild(el("b", null, left.length + " box" + (left.length === 1 ? "" : "es") + " open: "));
+        rem.appendChild(document.createTextNode(left.map(function (x) { return x.label; }).join(", ")));
+        var ceil = el("div", "line");
+        ceil.appendChild(document.createTextNode("Still on the table "));
+        ceil.appendChild(el("b", null, String(c.remaining)));
+        ceil.appendChild(document.createTextNode(" — best possible finish "));
+        ceil.appendChild(el("b", null, String(c.best)));
+        card.appendChild(rem);
+        card.appendChild(ceil);
+      } else {
+        rem.className = "rem done";
+        rem.textContent = "All thirteen boxes filled — final score " + grand(p) + ".";
+        card.appendChild(rem);
+      }
+
+      summary.appendChild(card);
+    });
+
+    var round = document.getElementById("round");
+    round.textContent = "";
+    if (done) {
+      var order = state.players.slice().sort(function (x, y) { return grand(y) - grand(x); });
+      round.appendChild(el("span", "turn", "Final"));
+      order.forEach(function (p) {
+        var t = el("span", "tally");
+        t.appendChild(el("b", null, (p.name || "Player") + " " + grand(p)));
+        round.appendChild(t);
+      });
+    } else {
+      var next = state.players.reduce(function (a, b) { return filled(b) < filled(a) ? b : a; }, state.players[0]);
+      round.appendChild(el("span", "turn", "Up next: " + (next.name || "Player")));
+      state.players.forEach(function (p) {
+        var t = el("span", "tally");
+        t.appendChild(el("b", null, p.name || "Player"));
+        t.appendChild(document.createTextNode(" " + filled(p) + "/13 · " + grand(p) + " pts"));
+        round.appendChild(t);
+      });
+    }
   }
 
   function updateBanner(done, best) {
@@ -671,15 +751,10 @@
       var names = winners.map(function (p) { return p.name || "Unnamed"; });
       banner.classList.add("win");
       var line = el("span");
-      if (winners.length === 1) {
-        line.appendChild(document.createTextNode("Card complete. "));
-        line.appendChild(el("strong", null, names[0]));
-        line.appendChild(document.createTextNode(" wins with " + best + "."));
-      } else {
-        line.appendChild(document.createTextNode("Card complete. "));
-        line.appendChild(el("strong", null, names.join(" and ")));
-        line.appendChild(document.createTextNode(" tie at " + best + "."));
-      }
+      line.appendChild(document.createTextNode("Card complete. "));
+      line.appendChild(el("strong", null, names.join(" and ")));
+      line.appendChild(document.createTextNode(
+        winners.length === 1 ? " wins with " + best + "." : " tie at " + best + "."));
       banner.appendChild(line);
       var again = el("button", "btn", "Play again");
       again.type = "button";
@@ -705,9 +780,7 @@
     banner.hidden = true;
   }
 
-  function clearSample() {
-    if (state.sample) state.sample = false;
-  }
+  function clearSample() { if (state.sample) state.sample = false; }
 
   /* ---------- score entry ---------- */
 
@@ -722,7 +795,7 @@
     var header = el("header");
     header.appendChild(el("span", "who", p.name || "Player"));
     header.appendChild(el("h2", null, cat.label));
-    header.appendChild(el("span", "rule", cat.hint));
+    header.appendChild(el("span", "rule", cat.hint + " · max " + cat.max));
     sheet.appendChild(header);
 
     function commit(value) {
@@ -771,18 +844,18 @@
       input.type = "number";
       input.id = "sum-input";
       input.min = "0";
-      input.max = "30";
+      input.max = String(cat.max);
       input.step = "1";
       input.inputMode = "numeric";
       input.value = has ? String(current) : "";
       input.placeholder = "total of 5 dice";
-      input.setAttribute("aria-label", "Total of the five dice");
+      input.setAttribute("aria-label", "Total of the five dice, 0 to " + cat.max);
       var go = el("button", "btn primary", "Score it");
       go.type = "button";
       go.addEventListener("click", function () {
         var v = parseInt(input.value, 10);
         if (isNaN(v)) { input.focus(); return; }
-        commit(Math.max(0, Math.min(30, v)));
+        commit(Math.max(0, Math.min(cat.max, v)));
       });
       input.addEventListener("keydown", function (e) {
         if (e.key === "Enter") { e.preventDefault(); go.click(); }
@@ -857,6 +930,8 @@
     renderAll();
     document.getElementById("undo").disabled = history.length === 0;
   });
+
+  document.getElementById("print").addEventListener("click", function () { window.print(); });
 
   /* ---------- boot ---------- */
 
