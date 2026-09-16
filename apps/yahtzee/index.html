@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+  html { color-scheme: light dark; }
+  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+<title>Thirteen Boxes</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --ground: #e9edec;
+    --surface: #ffffff;
+    --surface-2: #f4f6f5;
+    --line: #d2dad8;
+    --line-strong: #b4c0bd;
+    --ink: #12181b;
+    --muted: #5a6a6d;
+    --accent: #0c6659;
+    --accent-soft: #d9ebe6;
+    --on-accent: #ffffff;
+    --hot: #a8321c;
+    --hot-soft: #f6e2dd;
+    --empty: #93a3a4;
+    --radius: 10px;
+    --display: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
+    --body: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0e1417;
+      --surface: #171f23;
+      --surface-2: #1e282d;
+      --line: #2c383d;
+      --line-strong: #3d4d53;
+      --ink: #e7eeef;
+      --muted: #97a8ab;
+      --accent: #46c2ac;
+      --accent-soft: #1d3a37;
+      --on-accent: #0b1a18;
+      --hot: #f08a70;
+      --hot-soft: #3a211b;
+      --empty: #5b6b70;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0e1417;
+    --surface: #171f23;
+    --surface-2: #1e282d;
+    --line: #2c383d;
+    --line-strong: #3d4d53;
+    --ink: #e7eeef;
+    --muted: #97a8ab;
+    --accent: #46c2ac;
+    --accent-soft: #1d3a37;
+    --on-accent: #0b1a18;
+    --hot: #f08a70;
+    --hot-soft: #3a211b;
+    --empty: #5b6b70;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.45;
+    -webkit-text-size-adjust: 100%;
+  }
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: 22px 40px;
+  }
+
+  /* ---- masthead ---- */
+  .masthead { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 20px; margin-bottom: 14px; }
+  .masthead h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(26px, 6vw, 40px);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 0;
+    min-width: 0;
+  }
+  .masthead h1 .die { color: var(--accent); }
+  .tagline { color: var(--muted); font-size: 13px; margin: 0; min-width: 0; }
+
+  /* ---- toolbar ---- */
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; align-items: center; }
+  .btn {
+    font: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 8px 13px;
+    cursor: pointer;
+    min-width: 0;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn[disabled] { opacity: .45; cursor: not-allowed; }
+  .btn[disabled]:hover { border-color: var(--line-strong); color: var(--ink); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .btn.primary:hover { color: var(--on-accent); filter: brightness(1.08); }
+  .spacer { flex: 1 1 auto; }
+  .count { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---- banner ---- */
+  .banner {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
+    border: 1px solid var(--line-strong);
+    border-left: 4px solid var(--accent);
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 14px;
+  }
+  .banner.win { border-left-color: var(--hot); background: var(--hot-soft); }
+  .banner strong { font-family: var(--display); font-weight: 800; }
+  .banner .btn { padding: 5px 10px; font-size: 13px; }
+
+  /* ---- scorecard ---- */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .scroller { overflow-x: auto; }
+  table { border-collapse: separate; border-spacing: 0; width: 100%; }
+  th, td { border-bottom: 1px solid var(--line); padding: 0; text-align: center; }
+  tr:last-child th, tr:last-child td { border-bottom: 0; }
+
+  th.cat {
+    position: sticky; left: 0; z-index: 2;
+    background: var(--surface);
+    text-align: left;
+    padding: 7px 12px;
+    min-width: 168px; width: 168px;
+    border-right: 1px solid var(--line-strong);
+    font-weight: 500;
+  }
+  th.cat .name { display: block; font-size: 14px; }
+  th.cat .hint { display: block; font-size: 11.5px; color: var(--muted); }
+
+  thead th.cat { background: var(--surface-2); }
+  th.player {
+    background: var(--surface-2);
+    padding: 8px 8px 9px;
+    min-width: 108px;
+    border-left: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .player-head { display: flex; flex-direction: column; gap: 4px; align-items: stretch; min-width: 0; }
+  .name-row { display: flex; align-items: center; gap: 4px; min-width: 0; }
+  input.pname {
+    font: 600 14px var(--body);
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    padding: 4px 5px;
+    width: 100%;
+    min-width: 0;
+    text-align: center;
+  }
+  input.pname:hover { border-color: var(--line-strong); }
+  input.pname:focus { border-color: var(--accent); background: var(--surface); outline: none; }
+  .drop {
+    border: 0; background: transparent; color: var(--muted);
+    font: 700 15px/1 var(--body); cursor: pointer; padding: 3px 5px; border-radius: 6px; flex: none;
+  }
+  .drop:hover { color: var(--hot); background: var(--hot-soft); }
+  .runner {
+    font-family: var(--mono); font-variant-numeric: tabular-nums;
+    font-size: 17px; font-weight: 600; color: var(--muted);
+  }
+  th.player.leader .runner { color: var(--accent); }
+  th.player.leader { box-shadow: inset 0 3px 0 var(--accent); }
+
+  tr.section th {
+    background: var(--surface-2);
+    text-align: left;
+    font-family: var(--display); font-weight: 800; font-size: 11px;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+    padding: 6px 12px;
+    position: sticky; left: 0;
+  }
+
+  td.score { border-left: 1px solid var(--line); padding: 2px; }
+  button.cell {
+    font-family: var(--mono); font-variant-numeric: tabular-nums;
+    font-size: 16px; font-weight: 600;
+    color: var(--ink);
+    width: 100%; min-height: 40px;
+    border: 1px dashed transparent; border-radius: 7px;
+    background: transparent; cursor: pointer; padding: 4px 2px;
+  }
+  button.cell.empty { color: var(--empty); font-weight: 400; border-color: var(--line); }
+  button.cell:hover { border-style: solid; border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
+  button.cell.zero { color: var(--muted); }
+
+  .stepper { display: flex; align-items: center; justify-content: center; gap: 2px; padding: 3px; }
+  .stepper button {
+    font: 600 15px/1 var(--body); color: var(--muted); background: var(--surface-2);
+    border: 1px solid var(--line); border-radius: 6px; width: 26px; height: 28px; cursor: pointer; flex: none;
+  }
+  .stepper button:hover { color: var(--accent); border-color: var(--accent); }
+  .stepper .val { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 15px; min-width: 42px; }
+
+  tr.sum td, tr.sum th.cat { background: var(--surface-2); }
+  tr.sum .val { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 15px; font-weight: 600; padding: 7px 4px; }
+  tr.bonus .val.earned { color: var(--accent); }
+  tr.bonus .need { display: block; font-family: var(--body); font-size: 11px; font-weight: 400; color: var(--muted); }
+  tr.grand th.cat, tr.grand td { background: var(--accent-soft); border-top: 2px solid var(--accent); }
+  tr.grand th.cat .name { font-family: var(--display); font-weight: 800; font-size: 15px; }
+  tr.grand .val { font-size: 20px; font-weight: 600; padding: 9px 4px; color: var(--ink); }
+  tr.grand td.lead .val { color: var(--accent); }
+
+  /* ---- entry dialog ---- */
+  dialog {
+    border: 1px solid var(--line-strong); border-radius: 14px; padding: 0;
+    background: var(--surface); color: var(--ink);
+    width: min(400px, calc(100vw - 32px));
+    box-shadow: 0 18px 48px rgba(0,0,0,.28);
+  }
+  dialog::backdrop { background: rgba(8, 16, 18, .52); }
+  .sheet { padding: 16px; display: flex; flex-direction: column; gap: 13px; }
+  .sheet header { display: flex; flex-direction: column; gap: 2px; }
+  .sheet .who { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .sheet h2 { font-family: var(--display); font-weight: 800; font-size: 21px; margin: 0; letter-spacing: -0.01em; }
+  .sheet .rule { font-size: 13px; color: var(--muted); }
+  .opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+  .opts.two { grid-template-columns: repeat(2, 1fr); }
+  .opt {
+    font-family: var(--mono); font-size: 19px; font-weight: 600; color: var(--ink);
+    background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 9px 4px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  .opt small { font-family: var(--body); font-size: 11px; font-weight: 500; color: var(--muted); }
+  .opt:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .opt.current { border-color: var(--accent); border-width: 2px; }
+  .opt.scratch { color: var(--hot); }
+  .sumrow { display: flex; gap: 7px; align-items: stretch; }
+  .sumrow input {
+    font: 600 20px var(--mono); color: var(--ink); background: var(--surface-2);
+    border: 1px solid var(--line-strong); border-radius: var(--radius);
+    padding: 8px 10px; width: 100%; min-width: 0; text-align: center;
+  }
+  .sumrow input:focus { border-color: var(--accent); outline: none; }
+  .sheet footer { display: flex; gap: 7px; }
+  .sheet footer .btn { flex: 1 1 auto; }
+  .sheet footer .btn.clear { color: var(--hot); border-color: var(--line-strong); }
+  .sheet footer .btn.clear:hover { border-color: var(--hot); color: var(--hot); }
+
+  .legend { margin-top: 14px; color: var(--muted); font-size: 12.5px; }
+  .legend b { color: var(--ink); font-weight: 600; }
+
+  @media (max-width: 520px) {
+    th.cat { min-width: 132px; width: 132px; }
+    th.cat .hint { display: none; }
+    th.player { min-width: 84px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  @media print {
+    .toolbar, .drop, .legend, .banner .btn { display: none; }
+    body { background: #fff; }
+    .card { border-color: #666; }
+  }
+</style>
+
+</head>
+<body>
+<div class="page">
+  <div class="masthead">
+    <h1><span class="die">⚂</span> Thirteen Boxes</h1>
+    <p class="tagline">Yahtzee scorecard — roll the dice yourself, tap a box to fill it in.</p>
+  </div>
+
+  <div class="toolbar">
+    <button class="btn primary" id="add">+ Add player</button>
+    <button class="btn" id="undo">Undo</button>
+    <button class="btn" id="reset">New game</button>
+    <span class="spacer"></span>
+    <span class="count" id="progress"></span>
+  </div>
+
+  <div class="banner" id="banner" hidden></div>
+
+  <div class="card">
+    <div class="scroller">
+      <table id="card">
+        <thead><tr id="head"></tr></thead>
+        <tbody id="body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <p class="legend">
+    <b>Upper section</b> counts only the matching face — 35 bonus at 63 or more.
+    <b>Full house</b> 25 · <b>small straight</b> 30 · <b>large straight</b> 40 · <b>Yahtzee</b> 50, and every extra Yahtzee after the first is worth 100 more.
+    A dashed box is still open; scratching one scores it zero.
+  </p>
+</div>
+
+<dialog id="entry"><form method="dialog" class="sheet" id="sheet"></form></dialog>
+
+<script>
+(function () {
+  "use strict";
+
+  var STORE = "thirteen-boxes-v1";
+  var MAX_PLAYERS = 8;
+
+  var CATS = [
+    { k: "ones",   label: "Aces",   hint: "Count and add only 1s",  face: 1 },
+    { k: "twos",   label: "Twos",   hint: "Count and add only 2s",  face: 2 },
+    { k: "threes", label: "Threes", hint: "Count and add only 3s",  face: 3 },
+    { k: "fours",  label: "Fours",  hint: "Count and add only 4s",  face: 4 },
+    { k: "fives",  label: "Fives",  hint: "Count and add only 5s",  face: 5 },
+    { k: "sixes",  label: "Sixes",  hint: "Count and add only 6s",  face: 6 },
+    { k: "threeKind", label: "Three of a kind", hint: "Add all five dice", sum: true },
+    { k: "fourKind",  label: "Four of a kind",  hint: "Add all five dice", sum: true },
+    { k: "fullHouse", label: "Full house",      hint: "Three of one, two of another", fixed: 25 },
+    { k: "smallStraight", label: "Small straight", hint: "Four in a row", fixed: 30 },
+    { k: "largeStraight", label: "Large straight", hint: "Five in a row", fixed: 40 },
+    { k: "yahtzee", label: "Yahtzee", hint: "Five of a kind", fixed: 50 },
+    { k: "chance",  label: "Chance",  hint: "Add all five dice", sum: true }
+  ];
+  var UPPER = CATS.slice(0, 6);
+  var LOWER = CATS.slice(6);
+  var byKey = {};
+  CATS.forEach(function (c) { byKey[c.k] = c; });
+
+  var state = null;
+  var history = [];
+
+  /* ---------- model ---------- */
+
+  function uid() { return Math.random().toString(36).slice(2, 9); }
+
+  function makePlayer(name) {
+    return { id: uid(), name: name, scores: {}, extraYahtzees: 0 };
+  }
+
+  function sampleGame() {
+    var a = makePlayer("Ana");
+    a.scores = { ones: 3, twos: 6, threes: 9, fours: 12, fullHouse: 25, smallStraight: 30, chance: 21 };
+    var m = makePlayer("Marcus");
+    m.scores = { ones: 2, twos: 4, threes: 12, fours: 8, fullHouse: 0, smallStraight: 30, chance: 24 };
+    var d = makePlayer("Devi");
+    d.scores = { ones: 4, twos: 8, threes: 6, fours: 16, fullHouse: 25, smallStraight: 0, chance: 19 };
+    return { players: [a, m, d], sample: true };
+  }
+
+  function freshGame(names) {
+    return {
+      players: (names || ["Player 1", "Player 2"]).map(function (n) { return makePlayer(n); }),
+      sample: false
+    };
+  }
+
+  function normalize(raw) {
+    if (!raw || !Array.isArray(raw.players) || !raw.players.length) return null;
+    var players = raw.players.slice(0, MAX_PLAYERS).map(function (p) {
+      var scores = {};
+      CATS.forEach(function (c) {
+        var v = p && p.scores ? p.scores[c.k] : null;
+        if (typeof v === "number" && isFinite(v)) scores[c.k] = clampScore(c, Math.round(v));
+      });
+      return {
+        id: (p && p.id) || uid(),
+        name: typeof (p && p.name) === "string" ? p.name : "Player",
+        scores: scores,
+        extraYahtzees: Math.max(0, Math.min(3, Math.round((p && p.extraYahtzees) || 0)))
+      };
+    });
+    return { players: players, sample: !!raw.sample };
+  }
+
+  function clampScore(cat, v) {
+    if (v <= 0) return 0;
+    if (cat.face) return Math.min(v, cat.face * 5);
+    if (cat.fixed) return cat.fixed;
+    return Math.min(v, 30);
+  }
+
+  function upperSum(p) {
+    return UPPER.reduce(function (t, c) { return t + (p.scores[c.k] || 0); }, 0);
+  }
+  function upperBonus(p) { return upperSum(p) >= 63 ? 35 : 0; }
+  function lowerSum(p) {
+    return LOWER.reduce(function (t, c) { return t + (p.scores[c.k] || 0); }, 0) + p.extraYahtzees * 100;
+  }
+  function grand(p) { return upperSum(p) + upperBonus(p) + lowerSum(p); }
+  function filled(p) {
+    return CATS.filter(function (c) { return typeof p.scores[c.k] === "number"; }).length;
+  }
+  function complete() {
+    return state.players.every(function (p) { return filled(p) === CATS.length; });
+  }
+
+  /* ---------- persistence ---------- */
+
+  function save() {
+    try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) { /* private mode */ }
+  }
+  function load() {
+    try { return normalize(JSON.parse(localStorage.getItem(STORE))); } catch (e) { return null; }
+  }
+  function snapshot() {
+    history.push(JSON.stringify(state));
+    if (history.length > 40) history.shift();
+    document.getElementById("undo").disabled = false;
+  }
+
+  /* ---------- rendering ---------- */
+
+  var head = document.getElementById("head");
+  var body = document.getElementById("body");
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function catHead(cat) {
+    var th = el("th", "cat");
+    th.scope = "row";
+    th.appendChild(el("span", "name", cat.label));
+    th.appendChild(el("span", "hint", cat.hint));
+    return th;
+  }
+
+  function renderAll() {
+    head.textContent = "";
+    body.textContent = "";
+
+    var corner = el("th", "cat");
+    corner.appendChild(el("span", "name", "Category"));
+    corner.appendChild(el("span", "hint", state.players.length + " playing"));
+    head.appendChild(corner);
+
+    state.players.forEach(function (p, i) {
+      var th = el("th", "player");
+      th.scope = "col";
+      th.dataset.pid = p.id;
+      var wrap = el("div", "player-head");
+      var row = el("div", "name-row");
+      var input = el("input", "pname");
+      input.type = "text";
+      input.id = "name-" + p.id;
+      input.value = p.name;
+      input.maxLength = 18;
+      input.setAttribute("aria-label", "Name of player " + (i + 1));
+      input.addEventListener("input", function () {
+        p.name = input.value;
+        save();
+        refreshTotals();
+      });
+      input.addEventListener("focus", function () { input.select(); });
+      row.appendChild(input);
+      if (state.players.length > 1) {
+        var drop = el("button", "drop", "×");
+        drop.type = "button";
+        drop.title = "Remove " + (p.name || "this player");
+        drop.setAttribute("aria-label", "Remove " + (p.name || "player " + (i + 1)));
+        drop.addEventListener("click", function () {
+          if (filled(p) && !confirm("Remove " + (p.name || "this player") + " and their scores?")) return;
+          snapshot();
+          state.players = state.players.filter(function (q) { return q.id !== p.id; });
+          save();
+          renderAll();
+        });
+        row.appendChild(drop);
+      }
+      wrap.appendChild(row);
+      wrap.appendChild(el("div", "runner", "0"));
+      th.appendChild(wrap);
+      head.appendChild(th);
+    });
+
+    sectionRow("Upper section");
+    UPPER.forEach(catRow);
+    sumRow("Upper total", "upper", "Aces through Sixes");
+    bonusRow();
+    sectionRow("Lower section");
+    LOWER.forEach(catRow);
+    yahtzeeBonusRow();
+    sumRow("Lower total", "lower", "Includes Yahtzee bonus");
+    sumRow("Grand total", "grand", "Upper + bonus + lower", true);
+
+    refreshTotals();
+  }
+
+  function sectionRow(label) {
+    var tr = el("tr", "section");
+    var th = el("th", null, label);
+    th.colSpan = state.players.length + 1;
+    th.scope = "colgroup";
+    tr.appendChild(th);
+    body.appendChild(tr);
+  }
+
+  function catRow(cat) {
+    var tr = el("tr");
+    tr.appendChild(catHead(cat));
+    state.players.forEach(function (p) {
+      var td = el("td", "score");
+      var btn = el("button", "cell");
+      btn.type = "button";
+      btn.dataset.pid = p.id;
+      btn.dataset.cat = cat.k;
+      btn.addEventListener("click", function () { openEntry(p, cat); });
+      paintCell(btn, p, cat);
+      td.appendChild(btn);
+      tr.appendChild(td);
+    });
+    body.appendChild(tr);
+  }
+
+  function paintCell(btn, p, cat) {
+    var v = p.scores[cat.k];
+    var has = typeof v === "number";
+    btn.textContent = has ? String(v) : "—";
+    btn.className = "cell" + (has ? (v === 0 ? " zero" : "") : " empty");
+    btn.setAttribute("aria-label",
+      cat.label + ", " + (p.name || "player") + ": " + (has ? v + " points" : "not scored yet"));
+  }
+
+  function sumRow(label, kind, hint, isGrand) {
+    var tr = el("tr", "sum" + (isGrand ? " grand" : ""));
+    var th = el("th", "cat");
+    th.scope = "row";
+    th.appendChild(el("span", "name", label));
+    th.appendChild(el("span", "hint", hint));
+    tr.appendChild(th);
+    state.players.forEach(function (p) {
+      var td = el("td");
+      td.dataset.total = kind;
+      td.dataset.pid = p.id;
+      td.appendChild(el("div", "val", "0"));
+      tr.appendChild(td);
+    });
+    body.appendChild(tr);
+  }
+
+  function bonusRow() {
+    var tr = el("tr", "sum bonus");
+    var th = el("th", "cat");
+    th.scope = "row";
+    th.appendChild(el("span", "name", "Upper bonus"));
+    th.appendChild(el("span", "hint", "35 if the upper total reaches 63"));
+    tr.appendChild(th);
+    state.players.forEach(function (p) {
+      var td = el("td");
+      td.dataset.total = "bonus";
+      td.dataset.pid = p.id;
+      var v = el("div", "val", "0");
+      v.appendChild(el("span", "need", ""));
+      td.appendChild(v);
+      tr.appendChild(td);
+    });
+    body.appendChild(tr);
+  }
+
+  function yahtzeeBonusRow() {
+    var tr = el("tr");
+    var th = el("th", "cat");
+    th.scope = "row";
+    th.appendChild(el("span", "name", "Yahtzee bonus"));
+    th.appendChild(el("span", "hint", "100 for each extra Yahtzee"));
+    tr.appendChild(th);
+    state.players.forEach(function (p) {
+      var td = el("td", "score");
+      var box = el("div", "stepper");
+      var minus = el("button", null, "−");
+      minus.type = "button";
+      minus.setAttribute("aria-label", "One fewer extra Yahtzee for " + (p.name || "player"));
+      var val = el("span", "val", "0");
+      var plus = el("button", null, "+");
+      plus.type = "button";
+      plus.setAttribute("aria-label", "One more extra Yahtzee for " + (p.name || "player"));
+      function paint() { val.textContent = p.extraYahtzees ? p.extraYahtzees * 100 : "0"; }
+      minus.addEventListener("click", function () {
+        if (!p.extraYahtzees) return;
+        snapshot();
+        p.extraYahtzees--;
+        paint(); save(); refreshTotals();
+      });
+      plus.addEventListener("click", function () {
+        if (p.extraYahtzees >= 3) return;
+        snapshot();
+        clearSample();
+        p.extraYahtzees++;
+        paint(); save(); refreshTotals();
+      });
+      paint();
+      box.appendChild(minus); box.appendChild(val); box.appendChild(plus);
+      td.appendChild(box);
+      tr.appendChild(td);
+    });
+    body.appendChild(tr);
+  }
+
+  function refreshTotals() {
+    var best = -1;
+    state.players.forEach(function (p) { best = Math.max(best, grand(p)); });
+    var done = complete();
+
+    state.players.forEach(function (p) {
+      var up = upperSum(p), bon = upperBonus(p), low = lowerSum(p), all = grand(p);
+      setTotal(p.id, "upper", up);
+      setTotal(p.id, "lower", low);
+      setTotal(p.id, "grand", all);
+
+      var cell = body.querySelector('td[data-total="bonus"][data-pid="' + p.id + '"] .val');
+      if (cell) {
+        cell.firstChild.nodeValue = String(bon);
+        cell.className = "val" + (bon ? " earned" : "");
+        var need = cell.querySelector(".need");
+        need.textContent = bon ? "reached" : (63 - up) + " to go";
+      }
+
+      var td = body.querySelector('tr.grand td[data-pid="' + p.id + '"]');
+      if (td) td.classList.toggle("lead", done && all === best && best > 0);
+
+      var th = head.querySelector('th[data-pid="' + p.id + '"]');
+      if (th) {
+        th.querySelector(".runner").textContent = all;
+        th.classList.toggle("leader", all === best && best > 0);
+      }
+    });
+
+    var scored = state.players.reduce(function (t, p) { return t + filled(p); }, 0);
+    var boxes = state.players.length * CATS.length;
+    document.getElementById("progress").textContent = scored + " of " + boxes + " boxes filled";
+    updateBanner(done, best);
+  }
+
+  function setTotal(pid, kind, value) {
+    var node = body.querySelector('td[data-total="' + kind + '"][data-pid="' + pid + '"] .val');
+    if (node) node.textContent = String(value);
+  }
+
+  function updateBanner(done, best) {
+    var banner = document.getElementById("banner");
+    banner.textContent = "";
+    banner.className = "banner";
+
+    if (done && best >= 0) {
+      var winners = state.players.filter(function (p) { return grand(p) === best; });
+      var names = winners.map(function (p) { return p.name || "Unnamed"; });
+      banner.classList.add("win");
+      var line = el("span");
+      if (winners.length === 1) {
+        line.appendChild(document.createTextNode("Card complete. "));
+        line.appendChild(el("strong", null, names[0]));
+        line.appendChild(document.createTextNode(" wins with " + best + "."));
+      } else {
+        line.appendChild(document.createTextNode("Card complete. "));
+        line.appendChild(el("strong", null, names.join(" and ")));
+        line.appendChild(document.createTextNode(" tie at " + best + "."));
+      }
+      banner.appendChild(line);
+      var again = el("button", "btn", "Play again");
+      again.type = "button";
+      again.addEventListener("click", function () { restart(true); });
+      banner.appendChild(again);
+      banner.hidden = false;
+      return;
+    }
+
+    if (state.sample) {
+      var note = el("span");
+      note.appendChild(el("strong", null, "Sample game."));
+      note.appendChild(document.createTextNode(" Ana, Marcus and Devi are part-way through — rename them, or start your own card."));
+      banner.appendChild(note);
+      var fresh = el("button", "btn", "Start fresh");
+      fresh.type = "button";
+      fresh.addEventListener("click", function () { restart(false); });
+      banner.appendChild(fresh);
+      banner.hidden = false;
+      return;
+    }
+
+    banner.hidden = true;
+  }
+
+  function clearSample() {
+    if (state.sample) state.sample = false;
+  }
+
+  /* ---------- score entry ---------- */
+
+  var dialog = document.getElementById("entry");
+  var sheet = document.getElementById("sheet");
+
+  function openEntry(p, cat) {
+    sheet.textContent = "";
+    var current = p.scores[cat.k];
+    var has = typeof current === "number";
+
+    var header = el("header");
+    header.appendChild(el("span", "who", p.name || "Player"));
+    header.appendChild(el("h2", null, cat.label));
+    header.appendChild(el("span", "rule", cat.hint));
+    sheet.appendChild(header);
+
+    function commit(value) {
+      snapshot();
+      clearSample();
+      if (value === null) delete p.scores[cat.k];
+      else p.scores[cat.k] = value;
+      save();
+      var btn = body.querySelector('button.cell[data-pid="' + p.id + '"][data-cat="' + cat.k + '"]');
+      if (btn) paintCell(btn, p, cat);
+      refreshTotals();
+      dialog.close();
+    }
+
+    if (cat.face) {
+      var grid = el("div", "opts");
+      for (var n = 0; n <= 5; n++) {
+        (function (count) {
+          var value = count * cat.face;
+          var b = el("button", "opt" + (has && current === value ? " current" : "") + (count === 0 ? " scratch" : ""));
+          b.type = "button";
+          b.appendChild(document.createTextNode(String(value)));
+          b.appendChild(el("small", null, count === 0 ? "none" : count + (count === 1 ? " die" : " dice")));
+          b.addEventListener("click", function () { commit(value); });
+          grid.appendChild(b);
+        })(n);
+      }
+      sheet.appendChild(grid);
+    } else if (cat.fixed) {
+      var two = el("div", "opts two");
+      var yes = el("button", "opt" + (has && current === cat.fixed ? " current" : ""));
+      yes.type = "button";
+      yes.appendChild(document.createTextNode(String(cat.fixed)));
+      yes.appendChild(el("small", null, "scored it"));
+      yes.addEventListener("click", function () { commit(cat.fixed); });
+      var no = el("button", "opt scratch" + (has && current === 0 ? " current" : ""));
+      no.type = "button";
+      no.appendChild(document.createTextNode("0"));
+      no.appendChild(el("small", null, "scratch"));
+      no.addEventListener("click", function () { commit(0); });
+      two.appendChild(yes); two.appendChild(no);
+      sheet.appendChild(two);
+    } else {
+      var row = el("div", "sumrow");
+      var input = el("input");
+      input.type = "number";
+      input.id = "sum-input";
+      input.min = "0";
+      input.max = "30";
+      input.step = "1";
+      input.inputMode = "numeric";
+      input.value = has ? String(current) : "";
+      input.placeholder = "total of 5 dice";
+      input.setAttribute("aria-label", "Total of the five dice");
+      var go = el("button", "btn primary", "Score it");
+      go.type = "button";
+      go.addEventListener("click", function () {
+        var v = parseInt(input.value, 10);
+        if (isNaN(v)) { input.focus(); return; }
+        commit(Math.max(0, Math.min(30, v)));
+      });
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") { e.preventDefault(); go.click(); }
+      });
+      row.appendChild(input); row.appendChild(go);
+      sheet.appendChild(row);
+
+      var scratch = el("div", "opts two");
+      var zero = el("button", "opt scratch" + (has && current === 0 ? " current" : ""));
+      zero.type = "button";
+      zero.appendChild(document.createTextNode("0"));
+      zero.appendChild(el("small", null, "scratch"));
+      zero.addEventListener("click", function () { commit(0); });
+      scratch.appendChild(zero);
+      sheet.appendChild(scratch);
+    }
+
+    var foot = el("footer");
+    if (has) {
+      var clear = el("button", "btn clear", "Clear box");
+      clear.type = "button";
+      clear.addEventListener("click", function () { commit(null); });
+      foot.appendChild(clear);
+    }
+    var cancel = el("button", "btn", "Cancel");
+    cancel.type = "button";
+    cancel.addEventListener("click", function () { dialog.close(); });
+    foot.appendChild(cancel);
+    sheet.appendChild(foot);
+
+    dialog.showModal();
+    var first = sheet.querySelector("input, .opt");
+    if (first) first.focus();
+  }
+
+  /* ---------- toolbar ---------- */
+
+  function restart(keepNames) {
+    var names = keepNames
+      ? state.players.map(function (p, i) { return p.name || "Player " + (i + 1); })
+      : null;
+    snapshot();
+    state = freshGame(names);
+    save();
+    renderAll();
+  }
+
+  document.getElementById("add").addEventListener("click", function () {
+    if (state.players.length >= MAX_PLAYERS) return;
+    snapshot();
+    clearSample();
+    state.players.push(makePlayer("Player " + (state.players.length + 1)));
+    save();
+    renderAll();
+    var last = state.players[state.players.length - 1];
+    var input = document.getElementById("name-" + last.id);
+    if (input) input.focus();
+    document.getElementById("add").disabled = state.players.length >= MAX_PLAYERS;
+  });
+
+  document.getElementById("reset").addEventListener("click", function () {
+    var anyScores = state.players.some(function (p) { return filled(p) || p.extraYahtzees; });
+    if (!state.sample && anyScores && !confirm("Start a new game? The players stay, the scores are cleared.")) return;
+    restart(!state.sample);
+  });
+
+  document.getElementById("undo").addEventListener("click", function () {
+    var prev = history.pop();
+    if (!prev) return;
+    state = normalize(JSON.parse(prev)) || state;
+    save();
+    renderAll();
+    document.getElementById("undo").disabled = history.length === 0;
+  });
+
+  /* ---------- boot ---------- */
+
+  function start(carried) {
+    state = (carried && carried.game) || load() || sampleGame();
+    document.getElementById("undo").disabled = true;
+    renderAll();
+    document.getElementById("add").disabled = state.players.length >= MAX_PLAYERS;
+  }
+
+  try {
+    if (window.claude && window.claude.hot && window.claude.hot.snapshot) {
+      window.claude.hot.snapshot(function () { return { game: state }; });
+    }
+  } catch (e) { /* not running inside the artifact host */ }
+
+  if (window.claude && window.claude.hot && window.claude.hot.ready) {
+    window.claude.hot.ready(start);
+  } else {
+    start((window.claude && window.claude.hot && window.claude.hot.data) || {});
+  }
+})();
+</script>
+</body>
+</html>
