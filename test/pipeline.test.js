@@ -17,6 +17,7 @@ import { collectJsonLd, jsonLdToProfile } from '../src/harvest/extract/jsonld.js
 import { extractServices, extractFaqs, extractTestimonials } from '../src/harvest/extract/content.js';
 import { walk } from '../src/util/fs.js';
 import { image, brandLogo } from '../src/shell/components.js';
+import { schemaType } from '../src/render/seo.js';
 
 const sampleProfile = () => normalizeProfile({
   business: { name: 'Test Trades Co', category: 'HVAC contractor', description: 'We fix things.', serviceArea: ['Springfield'] },
@@ -179,6 +180,22 @@ test('every image carries an alt attribute, decorative ones included', () => {
   }
   assert.equal(attr(imgs[0], 'alt'), 'Acme logo', 'the first carries the accessible name');
   assert.equal(attr(imgs[1], 'alt'), '', 'the second is explicitly decorative');
+});
+
+test('schema type never claims a trade the business is not in', () => {
+  // A cleaning company was being marked up as a HousePainter, and a
+  // photographer as a Photograph (which is the picture, not the business).
+  // Every type returned must be a schema.org LocalBusiness subtype or the
+  // LocalBusiness/ProfessionalService fallbacks — never a CreativeWork, and
+  // never a sibling trade picked because it looked close enough.
+  assert.equal(schemaType('Cleaning service'), 'HomeAndConstructionBusiness');
+  assert.equal(schemaType('Domestic cleaning'), 'HomeAndConstructionBusiness');
+  assert.notEqual(schemaType('Cleaning service'), 'HousePainter');
+  assert.equal(schemaType('Photographer'), 'ProfessionalService');
+  assert.notEqual(schemaType('Photographer'), 'Photograph');
+  assert.equal(schemaType('House painter'), 'HousePainter', 'the painter type belongs to painters');
+  assert.equal(schemaType('Painter and decorator'), 'HousePainter');
+  assert.equal(schemaType(''), 'LocalBusiness');
 });
 
 test('theme suggestion weights category above service names', () => {

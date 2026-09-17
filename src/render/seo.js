@@ -12,7 +12,10 @@ export function schemaType(category = '') {
     [/roof/, 'RoofingContractor'],
     [/contractor|construct|remodel|builder/, 'GeneralContractor'],
     [/landscap|lawn|garden/, 'Landscaper'],
-    [/clean|maid|janitor/, 'HousePainter'],
+    // schema.org has no cleaning subtype. The parent is the accurate claim;
+    // HousePainter, which sat here before, told Google the business paints.
+    [/clean|maid|janitor/, 'HomeAndConstructionBusiness'],
+    [/paint|decorat/, 'HousePainter'],
     [/pest|exterminat/, 'PestControlService'],
     [/lock/, 'Locksmith'],
     [/mov(ing|er)/, 'MovingCompany'],
@@ -36,7 +39,8 @@ export function schemaType(category = '') {
     [/spa|massage/, 'DaySpa'],
     [/gym|fitness|crossfit|yoga|pilates/, 'ExerciseGym'],
     [/florist|flower/, 'Florist'],
-    [/photograph/, 'Photograph'],
+    // Photograph is a CreativeWork — the picture, not the person who took it.
+    [/photograph/, 'ProfessionalService'],
     [/child care|childcare|daycare|nursery/, 'ChildCare'],
     [/storage/, 'SelfStorage'],
     [/travel/, 'TravelAgency'],
