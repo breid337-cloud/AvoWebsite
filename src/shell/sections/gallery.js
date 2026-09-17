@@ -20,7 +20,7 @@ export function renderGallery(ctx, config = {}) {
     const alt = item.alt || `${profile.business.name} work, photo ${i + 1}`;
     return `  <figure class="gallery__item">
     <button class="gallery__trigger" type="button"${attrs({ 'data-lightbox': src, 'data-caption': item.caption || alt })}>
-      ${image(src, alt, { className: 'gallery__img', sizes: '(min-width: 900px) 33vw, 50vw' })}
+      ${image(src, alt, { className: 'gallery__img', sizes: '(min-width: 900px) 33vw, 50vw', variants: ctx.variantsFor?.(item.src) ?? null })}
       <span class="visually-hidden">View larger: ${escapeHtml(alt)}</span>
     </button>
 ${item.caption ? `    <figcaption>${escapeHtml(item.caption)}</figcaption>` : ''}

@@ -246,6 +246,45 @@ test('a full build produces valid, self-consistent output', async () => {
   }
 });
 
+test('every section that shows an image serves the responsive variants', async () => {
+  // Only the hero used to pass its variants through, so cards, the gallery,
+  // the about section and team photos loaded the full original. On the first
+  // real site that meant two 400KB JPEGs on the home page while 22KB WebP
+  // versions sat unused beside them.
+  let sharp;
+  try { sharp = (await import('sharp')).default; } catch { return; } // optional dep: skip, don't fail
+  const clientDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-client-'));
+  const outDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-variants-'));
+  try {
+    await fsp.mkdir(path.join(clientDir, 'assets'), { recursive: true });
+    for (const name of ['hero', 'svc', 'about', 'gal', 'team']) {
+      await sharp({ create: { width: 1200, height: 800, channels: 3, background: '#888' } })
+        .jpeg().toFile(path.join(clientDir, 'assets', `${name}.jpg`));
+    }
+    const profile = sampleProfile();
+    profile.content.hero.image = 'assets/hero.jpg';
+    profile.content.about.image = 'assets/about.jpg';
+    profile.services[0].image = 'assets/svc.jpg';
+    profile.gallery = [{ src: 'assets/gal.jpg', alt: 'One' }, { src: 'assets/gal.jpg', alt: 'Two' }, { src: 'assets/gal.jpg', alt: 'Three' }];
+    profile.team = [{ name: 'Ed', role: 'Owner', photo: 'assets/team.jpg' }];
+    await buildSite(profile, { themeId: 'forge', outDir, siteUrl: 'https://example.com', minify: false, clientDir });
+
+    const home = parseHtml(await fsp.readFile(path.join(outDir, 'index.html'), 'utf8'));
+    const withoutSrcset = qsa(home, 'img')
+      .filter((img) => /assets\/(hero|svc|about|gal|team)\.jpg/.test(attr(img, 'src') || ''))
+      .filter((img) => !attr(img, 'srcset'))
+      .map((img) => attr(img, 'src'));
+    assert.deepEqual(withoutSrcset, [], 'every content image carries a srcset');
+
+    const detail = parseHtml(await fsp.readFile(path.join(outDir, 'services', 'ac-repair', 'index.html'), 'utf8'));
+    const detailImg = qsa(detail, 'img').find((img) => /svc\.jpg/.test(attr(img, 'src') || ''));
+    assert.ok(detailImg && attr(detailImg, 'srcset'), 'the service detail image carries a srcset too');
+  } finally {
+    await fsp.rm(outDir, { recursive: true, force: true });
+    await fsp.rm(clientDir, { recursive: true, force: true });
+  }
+});
+
 test('a service can override its sticky card strapline and CTA', async () => {
   const outDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-strapline-'));
   try {
