@@ -378,9 +378,31 @@ test('no page repeats its own h1 as an h2', async () => {
   // printing the title the page header had already used as the h1.
   const outDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-headings-'));
   try {
-    const profile = sampleProfile();
-    profile.gallery = [1, 2, 3].map((n) => ({ src: `p${n}.jpg`, alt: `Photo ${n}` }));
+    // The sample must reach every page type, or the check passes by not
+    // building the page that is broken — which is exactly how the case studies
+    // page kept its duplicate heading after the first three were fixed.
+    // Re-normalised, because the renderer's contract is that it only ever sees
+    // a normalised profile — bolting raw objects onto an already-normalised one
+    // produces shapes that cannot occur in a real build.
+    const profile = normalizeProfile({
+      ...sampleProfile(),
+      gallery: [1, 2, 3].map((n) => ({ src: `p${n}.jpg`, alt: `Photo ${n}` })),
+      caseStudies: [{
+        slug: 'a-rebuild', client: 'Someone', summary: 'What changed and by how much.',
+        before: ['It was slow.'], after: ['It is not.'],
+        metrics: [{ label: 'Speed', before: '61', after: '97' }],
+      }],
+      legal: [{
+        slug: 'privacy', title: 'Privacy policy',
+        sections: [{ heading: 'Who we are', body: ['A paragraph.'] }],
+      }],
+    });
     await buildSite(profile, { themeId: 'forge', outDir, siteUrl: 'https://example.com', minify: false });
+
+    const built = (await walk(outDir)).filter((f) => f.endsWith('.html'));
+    for (const expected of ['gallery', 'services', 'work', 'privacy']) {
+      assert.ok(built.some((f) => f.includes(expected)), `the sample should build a ${expected} page`);
+    }
 
     const text = (el) => cleanText(el);
     for (const rel of await walk(outDir)) {

@@ -18,7 +18,7 @@ export function renderCaseStudies(ctx, config = {}) {
 
   const head = sectionHeader({
     eyebrow: config.preview ? 'Selected work' : null,
-    title: config.heading ?? 'Case studies',
+    title: 'heading' in config ? config.heading : 'Case studies',
     intro: config.intro ?? '',
     align: 'start',
     id: 'case-studies-title',

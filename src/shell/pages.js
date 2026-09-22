@@ -116,7 +116,8 @@ export function planPages(profile, { theme } = {}) {
       inNav: true,
       sections: [
         { type: 'pageHeader', title: 'Case studies' },
-        { type: 'caseStudies' },
+        // heading: null — the page header above is already this page's h1.
+        { type: 'caseStudies', heading: null },
         { type: 'cta' },
       ],
     });
