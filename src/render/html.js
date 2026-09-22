@@ -92,8 +92,12 @@ ${consentBanner}
  */
 function renderConsentBanner(profile, ctx) {
   const policy = profile.site.consent?.policyUrl || '';
+  // The banner renders on every page, so a site-relative policyUrl has to be
+  // resolved per page — a bare "privacy/" would resolve to
+  // /services/web-design/privacy/ on a nested page. Absolute URLs pass through.
+  const href = policy && !/^[a-z][a-z0-9+.-]*:|^\/\//i.test(policy) ? ctx.link(policy) : policy;
   const link = policy
-    ? ` <a class="consent__link" href="${escapeHtml(policy)}">Privacy policy</a>`
+    ? ` <a class="consent__link" href="${escapeHtml(href)}">Privacy policy</a>`
     : '';
   return `  <div class="consent" id="avo-consent-banner" role="dialog" aria-modal="false" aria-labelledby="avo-consent-title" hidden>
     <div class="consent__inner">

@@ -563,7 +563,10 @@ const CONSENT_CSS = `
   .consent__inner { grid-template-columns: 1fr auto; }
   .consent__btn { flex: 0 0 auto; }
 }
-.footer__consent { margin-top: var(--space-2); }
+.footer__legal-links { margin-top: var(--space-2); display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-2); }
+.footer__legal-links a { color: var(--text-muted); font-size: var(--step--1); text-decoration: underline; }
+.footer__legal-links a:hover { color: var(--text); }
+.legal__updated { color: var(--text-muted); font-size: var(--step--1); }
 .footer__consent-btn { background: none; border: 0; padding: 0; color: var(--text-muted);
   font: inherit; font-size: var(--step--1); text-decoration: underline; cursor: pointer; }
 .footer__consent-btn:hover { color: var(--text); }

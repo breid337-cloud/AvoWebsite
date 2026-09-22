@@ -64,7 +64,10 @@ ${nav.map((item) => `        <li><a href="${item.href}">${escapeHtml(item.label)
     <p>&copy; ${year} ${escapeHtml(profile.business.legalName || name)}. All rights reserved.</p>
     ${profile.business.serviceArea.length ? `<p class="footer__areas">Serving ${escapeHtml(profile.business.serviceArea.join(', '))}</p>` : ''}
     ${profile.business.licenses.length ? `<p class="footer__licence">${escapeHtml(profile.business.licenses.join(' · '))}</p>` : ''}
-    ${consentRequired(profile) ? `<p class="footer__consent"><button type="button" class="footer__consent-btn" data-consent="manage">Cookie settings</button></p>` : ''}
+    ${(profile.legal ?? []).length || consentRequired(profile) ? `<p class="footer__legal-links">${[
+      ...(profile.legal ?? []).map((l) => `<a href="${link(`${l.slug}/`)}">${escapeHtml(l.title)}</a>`),
+      consentRequired(profile) ? `<button type="button" class="footer__consent-btn" data-consent="manage">Cookie settings</button>` : '',
+    ].filter(Boolean).join('<span aria-hidden="true"> · </span>')}</p>` : ''}
   </div>
 </footer>`;
 }

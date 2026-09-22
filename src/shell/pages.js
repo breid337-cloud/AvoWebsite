@@ -152,6 +152,24 @@ export function planPages(profile, { theme } = {}) {
     ],
   });
 
+  // Legal pages sit outside the main nav — the footer links them — but they are
+  // real, indexable pages so a consent banner or a form can point at one.
+  for (const legal of profile.legal ?? []) {
+    pages.push({
+      slug: legal.slug,
+      url: `${legal.slug}/`,
+      outPath: `${legal.slug}/index.html`,
+      title: `${legal.title} | ${profile.business.name}`,
+      description: `${legal.title} for ${profile.business.name}.`,
+      navLabel: legal.title,
+      inNav: false,
+      sections: [
+        { type: 'pageHeader', title: legal.title },
+        { type: 'legal', slug: legal.slug },
+      ],
+    });
+  }
+
   pages.push({
     slug: '404',
     url: '404.html',

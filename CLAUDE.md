@@ -57,6 +57,10 @@ until it is accepted — the markup contains no `gtag.js` at all until then, whi
 is what PECR requires. Plausible is cookieless and never gated. The predicate is
 `consentRequired()` in `src/profile/schema.js`; see `docs/cookie-consent.md`.
 
+`content.legal` carries prose pages outside the main nav (privacy, terms), each
+built at `/<slug>/` and linked from the footer. Point the banner at one with
+`site.consent.policyUrl`; a relative value is resolved per page.
+
 ## Adding a profile field
 
 1. Add it to `emptyProfile()` in `src/profile/schema.js`.

@@ -3,6 +3,7 @@ import { renderHero } from './hero.js';
 import { renderTrustbar } from './trustbar.js';
 import { renderServices, renderServiceDetail } from './services.js';
 import { renderAbout } from './about.js';
+import { renderLegal } from './legal.js';
 import { renderGallery } from './gallery.js';
 import { renderCaseStudies } from './case-studies.js';
 import { renderTestimonials } from './testimonials.js';
@@ -20,6 +21,7 @@ export const SECTIONS = {
   services: renderServices,
   serviceDetail: renderServiceDetail,
   about: renderAbout,
+  legal: renderLegal,
   gallery: renderGallery,
   caseStudies: renderCaseStudies,
   testimonials: renderTestimonials,

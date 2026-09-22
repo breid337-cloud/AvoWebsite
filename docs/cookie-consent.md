@@ -65,3 +65,33 @@ choice and reopens the banner, so you can put one in a privacy policy page too.
 - **This is not legal advice.** It withholds the tag until consent and lets a
   visitor change their mind, which is the mechanical part. Whether your notice
   says enough about what you collect is your call.
+
+## Legal pages
+
+`content.legal` carries prose pages that sit outside the main nav — a privacy
+policy, terms, a cookie policy. Each becomes a real, indexable page at
+`/<slug>/`, linked from the footer of every page and listed in `sitemap.xml`.
+
+```jsonc
+"legal": [
+  {
+    "slug": "privacy",
+    "title": "Privacy policy",
+    "updated": "22 September 2026",
+    "sections": [
+      { "heading": "Who we are", "body": ["First paragraph.", "Second."] }
+    ]
+  }
+]
+```
+
+`body` accepts a string or an array of strings. Pages with no title or no
+sections are dropped by the normaliser rather than shipped empty.
+
+Point the banner at one with `site.consent.policyUrl`. A site-relative value is
+resolved per page, so `"privacy/"` becomes `../../privacy/` on a page two levels
+deep; an absolute URL is passed through untouched. A test covers both, because
+a bare relative href in the banner resolves under whatever page it renders on.
+
+The renderer is deliberately dumb: it prints the headings and paragraphs it is
+given and nothing else. What a legal page says is the client's to write.
