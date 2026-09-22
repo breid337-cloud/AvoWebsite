@@ -50,6 +50,13 @@ Data flows one way: **raw HTML → `raw.json` → `profile.json` → `dist/`**.
 4. Section variants named in `sections` must exist in the relevant renderer, or
    the section silently falls back to `cards`.
 
+## Analytics and consent
+
+`site.analytics.ga4` makes the build ship a consent banner and withhold the tag
+until it is accepted — the markup contains no `gtag.js` at all until then, which
+is what PECR requires. Plausible is cookieless and never gated. The predicate is
+`consentRequired()` in `src/profile/schema.js`; see `docs/cookie-consent.md`.
+
 ## Adding a profile field
 
 1. Add it to `emptyProfile()` in `src/profile/schema.js`.

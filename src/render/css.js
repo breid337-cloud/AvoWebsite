@@ -536,12 +536,38 @@ export function buildStylesheet(theme, { brand = {}, mode = 'light', darkMode = 
     parts.push(tokensToCss(light.vars, `:root[data-theme="${mode === 'dark' ? 'dark' : 'light'}"]`));
   }
 
+  parts.push(CONSENT_CSS.trim());
   parts.push(logoSwapCss({ mode, darkMode }));
   parts.push(BASE_CSS.trim());
   if (theme.extras?.css) parts.push(`/* ${theme.name} theme details */\n${theme.extras.css.trim()}`);
 
   return { css: parts.join('\n\n') + '\n', warnings: [...new Set(warnings)] };
 }
+
+/* Cookie consent banner. Sits above everything, styled from the theme tokens so
+   it belongs to the site rather than looking bolted on. */
+const CONSENT_CSS = `
+.consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: var(--surface);
+  border-top: 1px solid var(--border); box-shadow: var(--shadow-lg, 0 -8px 32px rgba(0,0,0,.16)); }
+.consent[hidden] { display: none; }
+.consent__inner { max-width: var(--container); margin-inline: auto; padding: var(--space-6) var(--gutter);
+  display: grid; gap: var(--space-5); align-items: center; }
+.consent__copy { min-width: 0; }
+.consent__title { font-size: var(--step-1); margin-bottom: var(--space-2); color: var(--text); }
+.consent__text { color: var(--text-muted); font-size: var(--step--1); line-height: 1.55; }
+.consent__link { color: var(--link); text-decoration: underline; white-space: nowrap; }
+/* Equal size, side by side: refusing must be exactly as easy as accepting. */
+.consent__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.consent__btn { flex: 1 1 auto; min-width: 8rem; justify-content: center; }
+@media (min-width: 46rem) {
+  .consent__inner { grid-template-columns: 1fr auto; }
+  .consent__btn { flex: 0 0 auto; }
+}
+.footer__consent { margin-top: var(--space-2); }
+.footer__consent-btn { background: none; border: 0; padding: 0; color: var(--text-muted);
+  font: inherit; font-size: var(--step--1); text-decoration: underline; cursor: pointer; }
+.footer__consent-btn:hover { color: var(--text); }
+`;
 
 /**
  * Show the logo master that suits the current background. Mirrors the token

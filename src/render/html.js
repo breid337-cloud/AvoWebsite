@@ -5,6 +5,7 @@ import { renderSection } from '../shell/sections/index.js';
 import { renderHeader } from '../shell/sections/header.js';
 import { renderFooter } from '../shell/sections/footer.js';
 import { icon } from '../shell/icons.js';
+import { consentRequired } from '../profile/schema.js';
 
 /** Full HTML document for one page. */
 export function renderDocument(ctx) {
@@ -18,15 +19,28 @@ export function renderDocument(ctx) {
 
   const body = page.sections.map((spec) => renderSection(ctx, spec)).filter(Boolean).join('\n\n');
 
+  // When consent is required the GA4 tag is NOT emitted. Its id is handed to the
+  // runtime as inert JSON instead, and site.js injects the script only after the
+  // visitor agrees — so no cookie is set before that, which is what UK PECR and
+  // the GDPR actually require. A banner that merely announces cookies already
+  // being set would not comply.
+  const gated = consentRequired(profile);
+  const ga4 = profile.site.analytics?.ga4 ?? '';
   const analytics = [
+    // Plausible is cookieless, so it loads regardless of the banner.
     profile.site.analytics?.plausible
       ? `<script defer data-domain="${escapeHtml(profile.site.analytics.plausible)}" src="https://plausible.io/js/script.js"></script>`
       : '',
-    profile.site.analytics?.ga4
-      ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${escapeHtml(profile.site.analytics.ga4)}"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${escapeHtml(profile.site.analytics.ga4)}');</script>`
+    ga4 && !gated
+      ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${escapeHtml(ga4)}"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${escapeHtml(ga4)}');</script>`
+      : '',
+    gated
+      ? `<script type="application/json" id="avo-consent">${JSON.stringify({ ga4, policyUrl: profile.site.consent?.policyUrl || '' })}</script>`
       : '',
   ].filter(Boolean).join('\n  ');
+
+  const consentBanner = gated ? renderConsentBanner(profile, ctx) : '';
 
   const themeToggle = options.themeToggle
     ? `<button class="btn btn--ghost theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch colour scheme">${icon('sparkle')}</button>`
@@ -59,10 +73,40 @@ ${body}
   </main>
 ${renderFooter(ctx)}
   ${themeToggle}
+${consentBanner}
   <script src="${escapeHtml(jsPath)}" defer></script>
 </body>
 </html>
 `;
+}
+
+/**
+ * Cookie consent banner. Ships hidden and is revealed by site.js only when no
+ * choice is stored, so a returning visitor never sees it again and a visitor
+ * with JS disabled sees nothing — correctly, since without JS the tag never
+ * loads either.
+ *
+ * Accept and Decline are the same size, side by side, one tap each. Regulators
+ * treat a hard-to-find refusal as no consent at all, so the two must stay
+ * equally easy to press.
+ */
+function renderConsentBanner(profile, ctx) {
+  const policy = profile.site.consent?.policyUrl || '';
+  const link = policy
+    ? ` <a class="consent__link" href="${escapeHtml(policy)}">Privacy policy</a>`
+    : '';
+  return `  <div class="consent" id="avo-consent-banner" role="dialog" aria-modal="false" aria-labelledby="avo-consent-title" hidden>
+    <div class="consent__inner">
+      <div class="consent__copy">
+        <h2 class="consent__title" id="avo-consent-title">Cookies</h2>
+        <p class="consent__text">We would like to use Google Analytics to see how people find and use this site. It sets cookies, so we only switch it on if you agree. Nothing is loaded until you choose.${link}</p>
+      </div>
+      <div class="consent__actions">
+        <button type="button" class="btn btn--primary consent__btn" data-consent="accept">Accept</button>
+        <button type="button" class="btn btn--ghost consent__btn" data-consent="decline">Decline</button>
+      </div>
+    </div>
+  </div>`;
 }
 
 /** A generated SVG favicon so every site ships one, logo or not. */

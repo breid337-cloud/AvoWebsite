@@ -324,3 +324,37 @@ test('all six themes build without error', async () => {
     }
   }
 });
+
+test('cookie consent withholds the analytics tag until it is granted', async () => {
+  const build = async (site) => {
+    const outDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-consent-'));
+    const profile = normalizeProfile({ ...sampleProfile(), site: { ...sampleProfile().site, ...site } });
+    await buildSite(profile, { themeId: 'forge', outDir, siteUrl: 'https://example.com', minify: false });
+    const html = await fsp.readFile(path.join(outDir, 'index.html'), 'utf8');
+    await fsp.rm(outDir, { recursive: true, force: true });
+    return html;
+  };
+
+  // GA4 + consent on: the tag must be absent from the markup entirely, because a
+  // banner that only announces already-set cookies would not comply.
+  const gated = await build({ analytics: { plausible: '', ga4: 'G-TEST123' } });
+  assert.ok(!gated.includes('googletagmanager.com'), 'gtag.js must not ship before consent');
+  assert.ok(gated.includes('id="avo-consent"'), 'the measurement id should ship as inert JSON');
+  assert.ok(gated.includes('id="avo-consent-banner"'), 'banner missing');
+  assert.ok(gated.includes('data-consent="accept"') && gated.includes('data-consent="decline"'), 'both choices must be offered');
+  assert.ok(gated.includes('data-consent="manage"'), 'withdrawing must be as easy as consenting');
+
+  // Explicitly disabled: the owner has taken responsibility, so the tag ships inline.
+  const ungated = await build({ analytics: { plausible: '', ga4: 'G-TEST123' }, consent: { enabled: false, policyUrl: '' } });
+  assert.ok(ungated.includes('googletagmanager.com'), 'tag should ship when consent is disabled');
+  assert.ok(!ungated.includes('id="avo-consent-banner"'), 'no banner when consent is disabled');
+
+  // Plausible is cookieless, so it needs no banner and is never withheld.
+  const plausible = await build({ analytics: { plausible: 'example.com', ga4: '' } });
+  assert.ok(plausible.includes('plausible.io'), 'plausible should load unconditionally');
+  assert.ok(!plausible.includes('id="avo-consent-banner"'), 'cookieless analytics needs no banner');
+
+  // Nothing configured: no banner, no tags.
+  const none = await build({ analytics: { plausible: '', ga4: '' } });
+  assert.ok(!none.includes('id="avo-consent-banner"'), 'no analytics means no banner');
+});
