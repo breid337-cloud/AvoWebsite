@@ -528,3 +528,52 @@ test('the consent banner links to the policy correctly from any page depth', asy
     await fsp.rm(outDir, { recursive: true, force: true });
   }
 });
+
+test('a service page renders its steps and price tiers, and nothing when it has none', async () => {
+  // steps[] and plans[] are optional. A service that declares neither must not
+  // sprout an empty "How it goes" heading with no list under it.
+  const profile = normalizeProfile({
+    ...JSON.parse(JSON.stringify(sampleProfile())),
+    services: [
+      {
+        name: 'AC Repair',
+        summary: 'We repair air conditioners quickly and properly.',
+        steps: [
+          { title: 'We look at it', text: 'Same day where we can.' },
+          { title: 'We quote it', text: 'In writing, before any work starts.' },
+          { title: 'We fix it' },
+        ],
+        plans: [
+          { name: 'Callout', price: 'From $89', period: 'per visit', summary: 'Diagnosis, then the quote.' },
+          { name: 'Cover', price: '$19', period: 'a month', summary: 'Two services a year.', featured: true },
+        ],
+      },
+      { name: 'Furnace Install', summary: 'We install furnaces sized for your home.' },
+    ],
+  });
+
+  const outDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-steps-'));
+  try {
+    await buildSite(profile, { themeId: 'forge', outDir, siteUrl: 'https://example.com', minify: false });
+
+    const withBoth = parseHtml(await fsp.readFile(path.join(outDir, 'services', 'ac-repair', 'index.html'), 'utf8'));
+    const steps = qsa(withBoth, 'ol.steps > li.step');
+    assert.equal(steps.length, 3, 'every step rendered, in one ordered list');
+    assert.equal(cleanText(qs(steps[0], '.step__title')), 'We look at it');
+    assert.equal(qs(steps[2], '.step__text'), null, 'a step with no body text gets no empty paragraph');
+
+    const plans = qsa(withBoth, 'ul.plans > li.plan');
+    assert.equal(plans.length, 2);
+    assert.equal(qsa(withBoth, '.plan--featured').length, 1, 'exactly one tier is highlighted');
+    assert.ok(cleanText(qs(plans[0], '.plan__price')).includes('From $89'), 'the price stays the string it was given');
+
+    const withNeither = parseHtml(await fsp.readFile(path.join(outDir, 'services', 'furnace-install', 'index.html'), 'utf8'));
+    assert.equal(qs(withNeither, '.steps'), null);
+    assert.equal(qs(withNeither, '.plans'), null);
+    const headings = qsa(withNeither, 'h2').map((h) => cleanText(h));
+    assert.ok(!headings.includes('How it goes'), 'no heading without a list under it');
+    assert.ok(!headings.includes('What it costs'));
+  } finally {
+    await fsp.rm(outDir, { recursive: true, force: true });
+  }
+});

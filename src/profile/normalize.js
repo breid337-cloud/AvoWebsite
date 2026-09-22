@@ -90,6 +90,20 @@ function normalizeService(service, index) {
     outcomes: arr(service?.outcomes)
       .map((o) => ({ icon: str(o?.icon), title: humanizeHeading(str(o?.title)), text: str(o?.text) }))
       .filter((o) => o.title && o.text),
+    // How the job runs, start to finish. Prices stay strings so a service can
+    // say "from £25", "POA" or "Free" without the renderer guessing at units.
+    steps: arr(service?.steps)
+      .map((s) => ({ title: humanizeHeading(str(s?.title)), text: str(s?.text) }))
+      .filter((s) => s.title),
+    plans: arr(service?.plans)
+      .map((p) => ({
+        name: humanizeHeading(str(p?.name)),
+        price: str(p?.price),
+        period: str(p?.period),
+        summary: str(p?.summary),
+        featured: p?.featured === true,
+      }))
+      .filter((p) => p.name && p.price),
     featured: service?.featured === true,
     sourceUrl: str(service?.sourceUrl),
   };

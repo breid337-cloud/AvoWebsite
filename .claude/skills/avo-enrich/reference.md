@@ -94,6 +94,16 @@ line, say, where the company strapline would read as boilerplate.
 pointing at the contact page. Set the label when "quote" is the wrong word for
 what the service asks of someone.
 
+`steps[]` — `{ title, text }`, in order. Renders as a numbered "How it goes"
+list. `text` is optional; a step with only a title gets no empty paragraph.
+
+`plans[]` — `{ name, price, period, summary, featured }`. Price tiers, rendered
+as "What it costs". `price` and `period` are strings, so "From £25" / "a month",
+"£299" / "one-off" and "POA" all work without the renderer guessing at units.
+Mark at most one tier `featured: true`; it gets the highlighted border.
+
+Both are optional, and the headings only appear when the array has entries.
+
 ## testimonials[]
 
 `{ quote, author, role, location, rating, source, date }`. **Verbatim from the

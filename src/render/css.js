@@ -413,6 +413,24 @@ body.nav-open { overflow: hidden; }
 .prose h2 { font-size: var(--step-2); margin-top: var(--space-6); }
 .prose p { color: var(--text-muted); }
 .sticky-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-7); display: grid; gap: var(--space-5); }
+/* How the job runs. An ordered list, because the order is the information. */
+.steps { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-5); counter-reset: avo-step; }
+.step { display: grid; grid-template-columns: 2.5rem 1fr; gap: var(--space-5); align-items: start; }
+.step::before { counter-increment: avo-step; content: counter(avo-step); font-family: var(--font-heading); font-weight: var(--fw-heading-strong); font-size: var(--step-2); color: var(--primary); line-height: 1; }
+.step__body { min-width: 0; }
+.step__title { font-size: var(--step-0); margin: 0 0 var(--space-2); }
+.step__text { color: var(--text-muted); margin: 0; }
+
+/* Price tiers. Grid rather than a table: on a phone a three-column table
+   either scrolls sideways or squeezes the words to one per line. */
+.plans { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
+.plan { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-5); min-width: 0; }
+.plan--featured { border-color: var(--primary); box-shadow: inset 0 0 0 1px var(--primary); }
+.plan__name { font-family: var(--font-heading); font-weight: var(--fw-heading); margin: 0 0 var(--space-2); }
+.plan__price { font-family: var(--font-heading); font-size: var(--step-3); font-weight: var(--fw-heading-strong); color: var(--primary); line-height: 1; margin: 0; }
+.plan__period { display: block; font-family: var(--font-body); font-size: var(--step--1); font-weight: var(--fw-body); color: var(--text-muted); margin-top: var(--space-1); }
+.plan__summary { color: var(--text-muted); font-size: var(--step--1); margin: var(--space-3) 0 0; }
+
 /* Styled as a heading but not marked up as one: it labels the CTA card, and as
    an <h2> it repeated the page's own h1 on every service page. */
 .sticky-card__title { font-size: var(--step-2); font-family: var(--font-heading); font-weight: var(--fw-heading); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); text-wrap: balance; margin: 0; }

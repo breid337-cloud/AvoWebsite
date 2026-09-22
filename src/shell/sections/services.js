@@ -109,6 +109,10 @@ ${service.outcomes?.length ? `    <h2>What that means for you</h2>
     <ul class="value-props value-props--stacked">${service.outcomes.map((o) => `<li class="value-prop"><span class="value-prop__icon">${icon(o.icon || 'checkCircle')}</span><div><h3 class="value-prop__title">${escapeHtml(o.title)}</h3><p class="value-prop__text">${escapeHtml(o.text)}</p></div></li>`).join('')}</ul>` : ''}
 ${service.features?.length ? `    <h2>What's included</h2>
     <ul class="tick-list tick-list--lg">${service.features.map((f) => `<li>${icon('check')}<span>${escapeHtml(f)}</span></li>`).join('')}</ul>` : ''}
+${service.steps?.length ? `    <h2>How it goes</h2>
+    <ol class="steps">${service.steps.map((s) => `<li class="step"><div class="step__body"><h3 class="step__title">${escapeHtml(s.title)}</h3>${s.text ? `<p class="step__text">${escapeHtml(s.text)}</p>` : ''}</div></li>`).join('')}</ol>` : ''}
+${service.plans?.length ? `    <h2>What it costs</h2>
+    <ul class="plans">${service.plans.map((p) => `<li class="plan${p.featured ? ' plan--featured' : ''}"><p class="plan__name">${escapeHtml(p.name)}</p><p class="plan__price">${escapeHtml(p.price)}${p.period ? `<span class="plan__period">${escapeHtml(p.period)}</span>` : ''}</p>${p.summary ? `<p class="plan__summary">${escapeHtml(p.summary)}</p>` : ''}</li>`).join('')}</ul>` : ''}
   </div>
   <aside class="prose-aside">
     <div class="sticky-card">
