@@ -18,6 +18,24 @@
         "import('./src/preview/static-server.js').then(async m => { const s = m.createStaticServer('clients/k9/dist'); await m.listen(s, 8791); console.log('serving k9 on 8791'); })"
       ],
       "port": 8791
+    },
+    {
+      "name": "goldi-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "-e",
+        "import('./src/preview/static-server.js').then(async m => { const s = m.createStaticServer('clients/goldi/dist/homestead'); await m.listen(s, 8792); console.log('serving goldi on 8792'); })"
+      ],
+      "port": 8792
+    },
+    {
+      "name": "avo-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "-e",
+        "import('./src/preview/static-server.js').then(async m => { const s = m.createStaticServer('../avosolution-website/avosolution/dist/folio'); await m.listen(s, 8793); console.log('serving avosolution on 8793'); })"
+      ],
+      "port": 8793
     }
   ]
 }

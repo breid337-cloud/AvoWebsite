@@ -1,14 +1,14 @@
 {
-  "ranAt": "2026-09-10T00:20:13.558Z",
+  "ranAt": "2026-09-22T22:37:28.635Z",
   "lighthouse": true,
   "sites": [
     {
       "name": "Jackson's Stonemasonry",
       "domain": "jacksonstonemasonry.com",
       "status": 200,
-      "responseMs": 600,
+      "responseMs": 353,
       "cert": {
-        "days": 90,
+        "days": 77,
         "expires": "2026-12-08",
         "issuer": "Let's Encrypt"
       },
@@ -24,16 +24,16 @@
         "lcp": 1.74,
         "samples": 5,
         "runs": 5,
-        "spread": 1
+        "spread": 8
       }
     },
     {
       "name": "Basingstoke K9 Companions",
       "domain": "basingstokek9companions.co.uk",
       "status": 200,
-      "responseMs": 335,
+      "responseMs": 401,
       "cert": {
-        "days": 80,
+        "days": 67,
         "expires": "2026-11-28",
         "issuer": "Let's Encrypt"
       },
@@ -47,35 +47,35 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 100,
-        "lcp": 2.01,
+        "lcp": 2.02,
         "samples": 5,
         "runs": 5,
-        "spread": 1
+        "spread": 2
       }
     },
     {
       "name": "AvoSolution",
       "domain": "avosolution.co.uk",
       "status": 200,
-      "responseMs": 203,
+      "responseMs": 190,
       "cert": {
-        "days": 80,
+        "days": 67,
         "expires": "2026-11-28",
         "issuer": "Let's Encrypt"
       },
       "dns": [
         "75.2.60.5"
       ],
-      "pages": 10,
+      "pages": 11,
       "lighthouse": {
         "performance": 100,
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 100,
-        "lcp": 0.92,
+        "lcp": 1.16,
         "samples": 5,
         "runs": 5,
-        "spread": 0
+        "spread": 2
       }
     }
   ],
@@ -112,13 +112,23 @@
     {
       "level": "note",
       "at": "Jackson's Stonemasonry",
+      "what": "Performance ranged 8 points across 5 runs — the median below is soft"
+    },
+    {
+      "level": "note",
+      "at": "Jackson's Stonemasonry",
       "what": "Performance is 97, not 100 (median of 5)"
     },
     {
       "level": "note",
       "at": "Basingstoke K9 Companions",
       "what": "Performance is 99, not 100 (median of 5)"
+    },
+    {
+      "level": "note",
+      "at": "AvoSolution",
+      "what": "Pages went up from 10 to 11"
     }
   ],
-  "previousRun": "2026-09-09T22:22:13.109Z"
+  "previousRun": "2026-09-10T00:20:13.558Z"
 }
