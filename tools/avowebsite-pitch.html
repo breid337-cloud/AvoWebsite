@@ -1,0 +1,379 @@
+<title>An AvoWebsite</title>
+<style>
+  /* AvoSolution pitch deck — palette and vocabulary from AvoSolution-Pitch-v1.
+     Two corrections, both for legibility: the brand blue #3A86DE gives white
+     text only 3.7:1, and the original cover gradient ran to #66a8f0 at 2.5:1.
+     #3A86DE is kept for fills that carry no text; --primary-ink (#2a63ad,
+     6.0:1) carries text. The same contrast-correction the generator applies to
+     a client's brand colour, applied to our own. */
+  :root {
+    --primary:     #3A86DE;
+    --primary-ink: #2a63ad;
+    --navy:        #232B5D;
+    --bg:          #F5F7FA;
+    --text:        #1f282e;
+    --muted:       #3f4c54;
+    --rule:        #dde3ea;
+    --good:        #1f6b3f;
+    --bad:         #9a3129;
+    --sans: Arial, Helvetica, "Segoe UI", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--sans); font-size: 17px; line-height: 1.65; -webkit-text-size-adjust: 100%;
+  }
+  section {
+    min-height: 100vh; padding: clamp(1.75rem, 6vw, 70px);
+    display: flex; flex-direction: column; justify-content: center;
+    border-bottom: 1px solid var(--rule);
+  }
+  .inner { width: 100%; max-width: 60rem; margin: 0 auto; }
+
+  h2 { color: var(--navy); font-size: clamp(1.9rem, 5.5vw, 42px); line-height: 1.1;
+       margin: 0 0 1.5rem; text-wrap: balance; }
+  h3 { font-size: 1.15rem; margin: 0 0 .5rem; color: var(--navy); }
+  p { margin: 0 0 1rem; max-width: 62ch; }
+  p:last-child { margin-bottom: 0; }
+  /* Navy is the emphasis colour on light grounds only. On the cover, the
+     closing panel and the blue step boxes, <strong> must inherit the white it
+     sits in — otherwise it renders navy on navy and disappears. */
+  strong { color: var(--navy); }
+  .cover strong, .closing strong, .flow strong, th strong { color: inherit; }
+  .lede { font-size: clamp(1.05rem, 2.5vw, 1.25rem); color: var(--muted); }
+
+  /* ── cover ─────────────────────────────────────────── */
+  .cover {
+    background: linear-gradient(135deg, var(--navy), #2f6fbe);
+    color: #fff; justify-content: space-between;
+  }
+  .cover .brand h1 { font-size: clamp(2rem, 7vw, 54px); margin: 0; line-height: 1; }
+  .cover .tag { letter-spacing: 3px; text-transform: uppercase; font-size: .85rem; font-weight: bold; margin: .7rem 0 0; color: #fff; }
+  .cover .hero { margin-top: auto; padding-top: 3rem; }
+  .cover .hero h2 { font-size: clamp(2.2rem, 9vw, 64px); color: #fff; margin: 0 0 .4rem; line-height: 1.02; }
+  .cover .hero h3 { color: #fff; font-size: clamp(1.1rem, 3vw, 1.5rem); font-weight: normal; margin: 0 0 1.5rem; }
+  .cover .hero p { color: #fff; margin: 0; }
+
+  /* ── cards ─────────────────────────────────────────── */
+  .card { background: #fff; padding: 24px; border-radius: 14px; box-shadow: 0 10px 25px rgba(0,0,0,.08); }
+  .card p:last-child { margin-bottom: 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  @media (max-width: 46rem) { .grid { grid-template-columns: 1fr; gap: 18px; } }
+
+  /* ── the four-step flow (the deck's architecture strip) ── */
+  .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 1.5rem; }
+  .flow div { background: var(--primary-ink); color: #fff; padding: 20px; border-radius: 10px; }
+  .flow b { display: block; font-size: 1.7rem; line-height: 1; margin-bottom: .5rem; color: #dce8f8; }
+  .flow span { font-size: .95rem; }
+  @media (max-width: 52rem) { .flow { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 30rem) { .flow { grid-template-columns: 1fr; gap: 12px; } }
+
+  /* ── tables ────────────────────────────────────────── */
+  .tablewrap { overflow-x: auto; border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; min-width: 34rem; }
+  th { background: var(--primary-ink); color: #fff; text-align: left; }
+  td, th { padding: 14px; border: 1px solid var(--rule); }
+  td.was { color: var(--bad); font-weight: bold; }
+  td.now { color: var(--good); font-weight: bold; }
+  .note { color: var(--muted); font-size: .95rem; margin-top: 1rem; }
+
+  /* ── lists ─────────────────────────────────────────── */
+  ul.ticks { list-style: none; padding: 0; margin: 0; display: grid; gap: .8rem; }
+  ul.ticks li { display: grid; grid-template-columns: 1.5rem 1fr; gap: .7rem; align-items: start; }
+  ul.ticks li > span { min-width: 0; }
+  ul.ticks li::before { content: "\2713"; color: var(--good); font-weight: bold; font-size: 1.1rem; line-height: 1.4; }
+  ul.nots li::before { content: "\2715"; color: var(--bad); }
+
+  .price-head { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; align-items: baseline; margin-bottom: 1.5rem; }
+  .price-head b { font-size: clamp(2.2rem, 7vw, 3rem); color: var(--navy); line-height: 1; display: block; }
+  .price-head span { color: var(--muted); font-size: .95rem; }
+  tr.pick td { background: #eef4fb; font-weight: bold; }
+
+  /* ── closing ───────────────────────────────────────── */
+  .closing { background: var(--navy); color: #fff; border-bottom: 0; }
+  .closing h2 { color: #fff; }
+  .closing p { color: #fff; }
+  .closing ol { font-size: 1.1rem; line-height: 2; padding-left: 1.3rem; margin: 0 0 2rem; }
+  .closing a { color: #fff; }
+  .closing .foot { color: #c3cbe0; font-size: .88rem; margin-top: 2.5rem; max-width: 60ch; }
+
+  a { color: var(--primary-ink); }
+  a:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+
+  @media print {
+    section { page-break-after: always; min-height: auto; }
+    .card { box-shadow: none; border: 1px solid var(--rule); }
+  }
+</style>
+
+<section class="cover">
+  <div class="brand">
+    <h1>AvoSolution</h1>
+    <p class="tag">Innovate in Style</p>
+  </div>
+  <div class="hero">
+    <h2>An AvoWebsite</h2>
+    <h3>Websites for small businesses that need to be found</h3>
+    <p>Built, measured, and looked after.</p>
+  </div>
+</section>
+
+<section>
+  <div class="inner">
+    <h2>Most small business websites are quietly losing work</h2>
+    <p class="lede">
+      Not because they look wrong. Because they are slow on a phone, and because Google either
+      cannot read them or does not know the pages exist.
+    </p>
+    <div class="grid" style="margin-top:1.5rem">
+      <div class="card">
+        <h3>What we usually find</h3>
+        <ul class="ticks nots">
+          <li><span>Nine seconds to appear on a phone</span></li>
+          <li><span>63 out of 100 for accessibility</span></li>
+          <li><span>No description for Google to show</span></li>
+          <li><span>Pages Google has never indexed</span></li>
+          <li><span>No listing on the map at all</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>What it costs the owner</h3>
+        <p>
+          Half of visitors leave a page that takes more than three seconds. The ones who stay
+          never saw it, because the business was not on the map when they searched.
+        </p>
+        <p><strong>None of this is visible from the office. All of it is measurable.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="inner">
+    <h2>So we measure yours first — free</h2>
+    <p class="lede">
+      Before any talk of a new site, we run the same checks Google runs, and send you the result.
+    </p>
+    <div class="grid" style="margin-top:1.5rem">
+      <div class="card">
+        <h3>What you get back</h3>
+        <ul class="ticks">
+          <li><span>Your four Google scores, out of 100</span></li>
+          <li><span>How many of your pages Google has actually indexed</span></li>
+          <li><span>Whether you appear on the map locally</span></li>
+          <li><span>A plain-English list of what is wrong</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>The terms</h3>
+        <p>It takes us about twenty minutes and costs you nothing.</p>
+        <p>
+          If your site comes back healthy we will tell you so, and you have lost nothing but the
+          email. <strong>It usually does not.</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="inner">
+    <h2>Then we rebuild it, and the numbers move</h2>
+    <p>
+      Google scores every website out of 100 in four areas. These are real clients, measured on a
+      phone connection. Open either site and check for yourself.
+    </p>
+    <div class="tablewrap">
+      <table>
+        <tr>
+          <th>Site</th><th>Speed before</th><th>Speed after</th><th>Accessibility</th><th>Best practice</th><th>SEO</th>
+        </tr>
+        <tr>
+          <td><a href="https://jacksonstonemasonry.com">Jackson's Stonemasonry</a></td>
+          <td class="was">61</td><td class="now">98</td><td class="now">100</td><td class="now">100</td><td class="now">100</td>
+        </tr>
+        <tr>
+          <td><a href="https://basingstokek9companions.co.uk">Basingstoke K9 Companions</a></td>
+          <td class="was">&mdash;</td><td class="now">100</td><td class="now">100</td><td class="now">100</td><td class="now">100</td>
+        </tr>
+        <tr>
+          <td>A cleaning company, Oxfordshire</td>
+          <td class="was">67</td><td class="now">99</td><td class="now">100</td><td class="now">100</td><td class="now">100</td>
+        </tr>
+        <tr>
+          <td><a href="https://avosolution.co.uk">AvoSolution</a> &mdash; our own site</td>
+          <td class="was">&mdash;</td><td class="now">100</td><td class="now">100</td><td class="now">100</td><td class="now">100</td>
+        </tr>
+      </table>
+    </div>
+    <p class="note">
+      K9's previous site was a Weebly page and AvoSolution's was a website-builder template, so
+      neither has a comparable before-score. The cleaning company is a rebuild we ran as a
+      demonstration and is unnamed here. Every figure is a median across repeated runs, not a best
+      result &mdash; Jackson's scores 95 to 100 depending on the phone and the signal, and 98 is
+      the middle of nine.
+      <strong>We hold our own site to the same standard we sell &mdash; open it and check.</strong>
+    </p>
+    <div class="card" style="margin-top:1.75rem">
+      <h3>Jackson's went further than the scores</h3>
+      <p>
+        Thirty-nine pages, and Google had indexed one of them &mdash; still showing text from a
+        site that had already been replaced. Once that was fixed, the site came up
+        <strong>first for &ldquo;stonemason winchcombe&rdquo;</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="inner">
+    <h2>What you get</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Built around the work you want</h3>
+        <p>Not a template with your logo dropped in. If fireplaces are where the money is, fireplaces lead.</p>
+      </div>
+      <div class="card">
+        <h3>A page for every service and town</h3>
+        <p>People search for a trade and a place together. A page that never names the place cannot answer that search.</p>
+      </div>
+      <div class="card">
+        <h3>Set up properly on Google</h3>
+        <p>Search Console, your sitemap submitted, your Business Profile checked. Most of what stops small firms being found happens here, not on the website.</p>
+      </div>
+      <div class="card">
+        <h3>Watched every week</h3>
+        <p>Uptime, security certificate, speed, and whether anything has quietly broken. You hear from us before you hear from a customer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="inner">
+    <h2>What we will never do</h2>
+    <div class="card">
+      <ul class="ticks nots">
+        <li><span><strong>Invent a review.</strong> Not one, not ever. Fake reviews are illegal in the UK, and we have removed them from a site we inherited rather than leave them up.</span></li>
+        <li><span><strong>Claim you are insured, accredited or award-winning</strong> unless you have told us you are.</span></li>
+        <li><span><strong>Make up a price, a guarantee or a response time</strong> on your behalf. Those are promises you have to keep, so you write them.</span></li>
+        <li><span><strong>Leave you guessing about who owns what.</strong> Whether the site is handed to you outright or stays with us to look after is agreed in writing before we start, not after. Your domain and your content are yours either way, and the only commitment is the twelve months on the care plan &mdash; written on the previous page rather than buried.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="inner">
+    <h2>What it costs</h2>
+    <div class="price-head">
+      <div><b>Free</b><span>to design and build it, with a care plan</span></div>
+      <div><b>&pound;39</b><span>a month, to host, watch and look after it</span></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <tr><th>Plan</th><th>Monthly</th><th>What it covers</th></tr>
+        <tr><td>Essential</td><td>&pound;25</td><td>Hosting, security certificate, weekly checks, and we fix it if it breaks</td></tr>
+        <tr class="pick"><td>Care</td><td>&pound;39</td><td>Everything above, plus changes made for you and a monthly search report</td></tr>
+        <tr><td>Growth</td><td>&pound;69</td><td>Everything above, plus Business Profile managed, reviews chased, new content quarterly</td></tr>
+      </table>
+    </div>
+    <p class="note">
+      <strong>Squarespace is &pound;24 a month and you do all the work yourself.</strong> Our
+      Essential plan is &pound;25 and we do it. A typical UK agency care plan runs
+      &pound;45&ndash;95, and most of them look at a site once a month rather than once a week.
+    </p>
+    <div class="grid" style="margin-top:1.75rem">
+      <div class="card">
+        <h3>Why the build is free</h3>
+        <p>
+          The hard parts are automated &mdash; we have spent two years building the machine that
+          does it. So we would rather earn your business over a year than charge you up front for
+          an afternoon's work.
+        </p>
+        <p>
+          <strong>Twelve months minimum on the care plan, then month to month.</strong> That is
+          what makes a free build work. Leave inside the first year and the &pound;299 build fee
+          becomes payable &mdash; nothing else.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Rather not have a plan?</h3>
+        <p>
+          The build on its own is <strong>&pound;299</strong>, and you host it wherever you like.
+          It is a plain, fast website with no system behind it to go wrong, so any host will run it.
+        </p>
+        <p>
+          You lose the weekly checks, the changes and the search reporting &mdash; which is most of
+          what the monthly fee buys.
+        </p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:1.5rem">
+      <h3>What a free build covers</h3>
+      <div class="grid" style="gap:1.5rem; margin-top:1rem">
+        <ul class="ticks">
+          <li><span><strong>Up to ten pages.</strong> Usually home, about, contact, a quote form and six or so services. More than that is fine &mdash; we just price it separately.</span></li>
+          <li><span><strong>Your words and your photographs</strong>, rewritten and laid out properly. We work from what you already have.</span></li>
+          <li><span><strong>One round of changes</strong> after you have seen it. After launch, changes are part of your monthly plan anyway.</span></li>
+          <li><span><strong>A contact form</strong> that emails you, and your existing web address moved across.</span></li>
+        </ul>
+        <ul class="ticks nots">
+          <li><span><strong>An online shop</strong> or card payments</span></li>
+          <li><span><strong>Customer logins</strong> or accounts</span></li>
+          <li><span><strong>A booking or diary system</strong></span></li>
+          <li><span><strong>Photography or a new logo</strong> &mdash; though we will tell you when one would help</span></li>
+        </ul>
+      </div>
+      <p style="margin-top:1.25rem">
+        <strong>It is a website, not a system &mdash; and that is deliberate.</strong> There is no
+        database and nothing installed that can break, go out of date or get hacked. It is why the
+        pages load in under two seconds and why the weekly check is usually boring. If you need a
+        shop or a booking system, say so and we will talk about it separately &mdash; that is
+        different work at a different price.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="inner">
+    <h2>How it goes</h2>
+    <div class="flow">
+      <div><b>1</b><span>We check your current site and send you the numbers. Free.</span></div>
+      <div><b>2</b><span>We build the new one and show you it working, before you pay.</span></div>
+      <div><b>3</b><span>You tell us what only you would know is wrong. We fix it.</span></div>
+      <div><b>4</b><span>It goes live on your own address, usually within a week.</span></div>
+    </div>
+    <div class="card" style="margin-top:1.75rem">
+      <p>
+        Your existing web address keeps working, and old links land on the matching new page rather
+        than an error &mdash; so nothing you have already handed out stops working.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="inner">
+    <h2>Next steps</h2>
+    <ol>
+      <li>Send us your web address</li>
+      <li>We send back what Google sees</li>
+      <li>We build it and show you</li>
+      <li>You decide</li>
+    </ol>
+    <p style="font-size:1.1rem">
+      <a href="https://avosolution.co.uk/contact/">avosolution.co.uk/contact</a>
+      &nbsp;&middot;&nbsp;
+      <a href="mailto:ask@avosolution.co.uk">ask@avosolution.co.uk</a>
+    </p>
+    <p style="font-size:1.35rem; margin-top:2.25rem"><strong>Not just a website. An AvoWebsite.</strong></p>
+    <p class="foot">
+      AvoSolution &middot; Web design and bespoke software development.
+      Scores measured with Google Lighthouse on a simulated mobile connection, medians of repeated
+      runs, September 2026.
+    </p>
+  </div>
+</section>
