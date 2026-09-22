@@ -75,7 +75,8 @@ export function planPages(profile, { theme } = {}) {
       inNav: true,
       sections: [
         { type: 'pageHeader', title: 'Our services', intro: profile.business.tagline },
-        { type: 'services' },
+        // heading: null — the page header above is already this page's h1.
+        { type: 'services', heading: null },
         has.faqs ? { type: 'faq' } : null,
         { type: 'cta' },
       ].filter(Boolean),
@@ -132,7 +133,8 @@ export function planPages(profile, { theme } = {}) {
       inNav: true,
       sections: [
         { type: 'pageHeader', title: 'Our work' },
-        { type: 'gallery' },
+        // heading: null — the page header above is already this page's h1.
+        { type: 'gallery', heading: null },
         { type: 'cta' },
       ],
     });

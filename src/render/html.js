@@ -1,6 +1,5 @@
 import { escapeHtml } from '../util/text.js';
 import { metaTags, buildJsonLd, hoursJson } from './seo.js';
-import { googleFontsHref } from '../themes/tokens.js';
 import { renderSection } from '../shell/sections/index.js';
 import { renderHeader } from '../shell/sections/header.js';
 import { renderFooter } from '../shell/sections/footer.js';
@@ -12,7 +11,6 @@ export function renderDocument(ctx) {
   const { profile, theme, page, pages, siteUrl, cssPath, jsPath, tokens, options } = ctx;
 
   const canonical = siteUrl ? new URL(page.url, siteUrl.endsWith('/') ? siteUrl : `${siteUrl}/`).toString() : '';
-  const fonts = googleFontsHref(theme);
   const lang = options.lang || 'en';
   const jsonLd = buildJsonLd(profile, page, { siteUrl, pages });
   const hours = hoursJson(profile);
@@ -54,9 +52,6 @@ export function renderDocument(ctx) {
   ${metaTags(profile, page, { siteUrl, canonical })}
   <meta name="theme-color" content="${escapeHtml(tokens['--primary'])}">
   <meta name="generator" content="Avo Website Builder">
-${fonts ? `  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="${escapeHtml(fonts)}">` : ''}
   <link rel="stylesheet" href="${escapeHtml(cssPath)}">
   <link rel="icon" href="${escapeHtml(ctx.link('favicon.svg'))}" type="image/svg+xml">
   <link rel="manifest" href="${escapeHtml(ctx.link('site.webmanifest'))}">

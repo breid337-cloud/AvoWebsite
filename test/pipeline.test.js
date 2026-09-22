@@ -8,7 +8,7 @@ import { normalizeProfile } from '../src/profile/normalize.js';
 import { validateProfile, scoreProfile } from '../src/profile/validate.js';
 import { buildSite } from '../src/render/index.js';
 import { THEME_IDS, getTheme, suggestTheme } from '../src/themes/index.js';
-import { compileTokens } from '../src/themes/tokens.js';
+import { compileTokens, fontFaceCss, fontFilesFor } from '../src/themes/tokens.js';
 import { contrast } from '../src/util/color.js';
 import { relativeUrl, planPages } from '../src/shell/pages.js';
 import { Robots } from '../src/harvest/fetcher.js';
@@ -282,6 +282,116 @@ test('every section that shows an image serves the responsive variants', async (
   } finally {
     await fsp.rm(outDir, { recursive: true, force: true });
     await fsp.rm(clientDir, { recursive: true, force: true });
+  }
+});
+
+test('every theme self-hosts its fonts and reaches no third-party origin', async () => {
+  // Loading fonts from Google cost two extra origins and a chain the browser
+  // cannot shorten — it must fetch the stylesheet before it learns the font
+  // URL. On a real build that put first paint at 3.0s; self-hosted it is 1.4s.
+  // A theme that quietly went back to Google would undo that invisibly.
+  for (const id of THEME_IDS) {
+    const theme = getTheme(id);
+    const families = new Set(
+      [theme.fonts.heading, theme.fonts.body].filter((f) => f.google).map((f) => f.google),
+    );
+    const css = fontFaceCss(theme);
+    const files = fontFilesFor(theme);
+
+    if (!families.size) {
+      assert.equal(css, '', `${id} ships no webfont, so it should emit no @font-face`);
+      assert.deepEqual(files, [], `${id} should need no font files`);
+      continue;
+    }
+    assert.ok(css.includes('@font-face'), `${id} declares fonts but emits no @font-face`);
+    assert.ok(files.length > 0, `${id} emits @font-face but copies no files`);
+    assert.ok(!/fonts\.(googleapis|gstatic)/.test(css), `${id} still points at Google`);
+    for (const family of families) {
+      assert.ok(css.includes(`font-family: '${family}'`), `${id} is missing a face for ${family}`);
+    }
+    // Declared and copied must agree, or a page renders in the fallback stack.
+    const referenced = [...css.matchAll(/url\('fonts\/([^']+)'\)/g)].map((m) => m[1]);
+    assert.deepEqual([...new Set(referenced)].sort(), [...new Set(files)].sort(),
+      `${id} references different files from the ones it copies`);
+  }
+});
+
+test('a built site loads no third-party font, and the files are really there', async () => {
+  const outDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-fonts-'));
+  try {
+    await buildSite(sampleProfile(), { themeId: 'forge', outDir, siteUrl: 'https://example.com', minify: false });
+    const css = await fsp.readFile(path.join(outDir, 'styles.css'), 'utf8');
+    const html = await fsp.readFile(path.join(outDir, 'index.html'), 'utf8');
+
+    assert.ok(!/fonts\.googleapis|fonts\.gstatic/.test(html), 'no Google font link in the markup');
+    assert.ok(!/fonts\.googleapis|fonts\.gstatic/.test(css), 'no Google font import in the stylesheet');
+    assert.ok(css.includes('@font-face'), 'the stylesheet declares its own faces');
+
+    const files = await walk(outDir);
+    for (const m of css.matchAll(/url\('fonts\/([^']+)'\)/g)) {
+      assert.ok(files.includes(path.join('fonts', m[1])), `${m[1]} declared but not copied into the build`);
+    }
+  } finally {
+    await fsp.rm(outDir, { recursive: true, force: true });
+  }
+});
+
+test('srcset candidates resolve from the page that uses them', async () => {
+  // A variant path is stored relative to the site root. Handed over raw it put
+  // "assets/…" into a srcset on /gallery/, which resolves to
+  // /gallery/assets/… — and because a matching srcset candidate beats src, the
+  // image broke even though src itself was correct. It only showed on nested
+  // pages, which is why it survived a homepage check.
+  let sharp;
+  try { sharp = (await import('sharp')).default; } catch { return; }
+  const clientDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-srcset-client-'));
+  const outDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-srcset-'));
+  try {
+    await fsp.mkdir(path.join(clientDir, 'assets'), { recursive: true });
+    await sharp({ create: { width: 1200, height: 800, channels: 3, background: '#777' } })
+      .jpeg().toFile(path.join(clientDir, 'assets', 'shot.jpg'));
+    const profile = sampleProfile();
+    profile.gallery = [1, 2, 3].map((n) => ({ src: 'assets/shot.jpg', alt: `Photo ${n}` }));
+    await buildSite(profile, { themeId: 'forge', outDir, siteUrl: 'https://example.com', minify: false, clientDir });
+
+    const html = await fsp.readFile(path.join(outDir, 'gallery', 'index.html'), 'utf8');
+    const sets = [...html.matchAll(/srcset="([^"]+)"/g)].map((m) => m[1]);
+    assert.ok(sets.length > 0, 'the gallery page serves a srcset');
+    const files = await walk(outDir);
+    for (const set of sets) {
+      for (const candidate of set.split(',')) {
+        const url = candidate.trim().split(/\s+/)[0];
+        assert.ok(url.startsWith('../'), `srcset "${url}" is not resolved for a nested page`);
+        const onDisk = url.replace(/^\.\.\//, '').split('/').join(path.sep);
+        assert.ok(files.includes(onDisk), `srcset points at ${url}, which is not in the build`);
+      }
+    }
+  } finally {
+    await fsp.rm(outDir, { recursive: true, force: true });
+    await fsp.rm(clientDir, { recursive: true, force: true });
+  }
+});
+
+test('no page repeats its own h1 as an h2', async () => {
+  // Eight of twelve pages did. `config.heading ?? 'Our work'` cannot express
+  // "no heading" — null is exactly what ?? falls through on — so a section kept
+  // printing the title the page header had already used as the h1.
+  const outDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-headings-'));
+  try {
+    const profile = sampleProfile();
+    profile.gallery = [1, 2, 3].map((n) => ({ src: `p${n}.jpg`, alt: `Photo ${n}` }));
+    await buildSite(profile, { themeId: 'forge', outDir, siteUrl: 'https://example.com', minify: false });
+
+    const text = (el) => cleanText(el);
+    for (const rel of await walk(outDir)) {
+      if (!rel.endsWith('.html')) continue;
+      const doc = parseHtml(await fsp.readFile(path.join(outDir, rel), 'utf8'));
+      const h1 = qsa(doc, 'h1').map(text);
+      const repeated = qsa(doc, 'h2').map(text).filter((t) => t && h1.includes(t));
+      assert.deepEqual(repeated, [], `${rel} repeats its h1 as an h2`);
+    }
+  } finally {
+    await fsp.rm(outDir, { recursive: true, force: true });
   }
 });
 

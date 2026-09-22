@@ -1,4 +1,5 @@
 import { ensureContrast, contrast, mix, ramp, parseColor, toHex, bestForeground } from '../util/color.js';
+import { FONT_FILES } from './fonts/manifest.js';
 
 /**
  * Compile a theme (plus any brand overrides harvested from the old site) into
@@ -149,6 +150,44 @@ export function tokensToCss(vars, selector = ':root') {
 }
 
 /** Google Fonts stylesheet URL for whatever the theme actually uses. */
+export function fontFaceCss(theme) {
+  const rules = [];
+  for (const family of familiesOf(theme)) {
+    for (const face of FONT_FILES[family] ?? []) {
+      rules.push([
+        '@font-face {',
+        `  font-family: '${family}';`,
+        `  font-style: ${face.style};`,
+        `  font-weight: ${face.weight};`,
+        '  font-display: swap;',
+        `  src: url('fonts/${face.file}') format('woff2');`,
+        `  unicode-range: ${face.unicodeRange};`,
+        '}',
+      ].join('\n'));
+    }
+  }
+  return rules.join('\n');
+}
+
+/** The font files a theme needs copied into the build. */
+export function fontFilesFor(theme) {
+  return familiesOf(theme).flatMap((f) => (FONT_FILES[f] ?? []).map((x) => x.file));
+}
+
+function familiesOf(theme) {
+  const set = new Set();
+  for (const font of [theme.fonts.heading, theme.fonts.body]) {
+    if (font.google) set.add(font.google);
+  }
+  return [...set].sort();
+}
+
+/**
+ * Google Fonts stylesheet URL. The build self-hosts instead — see fontFaceCss —
+ * because loading from Google costs two extra origins and a chain the browser
+ * cannot shorten: it must fetch the stylesheet before it learns the font's URL.
+ * Kept because it is the reference for what the manifest has to cover.
+ */
 export function googleFontsHref(theme) {
   // Merge weights per family: requesting the same family twice is invalid.
   const byFamily = new Map();

@@ -16,7 +16,7 @@ export function renderServices(ctx, config = {}) {
 
   const head = sectionHeader({
     eyebrow: config.preview ? 'What we do' : null,
-    title: config.heading ?? 'Our services',
+    title: 'heading' in config ? config.heading : 'Our services',
     intro: config.intro ?? (config.preview ? profile.business.tagline : ''),
     align: style === 'features' || style === 'menu' ? 'center' : 'start',
     id: 'services-title',
@@ -112,7 +112,7 @@ ${service.features?.length ? `    <h2>What's included</h2>
   </div>
   <aside class="prose-aside">
     <div class="sticky-card">
-      <h2 class="sticky-card__title">${escapeHtml(service.name)}</h2>
+      <p class="sticky-card__title">${escapeHtml(service.name)}</p>
       ${service.price ? `<p class="sticky-card__price">${escapeHtml(service.price)}${service.priceNote ? `<span>${escapeHtml(service.priceNote)}</span>` : ''}</p>` : ''}
       <p>${escapeHtml(service.strapline || profile.business.tagline || `Talk to ${profile.business.name} about your ${service.name.toLowerCase()}.`)}</p>
       ${button(ctx.cta(service.cta, { label: 'Request a quote' }), { variant: 'primary', className: 'btn--block' })}

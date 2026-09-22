@@ -1,6 +1,8 @@
 import path from 'node:path';
+import fsp from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import { getTheme } from '../themes/index.js';
-import { compileTokens } from '../themes/tokens.js';
+import { compileTokens, fontFilesFor } from '../themes/tokens.js';
 import { buildStylesheet, minifyCss } from './css.js';
 import { RUNTIME_JS, minifyJs } from './js.js';
 import { renderDocument, faviconSvg } from './html.js';
@@ -82,7 +84,16 @@ export async function buildSite(profile, options = {}) {
       },
       asset: (p) => (p && !/^(https?:)?\/\//i.test(p) ? link(p) : p),
       variant: (name) => theme.sections[name] ?? 'cards',
-      variantsFor: (src) => variants.get(src) ?? null,
+      // Variant paths are stored relative to the site root, so they must be
+      // resolved for the current page exactly like any other asset. Handing
+      // them over raw put "assets/…" in a srcset on /gallery/, which the
+      // browser resolved to /gallery/assets/… and failed — and because a
+      // matching srcset candidate beats src, the image broke even though src
+      // was correct.
+      variantsFor: (src) => {
+        const list = variants.get(src);
+        return list ? list.map((v) => ({ ...v, src: link(v.src) })) : null;
+      },
       cssPath: link('styles.css'),
       jsPath: link('site.js'),
     };
@@ -93,6 +104,7 @@ export async function buildSite(profile, options = {}) {
 
   // ── Shared files ───────────────────────────────────────────────────
   await writeText(path.join(outDir, 'styles.css'), minify ? minifyCss(css) : css);
+  await copyFonts(theme, outDir);
   await writeText(path.join(outDir, 'site.js'), minify ? minifyJs(RUNTIME_JS) : RUNTIME_JS);
   await writeText(path.join(outDir, 'favicon.svg'), faviconSvg(profile, tokens));
   await writeText(path.join(outDir, 'site.webmanifest'), webManifest(profile, tokens));
@@ -134,6 +146,28 @@ export async function buildSite(profile, options = {}) {
     notes: validation.notes,
     score: scoreProfile(profile),
   };
+}
+
+/**
+ * Copy the theme's self-hosted webfonts into the build, next to styles.css so
+ * the relative url() in the @font-face rules resolves.
+ *
+ * A missing file is a warning, not a failure: the theme's fallback stack still
+ * renders the site. Losing a typeface is survivable; refusing to build is not.
+ */
+async function copyFonts(theme, outDir) {
+  const files = fontFilesFor(theme);
+  if (!files.length) return;
+  const srcDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'themes', 'fonts');
+  const destDir = path.join(outDir, 'fonts');
+  await ensureDir(destDir);
+  for (const file of files) {
+    try {
+      await fsp.copyFile(path.join(srcDir, file), path.join(destDir, file));
+    } catch (err) {
+      log.warn(`font ${file} could not be copied (${err.code}); the fallback stack will be used`);
+    }
+  }
 }
 
 /** Build the same profile in every theme, into sibling folders. */

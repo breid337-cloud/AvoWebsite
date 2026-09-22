@@ -10,7 +10,7 @@ export function renderGallery(ctx, config = {}) {
 
   const head = sectionHeader({
     eyebrow: config.preview ? 'Recent work' : null,
-    title: config.heading ?? 'Our work',
+    title: 'heading' in config ? config.heading : 'Our work',
     align: 'start',
     id: 'gallery-title',
   });
