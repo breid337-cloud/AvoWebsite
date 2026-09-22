@@ -358,3 +358,41 @@ test('cookie consent withholds the analytics tag until it is granted', async () 
   const none = await build({ analytics: { plausible: '', ga4: '' } });
   assert.ok(!none.includes('id="avo-consent-banner"'), 'no analytics means no banner');
 });
+
+test('the consent banner links to the policy correctly from any page depth', async () => {
+  const outDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-policy-'));
+  try {
+    const base = sampleProfile();
+    const profile = normalizeProfile({
+      ...base,
+      site: { ...base.site, analytics: { plausible: '', ga4: 'G-TEST123' }, consent: { enabled: true, policyUrl: 'privacy/' } },
+      legal: [{ slug: 'privacy', title: 'Privacy policy', sections: [{ heading: 'Who we are', body: ['Us.'] }] }],
+    });
+    await buildSite(profile, { themeId: 'forge', outDir, siteUrl: 'https://example.com', minify: false });
+
+    const files = await walk(outDir);
+    assert.ok(files.includes(path.join('privacy', 'index.html')), 'legal page not built');
+
+    const grab = async (rel) => {
+      const html = await fsp.readFile(path.join(outDir, rel), 'utf8');
+      return attr(qs(parseHtml(html), 'a.consent__link'), 'href');
+    };
+    // A bare "privacy/" on a nested page would resolve under that page.
+    assert.equal(await grab('index.html'), 'privacy/');
+    const nested = await grab(path.join('services', 'index.html'));
+    assert.ok(nested.startsWith('../'), `nested banner link should climb out, got ${nested}`);
+
+    // An absolute URL is left exactly as given.
+    const outDir2 = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-policy-abs-'));
+    const abs = normalizeProfile({
+      ...base,
+      site: { ...base.site, analytics: { plausible: '', ga4: 'G-T' }, consent: { enabled: true, policyUrl: 'https://example.org/privacy' } },
+    });
+    await buildSite(abs, { themeId: 'forge', outDir: outDir2, siteUrl: 'https://example.com', minify: false });
+    const absHtml = await fsp.readFile(path.join(outDir2, 'index.html'), 'utf8');
+    assert.equal(attr(qs(parseHtml(absHtml), 'a.consent__link'), 'href'), 'https://example.org/privacy');
+    await fsp.rm(outDir2, { recursive: true, force: true });
+  } finally {
+    await fsp.rm(outDir, { recursive: true, force: true });
+  }
+});

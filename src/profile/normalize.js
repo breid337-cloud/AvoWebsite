@@ -208,6 +208,19 @@ export function normalizeProfile(input = {}, { slug } = {}) {
   p.team = arr(p.team)
     .map((m) => ({ name: str(m?.name), role: str(m?.role), bio: str(m?.bio), photo: str(m?.photo), email: str(m?.email), phone: str(m?.phone) }))
     .filter((m) => m.name);
+  p.legal = arr(p.legal)
+    .map((page, i) => ({
+      slug: slugify(page?.slug || page?.title || '', `page-${i + 1}`),
+      title: str(page?.title),
+      updated: str(page?.updated),
+      sections: arr(page?.sections)
+        .map((sec) => ({
+          heading: str(sec?.heading),
+          body: (typeof sec?.body === 'string' ? [sec.body] : arr(sec?.body)).map(str).filter(Boolean),
+        }))
+        .filter((sec) => sec.heading || sec.body.length),
+    }))
+    .filter((page) => page.title && page.sections.length);
   p.faqs = arr(p.faqs)
     .map((f) => ({ question: str(f?.question ?? f?.q), answer: str(f?.answer ?? f?.a) }))
     .filter((f) => f.question && f.answer);

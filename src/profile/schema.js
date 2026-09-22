@@ -125,6 +125,10 @@ export function emptyProfile(slug = 'client') {
     testimonials: [],
     team: [],
     faqs: [],
+    // Prose pages that sit outside the main nav and are linked from the footer:
+    // privacy policy, terms, cookie policy. Each is { slug, title, updated,
+    // sections: [{ heading, body: [] }] }.
+    legal: [],
     caseStudies: [],
     seo: { title: '', description: '', keywords: [], ogImage: '', canonical: '' },
     site: {
