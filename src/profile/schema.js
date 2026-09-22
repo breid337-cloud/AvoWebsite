@@ -53,6 +53,19 @@ export const FIELDS = [
   { path: 'seo.description', label: 'SEO description', weight: 4, hint: '140–160 characters.' },
 ];
 
+/**
+ * True when the profile configures something that sets cookies before a visitor
+ * has agreed to it. Only GA4 qualifies today — Plausible is cookieless, so
+ * gating it would cost analytics for no privacy gain.
+ *
+ * Used by the renderer, the stylesheet and the footer so they cannot disagree
+ * about whether a banner exists.
+ */
+export function consentRequired(profile) {
+  if (profile?.site?.consent?.enabled === false) return false;
+  return isFilled(profile?.site?.analytics?.ga4);
+}
+
 export function getPath(obj, path) {
   return path.split('.').reduce((acc, key) => (acc == null ? undefined : acc[key]), obj);
 }
@@ -118,6 +131,10 @@ export function emptyProfile(slug = 'client') {
       theme: 'meridian', mode: 'light', domain: '', pages: null,
       form: { action: '', method: 'POST', provider: 'none' },
       analytics: { plausible: '', ga4: '' },
+      // Cookie consent. `enabled` only matters when something cookie-setting is
+      // configured: Plausible is cookieless and is never gated, so a site with
+      // only Plausible shows no banner however this is set.
+      consent: { enabled: true, policyUrl: '' },
       // Ownership tokens for search consoles. Grouped by provider like
       // analytics, because Bing and the rest work exactly the same way.
       verification: { google: '' },

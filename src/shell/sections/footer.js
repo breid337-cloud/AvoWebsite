@@ -2,7 +2,7 @@ import { escapeHtml } from '../../util/text.js';
 import { brandLogo } from '../components.js';
 import { icon, brandIcon } from '../icons.js';
 import { telHref, formatPhone, formatAddress } from '../../profile/normalize.js';
-import { SOCIAL_NETWORKS, DAYS } from '../../profile/schema.js';
+import { SOCIAL_NETWORKS, DAYS, consentRequired } from '../../profile/schema.js';
 
 export function renderFooter(ctx) {
   const { profile, nav, link, asset, buildInfo } = ctx;
@@ -64,6 +64,7 @@ ${nav.map((item) => `        <li><a href="${item.href}">${escapeHtml(item.label)
     <p>&copy; ${year} ${escapeHtml(profile.business.legalName || name)}. All rights reserved.</p>
     ${profile.business.serviceArea.length ? `<p class="footer__areas">Serving ${escapeHtml(profile.business.serviceArea.join(', '))}</p>` : ''}
     ${profile.business.licenses.length ? `<p class="footer__licence">${escapeHtml(profile.business.licenses.join(' · '))}</p>` : ''}
+    ${consentRequired(profile) ? `<p class="footer__consent"><button type="button" class="footer__consent-btn" data-consent="manage">Cookie settings</button></p>` : ''}
   </div>
 </footer>`;
 }

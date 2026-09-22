@@ -169,6 +169,78 @@ export const RUNTIME_JS = `
     });
   }
 
+  /* ── Cookie consent ────────────────────────────────────────────── */
+  // The analytics tag is deliberately absent from the HTML. It is injected here
+  // only after the visitor accepts, so declining (or ignoring the banner) means
+  // no Google cookie is ever set.
+  var consentData = doc.getElementById('avo-consent');
+  var consentBanner = doc.getElementById('avo-consent-banner');
+  if (consentData && consentBanner) {
+    var KEY = 'avo-consent';
+    var cfg = {};
+    try { cfg = JSON.parse(consentData.textContent) || {}; } catch (e) { cfg = {}; }
+
+    var readChoice = function () {
+      try { return localStorage.getItem(KEY); } catch (e) { return null; }
+    };
+    var writeChoice = function (value) {
+      // Private browsing and blocked storage both throw. Failing to remember is
+      // survivable — the banner simply asks again next visit.
+      try { localStorage.setItem(KEY, value); } catch (e) {}
+    };
+
+    var loaded = false;
+    var loadAnalytics = function () {
+      if (loaded || !cfg.ga4) return;
+      loaded = true;
+      var tag = doc.createElement('script');
+      tag.async = true;
+      tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(cfg.ga4);
+      doc.head.appendChild(tag);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', cfg.ga4);
+    };
+
+    var lastFocus = null;
+    var openBanner = function () {
+      lastFocus = doc.activeElement;
+      consentBanner.hidden = false;
+      var first = consentBanner.querySelector('[data-consent]');
+      if (first) first.focus();
+    };
+    var closeBanner = function () {
+      consentBanner.hidden = true;
+      // Send focus back where it was, so a keyboard user is not dropped at the
+      // top of the document.
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    };
+
+    consentBanner.addEventListener('click', function (e) {
+      var button = e.target.closest ? e.target.closest('[data-consent]') : null;
+      if (!button) return;
+      var choice = button.getAttribute('data-consent');
+      if (choice === 'accept') { writeChoice('granted'); loadAnalytics(); }
+      else { writeChoice('denied'); }
+      closeBanner();
+    });
+
+    // Withdrawing has to be as easy as giving, so the footer carries a control
+    // that reopens this with the current choice cleared.
+    doc.addEventListener('click', function (e) {
+      var manage = e.target.closest ? e.target.closest('[data-consent="manage"]') : null;
+      if (!manage) return;
+      e.preventDefault();
+      try { localStorage.removeItem(KEY); } catch (err) {}
+      openBanner();
+    });
+
+    var choice = readChoice();
+    if (choice === 'granted') loadAnalytics();
+    else if (choice !== 'denied') openBanner();
+  }
+
   /* ── Scroll reveal ─────────────────────────────────────────────── */
   var revealables = doc.querySelectorAll('.section, .hero__copy, .card');
   if (!reduceMotion && 'IntersectionObserver' in window && revealables.length) {
