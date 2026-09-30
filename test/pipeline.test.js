@@ -654,3 +654,56 @@ test('a UK address is read from its postcode, and a US one still wins where it a
   // are not, and matching them used to invent an address out of a URL.
   assert.equal(extractAddress(parseHtml('<body><p>?ver=bd3d6ba style=e433be</p></body>')), null);
 });
+
+test('an image below the smallest breakpoint still gets a modern format', async () => {
+  // Variants were skipped entirely under 640px wide, which conflates "needs
+  // resizing" with "would benefit from WebP". Twenty of one client's twenty-six
+  // images were under the threshold, including a 300px PNG shipping at 50KB.
+  let sharp;
+  try { sharp = (await import('sharp')).default; } catch { return; } // optional dep
+  const clientDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-small-'));
+  const outDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-small-out-'));
+  try {
+    await fsp.mkdir(path.join(clientDir, 'assets'), { recursive: true });
+    // A 300px true-colour gradient: the photographic case, where PNG stores
+    // every pixel and WebP does not. Random noise would be the wrong test —
+    // nothing compresses it, so the size guard would correctly drop the
+    // variant and the test would fail for a reason it is not about.
+    const w = 300;
+    const hgt = 275;
+    const px = Buffer.alloc(w * hgt * 3);
+    for (let y = 0; y < hgt; y++) {
+      for (let x = 0; x < w; x++) {
+        const i = (y * w + x) * 3;
+        px[i] = (x * 255) / w;
+        px[i + 1] = (y * 255) / hgt;
+        px[i + 2] = ((x + y) * 255) / (w + hgt);
+      }
+    }
+    await sharp(px, { raw: { width: w, height: hgt, channels: 3 } })
+      .png().toFile(path.join(clientDir, 'assets', 'small.png'));
+
+    const profile = normalizeProfile({
+      ...sampleProfile(),
+      gallery: [1, 2, 3].map(() => ({ src: 'assets/small.png', alt: 'A small picture' })),
+    });
+    profile.gallery = [{ src: 'assets/small.png', alt: 'A small picture' }];
+    profile.content.hero.image = 'assets/small.png';
+    await buildSite(profile, { themeId: 'forge', outDir, siteUrl: 'https://example.com', minify: false, clientDir });
+
+    const built = await walk(path.join(outDir, 'assets'));
+    const webp = built.find((f) => /small-\d+\.webp$/.test(f));
+    assert.ok(webp, 'a WebP variant exists for an image narrower than 480px');
+
+    const original = await fsp.stat(path.join(outDir, 'assets', 'small.png'));
+    const variant = await fsp.stat(path.join(outDir, 'assets', webp));
+    assert.ok(variant.size < original.size, 'the variant is smaller than what it replaces');
+
+    const home = parseHtml(await fsp.readFile(path.join(outDir, 'index.html'), 'utf8'));
+    const img = qsa(home, 'img').find((i) => /small\.png/.test(attr(i, 'src') || ''));
+    assert.ok(attr(img, 'srcset')?.includes('.webp'), 'and the page offers it');
+  } finally {
+    await fsp.rm(outDir, { recursive: true, force: true });
+    await fsp.rm(clientDir, { recursive: true, force: true });
+  }
+});

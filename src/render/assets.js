@@ -28,13 +28,29 @@ export async function processAssets(clientDir, outDir, { responsive = true } = {
     try {
       const image = sharp(full);
       const meta = await image.metadata();
-      if (!meta.width || meta.width < 640) continue;
+      if (!meta.width) continue;
+
+      // Anything narrower than the smallest breakpoint used to be skipped
+      // entirely. There is nothing to resize there, but there is still a format
+      // to gain: one client's 300px PNG shipped at 50KB where WebP is 6KB, and
+      // twenty of their twenty-six images were under the threshold.
+      const widths = RESPONSIVE_WIDTHS.filter((w) => w <= meta.width);
+      if (!widths.length) widths.push(meta.width);
 
       const list = [];
-      for (const width of RESPONSIVE_WIDTHS) {
-        if (width > meta.width) continue;
+      for (const width of widths) {
         const outRel = rel.replace(/\.(jpe?g|png|webp)$/i, `-${width}.webp`);
-        await sharp(full).resize({ width }).webp({ quality: 78 }).toFile(path.join(destDir, outRel));
+        const outFull = path.join(destDir, outRel);
+        await sharp(full).resize({ width }).webp({ quality: 78 }).toFile(outFull);
+        // A small, already-tight JPEG can come out bigger as WebP. Keep the
+        // original rather than shipping a larger file for a modern format.
+        if (width === meta.width) {
+          const [variant, original] = await Promise.all([fsp.stat(outFull), fsp.stat(full)]);
+          if (variant.size >= original.size) {
+            await fsp.rm(outFull, { force: true });
+            continue;
+          }
+        }
         list.push({ src: path.posix.join('assets', outRel.split(path.sep).join('/')), width });
         made++;
       }
