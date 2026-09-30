@@ -90,15 +90,23 @@ export function ratingStars(rating) {
  * dark-background master, emit both and let CSS pick — matching the colour
  * scheme *and* the manual theme toggle, which a <picture media> cannot do.
  */
-export function brandLogo(profile, asset, { className = '', loading = 'lazy', fetchpriority = null } = {}) {
+export function brandLogo(profile, asset, { className = '', loading = 'lazy', fetchpriority = null, variantsFor = null, sizes = '220px' } = {}) {
   const { logo, logoDark } = profile.brand;
   if (!logo) return wordmark(profile.business.name);
   const alt = `${profile.business.name} logo`;
   const cls = (extra) => ['logo__img', className, extra].filter(Boolean).join(' ');
-  const light = image(asset(logo), alt, { className: cls(logoDark && 'logo__img--light'), loading, fetchpriority });
+  // The header logo is eager and high priority, so it is the first thing the
+  // browser fetches. A harvested logo is routinely a multi-megapixel JPEG —
+  // one client's was 773KB for a mark shown at 220px — and without a srcset
+  // every page paid for it.
+  const opts = (name, extra, alt_) => image(asset(name), alt_, {
+    className: cls(extra), loading, fetchpriority, sizes,
+    variants: variantsFor?.(name) ?? null,
+  });
+  const light = opts(logo, logoDark && 'logo__img--light', alt);
   if (!logoDark) return light;
   // The second copy is decorative: the first already carries the accessible name.
-  return light + image(asset(logoDark), '', { className: cls('logo__img--dark'), loading, fetchpriority });
+  return light + opts(logoDark, 'logo__img--dark', '');
 }
 
 export function wordmark(name) {

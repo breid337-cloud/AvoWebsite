@@ -35,7 +35,7 @@ ${DAYS.filter((d) => profile.contact.hours.some((h) => h.day === d)).map((day) =
   <div class="container site-footer__inner">
     <div class="footer__col footer__col--brand">
       <a class="brand brand--footer" href="${link('')}">${
-        brandLogo(profile, asset)
+        brandLogo(profile, asset, { variantsFor: ctx.variantsFor })
       }</a>
       ${profile.business.tagline ? `<p class="footer__tagline">${escapeHtml(profile.business.tagline)}</p>` : ''}
       ${socialLinks ? `<ul class="social">${socialLinks}</ul>` : ''}

@@ -264,11 +264,12 @@ test('every section that shows an image serves the responsive variants', async (
   const outDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'avo-variants-'));
   try {
     await fsp.mkdir(path.join(clientDir, 'assets'), { recursive: true });
-    for (const name of ['hero', 'svc', 'about', 'gal', 'team']) {
+    for (const name of ['hero', 'svc', 'about', 'gal', 'team', 'logo']) {
       await sharp({ create: { width: 1200, height: 800, channels: 3, background: '#888' } })
         .jpeg().toFile(path.join(clientDir, 'assets', `${name}.jpg`));
     }
     const profile = sampleProfile();
+    profile.brand.logo = 'assets/logo.jpg';
     profile.content.hero.image = 'assets/hero.jpg';
     profile.content.about.image = 'assets/about.jpg';
     profile.services[0].image = 'assets/svc.jpg';
@@ -278,7 +279,7 @@ test('every section that shows an image serves the responsive variants', async (
 
     const home = parseHtml(await fsp.readFile(path.join(outDir, 'index.html'), 'utf8'));
     const withoutSrcset = qsa(home, 'img')
-      .filter((img) => /assets\/(hero|svc|about|gal|team)\.jpg/.test(attr(img, 'src') || ''))
+      .filter((img) => /assets\/(hero|svc|about|gal|team|logo)\.jpg/.test(attr(img, 'src') || ''))
       .filter((img) => !attr(img, 'srcset'))
       .map((img) => attr(img, 'src'));
     assert.deepEqual(withoutSrcset, [], 'every content image carries a srcset');
@@ -286,6 +287,15 @@ test('every section that shows an image serves the responsive variants', async (
     const detail = parseHtml(await fsp.readFile(path.join(outDir, 'services', 'ac-repair', 'index.html'), 'utf8'));
     const detailImg = qsa(detail, 'img').find((img) => /svc\.jpg/.test(attr(img, 'src') || ''));
     assert.ok(detailImg && attr(detailImg, 'srcset'), 'the service detail image carries a srcset too');
+
+    // The header logo is eager and fetchpriority=high, so it is the first
+    // request on every page. A harvested logo is routinely a multi-megapixel
+    // JPEG: one client's was 773KB for a mark displayed 220px wide.
+    const logos = qsa(home, 'img.logo__img');
+    assert.ok(logos.length >= 2, 'header and footer both render the logo');
+    assert.ok(attr(logos[0], 'srcset'), 'the header logo carries a srcset');
+    assert.equal(attr(logos[0], 'loading'), 'eager');
+    assert.ok(attr(logos.at(-1), 'srcset'), 'so does the footer logo');
   } finally {
     await fsp.rm(outDir, { recursive: true, force: true });
     await fsp.rm(clientDir, { recursive: true, force: true });

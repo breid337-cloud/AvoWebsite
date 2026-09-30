@@ -15,7 +15,7 @@ export function renderHeader(ctx) {
   const name = profile.business.name;
   const phone = profile.contact.phone;
 
-  const logo = brandLogo(profile, ctx.asset, { loading: 'eager', fetchpriority: 'high' });
+  const logo = brandLogo(profile, ctx.asset, { loading: 'eager', fetchpriority: 'high', variantsFor: ctx.variantsFor });
 
   const brand = `<a class="brand" href="${link('')}"${attrs({ 'aria-label': `${name} — home` })}>${logo}</a>`;
 

@@ -36,6 +36,15 @@
         "import('./src/preview/static-server.js').then(async m => { const s = m.createStaticServer('../avosolution-website/avosolution/dist/folio'); await m.listen(s, 8793); console.log('serving avosolution on 8793'); })"
       ],
       "port": 8793
+    },
+    {
+      "name": "unicomp-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "-e",
+        "import('./src/preview/static-server.js').then(async m => { const s = m.createStaticServer('clients/unicomp/dist/meridian'); await m.listen(s, 8794); console.log('serving unicomp on 8794'); })"
+      ],
+      "port": 8794
     }
   ]
 }
