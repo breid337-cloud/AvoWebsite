@@ -36,7 +36,8 @@ export function schemaType(category = '') {
     [/caterer|catering/, 'FoodEstablishment'],
     [/salon|hair|barber/, 'HairSalon'],
     [/nail/, 'NailSalon'],
-    [/spa|massage/, 'DaySpa'],
+    // \b on both sides: "spares", "spare parts" and "space" are not day spas.
+    [/\bspas?\b|massage/, 'DaySpa'],
     [/gym|fitness|crossfit|yoga|pilates/, 'ExerciseGym'],
     [/florist|flower/, 'Florist'],
     // Photograph is a CreativeWork — the picture, not the person who took it.

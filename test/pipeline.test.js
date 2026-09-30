@@ -196,6 +196,12 @@ test('schema type never claims a trade the business is not in', () => {
   assert.notEqual(schemaType('Photographer'), 'Photograph');
   assert.equal(schemaType('House painter'), 'HousePainter', 'the painter type belongs to painters');
   assert.equal(schemaType('Painter and decorator'), 'HousePainter');
+  // 'spa' matched inside 'spares', so a printer spare-parts distributor
+  // was marked up as a day spa.
+  assert.equal(schemaType('Spare parts distribution and repair'), 'LocalBusiness');
+  assert.notEqual(schemaType('Printer spares distributor'), 'DaySpa');
+  assert.equal(schemaType('Day spa'), 'DaySpa', 'real spas keep their type');
+  assert.equal(schemaType('Massage therapy'), 'DaySpa');
   assert.equal(schemaType(''), 'LocalBusiness');
 });
 
