@@ -12,7 +12,7 @@ import { compileTokens, fontFaceCss, fontFilesFor } from '../src/themes/tokens.j
 import { contrast } from '../src/util/color.js';
 import { relativeUrl, planPages } from '../src/shell/pages.js';
 import { Robots } from '../src/harvest/fetcher.js';
-import { extractContact } from '../src/harvest/extract/contact.js';
+import { extractContact, extractAddress } from '../src/harvest/extract/contact.js';
 import { collectJsonLd, jsonLdToProfile } from '../src/harvest/extract/jsonld.js';
 import { extractServices, extractFaqs, extractTestimonials } from '../src/harvest/extract/content.js';
 import { extractImages } from '../src/harvest/extract/media.js';
@@ -599,4 +599,25 @@ test('a lazy-loaded image is harvested from data-src, not skipped for its placeh
   assert.ok(urls.includes('https://example.com/uploads/plain.jpg'), 'a plain src still works');
   assert.ok(!urls.some((u) => u.startsWith('data:')), 'no placeholder is kept as an image');
   assert.equal(images.find((i) => i.url.endsWith('logo.jpg'))?.role, 'logo');
+});
+
+test('a UK address is read from its postcode, and a US one still wins where it applies', () => {
+  // There is no state code to anchor on in the UK, so the postcode does the
+  // work. Unicomp's address sat on every page of the site and harvested as
+  // nothing, which left the local SEO markup empty.
+  const uk = extractAddress(parseHtml(
+    '<body><footer>Call us Address Bourne Enterprise Centre, Wrotham Rd, Borough Green, Sevenoaks TN15 8DG</footer></body>',
+  ));
+  assert.equal(uk.address.postalCode, 'TN15 8DG');
+  assert.equal(uk.address.city, 'Sevenoaks');
+  assert.equal(uk.address.street, 'Bourne Enterprise Centre, Wrotham Rd, Borough Green');
+  assert.equal(uk.address.country, 'GB');
+
+  const us = extractAddress(parseHtml('<body><address>1 Main St, Springfield, IL 62701</address></body>'));
+  assert.equal(us.address.country, 'US');
+  assert.equal(us.address.region, 'IL');
+
+  // Lowercase runs in cache-busting query strings look like postcodes; they
+  // are not, and matching them used to invent an address out of a URL.
+  assert.equal(extractAddress(parseHtml('<body><p>?ver=bd3d6ba style=e433be</p></body>')), null);
 });

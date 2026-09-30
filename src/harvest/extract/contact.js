@@ -83,6 +83,49 @@ export function extractEmails(doc) {
   return uniqueBy(found, (e) => e.value);
 }
 
+/**
+ * UK addresses have no state code to anchor on, so the postcode does the work:
+ * its shape is unambiguous and it always comes last. Uppercase only — lowercase
+ * "matches" are almost always a hex fragment from a cache-busting query string.
+ */
+const UK_POSTCODE = '[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}';
+const UK_ADDRESS_RE = new RegExp(
+  '((?:[A-Za-z0-9][^,\\n]{1,58},\\s*){1,4})' + // street lines, comma separated
+    '([A-Za-z][A-Za-z .\'-]{1,40}?)?\\s*' +    // post town, if it shares a segment
+    '(?<![A-Z0-9])(' + UK_POSTCODE + ')(?![A-Z0-9])',
+);
+
+// A contact page's text has no punctuation between a form's labels and the
+// address that follows, so the first segment arrives as "… Send Message
+// Address Bourne Enterprise Estate". Strip up to the last label word.
+const ADDRESS_LABEL = /^[\s\S]*\b(?:address|location|find us|visit us|our office|head office|send message|message|contact(?: us)?|email|phone|tel)\b[\s:.,–-]*/i;
+
+function matchUkAddress(text) {
+  const m = UK_ADDRESS_RE.exec(text);
+  if (!m) return null;
+
+  const parts = m[1].split(',').map((s) => squash(s)).filter(Boolean);
+  if (parts.length) parts[0] = squash(parts[0].replace(ADDRESS_LABEL, ''));
+  if (!parts[0]) parts.shift();
+  const trailing = squash(m[2] ?? '');
+  // The post town is whatever sits directly before the postcode: either the
+  // tail of the last comma segment, or the last segment itself.
+  const city = trailing || parts.pop() || '';
+  if (!city || !parts.length) return null;
+
+  return {
+    address: {
+      street: parts.join(', '),
+      street2: '',
+      city,
+      region: '',
+      postalCode: squash(m[3]).toUpperCase(),
+      country: 'GB',
+    },
+    raw: squash(m[0]),
+  };
+}
+
 export function extractAddress(doc) {
   // Microdata first — it is explicit.
   const streetEl = qs(doc, '[itemprop=streetAddress]');
@@ -106,21 +149,27 @@ export function extractAddress(doc) {
   candidates.push(cleanText(qs(doc, 'body') ?? doc));
 
   for (const text of candidates) {
+    const confidence = candidates.indexOf(text) < candidates.length - 1 ? 'medium' : 'low';
+
     const m = US_ADDRESS_RE.exec(text);
-    if (!m) continue;
-    return {
-      address: {
-        street: squash(m[1]),
-        street2: squash(m[2] ?? ''),
-        city: squash(m[3]),
-        region: m[4].toUpperCase(),
-        postalCode: m[5],
-        country: 'US',
-      },
-      confidence: candidates.indexOf(text) < candidates.length - 1 ? 'medium' : 'low',
-      source: 'text pattern',
-      raw: squash(m[0]),
-    };
+    if (m) {
+      return {
+        address: {
+          street: squash(m[1]),
+          street2: squash(m[2] ?? ''),
+          city: squash(m[3]),
+          region: m[4].toUpperCase(),
+          postalCode: m[5],
+          country: 'US',
+        },
+        confidence,
+        source: 'text pattern',
+        raw: squash(m[0]),
+      };
+    }
+
+    const uk = matchUkAddress(text);
+    if (uk) return { ...uk, confidence, source: 'text pattern' };
   }
   return null;
 }
