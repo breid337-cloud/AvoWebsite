@@ -15,6 +15,7 @@ import { Robots } from '../src/harvest/fetcher.js';
 import { extractContact } from '../src/harvest/extract/contact.js';
 import { collectJsonLd, jsonLdToProfile } from '../src/harvest/extract/jsonld.js';
 import { extractServices, extractFaqs, extractTestimonials } from '../src/harvest/extract/content.js';
+import { extractImages } from '../src/harvest/extract/media.js';
 import { walk } from '../src/util/fs.js';
 import { image, brandLogo } from '../src/shell/components.js';
 import { schemaType } from '../src/render/seo.js';
@@ -576,4 +577,26 @@ test('a service page renders its steps and price tiers, and nothing when it has 
   } finally {
     await fsp.rm(outDir, { recursive: true, force: true });
   }
+});
+
+test('a lazy-loaded image is harvested from data-src, not skipped for its placeholder', () => {
+  // W3 Total Cache and most WordPress lazy loaders put an inline SVG data: URI
+  // in src and the real file in data-src. Reading src first and then rejecting
+  // it for being a data: URI dropped every image on the page — a whole site
+  // harvested with no photographs and no logo.
+  const placeholder = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E';
+  const doc = parseHtml(`<body>
+    <img class="lazy" src="${placeholder}" data-src="/wp-content/uploads/logo.jpg" alt="Acme" id="logo" width="300" height="120">
+    <img src="${placeholder}" data-srcset="/uploads/wide-400.jpg 400w, /uploads/wide-1200.jpg 1200w" alt="Workshop">
+    <img src="/uploads/plain.jpg" alt="Plain">
+  </body>`);
+
+  const images = extractImages(doc, 'https://example.com/');
+  const urls = images.map((i) => i.url);
+  assert.equal(images.length, 3, 'every image survives its placeholder');
+  assert.ok(urls.includes('https://example.com/wp-content/uploads/logo.jpg'));
+  assert.ok(urls.includes('https://example.com/uploads/wide-1200.jpg'), 'widest data-srcset candidate wins');
+  assert.ok(urls.includes('https://example.com/uploads/plain.jpg'), 'a plain src still works');
+  assert.ok(!urls.some((u) => u.startsWith('data:')), 'no placeholder is kept as an image');
+  assert.equal(images.find((i) => i.url.endsWith('logo.jpg'))?.role, 'logo');
 });

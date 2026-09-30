@@ -17,19 +17,32 @@ function fromSrcset(value) {
   return candidates.sort((a, b) => b.score - a.score)[0]?.url ?? '';
 }
 
+/** First candidate that is a real file rather than an inline placeholder. */
+function firstUsable(...values) {
+  return values.find((v) => v && !v.startsWith('data:')) ?? '';
+}
+
 /** All usable images on the page, de-duplicated and classified. */
 export function extractImages(doc, baseUrl) {
   const out = [];
 
   for (const img of qsa(doc, 'img')) {
     // Lazy-loading attributes are extremely common on the sites we harvest.
-    const raw =
-      attr(img, 'src') ||
-      attr(img, 'data-src') ||
-      attr(img, 'data-lazy-src') ||
-      attr(img, 'data-original') ||
-      fromSrcset(attr(img, 'srcset') || attr(img, 'data-srcset'));
-    if (!raw || raw.startsWith('data:')) continue;
+    // A lazy loader puts a placeholder in src and the real file in data-src,
+    // and W3 Total Cache's placeholder is an inline SVG data: URI — so the
+    // first *usable* candidate is what we want, not the first non-empty one.
+    // Taking src and then rejecting it for being a data: URI skipped every
+    // image on the page.
+    const raw = firstUsable(
+      attr(img, 'src'),
+      attr(img, 'data-src'),
+      attr(img, 'data-lazy-src'),
+      attr(img, 'data-original'),
+      fromSrcset(attr(img, 'srcset')),
+      fromSrcset(attr(img, 'data-srcset')),
+      fromSrcset(attr(img, 'data-lazy-srcset')),
+    );
+    if (!raw) continue;
     const url = absolutize(raw, baseUrl);
     if (!url || TRACKING_HOSTS.test(url)) continue;
     if (JUNK_NAME.test(basename(url))) continue;
