@@ -24,12 +24,18 @@ export function renderServices(ctx, config = {}) {
 
   const href = (service) => (hasServicePages ? link(`services/${service.slug}/`) : link('contact/'));
 
+  // Each service sits one level under this section's own heading. Where the
+  // page header is already the heading (heading: null, so the page does not
+  // repeat its h1 as an h2) the services move up a level — otherwise the
+  // outline jumps h1 to h3, which fails the heading-order audit.
+  const h = head ? 'h3' : 'h2';
+
   const body = {
     numbered: () => `<ol class="service-list service-list--numbered">
 ${services.map((s, i) => `  <li class="service-row">
     <span class="service-number" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
     <div class="service-row__body">
-      <h3 class="service-row__title"><a href="${href(s)}">${escapeHtml(s.name)}</a></h3>
+      <${h} class="service-row__title"><a href="${href(s)}">${escapeHtml(s.name)}</a></${h}>
       ${s.summary ? `<p>${escapeHtml(s.summary)}</p>` : ''}
       ${s.price ? `<p class="service-row__price">${escapeHtml(s.price)}</p>` : ''}
     </div>
@@ -39,7 +45,7 @@ ${services.map((s, i) => `  <li class="service-row">
     menu: () => `<div class="menu-list">
 ${services.map((s) => `  <article class="menu-item">
     <div>
-      <h3 class="menu-item__name"><a href="${href(s)}">${escapeHtml(s.name)}</a></h3>
+      <${h} class="menu-item__name"><a href="${href(s)}">${escapeHtml(s.name)}</a></${h}>
       ${s.summary ? `<p class="menu-item__desc">${escapeHtml(s.summary)}</p>` : ''}
     </div>
     ${s.price ? `<p class="menu-item__price">${escapeHtml(s.price)}</p>` : ''}
@@ -49,7 +55,7 @@ ${services.map((s) => `  <article class="menu-item">
     features: () => `<ul class="feature-grid">
 ${services.map((s) => `  <li class="feature">
     <span class="feature__icon">${icon(s.icon || iconForService(s.name))}</span>
-    <h3 class="feature__title"><a href="${href(s)}">${escapeHtml(s.name)}</a></h3>
+    <${h} class="feature__title"><a href="${href(s)}">${escapeHtml(s.name)}</a></${h}>
     ${s.summary ? `<p class="feature__text">${escapeHtml(truncate(s.summary, 150))}</p>` : ''}
   </li>`).join('\n')}
 </ul>`,
@@ -57,7 +63,7 @@ ${services.map((s) => `  <li class="feature">
     list: () => `<ul class="service-list">
 ${services.map((s) => `  <li class="service-row">
     <div class="service-row__body">
-      <h3 class="service-row__title"><a href="${href(s)}">${escapeHtml(s.name)}</a></h3>
+      <${h} class="service-row__title"><a href="${href(s)}">${escapeHtml(s.name)}</a></${h}>
       ${s.summary ? `<p>${escapeHtml(s.summary)}</p>` : ''}
     </div>
     ${icon('arrow', 'icon service-row__arrow')}
@@ -68,7 +74,7 @@ ${services.map((s) => `  <li class="service-row">
 ${services.map((s) => `  <li class="card card--service">
     ${s.image ? `<div class="card__media">${image(asset(s.image), s.name, { className: 'card__img', sizes: '(min-width: 900px) 33vw, 100vw', variants: ctx.variantsFor?.(s.image) ?? null })}</div>` : `<span class="card__icon">${icon(s.icon || iconForService(s.name))}</span>`}
     <div class="card__body">
-      <h3 class="card__title"><a class="stretched" href="${href(s)}">${escapeHtml(s.name)}</a></h3>
+      <${h} class="card__title"><a class="stretched" href="${href(s)}">${escapeHtml(s.name)}</a></${h}>
       ${s.summary ? `<p class="card__text">${escapeHtml(truncate(s.summary, 160))}</p>` : ''}
       ${s.price ? `<p class="card__price">${escapeHtml(s.price)}</p>` : ''}
       ${s.features?.length ? `<ul class="tick-list">${s.features.slice(0, 4).map((f) => `<li>${icon('check')}<span>${escapeHtml(f)}</span></li>`).join('')}</ul>` : ''}

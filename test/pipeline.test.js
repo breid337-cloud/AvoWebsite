@@ -428,6 +428,23 @@ test('no page repeats its own h1 as an h2', async () => {
       const h1 = qsa(doc, 'h1').map(text);
       const repeated = qsa(doc, 'h2').map(text).filter((t) => t && h1.includes(t));
       assert.deepEqual(repeated, [], `${rel} repeats its h1 as an h2`);
+
+      // Removing the duplicate heading left the cards beneath it at h3 with no
+      // h2 above them, so the outline jumped h1 to h3 and the page lost two
+      // points of accessibility. Fixing one heading bug made the other.
+      const levels = [];
+      (function walk(node) {
+        for (const child of node.children ?? []) {
+          if (/^h[1-6]$/.test(child.tag ?? '')) levels.push(Number(child.tag[1]));
+          walk(child);
+        }
+      })(qs(doc, 'main') ?? doc);
+      for (let i = 1; i < levels.length; i++) {
+        assert.ok(
+          levels[i] <= levels[i - 1] + 1,
+          `${rel} skips a heading level: h${levels[i - 1]} straight to h${levels[i]}`,
+        );
+      }
     }
   } finally {
     await fsp.rm(outDir, { recursive: true, force: true });

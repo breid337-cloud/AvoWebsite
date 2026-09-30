@@ -24,6 +24,11 @@ export function renderCaseStudies(ctx, config = {}) {
     id: 'case-studies-title',
   });
 
+  // Same rule as the services section: with no heading of its own, the cards
+  // move up a level so the outline does not jump from h1 to h3.
+  const h = head ? 'h3' : 'h2';
+  const sub = head ? 'h4' : 'h3';
+
   const card = (study) => {
     // A table is right for the full list and wrong for the headline: someone
     // who has never heard of Lighthouse reads "8.7s → 1.8s" and understands
@@ -69,12 +74,12 @@ ${study.quote.author ? `        <footer>${escapeHtml(study.quote.author)}${study
 ${study.image ? `    <div class="case-study__media">${image(asset(study.image), `${study.client} website`, { className: 'rounded' })}</div>` : ''}
     <div class="case-study__body">
 ${study.sector ? `      <p class="eyebrow">${escapeHtml(study.sector)}</p>` : ''}
-      <h3 class="case-study__title">${escapeHtml(study.client)}</h3>
+      <${h} class="case-study__title">${escapeHtml(study.client)}</${h}>
 ${study.summary ? `      <p class="case-study__summary">${escapeHtml(study.summary)}</p>` : ''}
 ${deltas}
-${study.before.length ? `      <h4>Where they started</h4>
+${study.before.length ? `      <${sub}>Where they started</${sub}>
 ${study.before.map((p) => `      <p>${escapeHtml(p)}</p>`).join('\n')}` : ''}
-${study.after.length ? `      <h4>What changed</h4>
+${study.after.length ? `      <${sub}>What changed</${sub}>
 ${study.after.map((p) => `      <p>${escapeHtml(p)}</p>`).join('\n')}` : ''}
 ${metrics}
 ${quote}
