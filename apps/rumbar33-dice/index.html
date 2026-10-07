@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rum Bar 33 Dice</title>
+<style>
+  html { color-scheme: dark; }
+  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+<title>Rum Bar 33 Dice</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IBM+Plex+Mono:wght@400;600&family=Karla:wght@400;600;800&display=swap">
+<style>
+  /* Every colour is a token with a fallback: dropped into an Avo-built site
+     the page inherits that site's palette, fonts and radii; on its own it
+     wears the bar's late-night colours. */
+  .dice33 {
+    --bg: var(--surface, #1b1210);
+    --panel: var(--surface-2, #251a15);
+    --panel-2: var(--bg-alt, #2f211b);
+    --ink: var(--text, #f6ebdd);
+    --dim: var(--text-muted, #b7a08c);
+    --edge: var(--border, #3d2b23);
+    --edge-hi: var(--border-strong, #5b4133);
+    --brass: var(--primary, #dba53f);
+    --on-brass: var(--on-primary, #241509);
+    --lime: var(--accent, #9fc24f);
+    --red: var(--danger, #c9593c);
+    --ok: var(--success, #6fae5a);
+    --r: var(--radius, 12px);
+    --r-sm: var(--radius-sm, 8px);
+    --head: var(--font-heading, "Alfa Slab One", "Rockwell", Georgia, serif);
+    --body: var(--font-body, "Karla", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+    --num: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    --felt: var(--primary-soft, #16241c);
+
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.5;
+    box-sizing: border-box;
+  }
+  .dice33 *, .dice33 *::before, .dice33 *::after { box-sizing: inherit; }
+  body { margin: 0; background: #1b1210; }
+
+  .wrap { max-width: 1060px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 36px; }
+
+  /* ---- masthead ---- */
+  .top { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 22px; margin-bottom: 14px; }
+  .mark { min-width: 0; }
+  .venue {
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--brass); font-weight: 800; margin: 0 0 2px;
+  }
+  .mark h1 {
+    font-family: var(--head); font-weight: 400;
+    font-size: clamp(30px, 7vw, 46px); line-height: .95; letter-spacing: .01em;
+    margin: 0; color: var(--ink); text-wrap: balance;
+  }
+  .blurb { color: var(--dim); font-size: 13.5px; margin: 0; max-width: 46ch; min-width: 0; }
+
+  /* ---- prize strip ---- */
+  .prize {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px;
+    background: var(--panel); border: 1px solid var(--edge-hi);
+    border-left: 4px solid var(--brass);
+    border-radius: var(--r); padding: 11px 15px; margin-bottom: 16px;
+  }
+  .prize .month {
+    font-family: var(--head); font-weight: 400; font-size: 15px; color: var(--brass);
+    letter-spacing: .01em;
+  }
+  .prize .what { font-size: 13.5px; color: var(--ink); min-width: 0; }
+  .prize .left { font-size: 12px; color: var(--dim); margin-left: auto; font-variant-numeric: tabular-nums; }
+
+  /* ---- layout ---- */
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 348px); gap: 14px; align-items: start; }
+  .col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  /* On a phone the card has to follow the dice, not the leaderboard. */
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: minmax(0, 1fr); }
+    .col { display: contents; }
+    .p-table { order: 1; } .p-card { order: 2; } .p-board { order: 3; } .p-house { order: 4; }
+  }
+
+  .panel { background: var(--panel); border: 1px solid var(--edge-hi); border-radius: var(--r); min-width: 0; }
+  .panel > h2 {
+    font-family: var(--head); font-weight: 400; font-size: 13px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--dim);
+    margin: 0; padding: 11px 15px; border-bottom: 1px solid var(--edge);
+  }
+
+  /* ---- the table ---- */
+  .felt { padding: 16px 15px 18px; background: var(--felt); border-radius: 0 0 var(--r) var(--r); }
+  .roundline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin-bottom: 14px; }
+  .roundline .r { font-family: var(--head); font-size: 17px; color: var(--ink); }
+  .roundline .t { font-size: 12.5px; color: var(--dim); }
+  .pips { display: flex; gap: 3px; margin-left: auto; }
+  .pips i { width: 9px; height: 9px; border-radius: 50%; background: var(--edge-hi); display: block; }
+  .pips i.on { background: var(--brass); }
+
+  .tray { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 6px; }
+  .slot { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .die {
+    --d: clamp(54px, 14vw, 74px);
+    width: var(--d); height: var(--d);
+    background: #f5ede1; border: 0; border-radius: 16%;
+    padding: 13%; cursor: pointer;
+    display: grid; grid-template: repeat(3, 1fr) / repeat(3, 1fr); gap: 5%;
+    box-shadow: 0 5px 0 rgba(0,0,0,.35), inset 0 -3px 0 rgba(0,0,0,.09);
+  }
+  .die i { background: #27180f; border-radius: 50%; display: block; }
+  .die[disabled] { cursor: default; opacity: .9; }
+  .die.held { background: #fff6e6; box-shadow: 0 2px 0 rgba(0,0,0,.3), 0 0 0 3px var(--brass); transform: translateY(3px); }
+  .die.rolling { animation: tumble .42s ease-in-out; }
+  @keyframes tumble {
+    0% { transform: translateY(0) rotate(0); }
+    35% { transform: translateY(-14px) rotate(-13deg); }
+    70% { transform: translateY(-4px) rotate(9deg); }
+    100% { transform: translateY(0) rotate(0); }
+  }
+  .keep { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); font-weight: 800; min-height: 14px; }
+  .keep.off { color: transparent; }
+
+  .act { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center; margin-top: 12px; }
+  .roll {
+    font-family: var(--head); font-weight: 400; font-size: 19px; letter-spacing: .04em;
+    background: var(--brass); color: var(--on-brass);
+    border: 0; border-radius: var(--r); padding: 12px 30px; cursor: pointer;
+    box-shadow: 0 4px 0 rgba(0,0,0,.35);
+  }
+  .roll:hover { filter: brightness(1.07); }
+  .roll:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,.35); }
+  .roll[disabled] { background: var(--edge-hi); color: var(--dim); box-shadow: none; cursor: not-allowed; }
+  .ghost {
+    font: 600 13px var(--body); color: var(--dim); background: transparent;
+    border: 1px solid var(--edge-hi); border-radius: var(--r-sm); padding: 9px 13px; cursor: pointer;
+  }
+  .ghost:hover { color: var(--ink); border-color: var(--brass); }
+  .say { text-align: center; font-size: 13.5px; color: var(--dim); margin: 11px 0 0; min-height: 20px; }
+  .say b { color: var(--brass); font-weight: 800; }
+  .dice33 :focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+
+  /* ---- scorecard ---- */
+  .sheet { padding: 4px 0 8px; }
+  .grp {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
+    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim);
+    padding: 9px 15px 5px; font-weight: 800;
+  }
+  .grp span { letter-spacing: 0; text-transform: none; font-weight: 600; font-size: 11.5px; }
+  .row {
+    display: grid; grid-template-columns: minmax(0, 1fr) 58px; align-items: center; gap: 8px;
+    width: 100%; text-align: left; background: transparent; border: 0;
+    border-top: 1px solid var(--edge); padding: 7px 15px; cursor: default;
+    color: var(--ink); font: inherit; min-height: 38px;
+  }
+  .row .nm { min-width: 0; font-size: 13.5px; }
+  .row .nm small { display: block; font-size: 10.5px; color: var(--dim); }
+  .row .v {
+    font-family: var(--num); font-variant-numeric: tabular-nums;
+    font-size: 15px; text-align: right; color: var(--dim);
+  }
+  .row.open { cursor: pointer; }
+  .row.open .v { color: var(--lime); font-weight: 600; }
+  .row.open.nil .v { color: var(--dim); }
+  .row.open:hover { background: var(--panel-2); }
+  .row.open:hover .v { color: var(--brass); }
+  .row.taken .v { color: var(--ink); font-weight: 600; }
+  .row.taken .nm { color: var(--dim); }
+  .row.idle { cursor: default; }
+  .row.idle:hover { background: transparent; }
+  .row.must { background: var(--panel-2); box-shadow: inset 3px 0 0 var(--brass); }
+  .row.blocked { opacity: .4; cursor: not-allowed; }
+  .tot {
+    display: grid; grid-template-columns: minmax(0, 1fr) 58px; gap: 8px;
+    padding: 8px 15px; border-top: 1px solid var(--edge); background: var(--panel-2);
+    font-size: 12.5px; color: var(--dim);
+  }
+  .tot b { font-family: var(--num); font-variant-numeric: tabular-nums; text-align: right; color: var(--ink); font-size: 14px; }
+  .tot.big { border-top: 2px solid var(--brass); }
+  .tot.big span { font-family: var(--head); font-size: 14px; color: var(--ink); letter-spacing: .02em; }
+  .tot.big b { font-size: 21px; color: var(--brass); }
+
+  /* ---- result ---- */
+  .result { padding: 16px 15px 18px; text-align: center; }
+  .result .big { font-family: var(--head); font-size: clamp(40px, 11vw, 62px); line-height: 1; color: var(--brass); }
+  .result .cap { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; }
+  .result .verdict { font-size: 14px; margin: 9px auto 0; max-width: 40ch; }
+  .result .verdict b { color: var(--lime); }
+  .entry { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 14px; }
+  .entry input {
+    font: 600 15px var(--body); color: var(--ink); background: var(--bg);
+    border: 1px solid var(--edge-hi); border-radius: var(--r-sm);
+    padding: 10px 12px; width: 180px; min-width: 0; text-align: center; letter-spacing: .06em;
+  }
+  .entry input:focus { border-color: var(--brass); outline: none; }
+  .entry .roll { font-size: 16px; padding: 10px 20px; }
+  .fine { font-size: 11.5px; color: var(--dim); margin: 10px auto 0; max-width: 46ch; }
+
+  /* ---- leaderboard ---- */
+  .board ol { list-style: none; margin: 0; padding: 0; }
+  .board li {
+    display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; align-items: center; gap: 10px;
+    padding: 8px 15px; border-top: 1px solid var(--edge); font-size: 14px;
+  }
+  .board li:first-child { border-top: 0; }
+  .board .rk { font-family: var(--num); font-size: 12px; color: var(--dim); }
+  .board li.lead .rk, .board li.lead .nm { color: var(--brass); }
+  .board li.lead .nm { font-weight: 800; }
+  .board .nm { min-width: 0; overflow-wrap: anywhere; }
+  .board .sc { font-family: var(--num); font-variant-numeric: tabular-nums; font-weight: 600; }
+  .board li.you { background: var(--panel-2); }
+  .board li.you .nm::after {
+    content: "you"; font-family: var(--body); font-size: 10px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--on-brass); background: var(--brass);
+    border-radius: 99px; padding: 1px 6px; margin-left: 7px; font-weight: 800;
+  }
+  .board .par { border-top: 1px dashed var(--edge-hi); color: var(--dim); font-size: 12.5px; }
+  .empty { padding: 14px 15px; color: var(--dim); font-size: 13px; }
+  .where { padding: 10px 15px 13px; font-size: 11.5px; color: var(--dim); border-top: 1px solid var(--edge); }
+
+  .house ul { margin: 0; padding: 12px 15px 14px 32px; color: var(--dim); font-size: 12.5px; }
+  .house li { margin-bottom: 5px; }
+  .house li:last-child { margin-bottom: 0; }
+  .house b { color: var(--ink); font-weight: 600; }
+
+  @media (prefers-reduced-motion: reduce) { .dice33 * { animation: none !important; transition: none !important; } }
+</style>
+
+</head>
+<body>
+<div class="dice33">
+  <div class="wrap">
+    <div class="top">
+      <div class="mark">
+        <p class="venue" id="venue">Rum Bar 33</p>
+        <h1 id="gameName">Dice 33</h1>
+      </div>
+      <p class="blurb">Thirteen rounds, three rolls a round. Keep the dice you like, spend each box once,
+        and put your best score on the board.</p>
+    </div>
+
+    <div class="prize">
+      <span class="month" id="prizeMonth">This month</span>
+      <span class="what" id="prizeWhat"></span>
+      <span class="left" id="prizeLeft"></span>
+    </div>
+
+    <div class="layout">
+      <div class="col">
+      <section class="panel p-table" aria-label="The table">
+        <h2 id="tableHead">The table</h2>
+        <div class="felt" id="felt"></div>
+      </section>
+
+      <section class="panel board p-board" aria-label="Leaderboard">
+        <h2 id="boardHead">The board</h2>
+        <div id="boardBody"></div>
+        <p class="where" id="boardWhere"></p>
+      </section>
+      </div>
+
+      <div class="col">
+      <section class="panel p-card" aria-label="Scorecard">
+        <h2>Scorecard</h2>
+        <div class="sheet" id="sheet"></div>
+      </section>
+
+      <section class="panel house p-house" aria-label="House rules">
+        <h2>House rules</h2>
+        <ul id="houseRules"></ul>
+      </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ------------------------------------------------------------------
+     CONFIG — the only part the bar needs to edit.
+     Override without touching this file by setting window.BAR_DICE_CONFIG
+     before the page loads.
+  ------------------------------------------------------------------ */
+  var CONFIG = {
+    venue: "Rum Bar 33",
+    gameName: "Dice 33",
+    prize: "the month's high score drinks free — one cocktail from the house list, or its zero-proof twin",
+    minScore: 150,
+    par: 220,
+    claim: "Screenshot your score and show it at the bar, or ask staff to check the board.",
+    rules: [
+      "One entry per person per month. Best score counts — play as often as you like.",
+      "The board clears on the first of each month. The top name on the last night wins.",
+      "Scores are kept by this page, so the bar confirms the winner at the counter before pouring.",
+      "Prize is one drink, drunk in the bar, not transferable and no cash alternative. 18+.",
+    ],
+    /* Where a score is sent. "" keeps the board on the player's own device.
+       Point it at the same endpoint as the site's enquiry form
+       (see docs/contact-forms.md) to have entries land in the bar's inbox. */
+    endpoint: "",
+    endpointMethod: "POST"
+  };
+  if (window.BAR_DICE_CONFIG) {
+    for (var ck in window.BAR_DICE_CONFIG) {
+      if (Object.prototype.hasOwnProperty.call(window.BAR_DICE_CONFIG, ck)) CONFIG[ck] = window.BAR_DICE_CONFIG[ck];
+    }
+  }
+
+  var STORE = "bar-dice-33-v1";
+
+  var CATS = [
+    { k: "ones",   label: "Aces",   hint: "1s only",  face: 1 },
+    { k: "twos",   label: "Twos",   hint: "2s only",  face: 2 },
+    { k: "threes", label: "Threes", hint: "3s only",  face: 3 },
+    { k: "fours",  label: "Fours",  hint: "4s only",  face: 4 },
+    { k: "fives",  label: "Fives",  hint: "5s only",  face: 5 },
+    { k: "sixes",  label: "Sixes",  hint: "6s only",  face: 6 },
+    { k: "threeKind", label: "Three of a kind", hint: "all five dice" },
+    { k: "fourKind",  label: "Four of a kind",  hint: "all five dice" },
+    { k: "fullHouse", label: "Full house",      hint: "25" },
+    { k: "smallStraight", label: "Small straight", hint: "30" },
+    { k: "largeStraight", label: "Large straight", hint: "40" },
+    { k: "yahtzee", label: "Five of a kind", hint: "50" },
+    { k: "chance",  label: "Chance",  hint: "all five dice" }
+  ];
+  var UPPER = CATS.slice(0, 6), LOWER = CATS.slice(6);
+  var PIPS = { 1: [5], 2: [1, 9], 3: [1, 5, 9], 4: [1, 3, 7, 9], 5: [1, 3, 5, 7, 9], 6: [1, 3, 4, 6, 7, 9] };
+
+  var g = null;          /* the game in progress */
+  var board = [];        /* this month's entries, best first */
+  var me = { name: "", id: null };
+  var remote = null;     /* { db, uid, canWrite } once the shared store answers */
+  var unsub = null;
+  var busy = false;
+
+  /* ---------- month ---------- */
+
+  function monthKey(d) {
+    d = d || new Date();
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0");
+  }
+  function monthName(d) {
+    d = d || new Date();
+    return d.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+  }
+  function daysLeft() {
+    var now = new Date();
+    var end = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    return Math.max(0, Math.ceil((end - now) / 86400000));
+  }
+
+  /* ---------- dice + scoring ---------- */
+
+  function roll1() { return 1 + Math.floor(Math.random() * 6); }
+  function counts(d) { var c = [0, 0, 0, 0, 0, 0, 0]; d.forEach(function (v) { c[v]++; }); return c; }
+  function total(d) { return d.reduce(function (a, b) { return a + b; }, 0); }
+  function ofAKind(c, n) { return c.some(function (x) { return x >= n; }); }
+  function run(c, len) {
+    var r = 0;
+    for (var f = 1; f <= 6; f++) { r = c[f] ? r + 1 : 0; if (r >= len) return true; }
+    return false;
+  }
+  function isFive(d) { return counts(d).some(function (x) { return x === 5; }); }
+
+  /* Joker rules: once the five-of-a-kind box is spent, another five-of-a-kind
+     must go in its matching upper box if that is open; if not, the lower
+     boxes pay their face value. */
+  function jokering() { return g.thrown && isFive(g.dice) && typeof g.scores.yahtzee === "number"; }
+  function jokerHome() {
+    if (!jokering()) return null;
+    var k = UPPER[g.dice[0] - 1].k;
+    return typeof g.scores[k] === "number" ? null : k;
+  }
+  function allowed(k) {
+    var home = jokerHome();
+    return home ? k === home : true;
+  }
+
+  function wouldScore(k, d) {
+    var c = counts(d), s = total(d), cat = null;
+    CATS.forEach(function (x) { if (x.k === k) cat = x; });
+    if (cat.face) return c[cat.face] * cat.face;
+    var joker = isFive(d) && typeof g.scores.yahtzee === "number";
+    switch (k) {
+      case "threeKind": return ofAKind(c, 3) ? s : 0;
+      case "fourKind": return ofAKind(c, 4) ? s : 0;
+      case "fullHouse":
+        if (joker) return 25;
+        return (c.some(function (x) { return x === 3; }) && c.some(function (x) { return x === 2; })) ? 25 : 0;
+      case "smallStraight": return (joker || run(c, 4)) ? 30 : 0;
+      case "largeStraight": return (joker || run(c, 5)) ? 40 : 0;
+      case "yahtzee": return isFive(d) ? 50 : 0;
+      case "chance": return s;
+    }
+    return 0;
+  }
+
+  function upperSum() { return UPPER.reduce(function (t, c) { return t + (g.scores[c.k] || 0); }, 0); }
+  function upperBonus() { return upperSum() >= 63 ? 35 : 0; }
+  function lowerSum() {
+    return LOWER.reduce(function (t, c) { return t + (g.scores[c.k] || 0); }, 0) + g.fiveBonus * 100;
+  }
+  function grand() { return upperSum() + upperBonus() + lowerSum(); }
+  function roundOf() { return CATS.filter(function (c) { return typeof g.scores[c.k] === "number"; }).length + 1; }
+  function finished() { return roundOf() > CATS.length; }
+
+  /* ---------- state ---------- */
+
+  function newGame() {
+    return { dice: [1, 1, 1, 1, 1], held: [false, false, false, false, false],
+             rollsLeft: 3, thrown: false, scores: {}, fiveBonus: 0, logged: false };
+  }
+
+  function save() {
+    try {
+      localStorage.setItem(STORE, JSON.stringify({
+        game: g, name: me.name, month: monthKey(),
+        board: board.filter(function (e) { return e.local; })
+      }));
+    } catch (e) { /* private browsing */ }
+  }
+  function load() {
+    try {
+      var raw = JSON.parse(localStorage.getItem(STORE));
+      if (!raw) return;
+      if (raw.name) me.name = String(raw.name).slice(0, 14);
+      if (raw.month === monthKey() && Array.isArray(raw.board)) board = raw.board;
+      if (raw.game && raw.game.scores && raw.game.dice) g = raw.game;
+      if (g && typeof g.fiveBonus !== "number") g.fiveBonus = 0;
+    } catch (e) { /* ignore a corrupt or blocked store */ }
+  }
+
+  /* ---------- helpers ---------- */
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---------- the table ---------- */
+
+  function renderTable() {
+    var felt = $("felt");
+    felt.textContent = "";
+
+    if (finished()) { renderResult(felt); return; }
+
+    var line = el("div", "roundline");
+    line.appendChild(el("span", "r", "Round " + roundOf() + " of 13"));
+    line.appendChild(el("span", "t", g.thrown ? (g.rollsLeft ? g.rollsLeft + " roll" + (g.rollsLeft === 1 ? "" : "s") + " left" : "last roll — pick a box") : "three rolls"));
+    var pips = el("div", "pips");
+    for (var i = 0; i < 3; i++) pips.appendChild(el("i", i < g.rollsLeft ? "on" : ""));
+    line.appendChild(pips);
+    felt.appendChild(line);
+
+    var tray = el("div", "tray");
+    g.dice.forEach(function (v, i) {
+      var slot = el("div", "slot");
+      var die = el("button", "die" + (g.held[i] ? " held" : ""));
+      die.type = "button";
+      die.dataset.i = String(i);
+      die.disabled = !g.thrown || g.rollsLeft === 0;
+      die.setAttribute("aria-pressed", g.held[i] ? "true" : "false");
+      die.setAttribute("aria-label", "Die " + (i + 1) + ", showing " + v + (g.held[i] ? ", kept" : ""));
+      PIPS[v].forEach(function (cell) {
+        var pip = el("i");
+        pip.style.gridArea = Math.ceil(cell / 3) + " / " + (((cell - 1) % 3) + 1);
+        die.appendChild(pip);
+      });
+      die.addEventListener("click", function () {
+        if (die.disabled) return;
+        g.held[i] = !g.held[i];
+        save();
+        renderTable();
+      });
+      slot.appendChild(die);
+      slot.appendChild(el("span", "keep" + (g.held[i] ? "" : " off"), "keep"));
+      tray.appendChild(slot);
+    });
+    felt.appendChild(tray);
+
+    var act = el("div", "act");
+    var roll = el("button", "roll", g.thrown ? "Roll again" : "Roll");
+    roll.type = "button";
+    roll.disabled = g.rollsLeft === 0 || (g.thrown && g.held.every(function (h) { return h; }));
+    roll.addEventListener("click", doRoll);
+    act.appendChild(roll);
+    if (g.thrown) {
+      var clear = el("button", "ghost", "Keep none");
+      clear.type = "button";
+      clear.addEventListener("click", function () {
+        g.held = [false, false, false, false, false];
+        save(); renderTable();
+      });
+      act.appendChild(clear);
+    }
+    felt.appendChild(act);
+
+    var say = el("p", "say");
+    var home = jokerHome();
+    if (home) {
+      say.appendChild(document.createTextNode("Five of a kind again — the rules say it goes in "));
+      say.appendChild(el("b", null, CATS.filter(function (c) { return c.k === home; })[0].label));
+      say.appendChild(document.createTextNode("."));
+    } else if (!g.thrown) {
+      say.textContent = "Roll to start the round.";
+    } else if (isFive(g.dice) && typeof g.scores.yahtzee !== "number") {
+      say.appendChild(el("b", null, "Five of a kind."));
+      say.appendChild(document.createTextNode(" Fifty points, if you want them."));
+    } else if (g.rollsLeft === 0) {
+      say.textContent = "No rolls left — choose a box on the card.";
+    } else {
+      say.textContent = "Tap the dice you want to keep, then roll again.";
+    }
+    felt.appendChild(say);
+  }
+
+  function doRoll() {
+    if (g.rollsLeft === 0 || busy) return;
+    busy = true;
+    g.thrown = true;
+    g.rollsLeft--;
+
+    var moving = [];
+    g.dice.forEach(function (v, i) { if (!g.held[i]) moving.push(i); });
+    if (!moving.length) moving = [0, 1, 2, 3, 4].filter(function (i) { return !g.held[i]; });
+
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var ticks = reduced ? 1 : 6;
+    var n = 0;
+    var spin = setInterval(function () {
+      n++;
+      moving.forEach(function (i) { g.dice[i] = roll1(); });
+      renderTable();
+      moving.forEach(function (i) {
+        var d = document.querySelector('.die[data-i="' + i + '"]');
+        if (d && !reduced) d.classList.add("rolling");
+      });
+      if (n >= ticks) {
+        clearInterval(spin);
+        busy = false;
+        save();
+        renderTable();
+        renderSheet();
+      }
+    }, reduced ? 0 : 55);
+  }
+
+  /* ---------- scorecard ---------- */
+
+  function renderSheet() {
+    var sheet = $("sheet");
+    sheet.textContent = "";
+
+    var up = el("div", "grp");
+    up.appendChild(document.createTextNode("Upper"));
+    var need = 63 - upperSum();
+    up.appendChild(el("span", null, upperBonus() ? "bonus 35 banked" : (need > 0 ? need + " more for the 35 bonus" : "")));
+    sheet.appendChild(up);
+    UPPER.forEach(function (c) { sheet.appendChild(scoreRow(c)); });
+
+    var sub = el("div", "tot");
+    sub.appendChild(el("span", null, "Upper + bonus"));
+    sub.appendChild(el("b", null, String(upperSum() + upperBonus())));
+    sheet.appendChild(sub);
+
+    sheet.appendChild(el("div", "grp", "Lower"));
+    LOWER.forEach(function (c) { sheet.appendChild(scoreRow(c)); });
+
+    if (g.fiveBonus) {
+      var fb = el("div", "tot");
+      fb.appendChild(el("span", null, "Five-of-a-kind bonus ×" + g.fiveBonus));
+      fb.appendChild(el("b", null, String(g.fiveBonus * 100)));
+      sheet.appendChild(fb);
+    }
+
+    var gt = el("div", "tot big");
+    gt.appendChild(el("span", null, "Total"));
+    gt.appendChild(el("b", null, String(grand())));
+    sheet.appendChild(gt);
+  }
+
+  function scoreRow(cat) {
+    var taken = typeof g.scores[cat.k] === "number";
+    var live = !taken && g.thrown && !finished();
+    var value = live ? wouldScore(cat.k, g.dice) : null;
+    var blocked = live && !allowed(cat.k);
+
+    var row = el("button", "row " + (taken ? "taken" : (live ? (blocked ? "open blocked" : "open") : "idle")));
+    row.type = "button";
+    if (live && !blocked && value === 0) row.classList.add("nil");
+    if (live && jokerHome() === cat.k) row.classList.add("must");
+
+    var nm = el("div", "nm");
+    nm.appendChild(document.createTextNode(cat.label));
+    nm.appendChild(el("small", null, cat.hint));
+    row.appendChild(nm);
+    row.appendChild(el("div", "v", taken ? String(g.scores[cat.k]) : (live ? String(value) : "–")));
+
+    if (!live || blocked) {
+      row.disabled = true;
+      row.setAttribute("aria-label", cat.label + (taken ? ", scored " + g.scores[cat.k] : ", not available yet"));
+    } else {
+      row.setAttribute("aria-label", "Score " + cat.label + " for " + value);
+      row.addEventListener("click", function () { take(cat, value); });
+    }
+    return row;
+  }
+
+  function take(cat, value) {
+    if (busy) return;
+    if (value === 0 && !confirm("Scratch " + cat.label + " for nothing?")) return;
+    if (isFive(g.dice) && g.scores.yahtzee === 50) g.fiveBonus++;
+    g.scores[cat.k] = value;
+    g.held = [false, false, false, false, false];
+    g.rollsLeft = 3;
+    g.thrown = false;
+    save();
+    renderTable();
+    renderSheet();
+    if (finished()) renderBoard();
+  }
+
+  /* ---------- result + entry ---------- */
+
+  function renderResult(felt) {
+    var score = grand();
+    var card = el("div", "result");
+    card.appendChild(el("div", "cap", "Final score"));
+    card.appendChild(el("div", "big", String(score)));
+
+    var place = board.filter(function (e) { return e.score > score; }).length + 1;
+    var verdict = el("p", "verdict");
+    if (!board.length) {
+      verdict.appendChild(document.createTextNode("First score of "));
+      verdict.appendChild(el("b", null, monthName()));
+      verdict.appendChild(document.createTextNode(". Everyone else is chasing you."));
+    } else if (place === 1) {
+      verdict.appendChild(el("b", null, "Top of the board."));
+      verdict.appendChild(document.createTextNode(" Hold it to the end of the month and the drink is yours."));
+    } else {
+      verdict.appendChild(document.createTextNode("That is "));
+      verdict.appendChild(el("b", null, "number " + place));
+      verdict.appendChild(document.createTextNode(" this month — " + (board[0].score - score + 1) + " short of the lead."));
+    }
+    card.appendChild(verdict);
+
+    if (!g.logged && score >= CONFIG.minScore) {
+      var form = el("div", "entry");
+      var input = el("input");
+      input.type = "text";
+      input.id = "whoami";
+      input.maxLength = 14;
+      input.placeholder = "Name for the board";
+      input.value = me.name;
+      input.setAttribute("aria-label", "Your name for the board");
+      var go = el("button", "roll", "Put it up");
+      go.type = "button";
+      go.addEventListener("click", function () { submit(input.value, score, go); });
+      input.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); go.click(); } });
+      form.appendChild(input);
+      form.appendChild(go);
+      card.appendChild(form);
+      card.appendChild(el("p", "fine", CONFIG.claim));
+    } else if (!g.logged) {
+      card.appendChild(el("p", "fine", "The board takes scores of " + CONFIG.minScore + " and up. Another round?"));
+    } else {
+      card.appendChild(el("p", "fine", "On the board. " + CONFIG.claim));
+    }
+
+    var again = el("div", "act");
+    var btn = el("button", g.logged || score < CONFIG.minScore ? "roll" : "ghost", "Play again");
+    btn.type = "button";
+    btn.addEventListener("click", function () {
+      g = newGame();
+      save();
+      renderTable();
+      renderSheet();
+    });
+    again.appendChild(btn);
+    card.appendChild(again);
+
+    felt.appendChild(card);
+  }
+
+  function submit(name, score, btn) {
+    name = (name || "").trim().slice(0, 14);
+    if (!name) { var i = $("whoami"); if (i) i.focus(); return; }
+    me.name = name;
+    g.logged = true;
+    btn.disabled = true;
+    btn.textContent = "On the board";
+
+    var entry = { name: name, score: score, at: new Date().toISOString(), month: monthKey(), local: true, mine: true };
+    var mineIdx = -1;
+    board.forEach(function (e, idx) { if (e.mine && e.local) mineIdx = idx; });
+    if (mineIdx >= 0) {
+      if (board[mineIdx].score >= score) entry.score = board[mineIdx].score;
+      board.splice(mineIdx, 1);
+    }
+    board.push(entry);
+    sortBoard();
+    save();
+    renderBoard();
+    renderTable();
+
+    if (remote && remote.canWrite) {
+      remote.db.doc("scores/" + remote.uid).set({
+        name: name, score: score, month: monthKey(), at: Date.now()
+      }).catch(function () { /* the local board still has it */ });
+    }
+    if (CONFIG.endpoint) {
+      try {
+        fetch(CONFIG.endpoint, {
+          method: CONFIG.endpointMethod || "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            venue: CONFIG.venue, game: CONFIG.gameName,
+            month: monthKey(), name: name, score: score,
+            message: name + " scored " + score + " on " + CONFIG.gameName + " (" + monthName() + ")"
+          })
+        }).catch(function () { /* the player still sees their score */ });
+      } catch (e) { /* no network, no problem */ }
+    }
+  }
+
+  function sortBoard() {
+    board.sort(function (a, b) { return b.score - a.score || String(a.at).localeCompare(String(b.at)); });
+    board = board.slice(0, 20);
+  }
+
+  /* ---------- leaderboard ---------- */
+
+  function renderBoard() {
+    $("boardHead").textContent = monthName() + " — top scores";
+    var host = $("boardBody");
+    host.textContent = "";
+
+    if (!board.length) {
+      host.appendChild(el("p", "empty", "Nobody has put a score up yet this month. The house plays to about " + CONFIG.par + " — beat that and you are in front."));
+    } else {
+      var list = el("ol");
+      board.slice(0, 10).forEach(function (e, i) {
+        var li = el("li", (i === 0 ? "lead " : "") + (e.mine ? "you" : ""));
+        li.appendChild(el("span", "rk", String(i + 1)));
+        li.appendChild(el("span", "nm", e.name));
+        li.appendChild(el("span", "sc", String(e.score)));
+        list.appendChild(li);
+      });
+      var par = el("li", "par");
+      par.appendChild(el("span", "rk", "–"));
+      par.appendChild(el("span", "nm", "House par"));
+      par.appendChild(el("span", "sc", String(CONFIG.par)));
+      list.appendChild(par);
+      host.appendChild(list);
+    }
+
+    $("boardWhere").textContent = remote
+      ? (remote.canWrite ? "Live board — everyone playing this page shares it." : "Live board, read only for you — your score is kept on this device.")
+      : (CONFIG.endpoint ? "Kept on this device, and sent to the bar when you put a score up."
+                         : "Kept on this device. The bar confirms the winner at the counter.");
+  }
+
+  /* ---------- shared board, when the page is published by Claude ---------- */
+
+  function connect() {
+    if (!window.claude || typeof window.claude.use !== "function") return;
+    Promise.all([window.claude.use("db"), window.claude.use("user")]).then(function (both) {
+      var db = both[0], user = both[1];
+      if (!db) return;
+      return Promise.resolve(user ? user.id() : null).then(function (uid) {
+        return Promise.resolve(user && user.can ? user.can("data.write") : null).then(function (write) {
+          remote = { db: db, uid: uid, canWrite: !!uid && write !== false };
+          watch(db);
+          renderBoard();
+        });
+      });
+    }).catch(function () { /* no shared board; the local one stands */ });
+  }
+
+  function watch(db) {
+    if (unsub) return;
+    try {
+      unsub = db.collection("scores")
+        .where("month", "==", monthKey())
+        .orderBy("score", "desc")
+        .limit(20)
+        .onSnapshot(function (snap) {
+          var rows = [];
+          snap.docs.forEach(function (d) {
+            var v = d.data() || {};
+            if (typeof v.score !== "number" || !v.name) return;
+            rows.push({ name: String(v.name).slice(0, 14), score: v.score, at: v.at || 0,
+                        mine: remote && d.id === remote.uid });
+          });
+          var onBoard = rows.some(function (r) { return r.mine; });
+          board = rows.concat(onBoard ? [] : board.filter(function (e) { return e.local; }));
+          sortBoard();
+          renderBoard();
+        }, function () { /* board stays as it is */ });
+    } catch (e) { /* older runtime; local board only */ }
+  }
+
+  /* ---------- chrome ---------- */
+
+  function renderChrome() {
+    document.title = CONFIG.venue + " Dice";
+    $("venue").textContent = CONFIG.venue;
+    $("gameName").textContent = CONFIG.gameName;
+    $("prizeMonth").textContent = monthName();
+    $("prizeWhat").textContent = CONFIG.prize;
+    var d = daysLeft();
+    $("prizeLeft").textContent = d === 0 ? "last day" : d + " day" + (d === 1 ? "" : "s") + " to go";
+    var ul = $("houseRules");
+    ul.textContent = "";
+    CONFIG.rules.forEach(function (r) { ul.appendChild(el("li", null, r)); });
+  }
+
+  /* ---------- boot ---------- */
+
+  function start(carried) {
+    load();
+    if (carried && carried.game) g = carried.game;
+    if (!g) g = newGame();
+    if (carried && carried.board) board = carried.board;
+    sortBoard();
+    renderChrome();
+    renderTable();
+    renderSheet();
+    renderBoard();
+    connect();
+  }
+
+  try {
+    if (window.claude && window.claude.hot && window.claude.hot.snapshot) {
+      window.claude.hot.snapshot(function () { return { game: g, board: board }; });
+    }
+  } catch (e) { /* not inside the artifact host */ }
+
+  if (window.claude && window.claude.hot && window.claude.hot.ready) {
+    window.claude.hot.ready(start);
+  } else {
+    start((window.claude && window.claude.hot && window.claude.hot.data) || {});
+  }
+})();
+</script>
+</body>
+</html>
